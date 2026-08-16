@@ -1,0 +1,160 @@
+.loading-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.ice-cream {
+  position: relative;
+  width: 160px;
+  height: 190px;
+}
+
+/* =========================
+   CONO
+========================= */
+
+.cone {
+  position: absolute;
+  left: 55px;
+  top: 105px;
+  width: 50px;
+  height: 70px;
+  background: #d99a5b;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  z-index: 3;
+}
+
+.cone::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+
+  background: repeating-linear-gradient(
+    45deg,
+    transparent 0 8px,
+    rgba(120, 70, 30, 0.35) 9px 11px
+  );
+}
+
+/* =========================
+   ORBITA
+========================= */
+
+.orbit {
+  position: absolute;
+
+  width: 120px;
+  height: 120px;
+
+  left: 20px;
+  top: 25px;
+
+  transform-origin: center;
+
+  animation: orbit 3.2s ease-in-out infinite;
+
+  z-index: 2;
+}
+
+/* =========================
+   PALLINE
+========================= */
+
+.scoop {
+  position: absolute;
+
+  width: 44px;
+  height: 44px;
+
+  border-radius: 50%;
+}
+
+/* Cioccolato */
+
+.scoop-1 {
+  left: 38px;
+  top: 0;
+
+  background: #8b5a2b;
+}
+
+/* Vaniglia */
+
+.scoop-2 {
+  left: 4px;
+  top: 38px;
+
+  background: #f5d76e;
+}
+
+/* Fragola */
+
+.scoop-3 {
+  left: 72px;
+  top: 38px;
+
+  background: #f7b6c2;
+}
+
+/* =========================
+   ANIMAZIONE
+========================= */
+
+@keyframes orbit {
+  /* Palline raccolte nel cono */
+
+  0% {
+    transform: scale(0.38) rotate(0deg);
+  }
+
+  /* Si staccano */
+
+  15% {
+    transform: scale(0.75) rotate(20deg);
+  }
+
+  /* Si allargano */
+
+  25% {
+    transform: scale(1) rotate(45deg);
+  }
+
+  /* Giro circolare */
+
+  65% {
+    transform: scale(1) rotate(360deg);
+  }
+
+  /* Iniziano a tornare */
+
+  80% {
+    transform: scale(0.75) rotate(390deg);
+  }
+
+  /* Si ricompongono */
+
+  90% {
+    transform: scale(0.38) rotate(420deg);
+  }
+
+  /* Piccola pausa */
+
+  100% {
+    transform: scale(0.38) rotate(420deg);
+  }
+}
+
+/* =========================
+   TESTO
+========================= */
+
+.loading-container p {
+  margin: 0;
+
+  font-size: 16px;
+  font-weight: 500;
+}
