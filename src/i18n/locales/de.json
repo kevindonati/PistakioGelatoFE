@@ -1,0 +1,31 @@
+{
+  "navbar": {
+    "home": "Startseite",
+    "catalog": "Sortiment",
+    "cart": "Warenkorb",
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "logout": "Abmelden",
+    "account": "Konto",
+    "admin": "Admin"
+  },
+  "auth": {
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "name": "Vorname",
+    "surname": "Nachname",
+    "phone": "Telefon",
+    "language": "Sprache",
+    "loginError": "E-Mail oder Passwort ist falsch",
+    "registerError": "Registrierung fehlgeschlagen",
+    "emailAlreadyRegistered": "Diese E-Mail-Adresse ist bereits registriert."
+  },
+  "common": {
+    "loading": "Wird geladen..."
+  },
+  "errors": {
+    "notFound": "Seite nicht gefunden"
+  }
+}

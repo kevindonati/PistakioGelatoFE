@@ -1,0 +1,31 @@
+{
+  "navbar": {
+    "home": "Home",
+    "catalog": "Catalogo",
+    "cart": "Carrello",
+    "login": "Accedi",
+    "register": "Registrati",
+    "logout": "Esci",
+    "account": "Account",
+    "admin": "Admin"
+  },
+  "auth": {
+    "login": "Accedi",
+    "register": "Registrati",
+    "email": "Email",
+    "password": "Password",
+    "name": "Nome",
+    "surname": "Cognome",
+    "phone": "Telefono",
+    "language": "Lingua",
+    "loginError": "Email o password non corretti",
+    "registerError": "Registrazione non riuscita",
+    "emailAlreadyRegistered": "Questa email è già registrata."
+  },
+  "common": {
+    "loading": "Caricamento..."
+  },
+  "errors": {
+    "notFound": "Pagina non trovata"
+  }
+}

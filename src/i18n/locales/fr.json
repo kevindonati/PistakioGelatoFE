@@ -1,0 +1,31 @@
+{
+  "navbar": {
+    "home": "Accueil",
+    "catalog": "Catalogue",
+    "cart": "Panier",
+    "login": "Se connecter",
+    "register": "S'inscrire",
+    "logout": "Se déconnecter",
+    "account": "Compte",
+    "admin": "Admin"
+  },
+  "auth": {
+    "login": "Se connecter",
+    "register": "S'inscrire",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "name": "Prénom",
+    "surname": "Nom",
+    "phone": "Téléphone",
+    "language": "Langue",
+    "loginError": "E-mail ou mot de passe incorrect",
+    "registerError": "Échec de l'inscription",
+    "emailAlreadyRegistered": "Cette adresse e-mail est déjà enregistrée."
+  },
+  "common": {
+    "loading": "Chargement..."
+  },
+  "errors": {
+    "notFound": "Page introuvable"
+  }
+}

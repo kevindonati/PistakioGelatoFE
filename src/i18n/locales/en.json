@@ -1,0 +1,31 @@
+{
+  "navbar": {
+    "home": "Home",
+    "catalog": "Catalog",
+    "cart": "Cart",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "account": "Account",
+    "admin": "Admin"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "name": "First name",
+    "surname": "Last name",
+    "phone": "Phone",
+    "language": "Language",
+    "loginError": "Incorrect email or password",
+    "registerError": "Registration failed",
+    "emailAlreadyRegistered": "This email is already registered."
+  },
+  "common": {
+    "loading": "Loading..."
+  },
+  "errors": {
+    "notFound": "Page not found"
+  }
+}

@@ -2,6 +2,7 @@ import { useState } from "react"
 import type { FormEvent } from "react"
 import { useNavigate } from "react-router-dom"
 import api from "../services/api"
+import axios from "axios"
 
 function Register() {
   const navigate = useNavigate()
@@ -30,8 +31,17 @@ function Register() {
 
       navigate("/login")
     } catch (error) {
-      console.error(error)
-      setError("Registrazione non riuscita")
+      if (axios.isAxiosError(error)) {
+        const status = error.response?.status
+
+        if (status === 400) {
+          setError("Questa email è già registrata.")
+        } else {
+          setError("Registrazione non riuscita. Riprova.")
+        }
+      } else {
+        setError("Registrazione non riuscita. Riprova.")
+      }
     }
   }
 
