@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Login from "./components/Login"
+import Login from "./pages/Login"
 import ProtectedRoute from "./components/ProtectedRoute"
 import Loading from "./components/Loading"
+import AdminRoute from "./components/AdminRoute"
 
 function Home() {
   return <h1>Home</h1>
@@ -44,11 +45,16 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/cart" element={<Cart />} />
+
         <Route element={<ProtectedRoute />}>
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/account" element={<Account />} />
         </Route>
-        <Route path="/admin" element={<Admin />} />
+
+        <Route element={<AdminRoute />}>
+          <Route path="/admin" element={<Admin />} />
+        </Route>
+
         <Route path="/aa" element={<Loading />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
