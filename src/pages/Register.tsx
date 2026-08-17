@@ -3,6 +3,7 @@ import type { FormEvent } from "react"
 import { useNavigate } from "react-router-dom"
 import api from "../services/api"
 import axios from "axios"
+import { useTranslation } from "react-i18next"
 
 function Register() {
   const navigate = useNavigate()
@@ -14,6 +15,7 @@ function Register() {
   const [phone, setPhone] = useState("")
   const [language, setLanguage] = useState("IT")
   const [error, setError] = useState("")
+  const { t } = useTranslation()
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
@@ -47,11 +49,11 @@ function Register() {
 
   return (
     <div className="container mt-5">
-      <h1>Registrati</h1>
+      <h1>{t("auth.register")}</h1>
 
       <form onSubmit={handleSubmit} className="mt-4">
         <div className="mb-3">
-          <label className="form-label">Nome</label>
+          <label className="form-label">{t("auth.name")}</label>
           <input
             type="text"
             className="form-control"
@@ -62,7 +64,7 @@ function Register() {
         </div>
 
         <div className="mb-3">
-          <label className="form-label">Cognome</label>
+          <label className="form-label">{t("auth.surname")}</label>
           <input
             type="text"
             className="form-control"
@@ -73,7 +75,7 @@ function Register() {
         </div>
 
         <div className="mb-3">
-          <label className="form-label">Email</label>
+          <label className="form-label">{t("auth.email")}</label>
           <input
             type="email"
             className="form-control"
@@ -84,7 +86,7 @@ function Register() {
         </div>
 
         <div className="mb-3">
-          <label className="form-label">Password</label>
+          <label className="form-label">{t("auth.password")}</label>
           <input
             type="password"
             className="form-control"
@@ -95,7 +97,7 @@ function Register() {
         </div>
 
         <div className="mb-3">
-          <label className="form-label">Telefono</label>
+          <label className="form-label">{t("auth.phone")}</label>
           <input
             type="tel"
             className="form-control"
@@ -106,7 +108,7 @@ function Register() {
         </div>
 
         <div className="mb-3">
-          <label className="form-label">Lingua</label>
+          <label className="form-label">{t("auth.language")}</label>
 
           <select
             className="form-select"
@@ -123,7 +125,7 @@ function Register() {
         {error && <div className="alert alert-danger">{error}</div>}
 
         <button type="submit" className="btn btn-dark">
-          Registrati
+          {t("auth.register")}
         </button>
       </form>
     </div>

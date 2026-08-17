@@ -167,7 +167,7 @@
 
   &::before,
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: -4.5px;
     border: 5px solid transparent;
@@ -181,4 +181,12 @@
     right: 0;
     border-right-color: var(--border);
   }
+}
+
+.verde-pistakio {
+  color: rgb(6, 234, 67);
+}
+
+.rosa-pistakio {
+  color: rgb(244, 24, 152);
 }

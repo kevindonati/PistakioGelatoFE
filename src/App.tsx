@@ -6,6 +6,7 @@ import AdminRoute from "./components/AdminRoute"
 import Navbar from "./components/Navbar"
 import GuestRoute from "./components/GuestRoute"
 import Register from "./pages/Register"
+import "../src/App.css"
 
 function Home() {
   return <h1>Home</h1>

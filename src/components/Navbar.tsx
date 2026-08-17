@@ -12,7 +12,8 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg bg-white border-bottom">
       <div className="container">
         <Link to="/" className="navbar-brand fw-bold">
-          PistakioGelato
+          <span className="verde-pistakio">Pistakio</span>
+          <span className="rosa-pistakio">Gelato</span>
         </Link>
 
         <button
