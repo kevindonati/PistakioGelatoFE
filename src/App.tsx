@@ -3,13 +3,12 @@ import Login from "./pages/Login"
 import ProtectedRoute from "./components/ProtectedRoute"
 import Loading from "./components/Loading"
 import AdminRoute from "./components/AdminRoute"
+import Navbar from "./components/Navbar"
+import GuestRoute from "./components/GuestRoute"
+import Register from "./pages/Register"
 
 function Home() {
   return <h1>Home</h1>
-}
-
-function Register() {
-  return <h1>Register</h1>
 }
 
 function Catalog() {
@@ -39,10 +38,15 @@ function NotFound() {
 function App() {
   return (
     <BrowserRouter>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+
+        <Route element={<GuestRoute />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Route>
+
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/cart" element={<Cart />} />
 

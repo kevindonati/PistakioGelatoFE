@@ -1,12 +1,14 @@
 import { useState } from "react"
 import type { FormEvent } from "react"
 import { useAuth } from "../context/useAuth"
+import { useNavigate } from "react-router-dom"
 
 function Login() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
   const { login } = useAuth()
+  const navigate = useNavigate()
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
@@ -14,7 +16,7 @@ function Login() {
 
     try {
       await login(email, password)
-      console.log("Login effettuato")
+      navigate("/")
     } catch (error) {
       console.error(error)
       setError("Email o password non corretti")
