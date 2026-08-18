@@ -39,6 +39,8 @@
     "glutenFree": "Gluten-free",
     "sugarFree": "Sugar-free",
     "available": "Available",
-    "noFlavors": "No flavors available"
+    "noFlavors": "No flavors available",
+    "flavorNotFound": "Flavor not found",
+    "backToCatalog": "Back to catalog"
   }
 }

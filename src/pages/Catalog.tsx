@@ -1,21 +1,13 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { CandyOff, Leaf, MilkOffIcon, WheatOffIcon } from "lucide-react"
-import {
-  getCategories,
-  getFlavors,
-  getAvailableFlavors,
-  getVeganFlavors,
-  getLactoseFreeFlavors,
-  getGlutenFreeFlavors,
-  getSugarFreeFlavors,
-} from "../services/catalogApi"
+import { getCategories, getFlavors } from "../services/catalogApi"
 import type { Category } from "../types/Category"
 import type { Flavor } from "../types/Flavor"
 import Loading from "../components/Loading"
+import { useNavigate } from "react-router-dom"
 
 type FlavorFilter =
-  | "all"
   | "available"
   | "vegan"
   | "lactoseFree"
@@ -24,14 +16,13 @@ type FlavorFilter =
 
 function Catalog() {
   const { t } = useTranslation()
-
   const [categories, setCategories] = useState<Category[]>([])
   const [flavors, setFlavors] = useState<Flavor[]>([])
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
-  const [activeFilter, setActiveFilter] = useState<FlavorFilter>("all")
-
+  const [activeFilters, setActiveFilters] = useState<FlavorFilter[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
+  const navigate = useNavigate()
 
   useEffect(() => {
     const loadCatalog = async () => {
@@ -57,57 +48,46 @@ function Catalog() {
     loadCatalog()
   }, [t])
 
-  const handleFilterChange = async (filter: FlavorFilter) => {
-    try {
-      setLoading(true)
-      setError("")
-
-      setActiveFilter(filter)
-      setSelectedCategory(null)
-
-      let data: Flavor[]
-
-      switch (filter) {
-        case "available":
-          data = await getAvailableFlavors()
-          break
-
-        case "vegan":
-          data = await getVeganFlavors()
-          break
-
-        case "lactoseFree":
-          data = await getLactoseFreeFlavors()
-          break
-
-        case "glutenFree":
-          data = await getGlutenFreeFlavors()
-          break
-
-        case "sugarFree":
-          data = await getSugarFreeFlavors()
-          break
-
-        default: {
-          const response = await getFlavors(0, 50)
-          data = response.content
-          break
-        }
+  const toggleFilter = (filter: FlavorFilter) => {
+    setActiveFilters((currentFilters) => {
+      if (currentFilters.includes(filter)) {
+        return currentFilters.filter((item) => item !== filter)
       }
 
-      setFlavors(data)
-    } catch (error) {
-      console.error(error)
-      setError(t("catalog.loadError"))
-    } finally {
-      setLoading(false)
-    }
+      return [...currentFilters, filter]
+    })
   }
 
-  const filteredFlavors =
-    selectedCategory === null
-      ? flavors
-      : flavors.filter((flavor) => flavor.category === selectedCategory)
+  const filteredFlavors = flavors.filter((flavor) => {
+    if (
+      activeFilters.includes("available") &&
+      (!flavor.available || flavor.stockPortions <= 0)
+    ) {
+      return false
+    }
+
+    if (activeFilters.includes("vegan") && !flavor.vegan) {
+      return false
+    }
+
+    if (activeFilters.includes("lactoseFree") && !flavor.lactoseFree) {
+      return false
+    }
+
+    if (activeFilters.includes("glutenFree") && !flavor.glutenFree) {
+      return false
+    }
+
+    if (activeFilters.includes("sugarFree") && !flavor.sugarFree) {
+      return false
+    }
+
+    if (selectedCategory !== null && flavor.category !== selectedCategory) {
+      return false
+    }
+
+    return true
+  })
 
   if (loading) {
     return <Loading />
@@ -128,27 +108,29 @@ function Catalog() {
       <div className="d-flex flex-wrap gap-2 mb-3">
         <button
           className={`btn ${
-            activeFilter === "all" ? "btn-dark" : "btn-outline-dark"
+            activeFilters.length === 0 ? "btn-dark" : "btn-outline-dark"
           }`}
-          onClick={() => handleFilterChange("all")}
+          onClick={() => setActiveFilters([])}
         >
           {t("catalog.all")}
         </button>
 
         <button
           className={`btn ${
-            activeFilter === "available" ? "btn-dark" : "btn-outline-dark"
+            activeFilters.includes("available")
+              ? "btn-dark"
+              : "btn-outline-dark"
           }`}
-          onClick={() => handleFilterChange("available")}
+          onClick={() => toggleFilter("available")}
         >
           {t("catalog.available")}
         </button>
 
         <button
           className={`btn ${
-            activeFilter === "vegan" ? "btn-dark" : "btn-outline-dark"
+            activeFilters.includes("vegan") ? "btn-dark" : "btn-outline-dark"
           }`}
-          onClick={() => handleFilterChange("vegan")}
+          onClick={() => toggleFilter("vegan")}
         >
           <Leaf size={16} className="me-1" />
           {t("catalog.vegan")}
@@ -156,9 +138,11 @@ function Catalog() {
 
         <button
           className={`btn ${
-            activeFilter === "lactoseFree" ? "btn-dark" : "btn-outline-dark"
+            activeFilters.includes("lactoseFree")
+              ? "btn-dark"
+              : "btn-outline-dark"
           }`}
-          onClick={() => handleFilterChange("lactoseFree")}
+          onClick={() => toggleFilter("lactoseFree")}
         >
           <MilkOffIcon size={16} className="me-1" />
           {t("catalog.lactoseFree")}
@@ -166,9 +150,11 @@ function Catalog() {
 
         <button
           className={`btn ${
-            activeFilter === "glutenFree" ? "btn-dark" : "btn-outline-dark"
+            activeFilters.includes("glutenFree")
+              ? "btn-dark"
+              : "btn-outline-dark"
           }`}
-          onClick={() => handleFilterChange("glutenFree")}
+          onClick={() => toggleFilter("glutenFree")}
         >
           <WheatOffIcon size={16} className="me-1" />
           {t("catalog.glutenFree")}
@@ -176,9 +162,11 @@ function Catalog() {
 
         <button
           className={`btn ${
-            activeFilter === "sugarFree" ? "btn-dark" : "btn-outline-dark"
+            activeFilters.includes("sugarFree")
+              ? "btn-dark"
+              : "btn-outline-dark"
           }`}
-          onClick={() => handleFilterChange("sugarFree")}
+          onClick={() => toggleFilter("sugarFree")}
         >
           <CandyOff size={16} className="me-1" />
           {t("catalog.sugarFree")}
@@ -220,7 +208,11 @@ function Catalog() {
         <div className="row g-4">
           {filteredFlavors.map((flavor) => (
             <div key={flavor.id} className="col-12 col-sm-6 col-lg-4">
-              <div className="card h-100 shadow-sm border-0">
+              <div
+                className="card h-100 shadow-sm border-0"
+                role="button"
+                onClick={() => navigate(`/catalog/flavors/${flavor.id}`)}
+              >
                 {/* IMMAGINE */}
 
                 {flavor.image && (
@@ -241,7 +233,7 @@ function Catalog() {
                   <div className="d-flex justify-content-between align-items-start mb-2">
                     <h2 className="card-title h5 mb-0">{flavor.name}</h2>
 
-                    {!flavor.available && (
+                    {(!flavor.available || flavor.stockPortions <= 0) && (
                       <span className="badge text-bg-secondary">
                         {t("catalog.unavailable")}
                       </span>

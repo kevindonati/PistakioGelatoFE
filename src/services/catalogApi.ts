@@ -58,3 +58,8 @@ export const getSugarFreeFlavors = async (): Promise<Flavor[]> => {
   const response = await api.get<Flavor[]>("/flavors/sugar-free")
   return response.data
 }
+
+export const getFlavorById = async (id: string): Promise<Flavor> => {
+  const response = await api.get<Flavor>(`/flavors/${id}`)
+  return response.data
+}

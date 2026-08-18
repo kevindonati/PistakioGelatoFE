@@ -39,6 +39,8 @@
     "glutenFree": "Sans gluten",
     "sugarFree": "Sans sucre",
     "available": "Disponibles",
-    "noFlavors": "Aucun parfum disponible"
+    "noFlavors": "Aucun parfum disponible",
+    "flavorNotFound": "Parfum introuvable",
+    "backToCatalog": "Retour au catalogue"
   }
 }

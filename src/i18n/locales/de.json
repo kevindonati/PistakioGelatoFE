@@ -39,6 +39,8 @@
     "glutenFree": "Glutenfrei",
     "sugarFree": "Zuckerfrei",
     "available": "Verfügbar",
-    "noFlavors": "Keine Geschmacksrichtungen verfügbar"
+    "noFlavors": "Keine Geschmacksrichtungen verfügbar",
+    "flavorNotFound": "Geschmacksrichtung nicht gefunden",
+    "backToCatalog": "Zurück zum Sortiment"
   }
 }

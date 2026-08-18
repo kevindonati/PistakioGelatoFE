@@ -34,11 +34,13 @@
     "noCategories": "Nessuna categoria disponibile.",
     "all": "Tutti",
     "unavailable": "Non disponibile",
-    "vegan": "Vegan",
+    "vegan": "Vegano",
     "lactoseFree": "Senza lattosio",
     "glutenFree": "Senza glutine",
     "sugarFree": "Senza zucchero",
     "available": "Disponibili",
-    "noFlavors": "Nessun gusto disponibile"
+    "noFlavors": "Nessun gusto disponibile",
+    "flavorNotFound": "Gusto non trovato",
+    "backToCatalog": "Torna al catalogo"
   }
 }

@@ -8,6 +8,7 @@ import GuestRoute from "./components/GuestRoute"
 import Register from "./pages/Register"
 import "../src/App.css"
 import Catalog from "./pages/Catalog"
+import FlavorDetails from "./pages/FlavorDetails"
 
 function Home() {
   return <h1>Home</h1>
@@ -46,6 +47,7 @@ function App() {
         </Route>
 
         <Route path="/catalog" element={<Catalog />} />
+        <Route path="/catalog/flavors/:id" element={<FlavorDetails />} />
         <Route path="/cart" element={<Cart />} />
 
         <Route element={<ProtectedRoute />}>
