@@ -37,12 +37,12 @@ function Register() {
         const status = error.response?.status
 
         if (status === 400) {
-          setError("Questa email è già registrata.")
+          setError(t("auth.emailAlreadyRegistered"))
         } else {
-          setError("Registrazione non riuscita. Riprova.")
+          setError(t("auth.registerError"))
         }
       } else {
-        setError("Registrazione non riuscita. Riprova.")
+        setError("auth.registerError")
       }
     }
   }

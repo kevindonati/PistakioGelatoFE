@@ -21,7 +21,7 @@ function Login() {
       navigate("/")
     } catch (error) {
       console.error(error)
-      setError("Email o password non corretti")
+      setError(t("auth.loginError"))
     }
   }
 
