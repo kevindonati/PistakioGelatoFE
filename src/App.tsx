@@ -9,13 +9,11 @@ import Register from "./pages/Register"
 import "../src/App.css"
 import Catalog from "./pages/Catalog"
 import FlavorDetails from "./pages/FlavorDetails"
+import { CartProvider } from "./context/CartContext"
+import Cart from "./pages/Cart"
 
 function Home() {
   return <h1>Home</h1>
-}
-
-function Cart() {
-  return <h1>Cart</h1>
 }
 
 function Checkout() {
@@ -36,33 +34,35 @@ function NotFound() {
 
 function App() {
   return (
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
+    <CartProvider>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
 
-        <Route element={<GuestRoute />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Route>
+          <Route element={<GuestRoute />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Route>
 
-        <Route path="/catalog" element={<Catalog />} />
-        <Route path="/catalog/flavors/:id" element={<FlavorDetails />} />
-        <Route path="/cart" element={<Cart />} />
+          <Route path="/catalog" element={<Catalog />} />
+          <Route path="/catalog/flavors/:id" element={<FlavorDetails />} />
+          <Route path="/cart" element={<Cart />} />
 
-        <Route element={<ProtectedRoute />}>
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/account" element={<Account />} />
-        </Route>
+          <Route element={<ProtectedRoute />}>
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/account" element={<Account />} />
+          </Route>
 
-        <Route element={<AdminRoute />}>
-          <Route path="/admin" element={<Admin />} />
-        </Route>
+          <Route element={<AdminRoute />}>
+            <Route path="/admin" element={<Admin />} />
+          </Route>
 
-        <Route path="/aa" element={<Loading />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+          <Route path="/aa" element={<Loading />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </CartProvider>
   )
 }
 

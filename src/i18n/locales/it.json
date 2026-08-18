@@ -42,5 +42,19 @@
     "noFlavors": "Nessun gusto disponibile",
     "flavorNotFound": "Gusto non trovato",
     "backToCatalog": "Torna al catalogo"
+  },
+  "cart": {
+    "add": "Aggiungi al carrello",
+    "title": "Il tuo carrello",
+    "empty": "Il carrello è vuoto.",
+    "clear": "Svuota carrello",
+    "remove": "Rimuovi",
+    "summary": "Riepilogo",
+    "items": "Porzioni",
+    "checkout": "Procedi al checkout",
+    "tubSize": "Grandezza vaschetta",
+    "quantity": "Quantità",
+    "noTubAvailable": "Nessuna vaschetta disponibile",
+    "total": "Totale"
   }
 }

@@ -42,5 +42,19 @@
     "noFlavors": "No flavors available",
     "flavorNotFound": "Flavor not found",
     "backToCatalog": "Back to catalog"
+  },
+  "cart": {
+    "add": "Add to cart",
+    "title": "Your cart",
+    "empty": "Your cart is empty.",
+    "clear": "Clear cart",
+    "remove": "Remove",
+    "summary": "Summary",
+    "items": "Portions",
+    "checkout": "Proceed to checkout",
+    "tubSize": "Tub size",
+    "quantity": "Quantity",
+    "noTubAvailable": "No tub available",
+    "total": "Total"
   }
 }

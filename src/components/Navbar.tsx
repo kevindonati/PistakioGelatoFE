@@ -4,10 +4,12 @@ import { useTranslation } from "react-i18next"
 import { setLanguage } from "../services/language"
 import type { Language } from "../types/Language"
 import { CartFill } from "react-bootstrap-icons"
+import { useCart } from "../context/CartContext"
 
 const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth()
   const { t, i18n } = useTranslation()
+  const { totalItems } = useCart()
 
   return (
     <nav className="navbar navbar-expand-lg bg-white border-bottom">
@@ -42,13 +44,24 @@ const Navbar = () => {
           </ul>
 
           <div className="d-flex align-items-center gap-3">
+            {/* CARRELLO */}
+
             <Link
               to="/cart"
-              className="btn btn-outline-dark d-flex justify-content-between"
+              className="btn btn-outline-dark position-relative d-flex align-items-center gap-2"
             >
               <CartFill />
+
               {t("navbar.cart")}
+
+              {totalItems > 0 && (
+                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-danger">
+                  {totalItems}
+                </span>
+              )}
             </Link>
+
+            {/* LINGUA */}
 
             <select
               value={i18n.language}
@@ -57,11 +70,13 @@ const Navbar = () => {
               }}
               className="form-select form-select-sm"
             >
-              <option value="IT">🇮🇹 IT</option>
-              <option value="EN">🇬🇧 EN</option>
-              <option value="FR">🇫🇷 FR</option>
-              <option value="DE">🇩🇪 DE</option>
+              <option value="IT">IT</option>
+              <option value="EN">EN</option>
+              <option value="FR">FR</option>
+              <option value="DE">DE</option>
             </select>
+
+            {/* UTENTE */}
 
             {isAuthenticated ? (
               <>

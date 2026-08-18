@@ -6,11 +6,17 @@ import {
   CandyOff,
   Leaf,
   MilkOffIcon,
+  Minus,
+  Plus,
+  ShoppingCart,
   WheatOffIcon,
 } from "lucide-react"
 
-import { getFlavorById } from "../services/catalogApi"
+import { getFlavorById, getTubs } from "../services/catalogApi"
+import { useCart } from "../context/CartContext"
+
 import type { Flavor } from "../types/Flavor"
+import type { Tub } from "../types/Tub"
 import Loading from "../components/Loading"
 
 function FlavorDetails() {
@@ -18,12 +24,19 @@ function FlavorDetails() {
   const { id } = useParams()
   const navigate = useNavigate()
 
+  const { addToCart } = useCart()
+
   const [flavor, setFlavor] = useState<Flavor | null>(null)
+  const [tubs, setTubs] = useState<Tub[]>([])
+  const [selectedTub, setSelectedTub] = useState<Tub | null>(null)
+
+  const [quantity, setQuantity] = useState(1)
+
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
 
   useEffect(() => {
-    const loadFlavor = async () => {
+    const loadData = async () => {
       if (!id) {
         setError(t("catalog.flavorNotFound"))
         setLoading(false)
@@ -34,9 +47,20 @@ function FlavorDetails() {
         setLoading(true)
         setError("")
 
-        const data = await getFlavorById(id)
+        const [flavorData, tubsData] = await Promise.all([
+          getFlavorById(id),
+          getTubs(),
+        ])
 
-        setFlavor(data)
+        setFlavor(flavorData)
+
+        const availableTubs = tubsData.filter((tub) => tub.available)
+
+        setTubs(availableTubs)
+
+        if (availableTubs.length > 0) {
+          setSelectedTub(availableTubs[0])
+        }
       } catch (error) {
         console.error(error)
         setError(t("catalog.flavorNotFound"))
@@ -45,7 +69,7 @@ function FlavorDetails() {
       }
     }
 
-    loadFlavor()
+    loadData()
   }, [id, t])
 
   if (loading) {
@@ -66,6 +90,33 @@ function FlavorDetails() {
   }
 
   const isAvailable = flavor.available && flavor.stockPortions > 0
+
+  const canAddToCart = isAvailable && selectedTub !== null
+
+  const handleIncrease = () => {
+    if (quantity < flavor.stockPortions) {
+      setQuantity((current) => current + 1)
+    }
+  }
+
+  const handleDecrease = () => {
+    if (quantity > 1) {
+      setQuantity((current) => current - 1)
+    }
+  }
+
+  const handleTubChange = (tub: Tub) => {
+    setSelectedTub(tub)
+    setQuantity(1)
+  }
+
+  const handleAddToCart = () => {
+    if (!selectedTub) {
+      return
+    }
+    addToCart(flavor, selectedTub, quantity)
+    setQuantity(1)
+  }
 
   return (
     <main className="container py-5">
@@ -154,6 +205,83 @@ function FlavorDetails() {
               <p className="text-danger mb-0">{t("catalog.unavailable")}</p>
             )}
           </div>
+
+          {/* VASCHETTE */}
+
+          {isAvailable && tubs.length > 0 && (
+            <div className="mt-4">
+              <h2 className="h5 mb-3">{t("cart.tubSize")}</h2>
+
+              <div className="d-flex flex-wrap gap-2">
+                {tubs.map((tub) => (
+                  <button
+                    key={tub.id}
+                    type="button"
+                    className={`btn ${
+                      selectedTub?.id === tub.id
+                        ? "btn-dark"
+                        : "btn-outline-dark"
+                    }`}
+                    onClick={() => handleTubChange(tub)}
+                  >
+                    {tub.weight} g — € {tub.price.toFixed(2)}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* QUANTITÀ */}
+
+          {canAddToCart && (
+            <div className="mt-4">
+              <h2 className="h5 mb-3">{t("cart.quantity")}</h2>
+
+              <div className="d-flex align-items-center gap-3">
+                <button
+                  className="btn btn-outline-dark"
+                  onClick={handleDecrease}
+                  disabled={quantity <= 1}
+                >
+                  <Minus size={18} />
+                </button>
+
+                <span
+                  className="fw-semibold"
+                  style={{
+                    minWidth: "30px",
+                    textAlign: "center",
+                    fontSize: "1.2rem",
+                  }}
+                >
+                  {quantity}
+                </span>
+
+                <button
+                  className="btn btn-outline-dark"
+                  onClick={handleIncrease}
+                  disabled={quantity >= flavor.stockPortions}
+                >
+                  <Plus size={18} />
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* AGGIUNGI AL CARRELLO */}
+
+          {canAddToCart && (
+            <button className="btn btn-dark mt-4" onClick={handleAddToCart}>
+              <ShoppingCart size={18} className="me-2" />
+              {t("cart.add")}
+            </button>
+          )}
+
+          {/* NESSUNA VASCHETTA */}
+
+          {isAvailable && tubs.length === 0 && (
+            <p className="text-danger mt-4">{t("cart.noTubAvailable")}</p>
+          )}
         </div>
       </div>
     </main>

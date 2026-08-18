@@ -2,6 +2,7 @@ import api from "./api"
 import type { Category } from "../types/Category"
 import type { Flavor } from "../types/Flavor"
 import type { Page } from "../types/Page"
+import type { Tub } from "../types/Tub"
 
 export const getCategories = async (
   page = 0,
@@ -61,5 +62,17 @@ export const getSugarFreeFlavors = async (): Promise<Flavor[]> => {
 
 export const getFlavorById = async (id: string): Promise<Flavor> => {
   const response = await api.get<Flavor>(`/flavors/${id}`)
+  return response.data
+}
+
+export const getTubs = async (): Promise<Tub[]> => {
+  const response = await api.get("/tubs")
+
+  return response.data.content
+}
+
+export const getTubById = async (id: string): Promise<Tub> => {
+  const response = await api.get<Tub>(`/tubs/${id}`)
+
   return response.data
 }

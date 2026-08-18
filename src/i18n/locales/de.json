@@ -42,5 +42,19 @@
     "noFlavors": "Keine Geschmacksrichtungen verfügbar",
     "flavorNotFound": "Geschmacksrichtung nicht gefunden",
     "backToCatalog": "Zurück zum Sortiment"
+  },
+  "cart": {
+    "add": "In den Warenkorb",
+    "title": "Dein Warenkorb",
+    "empty": "Dein Warenkorb ist leer.",
+    "clear": "Warenkorb leeren",
+    "remove": "Entfernen",
+    "summary": "Zusammenfassung",
+    "items": "Portionen",
+    "checkout": "Zur Kasse",
+    "tubSize": "Bechergröße",
+    "quantity": "Menge",
+    "noTubAvailable": "Keine Becher verfügbar",
+    "total": "Gesamt"
   }
 }

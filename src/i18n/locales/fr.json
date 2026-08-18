@@ -42,5 +42,19 @@
     "noFlavors": "Aucun parfum disponible",
     "flavorNotFound": "Parfum introuvable",
     "backToCatalog": "Retour au catalogue"
+  },
+  "cart": {
+    "add": "Ajouter au panier",
+    "title": "Votre panier",
+    "empty": "Votre panier est vide.",
+    "clear": "Vider le panier",
+    "remove": "Supprimer",
+    "summary": "Récapitulatif",
+    "items": "Portions",
+    "checkout": "Passer au paiement",
+    "tubSize": "Taille du pot",
+    "quantity": "Quantité",
+    "noTubAvailable": "Aucun pot disponible",
+    "total": "Total"
   }
 }
