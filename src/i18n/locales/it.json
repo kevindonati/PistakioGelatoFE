@@ -56,5 +56,37 @@
     "quantity": "Quantità",
     "noTubAvailable": "Nessuna vaschetta disponibile",
     "total": "Totale"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "deliveryAddress": "Indirizzo di consegna",
+    "newAddress": "Nuovo indirizzo",
+    "addAddress": "Aggiungi indirizzo",
+    "noAddresses": "Non hai ancora nessun indirizzo.",
+    "addressRequired": "Seleziona un indirizzo di consegna.",
+    "notes": "Note",
+    "notesPlaceholder": "Inserisci eventuali note per la consegna...",
+    "summary": "Riepilogo ordine",
+    "confirm": "Conferma ordine",
+    "processing": "Elaborazione...",
+    "error": "Si è verificato un errore durante il checkout.",
+    "loadAddressesError": "Impossibile caricare gli indirizzi.",
+    "emptyCart": "Il carrello è vuoto.",
+    "backToCart": "Torna al carrello",
+    "subtotal": "Subtotale",
+    "shipping": "Spedizione",
+    "free": "Gratuita"
+  },
+  "address": {
+    "title": "Nuovo indirizzo",
+    "addressLine1": "Indirizzo",
+    "addressLine2": "Interno, piano, citofono (opzionale)",
+    "postalCode": "CAP",
+    "city": "Città",
+    "country": "Paese",
+    "save": "Salva indirizzo",
+    "saving": "Salvataggio...",
+    "backToCheckout": "Torna al checkout",
+    "createError": "Impossibile creare l'indirizzo."
   }
 }

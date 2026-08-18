@@ -1,10 +1,11 @@
 import { useTranslation } from "react-i18next"
 import { Minus, Plus, ShoppingCart, Trash2 } from "lucide-react"
 import { useCart } from "../context/CartContext"
+import { useNavigate } from "react-router-dom"
 
 function Cart() {
   const { t } = useTranslation()
-
+  const navigate = useNavigate()
   const { items, removeFromCart, updateQuantity, clearCart, totalItems } =
     useCart()
 
@@ -159,7 +160,10 @@ function Cart() {
 
               <hr />
 
-              <button className="btn btn-dark w-100" disabled>
+              <button
+                className="btn btn-dark w-100"
+                onClick={() => navigate("/checkout")}
+              >
                 {t("cart.checkout")}
               </button>
             </div>

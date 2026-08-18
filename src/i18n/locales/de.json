@@ -56,5 +56,37 @@
     "quantity": "Menge",
     "noTubAvailable": "Keine Becher verfügbar",
     "total": "Gesamt"
+  },
+  "checkout": {
+    "title": "Bestellung",
+    "deliveryAddress": "Lieferadresse",
+    "newAddress": "Neue Adresse",
+    "addAddress": "Adresse hinzufügen",
+    "noAddresses": "Du hast noch keine Adresse.",
+    "addressRequired": "Wähle eine Lieferadresse aus.",
+    "notes": "Notizen",
+    "notesPlaceholder": "Füge Hinweise zur Lieferung hinzu...",
+    "summary": "Bestellübersicht",
+    "confirm": "Bestellung bestätigen",
+    "processing": "Wird verarbeitet...",
+    "error": "Beim Checkout ist ein Fehler aufgetreten.",
+    "loadAddressesError": "Adressen konnten nicht geladen werden.",
+    "emptyCart": "Dein Warenkorb ist leer.",
+    "backToCart": "Zurück zum Warenkorb",
+    "subtotal": "Zwischensumme",
+    "shipping": "Versand",
+    "free": "Kostenlos"
+  },
+  "address": {
+    "title": "Neue Adresse",
+    "addressLine1": "Adresse",
+    "addressLine2": "Wohnung, Etage, Klingel (optional)",
+    "postalCode": "Postleitzahl",
+    "city": "Stadt",
+    "country": "Land",
+    "save": "Adresse speichern",
+    "saving": "Speichern...",
+    "backToCheckout": "Zurück zur Bestellung",
+    "createError": "Die Adresse konnte nicht erstellt werden."
   }
 }

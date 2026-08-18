@@ -56,5 +56,37 @@
     "quantity": "Quantity",
     "noTubAvailable": "No tub available",
     "total": "Total"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "deliveryAddress": "Delivery address",
+    "newAddress": "New address",
+    "addAddress": "Add address",
+    "noAddresses": "You don't have any addresses yet.",
+    "addressRequired": "Select a delivery address.",
+    "notes": "Notes",
+    "notesPlaceholder": "Add any delivery notes...",
+    "summary": "Order summary",
+    "confirm": "Confirm order",
+    "processing": "Processing...",
+    "error": "An error occurred during checkout.",
+    "loadAddressesError": "Unable to load addresses.",
+    "emptyCart": "Your cart is empty.",
+    "backToCart": "Back to cart",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "free": "Free"
+  },
+  "address": {
+    "title": "New address",
+    "addressLine1": "Address",
+    "addressLine2": "Apartment, floor, doorbell (optional)",
+    "postalCode": "Postal code",
+    "city": "City",
+    "country": "Country",
+    "save": "Save address",
+    "saving": "Saving...",
+    "backToCheckout": "Back to checkout",
+    "createError": "Unable to create the address."
   }
 }

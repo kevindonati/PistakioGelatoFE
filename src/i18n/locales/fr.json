@@ -56,5 +56,37 @@
     "quantity": "Quantité",
     "noTubAvailable": "Aucun pot disponible",
     "total": "Total"
+  },
+  "checkout": {
+    "title": "Commande",
+    "deliveryAddress": "Adresse de livraison",
+    "newAddress": "Nouvelle adresse",
+    "addAddress": "Ajouter une adresse",
+    "noAddresses": "Vous n'avez encore aucune adresse.",
+    "addressRequired": "Sélectionnez une adresse de livraison.",
+    "notes": "Notes",
+    "notesPlaceholder": "Ajoutez des notes pour la livraison...",
+    "summary": "Résumé de la commande",
+    "confirm": "Confirmer la commande",
+    "processing": "Traitement...",
+    "error": "Une erreur s'est produite lors de la commande.",
+    "loadAddressesError": "Impossible de charger les adresses.",
+    "emptyCart": "Votre panier est vide.",
+    "backToCart": "Retour au panier",
+    "subtotal": "Sous-total",
+    "shipping": "Livraison",
+    "free": "Gratuite"
+  },
+  "address": {
+    "title": "Nouvelle adresse",
+    "addressLine1": "Adresse",
+    "addressLine2": "Appartement, étage, interphone (facultatif)",
+    "postalCode": "Code postal",
+    "city": "Ville",
+    "country": "Pays",
+    "save": "Enregistrer l'adresse",
+    "saving": "Enregistrement...",
+    "backToCheckout": "Retour à la commande",
+    "createError": "Impossible de créer l'adresse."
   }
 }

@@ -11,13 +11,11 @@ import Catalog from "./pages/Catalog"
 import FlavorDetails from "./pages/FlavorDetails"
 import { CartProvider } from "./context/CartContext"
 import Cart from "./pages/Cart"
+import Checkout from "./pages/Checkout"
+import NewAddress from "./pages/NewAddress"
 
 function Home() {
   return <h1>Home</h1>
-}
-
-function Checkout() {
-  return <h1>Checkout</h1>
 }
 
 function Account() {
@@ -52,6 +50,7 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/account" element={<Account />} />
+            <Route path="/account/addresses/new" element={<NewAddress />} />
           </Route>
 
           <Route element={<AdminRoute />}>

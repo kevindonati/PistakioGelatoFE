@@ -83,3 +83,36 @@ export const getCartOrder = async (): Promise<Order | null> => {
 
   return response.data
 }
+
+export interface CheckoutData {
+  address: string
+  notes?: string
+}
+
+export const checkoutOrder = async (
+  orderId: string,
+  data: CheckoutData,
+): Promise<Order> => {
+  const response = await api.put<Order>(`/orders/${orderId}/checkout`, data)
+
+  return response.data
+}
+
+export const getShippingCost = async (): Promise<number> => {
+  const response = await api.get<number>("/settings/shipping-cost")
+  return response.data
+}
+
+export interface StripeCheckoutResponse {
+  checkoutUrl: string
+}
+
+export const createStripeCheckout = async (
+  orderId: string,
+): Promise<{ url: string }> => {
+  const response = await api.post<{ url: string }>(
+    `/payments/stripe/${orderId}`,
+  )
+
+  return response.data
+}
