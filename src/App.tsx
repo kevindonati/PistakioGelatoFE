@@ -7,13 +7,10 @@ import Navbar from "./components/Navbar"
 import GuestRoute from "./components/GuestRoute"
 import Register from "./pages/Register"
 import "../src/App.css"
+import Catalog from "./pages/Catalog"
 
 function Home() {
   return <h1>Home</h1>
-}
-
-function Catalog() {
-  return <h1>Catalog</h1>
 }
 
 function Cart() {

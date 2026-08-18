@@ -27,5 +27,18 @@
   },
   "errors": {
     "notFound": "Page not found"
+  },
+  "catalog": {
+    "title": "Our catalog",
+    "loadError": "Unable to load the catalog.",
+    "noCategories": "No categories available.",
+    "all": "All",
+    "unavailable": "Unavailable",
+    "vegan": "Vegan",
+    "lactoseFree": "Lactose-free",
+    "glutenFree": "Gluten-free",
+    "sugarFree": "Sugar-free",
+    "available": "Available",
+    "noFlavors": "No flavors available"
   }
 }

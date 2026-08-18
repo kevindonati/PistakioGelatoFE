@@ -27,5 +27,18 @@
   },
   "errors": {
     "notFound": "Seite nicht gefunden"
+  },
+  "catalog": {
+    "title": "Unser Sortiment",
+    "loadError": "Das Sortiment konnte nicht geladen werden.",
+    "noCategories": "Keine Kategorien verfügbar.",
+    "all": "Alle",
+    "unavailable": "Nicht verfügbar",
+    "vegan": "Vegan",
+    "lactoseFree": "Laktosefrei",
+    "glutenFree": "Glutenfrei",
+    "sugarFree": "Zuckerfrei",
+    "available": "Verfügbar",
+    "noFlavors": "Keine Geschmacksrichtungen verfügbar"
   }
 }

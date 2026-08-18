@@ -27,5 +27,18 @@
   },
   "errors": {
     "notFound": "Page introuvable"
+  },
+  "catalog": {
+    "title": "Notre catalogue",
+    "loadError": "Impossible de charger le catalogue.",
+    "noCategories": "Aucune catégorie disponible.",
+    "all": "Tous",
+    "unavailable": "Indisponible",
+    "vegan": "Vegan",
+    "lactoseFree": "Sans lactose",
+    "glutenFree": "Sans gluten",
+    "sugarFree": "Sans sucre",
+    "available": "Disponibles",
+    "noFlavors": "Aucun parfum disponible"
   }
 }

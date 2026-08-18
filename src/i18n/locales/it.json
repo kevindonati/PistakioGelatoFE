@@ -27,5 +27,18 @@
   },
   "errors": {
     "notFound": "Pagina non trovata"
+  },
+  "catalog": {
+    "title": "Il nostro catalogo",
+    "loadError": "Non è stato possibile caricare il catalogo.",
+    "noCategories": "Nessuna categoria disponibile.",
+    "all": "Tutti",
+    "unavailable": "Non disponibile",
+    "vegan": "Vegan",
+    "lactoseFree": "Senza lattosio",
+    "glutenFree": "Senza glutine",
+    "sugarFree": "Senza zucchero",
+    "available": "Disponibili",
+    "noFlavors": "Nessun gusto disponibile"
   }
 }

@@ -3,6 +3,7 @@ import { useAuth } from "../context/useAuth"
 import { useTranslation } from "react-i18next"
 import { setLanguage } from "../services/language"
 import type { Language } from "../types/Language"
+import { CartFill } from "react-bootstrap-icons"
 
 const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth()
@@ -41,8 +42,12 @@ const Navbar = () => {
           </ul>
 
           <div className="d-flex align-items-center gap-3">
-            <Link to="/cart" className="btn btn-outline-dark">
-              🛒{t("navbar.cart")}
+            <Link
+              to="/cart"
+              className="btn btn-outline-dark d-flex justify-content-between"
+            >
+              <CartFill />
+              {t("navbar.cart")}
             </Link>
 
             <select
