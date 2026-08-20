@@ -3,15 +3,15 @@
     "home": "Home",
     "catalog": "Catalog",
     "cart": "Cart",
-    "login": "Login",
+    "login": "Log in",
     "register": "Register",
-    "logout": "Logout",
+    "logout": "Log out",
     "account": "Account",
     "admin": "Admin",
     "orders": "My orders"
   },
   "auth": {
-    "login": "Login",
+    "login": "Log in",
     "register": "Register",
     "email": "Email",
     "password": "Password",
@@ -55,7 +55,7 @@
     "checkout": "Proceed to checkout",
     "tubSize": "Tub size",
     "quantity": "Quantity",
-    "noTubAvailable": "No tub available",
+    "noTubAvailable": "No tubs available",
     "total": "Total"
   },
   "checkout": {
@@ -109,16 +109,23 @@
     "loadError": "Unable to retrieve the order."
   },
   "orders": {
-    "title": "My orders",
-    "order": "Order",
-    "status": "Status",
-    "total": "Total",
+    "title": "Orders",
+    "subtitle": "Manage your store orders",
+    "all": "All orders",
+    "empty": "No orders found",
+    "loadError": "Unable to load orders.",
+    "actionError": "An error occurred during the operation.",
+    "prepare": "Start preparation",
+    "createShipment": "Create shipment",
+    "ship": "Mark as shipped",
+    "deliver": "Mark as delivered",
     "details": "Details",
-    "empty": "You haven't placed any orders yet",
-    "emptyMessage": "Your orders will appear here after your first purchase.",
-    "goToCatalog": "Go to catalog",
-    "loadError": "Unable to retrieve your orders.",
-    "orders": "My orders"
+    "shipment": "Shipment",
+    "carrier": "Carrier",
+    "trackingNumber": "Tracking number",
+    "confirmShipment": "Create shipment",
+    "cancel": "Cancel",
+    "notes": "Notes"
   },
   "orderDetails": {
     "title": "Order details",
@@ -127,7 +134,7 @@
     "products": "Products",
     "tubSize": "Tub",
     "quantity": "Quantity",
-    "unit": "item",
+    "unit": "piece",
     "subtotal": "Subtotal",
     "shipping": "Shipping",
     "free": "Free",
@@ -143,8 +150,16 @@
     "paymentError": "Unable to start the payment."
   },
   "orderStatus": {
+    "CART": "Cart",
+    "PENDING_PAYMENT": "Pending payment",
     "PAID": "Paid",
     "PREPARING": "Preparing",
+    "SHIPPED": "Shipped",
+    "DELIVERED": "Delivered",
+    "CANCELLED": "Cancelled"
+  },
+  "shipmentStatus": {
+    "PENDING": "Pending shipment",
     "SHIPPED": "Shipped",
     "DELIVERED": "Delivered"
   },
@@ -159,7 +174,7 @@
       "shipments": "Shipments",
       "payments": "Payments",
       "settings": "Settings",
-      "logout": "Logout"
+      "logout": "Log out"
     },
     "dashboard": {
       "title": "Dashboard",
@@ -167,6 +182,35 @@
       "orders": "Orders",
       "customers": "Customers",
       "revenue": "Revenue"
+    },
+    "orders": {
+      "title": "Orders",
+      "subtitle": "Manage your store orders",
+      "all": "All orders",
+      "empty": "No orders found",
+      "loadError": "Unable to load orders.",
+      "actionError": "An error occurred during the operation.",
+      "prepare": "Start preparation",
+      "createShipment": "Create shipment",
+      "ship": "Mark as shipped",
+      "deliver": "Mark as delivered",
+      "details": "Details",
+      "shipment": "Shipment",
+      "carrier": "Carrier",
+      "trackingNumber": "Tracking number",
+      "confirmShipment": "Create shipment",
+      "cancel": "Cancel",
+      "notes": "Notes",
+      "sortBy": "Sort by",
+      "newest": "Newest",
+      "oldest": "Oldest",
+      "id": "ID",
+      "customer": "Customer",
+      "city": "City",
+      "payment": "Payment",
+      "actions": "Actions",
+      "page": "Page",
+      "changeStatus": "Change status"
     }
   }
 }

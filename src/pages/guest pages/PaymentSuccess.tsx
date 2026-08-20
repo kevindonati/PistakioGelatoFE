@@ -3,16 +3,16 @@ import { Link, useSearchParams } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { ArrowRight, CheckCircle, MapPin, Package } from "lucide-react"
 
-import { getOrderById, getOrderItems } from "../services/orderApi"
+import { getOrderById, getOrderItems } from "../../services/orderApi"
 
-import { getFlavorById, getTubById } from "../services/catalogApi"
+import { getFlavorById, getTubById } from "../../services/catalogApi"
 
-import type { Order } from "../types/Order"
-import type { OrderItem } from "../types/OrderItem"
-import type { Flavor } from "../types/Flavor"
-import type { Tub } from "../types/Tub"
+import type { Order } from "../../types/Order"
+import type { OrderItem } from "../../types/OrderItem"
+import type { Flavor } from "../../types/Flavor"
+import type { Tub } from "../../types/Tub"
 
-import Loading from "../components/Loading"
+import Loading from "../../components/Loading"
 
 interface PaymentItem {
   orderItem: OrderItem

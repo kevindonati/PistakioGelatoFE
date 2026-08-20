@@ -10,6 +10,7 @@
     "admin": "Admin",
     "orders": "I miei ordini"
   },
+
   "auth": {
     "login": "Accedi",
     "register": "Registrati",
@@ -23,12 +24,15 @@
     "registerError": "Registrazione non riuscita",
     "emailAlreadyRegistered": "Questa email è già registrata."
   },
+
   "common": {
     "loading": "Caricamento..."
   },
+
   "errors": {
     "notFound": "Pagina non trovata"
   },
+
   "catalog": {
     "title": "Il nostro catalogo",
     "loadError": "Non è stato possibile caricare il catalogo.",
@@ -44,6 +48,7 @@
     "flavorNotFound": "Gusto non trovato",
     "backToCatalog": "Torna al catalogo"
   },
+
   "cart": {
     "add": "Aggiungi al carrello",
     "title": "Il tuo carrello",
@@ -58,6 +63,7 @@
     "noTubAvailable": "Nessuna vaschetta disponibile",
     "total": "Totale"
   },
+
   "checkout": {
     "title": "Checkout",
     "deliveryAddress": "Indirizzo di consegna",
@@ -78,6 +84,7 @@
     "shipping": "Spedizione",
     "free": "Gratuita"
   },
+
   "address": {
     "title": "Nuovo indirizzo",
     "addressLine1": "Indirizzo",
@@ -90,6 +97,7 @@
     "backToCheckout": "Torna al checkout",
     "createError": "Impossibile creare l'indirizzo."
   },
+
   "paymentSuccess": {
     "title": "Pagamento completato!",
     "message": "Il tuo ordine è stato confermato.",
@@ -108,18 +116,27 @@
     "orderNotFound": "Ordine non trovato.",
     "loadError": "Non è stato possibile recuperare l'ordine."
   },
+
   "orders": {
-    "title": "I miei ordini",
-    "order": "Ordine",
-    "status": "Stato",
-    "total": "Totale",
+    "title": "Ordini",
+    "subtitle": "Gestisci gli ordini del negozio",
+    "all": "Tutti gli ordini",
+    "empty": "Nessun ordine trovato",
+    "loadError": "Impossibile caricare gli ordini.",
+    "actionError": "Si è verificato un errore durante l'operazione.",
+    "prepare": "Inizia preparazione",
+    "createShipment": "Crea spedizione",
+    "ship": "Segna come spedito",
+    "deliver": "Segna come consegnato",
     "details": "Dettagli",
-    "empty": "Non hai ancora effettuato ordini",
-    "emptyMessage": "I tuoi ordini appariranno qui dopo il primo acquisto.",
-    "goToCatalog": "Vai al catalogo",
-    "loadError": "Non è stato possibile recuperare i tuoi ordini.",
-    "orders": "I miei ordini"
+    "shipment": "Spedizione",
+    "carrier": "Corriere",
+    "trackingNumber": "Numero di tracking",
+    "confirmShipment": "Crea spedizione",
+    "cancel": "Annulla",
+    "notes": "Note"
   },
+
   "orderDetails": {
     "title": "Dettaglio ordine",
     "orderDate": "Data ordine",
@@ -142,12 +159,23 @@
     "paymentLoading": "Apertura del pagamento...",
     "paymentError": "Non è stato possibile avviare il pagamento."
   },
+
   "orderStatus": {
+    "CART": "Carrello",
+    "PENDING_PAYMENT": "In attesa di pagamento",
     "PAID": "Pagato",
     "PREPARING": "In preparazione",
     "SHIPPED": "Spedito",
+    "DELIVERED": "Consegnato",
+    "CANCELLED": "Annullato"
+  },
+
+  "shipmentStatus": {
+    "PENDING": "In attesa di spedizione",
+    "SHIPPED": "Spedito",
     "DELIVERED": "Consegnato"
   },
+
   "admin": {
     "sidebar": {
       "dashboard": "Dashboard",
@@ -161,12 +189,43 @@
       "settings": "Impostazioni",
       "logout": "Esci"
     },
+
     "dashboard": {
       "title": "Pannello di controllo",
       "subtitle": "Gestisci il tuo negozio",
       "orders": "Ordini",
       "customers": "Clienti",
       "revenue": "Incassi"
+    },
+
+    "orders": {
+      "title": "Ordini",
+      "subtitle": "Gestisci gli ordini del negozio",
+      "all": "Tutti gli ordini",
+      "empty": "Nessun ordine trovato",
+      "loadError": "Impossibile caricare gli ordini.",
+      "actionError": "Si è verificato un errore durante l'operazione.",
+      "prepare": "Inizia preparazione",
+      "createShipment": "Crea spedizione",
+      "ship": "Segna come spedito",
+      "deliver": "Segna come consegnato",
+      "details": "Dettagli",
+      "shipment": "Spedizione",
+      "carrier": "Corriere",
+      "trackingNumber": "Numero di tracking",
+      "confirmShipment": "Crea spedizione",
+      "cancel": "Annulla",
+      "notes": "Note",
+      "sortBy": "Ordina per",
+      "newest": "Più recenti",
+      "oldest": "Meno recenti",
+      "id": "ID",
+      "customer": "Cliente",
+      "city": "Città",
+      "payment": "Pagamento",
+      "actions": "Azioni",
+      "page": "Pagina",
+      "changeStatus": "Cambia stato"
     }
   }
 }

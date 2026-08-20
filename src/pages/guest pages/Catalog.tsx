@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { CandyOff, Leaf, MilkOffIcon, WheatOffIcon } from "lucide-react"
-import { getCategories, getFlavors } from "../services/catalogApi"
-import type { Category } from "../types/Category"
-import type { Flavor } from "../types/Flavor"
-import Loading from "../components/Loading"
+import { getCategories, getFlavors } from "../../services/catalogApi"
+import type { Category } from "../../types/Category"
+import type { Flavor } from "../../types/Flavor"
+import Loading from "../../components/Loading"
 import { useNavigate } from "react-router-dom"
 
 type FlavorFilter =

@@ -3,9 +3,9 @@ import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { ArrowRight, Package } from "lucide-react"
 
-import { getMyOrders } from "../services/orderApi"
-import type { Order } from "../types/Order"
-import Loading from "../components/Loading"
+import { getMyOrders } from "../../services/orderApi"
+import type { Order } from "../../types/Order"
+import Loading from "../../components/Loading"
 
 function Orders() {
   const { t } = useTranslation()

@@ -153,3 +153,83 @@ export const getMyOrderItems = async (page = 0, size = 50) => {
 
   return response.data.content
 }
+
+export const getAllOrders = async (
+  page = 0,
+  size = 15,
+  direction: "asc" | "desc" = "desc",
+): Promise<{
+  content: Order[]
+  totalPages: number
+  totalElements: number
+}> => {
+  const response = await api.get("/orders", {
+    params: {
+      page,
+      size,
+      orderBy: "createdAt",
+      direction,
+    },
+  })
+
+  return response.data
+}
+
+export const prepareOrder = async (orderId: string): Promise<Order> => {
+  const response = await api.put(`/orders/${orderId}/prepare`)
+
+  return response.data
+}
+
+export interface Shipment {
+  id: string
+  carrier: string
+  trackingNumber: string
+  status: string
+  deliveredAt: string | null
+  order: {
+    id: string
+  }
+}
+
+export const getAllShipments = async (
+  page = 0,
+  size = 50,
+): Promise<{
+  content: Shipment[]
+  totalPages: number
+  totalElements: number
+}> => {
+  const response = await api.get("/shipments", {
+    params: {
+      page,
+      size,
+      orderBy: "shippingDate",
+    },
+  })
+
+  return response.data
+}
+
+export const createShipment = async (data: {
+  carrier: string
+  trackingNumber: string
+  order: string
+}) => {
+  const response = await api.post("/shipments", data)
+
+  return response.data
+}
+
+export const updateShipmentStatus = async (
+  shipmentId: string,
+  status: "SHIPPED" | "DELIVERED",
+): Promise<Shipment> => {
+  const response = await api.patch(`/shipments/${shipmentId}/status`, null, {
+    params: {
+      status,
+    },
+  })
+
+  return response.data
+}

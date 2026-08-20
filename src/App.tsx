@@ -1,23 +1,24 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom"
-import Login from "./pages/Login"
+import Login from "./pages/guest pages/Login"
 import ProtectedRoute from "./components/ProtectedRoute"
 import Loading from "./components/Loading"
 import AdminRoute from "./components/AdminRoute"
 import Navbar from "./components/Navbar"
 import GuestRoute from "./components/GuestRoute"
-import Register from "./pages/Register"
+import Register from "./pages/guest pages/Register"
 import "../src/App.css"
-import Catalog from "./pages/Catalog"
-import FlavorDetails from "./pages/FlavorDetails"
+import Catalog from "./pages/guest pages/Catalog"
+import FlavorDetails from "./pages/guest pages/FlavorDetails"
 import { CartProvider } from "./context/CartContext"
-import Cart from "./pages/Cart"
-import Checkout from "./pages/Checkout"
-import NewAddress from "./pages/NewAddress"
-import PaymentSuccess from "./pages/PaymentSuccess"
-import Orders from "./pages/Order"
-import OrderDetails from "./pages/OrderDetails"
+import Cart from "./pages/guest pages/Cart"
+import Checkout from "./pages/guest pages/Checkout"
+import NewAddress from "./pages/guest pages/NewAddress"
+import PaymentSuccess from "./pages/guest pages/PaymentSuccess"
+import Orders from "./pages/guest pages/Order"
+import OrderDetails from "./pages/guest pages/OrderDetails"
 import AdminLayout from "./components/AdminLayout"
-import AdminDashboard from "./pages/AdminDashboard"
+import AdminDashboard from "./pages/admin pages/AdminDashboard"
+import AdminOrders from "./pages/admin pages/AdminOrders"
 
 function Home() {
   return <h1>Home</h1>
@@ -46,11 +47,10 @@ function AppContent() {
         <Route element={<AdminRoute />}>
           <Route element={<AdminLayout />}>
             <Route path="/admin" element={<AdminDashboard />} />
+
+            <Route path="/admin/orders" element={<AdminOrders />} />
+            <Route path="/admin/orders/:id" element={<AdminOrderDetails />} />
             {/* 
-            <Route
-              path="/admin/orders"
-              element={<AdminOrders />}
-            />
             <Route
               path="/admin/catalog"
               element={<AdminCatalog />}

@@ -2,18 +2,18 @@ import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { ArrowLeft, Check, MapPin, Package } from "lucide-react"
-import { createStripeCheckout } from "../services/orderApi"
+import { createStripeCheckout } from "../../services/orderApi"
 
-import { getMyOrderById, getMyOrderItems } from "../services/orderApi"
+import { getMyOrderById, getMyOrderItems } from "../../services/orderApi"
 
-import { getFlavorById, getTubById } from "../services/catalogApi"
+import { getFlavorById, getTubById } from "../../services/catalogApi"
 
-import type { Order } from "../types/Order"
-import type { OrderItem } from "../types/OrderItem"
-import type { Flavor } from "../types/Flavor"
-import type { Tub } from "../types/Tub"
+import type { Order } from "../../types/Order"
+import type { OrderItem } from "../../types/OrderItem"
+import type { Flavor } from "../../types/Flavor"
+import type { Tub } from "../../types/Tub"
 
-import Loading from "../components/Loading"
+import Loading from "../../components/Loading"
 
 interface OrderProduct {
   orderItem: OrderItem

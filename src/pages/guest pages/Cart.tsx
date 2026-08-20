@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next"
 import { Minus, Plus, ShoppingCart, Trash2 } from "lucide-react"
-import { useCart } from "../context/CartContext"
+import { useCart } from "../../context/CartContext"
 import { useNavigate } from "react-router-dom"
-import Loading from "../components/Loading"
+import Loading from "../../components/Loading"
 
 function Cart() {
   const { t } = useTranslation()

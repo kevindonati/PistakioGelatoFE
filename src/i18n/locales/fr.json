@@ -35,7 +35,7 @@
     "noCategories": "Aucune catégorie disponible.",
     "all": "Tous",
     "unavailable": "Indisponible",
-    "vegan": "Vegan",
+    "vegan": "Végan",
     "lactoseFree": "Sans lactose",
     "glutenFree": "Sans gluten",
     "sugarFree": "Sans sucre",
@@ -50,27 +50,27 @@
     "empty": "Votre panier est vide.",
     "clear": "Vider le panier",
     "remove": "Supprimer",
-    "summary": "Récapitulatif",
+    "summary": "Résumé",
     "items": "Portions",
-    "checkout": "Passer au paiement",
+    "checkout": "Passer à la caisse",
     "tubSize": "Taille du pot",
     "quantity": "Quantité",
     "noTubAvailable": "Aucun pot disponible",
     "total": "Total"
   },
   "checkout": {
-    "title": "Commande",
+    "title": "Paiement",
     "deliveryAddress": "Adresse de livraison",
     "newAddress": "Nouvelle adresse",
     "addAddress": "Ajouter une adresse",
-    "noAddresses": "Vous n'avez encore aucune adresse.",
+    "noAddresses": "Vous n'avez pas encore d'adresse.",
     "addressRequired": "Sélectionnez une adresse de livraison.",
     "notes": "Notes",
-    "notesPlaceholder": "Ajoutez des notes pour la livraison...",
+    "notesPlaceholder": "Ajoutez des instructions pour la livraison...",
     "summary": "Résumé de la commande",
     "confirm": "Confirmer la commande",
     "processing": "Traitement...",
-    "error": "Une erreur s'est produite lors de la commande.",
+    "error": "Une erreur est survenue lors du paiement.",
     "loadAddressesError": "Impossible de charger les adresses.",
     "emptyCart": "Votre panier est vide.",
     "backToCart": "Retour au panier",
@@ -87,7 +87,7 @@
     "country": "Pays",
     "save": "Enregistrer l'adresse",
     "saving": "Enregistrement...",
-    "backToCheckout": "Retour à la commande",
+    "backToCheckout": "Retour au paiement",
     "createError": "Impossible de créer l'adresse."
   },
   "paymentSuccess": {
@@ -109,15 +109,23 @@
     "loadError": "Impossible de récupérer la commande."
   },
   "orders": {
-    "title": "Mes commandes",
-    "order": "Commande",
-    "status": "Statut",
-    "total": "Total",
+    "title": "Commandes",
+    "subtitle": "Gérez les commandes de la boutique",
+    "all": "Toutes les commandes",
+    "empty": "Aucune commande trouvée",
+    "loadError": "Impossible de charger les commandes.",
+    "actionError": "Une erreur est survenue lors de l'opération.",
+    "prepare": "Commencer la préparation",
+    "createShipment": "Créer l'expédition",
+    "ship": "Marquer comme expédiée",
+    "deliver": "Marquer comme livrée",
     "details": "Détails",
-    "empty": "Vous n'avez pas encore passé de commande",
-    "emptyMessage": "Vos commandes apparaîtront ici après votre premier achat.",
-    "goToCatalog": "Aller au catalogue",
-    "loadError": "Impossible de récupérer vos commandes."
+    "shipment": "Expédition",
+    "carrier": "Transporteur",
+    "trackingNumber": "Numéro de suivi",
+    "confirmShipment": "Créer l'expédition",
+    "cancel": "Annuler",
+    "notes": "Notes"
   },
   "orderDetails": {
     "title": "Détails de la commande",
@@ -126,7 +134,7 @@
     "products": "Produits",
     "tubSize": "Pot",
     "quantity": "Quantité",
-    "unit": "article",
+    "unit": "pièce",
     "subtotal": "Sous-total",
     "shipping": "Livraison",
     "free": "Gratuite",
@@ -142,8 +150,16 @@
     "paymentError": "Impossible de démarrer le paiement."
   },
   "orderStatus": {
+    "CART": "Panier",
+    "PENDING_PAYMENT": "Paiement en attente",
     "PAID": "Payée",
     "PREPARING": "En préparation",
+    "SHIPPED": "Expédiée",
+    "DELIVERED": "Livrée",
+    "CANCELLED": "Annulée"
+  },
+  "shipmentStatus": {
+    "PENDING": "Expédition en attente",
     "SHIPPED": "Expédiée",
     "DELIVERED": "Livrée"
   },
@@ -158,7 +174,7 @@
       "shipments": "Expéditions",
       "payments": "Paiements",
       "settings": "Paramètres",
-      "logout": "Déconnexion"
+      "logout": "Se déconnecter"
     },
     "dashboard": {
       "title": "Tableau de bord",
@@ -166,6 +182,35 @@
       "orders": "Commandes",
       "customers": "Clients",
       "revenue": "Chiffre d'affaires"
+    },
+    "orders": {
+      "title": "Commandes",
+      "subtitle": "Gérez les commandes de la boutique",
+      "all": "Toutes les commandes",
+      "empty": "Aucune commande trouvée",
+      "loadError": "Impossible de charger les commandes.",
+      "actionError": "Une erreur est survenue lors de l'opération.",
+      "prepare": "Commencer la préparation",
+      "createShipment": "Créer l'expédition",
+      "ship": "Marquer comme expédiée",
+      "deliver": "Marquer comme livrée",
+      "details": "Détails",
+      "shipment": "Expédition",
+      "carrier": "Transporteur",
+      "trackingNumber": "Numéro de suivi",
+      "confirmShipment": "Créer l'expédition",
+      "cancel": "Annuler",
+      "notes": "Notes",
+      "sortBy": "Trier par",
+      "newest": "Plus récentes",
+      "oldest": "Plus anciennes",
+      "id": "ID",
+      "customer": "Client",
+      "city": "Ville",
+      "payment": "Paiement",
+      "actions": "Actions",
+      "page": "Page",
+      "changeStatus": "Changer le statut"
     }
   }
 }

@@ -1,7 +1,7 @@
 {
   "navbar": {
     "home": "Startseite",
-    "catalog": "Sortiment",
+    "catalog": "Katalog",
     "cart": "Warenkorb",
     "login": "Anmelden",
     "register": "Registrieren",
@@ -24,14 +24,14 @@
     "emailAlreadyRegistered": "Diese E-Mail-Adresse ist bereits registriert."
   },
   "common": {
-    "loading": "Wird geladen..."
+    "loading": "Laden..."
   },
   "errors": {
     "notFound": "Seite nicht gefunden"
   },
   "catalog": {
-    "title": "Unser Sortiment",
-    "loadError": "Das Sortiment konnte nicht geladen werden.",
+    "title": "Unser Katalog",
+    "loadError": "Der Katalog konnte nicht geladen werden.",
     "noCategories": "Keine Kategorien verfügbar.",
     "all": "Alle",
     "unavailable": "Nicht verfügbar",
@@ -42,12 +42,12 @@
     "available": "Verfügbar",
     "noFlavors": "Keine Geschmacksrichtungen verfügbar",
     "flavorNotFound": "Geschmacksrichtung nicht gefunden",
-    "backToCatalog": "Zurück zum Sortiment"
+    "backToCatalog": "Zurück zum Katalog"
   },
   "cart": {
     "add": "In den Warenkorb",
-    "title": "Dein Warenkorb",
-    "empty": "Dein Warenkorb ist leer.",
+    "title": "Ihr Warenkorb",
+    "empty": "Ihr Warenkorb ist leer.",
     "clear": "Warenkorb leeren",
     "remove": "Entfernen",
     "summary": "Zusammenfassung",
@@ -59,20 +59,20 @@
     "total": "Gesamt"
   },
   "checkout": {
-    "title": "Bestellung",
+    "title": "Kasse",
     "deliveryAddress": "Lieferadresse",
     "newAddress": "Neue Adresse",
     "addAddress": "Adresse hinzufügen",
-    "noAddresses": "Du hast noch keine Adresse.",
-    "addressRequired": "Wähle eine Lieferadresse aus.",
+    "noAddresses": "Sie haben noch keine Adresse.",
+    "addressRequired": "Wählen Sie eine Lieferadresse.",
     "notes": "Notizen",
-    "notesPlaceholder": "Füge Hinweise zur Lieferung hinzu...",
+    "notesPlaceholder": "Fügen Sie Hinweise für die Lieferung hinzu...",
     "summary": "Bestellübersicht",
     "confirm": "Bestellung bestätigen",
-    "processing": "Wird verarbeitet...",
+    "processing": "Wird bearbeitet...",
     "error": "Beim Checkout ist ein Fehler aufgetreten.",
     "loadAddressesError": "Adressen konnten nicht geladen werden.",
-    "emptyCart": "Dein Warenkorb ist leer.",
+    "emptyCart": "Ihr Warenkorb ist leer.",
     "backToCart": "Zurück zum Warenkorb",
     "subtotal": "Zwischensumme",
     "shipping": "Versand",
@@ -87,14 +87,14 @@
     "country": "Land",
     "save": "Adresse speichern",
     "saving": "Speichern...",
-    "backToCheckout": "Zurück zur Bestellung",
+    "backToCheckout": "Zurück zur Kasse",
     "createError": "Die Adresse konnte nicht erstellt werden."
   },
   "paymentSuccess": {
-    "title": "Zahlung erfolgreich!",
-    "message": "Deine Bestellung wurde bestätigt.",
+    "title": "Zahlung abgeschlossen!",
+    "message": "Ihre Bestellung wurde bestätigt.",
     "paymentPending": "Zahlung wird verarbeitet",
-    "pendingMessage": "Wir überprüfen deine Zahlung. Bitte warte einige Sekunden.",
+    "pendingMessage": "Wir überprüfen Ihre Zahlung. Bitte warten Sie einige Sekunden.",
     "order": "Bestellübersicht",
     "orderId": "Bestellnummer",
     "orderDate": "Bestelldatum",
@@ -109,15 +109,23 @@
     "loadError": "Die Bestellung konnte nicht abgerufen werden."
   },
   "orders": {
-    "title": "Meine Bestellungen",
-    "order": "Bestellung",
-    "status": "Status",
-    "total": "Gesamt",
+    "title": "Bestellungen",
+    "subtitle": "Bestellungen des Shops verwalten",
+    "all": "Alle Bestellungen",
+    "empty": "Keine Bestellungen gefunden",
+    "loadError": "Bestellungen konnten nicht geladen werden.",
+    "actionError": "Bei diesem Vorgang ist ein Fehler aufgetreten.",
+    "prepare": "Vorbereitung starten",
+    "createShipment": "Versand erstellen",
+    "ship": "Als versendet markieren",
+    "deliver": "Als zugestellt markieren",
     "details": "Details",
-    "empty": "Du hast noch keine Bestellungen aufgegeben",
-    "emptyMessage": "Deine Bestellungen werden hier nach deinem ersten Kauf angezeigt.",
-    "goToCatalog": "Zum Katalog",
-    "loadError": "Die Bestellungen konnten nicht abgerufen werden."
+    "shipment": "Versand",
+    "carrier": "Versanddienstleister",
+    "trackingNumber": "Sendungsnummer",
+    "confirmShipment": "Versand erstellen",
+    "cancel": "Abbrechen",
+    "notes": "Notizen"
   },
   "orderDetails": {
     "title": "Bestelldetails",
@@ -126,7 +134,7 @@
     "products": "Produkte",
     "tubSize": "Becher",
     "quantity": "Menge",
-    "unit": "Artikel",
+    "unit": "Stück",
     "subtotal": "Zwischensumme",
     "shipping": "Versand",
     "free": "Kostenlos",
@@ -142,8 +150,16 @@
     "paymentError": "Die Zahlung konnte nicht gestartet werden."
   },
   "orderStatus": {
+    "CART": "Warenkorb",
+    "PENDING_PAYMENT": "Zahlung ausstehend",
     "PAID": "Bezahlt",
     "PREPARING": "In Vorbereitung",
+    "SHIPPED": "Versendet",
+    "DELIVERED": "Zugestellt",
+    "CANCELLED": "Storniert"
+  },
+  "shipmentStatus": {
+    "PENDING": "Versand ausstehend",
     "SHIPPED": "Versendet",
     "DELIVERED": "Zugestellt"
   },
@@ -166,6 +182,35 @@
       "orders": "Bestellungen",
       "customers": "Kunden",
       "revenue": "Umsatz"
+    },
+    "orders": {
+      "title": "Bestellungen",
+      "subtitle": "Bestellungen des Shops verwalten",
+      "all": "Alle Bestellungen",
+      "empty": "Keine Bestellungen gefunden",
+      "loadError": "Bestellungen konnten nicht geladen werden.",
+      "actionError": "Bei diesem Vorgang ist ein Fehler aufgetreten.",
+      "prepare": "Vorbereitung starten",
+      "createShipment": "Versand erstellen",
+      "ship": "Als versendet markieren",
+      "deliver": "Als zugestellt markieren",
+      "details": "Details",
+      "shipment": "Versand",
+      "carrier": "Versanddienstleister",
+      "trackingNumber": "Sendungsnummer",
+      "confirmShipment": "Versand erstellen",
+      "cancel": "Abbrechen",
+      "notes": "Notizen",
+      "sortBy": "Sortieren nach",
+      "newest": "Neueste",
+      "oldest": "Älteste",
+      "id": "ID",
+      "customer": "Kunde",
+      "city": "Stadt",
+      "payment": "Zahlung",
+      "actions": "Aktionen",
+      "page": "Seite",
+      "changeStatus": "Status ändern"
     }
   }
 }

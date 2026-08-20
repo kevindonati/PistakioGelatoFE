@@ -3,18 +3,18 @@ import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { ArrowLeft, Check, MapPin, Plus } from "lucide-react"
 
-import { useCart } from "../context/CartContext"
+import { useCart } from "../../context/CartContext"
 
-import { getAddresses } from "../services/addressApi"
+import { getAddresses } from "../../services/addressApi"
 import {
   checkoutOrder,
   getShippingCost,
   createStripeCheckout,
-} from "../services/orderApi"
+} from "../../services/orderApi"
 
-import type { Address } from "../types/Address"
+import type { Address } from "../../types/Address"
 
-import Loading from "../components/Loading"
+import Loading from "../../components/Loading"
 
 function Checkout() {
   const { t } = useTranslation()

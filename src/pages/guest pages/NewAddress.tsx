@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { ArrowLeft, Save } from "lucide-react"
 
-import api from "../services/api"
+import api from "../../services/api"
 
 function NewAddress() {
   const { t } = useTranslation()

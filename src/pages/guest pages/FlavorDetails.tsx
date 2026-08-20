@@ -12,12 +12,12 @@ import {
   WheatOffIcon,
 } from "lucide-react"
 
-import { getFlavorById, getTubs } from "../services/catalogApi"
-import { useCart } from "../context/CartContext"
+import { getFlavorById, getTubs } from "../../services/catalogApi"
+import { useCart } from "../../context/CartContext"
 
-import type { Flavor } from "../types/Flavor"
-import type { Tub } from "../types/Tub"
-import Loading from "../components/Loading"
+import type { Flavor } from "../../types/Flavor"
+import type { Tub } from "../../types/Tub"
+import Loading from "../../components/Loading"
 
 function FlavorDetails() {
   const { t } = useTranslation()

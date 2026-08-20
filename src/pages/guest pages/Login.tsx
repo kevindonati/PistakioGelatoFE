@@ -1,6 +1,6 @@
 import { useState } from "react"
 import type { FormEvent } from "react"
-import { useAuth } from "../context/useAuth"
+import { useAuth } from "../../context/useAuth"
 import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 

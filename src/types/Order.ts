@@ -1,5 +1,4 @@
 import type { OrderStatus } from "./OrderStatus"
-import type { Address } from "./Address"
 
 export interface Order {
   id: string
@@ -9,6 +8,20 @@ export interface Order {
   notes: string | null
   createdAt: string
   updatedAt: string
-  user: unknown
-  address: Address | null
+
+  user: {
+    id: string
+    name: string
+    surname: string
+    email: string
+  }
+
+  address: {
+    id: string
+    addressLine1: string
+    addressLine2?: string
+    postalCode: string
+    city: string
+    country: string
+  }
 }
