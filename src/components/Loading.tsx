@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next"
-import "../Loading.css"
+import "../styles/Loading.css"
 
 function Loading() {
   const { t } = useTranslation()
@@ -24,7 +24,7 @@ function Loading() {
         <div className="cone-bottom"></div>
       </div>
       <div className="bottom-shadow"></div>
-      <p>{t("common.loading")}</p>
+      <p className="fs-3">{t("common.loading")}</p>
     </div>
   )
 }

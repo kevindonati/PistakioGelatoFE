@@ -119,5 +119,54 @@
     "goToCatalog": "Vai al catalogo",
     "loadError": "Non è stato possibile recuperare i tuoi ordini.",
     "orders": "I miei ordini"
+  },
+  "orderDetails": {
+    "title": "Dettaglio ordine",
+    "orderDate": "Data ordine",
+    "status": "Stato dell'ordine",
+    "products": "Prodotti",
+    "tubSize": "Vaschetta",
+    "quantity": "Quantità",
+    "unit": "pezzo",
+    "subtotal": "Subtotale",
+    "shipping": "Spedizione",
+    "free": "Gratuita",
+    "total": "Totale",
+    "address": "Indirizzo di consegna",
+    "notes": "Note",
+    "cancelled": "Questo ordine è stato annullato.",
+    "orderNotFound": "Ordine non trovato.",
+    "loadError": "Non è stato possibile recuperare l'ordine.",
+    "backToOrders": "Torna ai miei ordini",
+    "payNow": "Paga ora",
+    "paymentLoading": "Apertura del pagamento...",
+    "paymentError": "Non è stato possibile avviare il pagamento."
+  },
+  "orderStatus": {
+    "PAID": "Pagato",
+    "PREPARING": "In preparazione",
+    "SHIPPED": "Spedito",
+    "DELIVERED": "Consegnato"
+  },
+  "admin": {
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "management": "Gestione",
+      "orders": "Ordini",
+      "catalog": "Catalogo",
+      "customers": "Clienti",
+      "store": "Negozio",
+      "shipments": "Spedizioni",
+      "payments": "Pagamenti",
+      "settings": "Impostazioni",
+      "logout": "Esci"
+    },
+    "dashboard": {
+      "title": "Pannello di controllo",
+      "subtitle": "Gestisci il tuo negozio",
+      "orders": "Ordini",
+      "customers": "Clienti",
+      "revenue": "Incassi"
+    }
   }
 }

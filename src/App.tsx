@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom"
 import Login from "./pages/Login"
 import ProtectedRoute from "./components/ProtectedRoute"
 import Loading from "./components/Loading"
@@ -15,6 +15,9 @@ import Checkout from "./pages/Checkout"
 import NewAddress from "./pages/NewAddress"
 import PaymentSuccess from "./pages/PaymentSuccess"
 import Orders from "./pages/Order"
+import OrderDetails from "./pages/OrderDetails"
+import AdminLayout from "./components/AdminLayout"
+import AdminDashboard from "./pages/AdminDashboard"
 
 function Home() {
   return <h1>Home</h1>
@@ -24,46 +27,102 @@ function Account() {
   return <h1>Account</h1>
 }
 
-function Admin() {
-  return <h1>Admin</h1>
-}
-
 function NotFound() {
   return <h1>404 - Pagina non trovata</h1>
+}
+
+function AppContent() {
+  const location = useLocation()
+
+  const isAdminRoute = location.pathname.startsWith("/admin")
+
+  return (
+    <>
+      {!isAdminRoute && <Navbar />}
+
+      <Routes>
+        {/* ADMIN */}
+
+        <Route element={<AdminRoute />}>
+          <Route element={<AdminLayout />}>
+            <Route path="/admin" element={<AdminDashboard />} />
+            {/* 
+            <Route
+              path="/admin/orders"
+              element={<AdminOrders />}
+            />
+            <Route
+              path="/admin/catalog"
+              element={<AdminCatalog />}
+            />
+            <Route
+              path="/admin/customers"
+              element={<AdminCustomers />}
+            />
+            <Route
+              path="/admin/shipments"
+              element={<AdminShipments />}
+            />
+            <Route
+              path="/admin/payments"
+              element={<AdminPayments />}
+            />
+            <Route
+              path="/admin/settings"
+              element={<AdminSettings />}
+            />
+            */}
+          </Route>
+        </Route>
+
+        {/* HOME */}
+
+        <Route path="/" element={<Home />} />
+
+        {/* GUEST */}
+
+        <Route element={<GuestRoute />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Route>
+
+        {/* CATALOGO */}
+
+        <Route path="/catalog" element={<Catalog />} />
+        <Route path="/catalog/flavors/:id" element={<FlavorDetails />} />
+
+        {/* CART */}
+
+        <Route path="/cart" element={<Cart />} />
+
+        {/* PROTECTED */}
+
+        <Route element={<ProtectedRoute />}>
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/account/addresses/new" element={<NewAddress />} />
+          <Route path="/payment/success" element={<PaymentSuccess />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/orders/:id" element={<OrderDetails />} />
+        </Route>
+
+        {/* TEST */}
+
+        <Route path="/aa" element={<Loading />} />
+
+        {/* 404 */}
+
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
+  )
 }
 
 function App() {
   return (
     <CartProvider>
       <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-
-          <Route element={<GuestRoute />}>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-          </Route>
-
-          <Route path="/catalog" element={<Catalog />} />
-          <Route path="/catalog/flavors/:id" element={<FlavorDetails />} />
-          <Route path="/cart" element={<Cart />} />
-
-          <Route element={<ProtectedRoute />}>
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/account" element={<Account />} />
-            <Route path="/account/addresses/new" element={<NewAddress />} />
-            <Route path="/payment/success" element={<PaymentSuccess />} />
-            <Route path="/orders" element={<Orders />} />
-          </Route>
-
-          <Route element={<AdminRoute />}>
-            <Route path="/admin" element={<Admin />} />
-          </Route>
-
-          <Route path="/aa" element={<Loading />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <AppContent />
       </BrowserRouter>
     </CartProvider>
   )

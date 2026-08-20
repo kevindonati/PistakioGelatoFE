@@ -6,7 +6,7 @@
  */
 
 .container-loading {
-  width: 320px;
+  width: 100vw;
   height: 400px;
   transform: scale(0.7);
   display: flex;

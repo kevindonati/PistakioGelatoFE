@@ -119,5 +119,54 @@
     "goToCatalog": "Go to catalog",
     "loadError": "Unable to retrieve your orders.",
     "orders": "My orders"
+  },
+  "orderDetails": {
+    "title": "Order details",
+    "orderDate": "Order date",
+    "status": "Order status",
+    "products": "Products",
+    "tubSize": "Tub",
+    "quantity": "Quantity",
+    "unit": "item",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "free": "Free",
+    "total": "Total",
+    "address": "Delivery address",
+    "notes": "Notes",
+    "cancelled": "This order has been cancelled.",
+    "orderNotFound": "Order not found.",
+    "loadError": "Unable to retrieve the order.",
+    "backToOrders": "Back to my orders",
+    "payNow": "Pay now",
+    "paymentLoading": "Opening payment...",
+    "paymentError": "Unable to start the payment."
+  },
+  "orderStatus": {
+    "PAID": "Paid",
+    "PREPARING": "Preparing",
+    "SHIPPED": "Shipped",
+    "DELIVERED": "Delivered"
+  },
+  "admin": {
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "management": "Management",
+      "orders": "Orders",
+      "catalog": "Catalog",
+      "customers": "Customers",
+      "store": "Store",
+      "shipments": "Shipments",
+      "payments": "Payments",
+      "settings": "Settings",
+      "logout": "Logout"
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "subtitle": "Manage your store",
+      "orders": "Orders",
+      "customers": "Customers",
+      "revenue": "Revenue"
+    }
   }
 }

@@ -118,5 +118,54 @@
     "emptyMessage": "Vos commandes apparaîtront ici après votre premier achat.",
     "goToCatalog": "Aller au catalogue",
     "loadError": "Impossible de récupérer vos commandes."
+  },
+  "orderDetails": {
+    "title": "Détails de la commande",
+    "orderDate": "Date de commande",
+    "status": "Statut de la commande",
+    "products": "Produits",
+    "tubSize": "Pot",
+    "quantity": "Quantité",
+    "unit": "article",
+    "subtotal": "Sous-total",
+    "shipping": "Livraison",
+    "free": "Gratuite",
+    "total": "Total",
+    "address": "Adresse de livraison",
+    "notes": "Notes",
+    "cancelled": "Cette commande a été annulée.",
+    "orderNotFound": "Commande introuvable.",
+    "loadError": "Impossible de récupérer la commande.",
+    "backToOrders": "Retour à mes commandes",
+    "payNow": "Payer maintenant",
+    "paymentLoading": "Ouverture du paiement...",
+    "paymentError": "Impossible de démarrer le paiement."
+  },
+  "orderStatus": {
+    "PAID": "Payée",
+    "PREPARING": "En préparation",
+    "SHIPPED": "Expédiée",
+    "DELIVERED": "Livrée"
+  },
+  "admin": {
+    "sidebar": {
+      "dashboard": "Tableau de bord",
+      "management": "Gestion",
+      "orders": "Commandes",
+      "catalog": "Catalogue",
+      "customers": "Clients",
+      "store": "Boutique",
+      "shipments": "Expéditions",
+      "payments": "Paiements",
+      "settings": "Paramètres",
+      "logout": "Déconnexion"
+    },
+    "dashboard": {
+      "title": "Tableau de bord",
+      "subtitle": "Gérez votre boutique",
+      "orders": "Commandes",
+      "customers": "Clients",
+      "revenue": "Chiffre d'affaires"
+    }
   }
 }

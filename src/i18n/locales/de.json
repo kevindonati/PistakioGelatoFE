@@ -118,5 +118,54 @@
     "emptyMessage": "Deine Bestellungen werden hier nach deinem ersten Kauf angezeigt.",
     "goToCatalog": "Zum Katalog",
     "loadError": "Die Bestellungen konnten nicht abgerufen werden."
+  },
+  "orderDetails": {
+    "title": "Bestelldetails",
+    "orderDate": "Bestelldatum",
+    "status": "Bestellstatus",
+    "products": "Produkte",
+    "tubSize": "Becher",
+    "quantity": "Menge",
+    "unit": "Artikel",
+    "subtotal": "Zwischensumme",
+    "shipping": "Versand",
+    "free": "Kostenlos",
+    "total": "Gesamt",
+    "address": "Lieferadresse",
+    "notes": "Notizen",
+    "cancelled": "Diese Bestellung wurde storniert.",
+    "orderNotFound": "Bestellung nicht gefunden.",
+    "loadError": "Die Bestellung konnte nicht abgerufen werden.",
+    "backToOrders": "Zurück zu meinen Bestellungen",
+    "payNow": "Jetzt bezahlen",
+    "paymentLoading": "Zahlung wird geöffnet...",
+    "paymentError": "Die Zahlung konnte nicht gestartet werden."
+  },
+  "orderStatus": {
+    "PAID": "Bezahlt",
+    "PREPARING": "In Vorbereitung",
+    "SHIPPED": "Versendet",
+    "DELIVERED": "Zugestellt"
+  },
+  "admin": {
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "management": "Verwaltung",
+      "orders": "Bestellungen",
+      "catalog": "Katalog",
+      "customers": "Kunden",
+      "store": "Shop",
+      "shipments": "Versand",
+      "payments": "Zahlungen",
+      "settings": "Einstellungen",
+      "logout": "Abmelden"
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "subtitle": "Verwalten Sie Ihren Shop",
+      "orders": "Bestellungen",
+      "customers": "Kunden",
+      "revenue": "Umsatz"
+    }
   }
 }

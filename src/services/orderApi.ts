@@ -135,3 +135,21 @@ export const getMyOrders = async (
 
   return response.data
 }
+
+export const getMyOrderById = async (id: string): Promise<Order> => {
+  const response = await api.get<Order>(`/orders/${id}`)
+
+  return response.data
+}
+
+export const getMyOrderItems = async (page = 0, size = 50) => {
+  const response = await api.get("/order-items", {
+    params: {
+      page,
+      size,
+      orderBy: "id",
+    },
+  })
+
+  return response.data.content
+}
