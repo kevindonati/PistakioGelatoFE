@@ -13,6 +13,7 @@ import {
   getAllShipments,
   type Shipment,
 } from "../../services/orderApi"
+import Loading from "../../components/Loading"
 
 function AdminOrders() {
   const { t } = useTranslation()
@@ -558,11 +559,7 @@ function AdminOrders() {
 
               <tbody>
                 {loading ? (
-                  <tr>
-                    <td colSpan={6} className="text-center py-5">
-                      {t("common.loading")}
-                    </td>
-                  </tr>
+                  <Loading />
                 ) : orders.length === 0 ? (
                   <tr>
                     <td colSpan={6} className="text-center py-5 text-muted">
