@@ -233,3 +233,51 @@ export const updateShipmentStatus = async (
 
   return response.data
 }
+
+export interface Payment {
+  id: string
+  order: {
+    id: string
+  }
+}
+
+export interface Payment {
+  id: string
+  provider: string
+  idTransaction: string
+  stripeEventId: string | null
+  amount: number
+  currency: string
+  status: string
+  paymentDate: string
+  order: {
+    id: string
+  }
+}
+
+export const getAllPayments = async (
+  page = 0,
+  size = 50,
+): Promise<{
+  content: Payment[]
+  totalPages: number
+  totalElements: number
+}> => {
+  const response = await api.get("/payments", {
+    params: {
+      page,
+      size,
+      orderBy: "paymentDate",
+    },
+  })
+
+  return response.data
+}
+
+export const getPaymentByOrderId = async (
+  orderId: string,
+): Promise<Payment> => {
+  const response = await api.get<Payment>(`/payments/order/${orderId}`)
+
+  return response.data
+}

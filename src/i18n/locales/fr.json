@@ -211,6 +211,44 @@
       "actions": "Actions",
       "page": "Page",
       "changeStatus": "Changer le statut"
+    },
+    "orderDetails": {
+      "title": "Détails de la commande",
+      "backToOrders": "Retour aux commandes",
+      "status": "Statut de la commande",
+      "customer": "Client",
+      "address": "Adresse de livraison",
+      "products": "Produits",
+      "noProducts": "Aucun produit trouvé.",
+      "subtotal": "Sous-total",
+      "shipping": "Livraison",
+      "free": "Gratuite",
+      "total": "Total",
+      "payment": "Paiement",
+      "provider": "Fournisseur",
+      "paymentStatus": "Statut du paiement",
+      "amount": "Montant",
+      "currency": "Devise",
+      "transaction": "ID de transaction",
+      "paymentDate": "Date du paiement",
+      "stripeEvent": "ID de l'événement Stripe",
+      "noPayment": "Aucun paiement associé à cette commande.",
+      "shipment": "Expédition",
+      "carrier": "Transporteur",
+      "trackingNumber": "Numéro de suivi",
+      "shipmentStatus": "Statut de l'expédition",
+      "deliveredAt": "Date de livraison",
+      "noShipment": "Aucune expédition associée à cette commande.",
+      "notes": "Notes",
+      "orderNotFound": "Commande introuvable.",
+      "loadError": "Impossible de récupérer les détails de la commande.",
+      "actionError": "Une erreur s'est produite lors de l'opération.",
+      "tub": "Pot"
+    },
+    "shipmentStatus": {
+      "PENDING": "Expédition en attente",
+      "SHIPPED": "Expédiée",
+      "DELIVERED": "Livrée"
     }
   }
 }

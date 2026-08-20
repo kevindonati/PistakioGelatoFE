@@ -19,6 +19,7 @@ import OrderDetails from "./pages/guest pages/OrderDetails"
 import AdminLayout from "./components/AdminLayout"
 import AdminDashboard from "./pages/admin pages/AdminDashboard"
 import AdminOrders from "./pages/admin pages/AdminOrders"
+import AdminOrderDetails from "./pages/admin pages/AdminOrderDetails"
 
 function Home() {
   return <h1>Home</h1>

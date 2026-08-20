@@ -38,11 +38,11 @@
 }
 
 .admin-logo-pistakio {
-  color: #7ebd3a;
+  color: rgb(6, 234, 67);
 }
 
 .admin-logo-gelato {
-  color: #f08ca8;
+  color: rgb(244, 24, 152);
 }
 
 .admin-collapse-button {
@@ -100,7 +100,6 @@
 .admin-nav-item.active {
   background-color: #212529;
   color: white;
-  box-shadow: inset 3px 0 0 #7ebd3a;
 }
 
 .admin-nav-item.active svg {
@@ -154,8 +153,7 @@
 }
 
 .status-select {
-  min-width: 170px;
-  border-radius: 4px;
+  min-width: 180px;
   font-weight: 600;
   cursor: pointer;
 }
@@ -183,9 +181,4 @@
 .status-select.text-bg-danger {
   background-color: #dc3545 !important;
   color: white !important;
-}
-
-.status-select:disabled {
-  opacity: 0.8;
-  cursor: not-allowed;
 }

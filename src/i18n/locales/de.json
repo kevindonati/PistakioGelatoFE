@@ -211,6 +211,44 @@
       "actions": "Aktionen",
       "page": "Seite",
       "changeStatus": "Status ändern"
+    },
+    "orderDetails": {
+      "title": "Bestelldetails",
+      "backToOrders": "Zurück zu den Bestellungen",
+      "status": "Bestellstatus",
+      "customer": "Kunde",
+      "address": "Lieferadresse",
+      "products": "Produkte",
+      "noProducts": "Keine Produkte gefunden.",
+      "subtotal": "Zwischensumme",
+      "shipping": "Versand",
+      "free": "Kostenlos",
+      "total": "Gesamt",
+      "payment": "Zahlung",
+      "provider": "Zahlungsanbieter",
+      "paymentStatus": "Zahlungsstatus",
+      "amount": "Betrag",
+      "currency": "Währung",
+      "transaction": "Transaktions-ID",
+      "paymentDate": "Zahlungsdatum",
+      "stripeEvent": "Stripe-Ereignis-ID",
+      "noPayment": "Keine Zahlung mit dieser Bestellung verknüpft.",
+      "shipment": "Versand",
+      "carrier": "Versanddienstleister",
+      "trackingNumber": "Sendungsnummer",
+      "shipmentStatus": "Versandstatus",
+      "deliveredAt": "Lieferdatum",
+      "noShipment": "Keine Sendung mit dieser Bestellung verknüpft.",
+      "notes": "Notizen",
+      "orderNotFound": "Bestellung nicht gefunden.",
+      "loadError": "Bestelldetails konnten nicht abgerufen werden.",
+      "actionError": "Bei diesem Vorgang ist ein Fehler aufgetreten.",
+      "tub": "Becher"
+    },
+    "shipmentStatus": {
+      "PENDING": "Versand ausstehend",
+      "SHIPPED": "Versendet",
+      "DELIVERED": "Zugestellt"
     }
   }
 }

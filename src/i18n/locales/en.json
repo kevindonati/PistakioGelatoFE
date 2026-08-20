@@ -211,6 +211,44 @@
       "actions": "Actions",
       "page": "Page",
       "changeStatus": "Change status"
+    },
+    "orderDetails": {
+      "title": "Order details",
+      "backToOrders": "Back to orders",
+      "status": "Order status",
+      "customer": "Customer",
+      "address": "Delivery address",
+      "products": "Products",
+      "noProducts": "No products found.",
+      "subtotal": "Subtotal",
+      "shipping": "Shipping",
+      "free": "Free",
+      "total": "Total",
+      "payment": "Payment",
+      "provider": "Provider",
+      "paymentStatus": "Payment status",
+      "amount": "Amount",
+      "currency": "Currency",
+      "transaction": "Transaction ID",
+      "paymentDate": "Payment date",
+      "stripeEvent": "Stripe event ID",
+      "noPayment": "No payment associated with this order.",
+      "shipment": "Shipment",
+      "carrier": "Carrier",
+      "trackingNumber": "Tracking number",
+      "shipmentStatus": "Shipment status",
+      "deliveredAt": "Delivery date",
+      "noShipment": "No shipment associated with this order.",
+      "notes": "Notes",
+      "orderNotFound": "Order not found.",
+      "loadError": "Unable to retrieve order details.",
+      "actionError": "An error occurred during the operation.",
+      "tub": "Tub"
+    },
+    "shipmentStatus": {
+      "PENDING": "Pending shipment",
+      "SHIPPED": "Shipped",
+      "DELIVERED": "Delivered"
     }
   }
 }

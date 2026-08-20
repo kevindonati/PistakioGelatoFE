@@ -14,6 +14,7 @@ export interface Order {
     name: string
     surname: string
     email: string
+    phone?: string
   }
 
   address: {

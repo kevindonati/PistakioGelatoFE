@@ -226,6 +226,44 @@
       "actions": "Azioni",
       "page": "Pagina",
       "changeStatus": "Cambia stato"
+    },
+    "orderDetails": {
+      "title": "Dettaglio ordine",
+      "backToOrders": "Torna agli ordini",
+      "status": "Stato dell'ordine",
+      "customer": "Cliente",
+      "address": "Indirizzo di consegna",
+      "products": "Prodotti",
+      "noProducts": "Nessun prodotto trovato.",
+      "subtotal": "Subtotale",
+      "shipping": "Spedizione",
+      "free": "Gratuita",
+      "total": "Totale",
+      "payment": "Pagamento",
+      "provider": "Provider",
+      "paymentStatus": "Stato del pagamento",
+      "amount": "Importo",
+      "currency": "Valuta",
+      "transaction": "ID transazione",
+      "paymentDate": "Data pagamento",
+      "stripeEvent": "ID evento Stripe",
+      "noPayment": "Nessun pagamento associato a questo ordine.",
+      "shipment": "Spedizione",
+      "carrier": "Corriere",
+      "trackingNumber": "Numero di tracking",
+      "shipmentStatus": "Stato della spedizione",
+      "deliveredAt": "Data consegna",
+      "noShipment": "Nessuna spedizione associata a questo ordine.",
+      "notes": "Note",
+      "orderNotFound": "Ordine non trovato.",
+      "loadError": "Non è stato possibile recuperare i dettagli dell'ordine.",
+      "actionError": "Si è verificato un errore durante l'operazione.",
+      "tub": "Vaschetta"
+    },
+    "shipmentStatus": {
+      "PENDING": "In attesa di spedizione",
+      "SHIPPED": "Spedito",
+      "DELIVERED": "Consegnato"
     }
   }
 }
