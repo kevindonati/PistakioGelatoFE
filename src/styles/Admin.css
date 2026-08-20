@@ -151,34 +151,3 @@
   padding: 32px;
   overflow-x: hidden;
 }
-
-.status-select {
-  min-width: 180px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.status-select.text-bg-success {
-  background-color: #198754 !important;
-  color: white !important;
-}
-
-.status-select.text-bg-warning {
-  background-color: #ffc107 !important;
-  color: #212529 !important;
-}
-
-.status-select.text-bg-info {
-  background-color: #0dcaf0 !important;
-  color: #212529 !important;
-}
-
-.status-select.text-bg-secondary {
-  background-color: #6c757d !important;
-  color: white !important;
-}
-
-.status-select.text-bg-danger {
-  background-color: #dc3545 !important;
-  color: white !important;
-}

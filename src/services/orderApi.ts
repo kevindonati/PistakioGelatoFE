@@ -154,11 +154,31 @@ export const getMyOrderItems = async (page = 0, size = 50) => {
   return response.data.content
 }
 
-export const getAllOrders = async (
+export interface OrderFilters {
+  page?: number
+  size?: number
+  direction?: "asc" | "desc"
+  id?: string
+  customer?: string
+  status?: string
+  minTotal?: number
+  maxTotal?: number
+  dateFrom?: string
+  dateTo?: string
+}
+
+export const getAllOrders = async ({
   page = 0,
   size = 15,
-  direction: "asc" | "desc" = "desc",
-): Promise<{
+  direction = "desc",
+  id,
+  customer,
+  status,
+  minTotal,
+  maxTotal,
+  dateFrom,
+  dateTo,
+}: OrderFilters = {}): Promise<{
   content: Order[]
   totalPages: number
   totalElements: number
@@ -169,6 +189,13 @@ export const getAllOrders = async (
       size,
       orderBy: "createdAt",
       direction,
+      id: id || undefined,
+      customer: customer || undefined,
+      status: status || undefined,
+      minTotal,
+      maxTotal,
+      dateFrom: dateFrom || undefined,
+      dateTo: dateTo || undefined,
     },
   })
 

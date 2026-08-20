@@ -134,7 +134,24 @@
     "trackingNumber": "Numero di tracking",
     "confirmShipment": "Crea spedizione",
     "cancel": "Annulla",
-    "notes": "Note"
+    "notes": "Note",
+    "id": "ID ordine",
+    "customer": "Cliente",
+    "status": "Stato",
+    "minTotal": "Totale minimo",
+    "maxTotal": "Totale massimo",
+    "dateFrom": "Data da",
+    "dateTo": "Data a",
+    "searchId": "Cerca per ID",
+    "searchCustomer": "Nome, cognome o email",
+    "search": "Cerca",
+    "reset": "Reset",
+    "newestFirst": "Più recenti",
+    "oldestFirst": "Più vecchi",
+    "order": "Ordine",
+    "date": "Data",
+    "total": "Totale",
+    "actions": "Azioni"
   },
 
   "orderDetails": {
