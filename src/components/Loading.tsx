@@ -1,19 +1,30 @@
+import { useTranslation } from "react-i18next"
 import "../Loading.css"
 
 function Loading() {
+  const { t } = useTranslation()
   return (
-    <div className="loading-container">
-      <div className="ice-cream">
-        <div className="orbit">
-          <div className="scoop scoop-1"></div>
-          <div className="scoop scoop-2"></div>
-          <div className="scoop scoop-3"></div>
+    <div className="container-loading">
+      <div className="wrapper">
+        <div className="circle">
+          <div className="face-wrapper">
+            <div className="eyes"></div>
+            <div className="eyes"></div>
+            <div className="circle-mouth"></div>
+          </div>
         </div>
-
-        <div className="cone"></div>
+        <div className="cone-top"></div>
+        <div className="cone">
+          <div className="face-wrapper">
+            <div className="eyes"></div>
+            <div className="eyes"></div>
+            <div className="mouth"></div>
+          </div>
+        </div>
+        <div className="cone-bottom"></div>
       </div>
-
-      <p>Caricamento...</p>
+      <div className="bottom-shadow"></div>
+      <p>{t("common.loading")}</p>
     </div>
   )
 }

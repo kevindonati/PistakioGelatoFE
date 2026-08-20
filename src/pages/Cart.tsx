@@ -2,12 +2,23 @@ import { useTranslation } from "react-i18next"
 import { Minus, Plus, ShoppingCart, Trash2 } from "lucide-react"
 import { useCart } from "../context/CartContext"
 import { useNavigate } from "react-router-dom"
+import Loading from "../components/Loading"
 
 function Cart() {
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const { items, removeFromCart, updateQuantity, clearCart, totalItems } =
-    useCart()
+  const {
+    items,
+    removeFromCart,
+    updateQuantity,
+    clearCart,
+    totalItems,
+    loading,
+  } = useCart()
+
+  if (loading) {
+    return <Loading />
+  }
 
   if (items.length === 0) {
     return (

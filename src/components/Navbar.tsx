@@ -5,11 +5,46 @@ import { setLanguage } from "../services/language"
 import type { Language } from "../types/Language"
 import { CartFill } from "react-bootstrap-icons"
 import { useCart } from "../context/CartContext"
+import { useState, useRef, useEffect } from "react"
 
 const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth()
   const { t, i18n } = useTranslation()
   const { totalItems } = useCart()
+
+  const [dropdownOpen, setDropdownOpen] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
+
+  const getInitials = () => {
+    if (!user) return ""
+
+    const firstName = user.name?.trim() || ""
+
+    const parts = firstName.split(" ").filter(Boolean)
+
+    if (parts.length >= 2) {
+      return `${parts[0][0]}${parts[1][0]}`.toUpperCase()
+    }
+
+    return firstName.slice(0, 2).toUpperCase()
+  }
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setDropdownOpen(false)
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside)
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [])
 
   return (
     <nav className="navbar navbar-expand-lg bg-white border-bottom">
@@ -79,21 +114,87 @@ const Navbar = () => {
             {/* UTENTE */}
 
             {isAuthenticated ? (
-              <>
-                <Link to="/account" className="nav-link">
-                  {user?.name}
-                </Link>
-
-                {user?.role === "ADMIN" && (
-                  <Link to="/admin" className="nav-link">
-                    {t("navbar.admin")}
-                  </Link>
-                )}
-
-                <button className="btn btn-outline-danger" onClick={logout}>
-                  {t("navbar.logout")}
+              <div className="position-relative" ref={dropdownRef}>
+                <button
+                  type="button"
+                  className="btn p-0 border-0"
+                  onClick={() => setDropdownOpen((current) => !current)}
+                  aria-expanded={dropdownOpen}
+                >
+                  <div
+                    className="rounded-circle bg-dark text-white d-flex align-items-center justify-content-center fw-semibold"
+                    style={{
+                      width: "42px",
+                      height: "42px",
+                    }}
+                  >
+                    {getInitials()}
+                  </div>
                 </button>
-              </>
+
+                {dropdownOpen && (
+                  <div
+                    className="dropdown-menu dropdown-menu-end show"
+                    style={{
+                      position: "absolute",
+                      right: 0,
+                      top: "calc(100% + 8px)",
+                      minWidth: "210px",
+                    }}
+                  >
+                    <div className="px-3 py-2">
+                      <div className="fw-semibold">{user?.name}</div>
+
+                      <small className="text-muted">{user?.email}</small>
+                    </div>
+
+                    <div className="dropdown-divider"></div>
+
+                    <Link
+                      to="/orders"
+                      className="dropdown-item"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      {t("navbar.orders")}
+                    </Link>
+
+                    <Link
+                      to="/account"
+                      className="dropdown-item"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      {t("navbar.account")}
+                    </Link>
+
+                    {user?.role === "ADMIN" && (
+                      <>
+                        <div className="dropdown-divider"></div>
+
+                        <Link
+                          to="/admin"
+                          className="dropdown-item"
+                          onClick={() => setDropdownOpen(false)}
+                        >
+                          {t("navbar.admin")}
+                        </Link>
+                      </>
+                    )}
+
+                    <div className="dropdown-divider"></div>
+
+                    <button
+                      type="button"
+                      className="dropdown-item text-danger"
+                      onClick={() => {
+                        setDropdownOpen(false)
+                        logout()
+                      }}
+                    >
+                      {t("navbar.logout")}
+                    </button>
+                  </div>
+                )}
+              </div>
             ) : (
               <>
                 <Link to="/login" className="btn btn-outline-dark">

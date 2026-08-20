@@ -116,3 +116,22 @@ export const createStripeCheckout = async (
 
   return response.data
 }
+
+export const getMyOrders = async (
+  page = 0,
+  size = 10,
+): Promise<{
+  content: Order[]
+  totalPages: number
+  totalElements: number
+}> => {
+  const response = await api.get("/orders/my", {
+    params: {
+      page,
+      size,
+      orderBy: "createdAt",
+    },
+  })
+
+  return response.data
+}

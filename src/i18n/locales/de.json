@@ -7,7 +7,8 @@
     "register": "Registrieren",
     "logout": "Abmelden",
     "account": "Konto",
-    "admin": "Admin"
+    "admin": "Admin",
+    "orders": "Meine Bestellungen"
   },
   "auth": {
     "login": "Anmelden",
@@ -88,5 +89,34 @@
     "saving": "Speichern...",
     "backToCheckout": "Zurück zur Bestellung",
     "createError": "Die Adresse konnte nicht erstellt werden."
+  },
+  "paymentSuccess": {
+    "title": "Zahlung erfolgreich!",
+    "message": "Deine Bestellung wurde bestätigt.",
+    "paymentPending": "Zahlung wird verarbeitet",
+    "pendingMessage": "Wir überprüfen deine Zahlung. Bitte warte einige Sekunden.",
+    "order": "Bestellübersicht",
+    "orderId": "Bestellnummer",
+    "orderDate": "Bestelldatum",
+    "products": "Produkte",
+    "noProducts": "Keine Produkte gefunden.",
+    "subtotal": "Zwischensumme",
+    "deliveryAddress": "Lieferadresse",
+    "notes": "Notizen",
+    "myOrders": "Meine Bestellungen",
+    "backToCatalog": "Zurück zum Katalog",
+    "orderNotFound": "Bestellung nicht gefunden.",
+    "loadError": "Die Bestellung konnte nicht abgerufen werden."
+  },
+  "orders": {
+    "title": "Meine Bestellungen",
+    "order": "Bestellung",
+    "status": "Status",
+    "total": "Gesamt",
+    "details": "Details",
+    "empty": "Du hast noch keine Bestellungen aufgegeben",
+    "emptyMessage": "Deine Bestellungen werden hier nach deinem ersten Kauf angezeigt.",
+    "goToCatalog": "Zum Katalog",
+    "loadError": "Die Bestellungen konnten nicht abgerufen werden."
   }
 }

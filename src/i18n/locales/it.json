@@ -7,7 +7,8 @@
     "register": "Registrati",
     "logout": "Esci",
     "account": "Account",
-    "admin": "Admin"
+    "admin": "Admin",
+    "orders": "I miei ordini"
   },
   "auth": {
     "login": "Accedi",
@@ -88,5 +89,35 @@
     "saving": "Salvataggio...",
     "backToCheckout": "Torna al checkout",
     "createError": "Impossibile creare l'indirizzo."
+  },
+  "paymentSuccess": {
+    "title": "Pagamento completato!",
+    "message": "Il tuo ordine è stato confermato.",
+    "paymentPending": "Pagamento in elaborazione",
+    "pendingMessage": "Stiamo verificando il pagamento. Attendi qualche secondo.",
+    "order": "Riepilogo ordine",
+    "orderId": "Numero ordine",
+    "orderDate": "Data ordine",
+    "products": "Prodotti",
+    "noProducts": "Nessun prodotto trovato.",
+    "subtotal": "Subtotale",
+    "deliveryAddress": "Indirizzo di consegna",
+    "notes": "Note",
+    "myOrders": "I miei ordini",
+    "backToCatalog": "Torna al catalogo",
+    "orderNotFound": "Ordine non trovato.",
+    "loadError": "Non è stato possibile recuperare l'ordine."
+  },
+  "orders": {
+    "title": "I miei ordini",
+    "order": "Ordine",
+    "status": "Stato",
+    "total": "Totale",
+    "details": "Dettagli",
+    "empty": "Non hai ancora effettuato ordini",
+    "emptyMessage": "I tuoi ordini appariranno qui dopo il primo acquisto.",
+    "goToCatalog": "Vai al catalogo",
+    "loadError": "Non è stato possibile recuperare i tuoi ordini.",
+    "orders": "I miei ordini"
   }
 }

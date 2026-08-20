@@ -7,7 +7,8 @@
     "register": "Register",
     "logout": "Logout",
     "account": "Account",
-    "admin": "Admin"
+    "admin": "Admin",
+    "orders": "My orders"
   },
   "auth": {
     "login": "Login",
@@ -88,5 +89,35 @@
     "saving": "Saving...",
     "backToCheckout": "Back to checkout",
     "createError": "Unable to create the address."
+  },
+  "paymentSuccess": {
+    "title": "Payment completed!",
+    "message": "Your order has been confirmed.",
+    "paymentPending": "Payment processing",
+    "pendingMessage": "We are verifying your payment. Please wait a few seconds.",
+    "order": "Order summary",
+    "orderId": "Order number",
+    "orderDate": "Order date",
+    "products": "Products",
+    "noProducts": "No products found.",
+    "subtotal": "Subtotal",
+    "deliveryAddress": "Delivery address",
+    "notes": "Notes",
+    "myOrders": "My orders",
+    "backToCatalog": "Back to catalog",
+    "orderNotFound": "Order not found.",
+    "loadError": "Unable to retrieve the order."
+  },
+  "orders": {
+    "title": "My orders",
+    "order": "Order",
+    "status": "Status",
+    "total": "Total",
+    "details": "Details",
+    "empty": "You haven't placed any orders yet",
+    "emptyMessage": "Your orders will appear here after your first purchase.",
+    "goToCatalog": "Go to catalog",
+    "loadError": "Unable to retrieve your orders.",
+    "orders": "My orders"
   }
 }

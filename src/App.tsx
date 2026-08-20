@@ -13,6 +13,8 @@ import { CartProvider } from "./context/CartContext"
 import Cart from "./pages/Cart"
 import Checkout from "./pages/Checkout"
 import NewAddress from "./pages/NewAddress"
+import PaymentSuccess from "./pages/PaymentSuccess"
+import Orders from "./pages/Order"
 
 function Home() {
   return <h1>Home</h1>
@@ -51,6 +53,8 @@ function App() {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/account" element={<Account />} />
             <Route path="/account/addresses/new" element={<NewAddress />} />
+            <Route path="/payment/success" element={<PaymentSuccess />} />
+            <Route path="/orders" element={<Orders />} />
           </Route>
 
           <Route element={<AdminRoute />}>

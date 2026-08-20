@@ -7,7 +7,8 @@
     "register": "S'inscrire",
     "logout": "Se déconnecter",
     "account": "Compte",
-    "admin": "Admin"
+    "admin": "Admin",
+    "orders": "Mes commandes"
   },
   "auth": {
     "login": "Se connecter",
@@ -88,5 +89,34 @@
     "saving": "Enregistrement...",
     "backToCheckout": "Retour à la commande",
     "createError": "Impossible de créer l'adresse."
+  },
+  "paymentSuccess": {
+    "title": "Paiement effectué !",
+    "message": "Votre commande a été confirmée.",
+    "paymentPending": "Paiement en cours",
+    "pendingMessage": "Nous vérifions votre paiement. Veuillez patienter quelques secondes.",
+    "order": "Résumé de la commande",
+    "orderId": "Numéro de commande",
+    "orderDate": "Date de commande",
+    "products": "Produits",
+    "noProducts": "Aucun produit trouvé.",
+    "subtotal": "Sous-total",
+    "deliveryAddress": "Adresse de livraison",
+    "notes": "Notes",
+    "myOrders": "Mes commandes",
+    "backToCatalog": "Retour au catalogue",
+    "orderNotFound": "Commande introuvable.",
+    "loadError": "Impossible de récupérer la commande."
+  },
+  "orders": {
+    "title": "Mes commandes",
+    "order": "Commande",
+    "status": "Statut",
+    "total": "Total",
+    "details": "Détails",
+    "empty": "Vous n'avez pas encore passé de commande",
+    "emptyMessage": "Vos commandes apparaîtront ici après votre premier achat.",
+    "goToCatalog": "Aller au catalogue",
+    "loadError": "Impossible de récupérer vos commandes."
   }
 }
