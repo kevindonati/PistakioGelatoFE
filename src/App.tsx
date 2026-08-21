@@ -20,6 +20,10 @@ import AdminLayout from "./components/AdminLayout"
 import AdminDashboard from "./pages/admin pages/AdminDashboard"
 import AdminOrders from "./pages/admin pages/AdminOrders"
 import AdminOrderDetails from "./pages/admin pages/AdminOrderDetails"
+import AdminFlavors from "./pages/admin pages/AdminFlavors"
+import AdminFlavorForm from "./pages/admin pages/AdminFlavorForm"
+import AdminTubs from "./pages/admin pages/AdminTubs"
+import AdminTubForm from "./pages/admin pages/AdminTubForm"
 
 function Home() {
   return <h1>Home</h1>
@@ -51,11 +55,23 @@ function AppContent() {
 
             <Route path="/admin/orders" element={<AdminOrders />} />
             <Route path="/admin/orders/:id" element={<AdminOrderDetails />} />
-            {/* 
+            <Route path="/admin/catalog/flavors" element={<AdminFlavors />} />
             <Route
-              path="/admin/catalog"
-              element={<AdminCatalog />}
+              path="/admin/catalog/flavors/new"
+              element={<AdminFlavorForm />}
             />
+            <Route
+              path="/admin/catalog/flavors/:id/edit"
+              element={<AdminFlavorForm />}
+            />
+            <Route path="/admin/catalog/tubs" element={<AdminTubs />} />
+            <Route path="/admin/catalog/tubs/new" element={<AdminTubForm />} />
+
+            <Route
+              path="/admin/catalog/tubs/:id/edit"
+              element={<AdminTubForm />}
+            />
+            {/* 
             <Route
               path="/admin/customers"
               element={<AdminCustomers />}

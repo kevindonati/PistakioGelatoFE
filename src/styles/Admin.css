@@ -151,3 +151,45 @@
   padding: 32px;
   overflow-x: hidden;
 }
+
+.admin-catalog-button {
+  border: none;
+  width: 100%;
+  background: transparent;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.admin-chevron-open {
+  transform: rotate(180deg);
+}
+
+.admin-submenu {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 4px 0 8px 20px;
+  padding-left: 14px;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.admin-subnav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.admin-subnav-item:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.admin-subnav-item.active {
+  background: rgba(0, 0, 0, 0.08);
+  font-weight: 600;
+}

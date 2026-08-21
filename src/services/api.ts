@@ -4,9 +4,6 @@ import { getToken } from "./auth"
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
 })
 
 api.interceptors.request.use((config) => {
@@ -16,7 +13,7 @@ api.interceptors.request.use((config) => {
   if (config.method === "get") {
     config.params = {
       ...config.params,
-      language,
+      language: config.params?.language ?? language,
     }
   }
 

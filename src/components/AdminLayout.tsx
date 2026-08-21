@@ -1,4 +1,4 @@
-import { Outlet, NavLink, useNavigate } from "react-router-dom"
+import { Outlet, NavLink, useNavigate, useLocation } from "react-router-dom"
 import {
   LayoutDashboard,
   ShoppingBag,
@@ -8,8 +8,11 @@ import {
   LogOut,
   ChevronLeft,
   ChevronRight,
+  ChevronDown,
   Truck,
   CreditCard,
+  Box,
+  Tags,
 } from "lucide-react"
 import { useState } from "react"
 import { useAuth } from "../context/useAuth"
@@ -20,12 +23,27 @@ function AdminLayout() {
   const { logout } = useAuth()
   const { t } = useTranslation()
   const navigate = useNavigate()
+  const location = useLocation()
 
   const [collapsed, setCollapsed] = useState(false)
+
+  const isCatalogActive = location.pathname.startsWith("/admin/catalog")
+
+  const [catalogOpen, setCatalogOpen] = useState(isCatalogActive)
 
   const handleLogout = () => {
     logout()
     navigate("/login")
+  }
+
+  const handleCatalogClick = () => {
+    if (collapsed) {
+      setCollapsed(false)
+      setCatalogOpen(true)
+      return
+    }
+
+    setCatalogOpen((current) => !current)
   }
 
   return (
@@ -41,6 +59,7 @@ function AdminLayout() {
           {!collapsed && (
             <div className="admin-logo">
               <span className="admin-logo-pistakio">Pistakio</span>
+
               <span className="admin-logo-gelato">Gelato</span>
             </div>
           )}
@@ -49,7 +68,11 @@ function AdminLayout() {
             type="button"
             className="admin-collapse-button"
             onClick={() => setCollapsed((current) => !current)}
-            title={collapsed ? "Apri menu" : "Chiudi menu"}
+            title={
+              collapsed
+                ? t("admin.sidebar.openMenu")
+                : t("admin.sidebar.closeMenu")
+            }
           >
             {collapsed ? <ChevronRight size={19} /> : <ChevronLeft size={19} />}
           </button>
@@ -58,6 +81,8 @@ function AdminLayout() {
         {/* MENU */}
 
         <nav className="admin-nav">
+          {/* DASHBOARD */}
+
           <AdminNavItem
             to="/admin"
             icon={<LayoutDashboard size={19} />}
@@ -66,9 +91,13 @@ function AdminLayout() {
             end
           />
 
-          <div className="admin-section-title">
-            {!collapsed && t("admin.sidebar.management")}
-          </div>
+          {/* GESTIONE */}
+
+          {!collapsed && (
+            <div className="admin-section-title">
+              {t("admin.sidebar.management")}
+            </div>
+          )}
 
           <AdminNavItem
             to="/admin/orders"
@@ -77,12 +106,69 @@ function AdminLayout() {
             collapsed={collapsed}
           />
 
-          <AdminNavItem
-            to="/admin/catalog"
-            icon={<IceCreamBowl size={19} />}
-            label={t("admin.sidebar.catalog")}
-            collapsed={collapsed}
-          />
+          {/* CATALOGO */}
+
+          {!collapsed && (
+            <button
+              type="button"
+              className={`admin-nav-item admin-catalog-button ${
+                isCatalogActive ? "active" : ""
+              }`}
+              onClick={handleCatalogClick}
+            >
+              <IceCreamBowl size={19} />
+
+              <span className="flex-grow-1 text-start">
+                {t("admin.sidebar.catalog")}
+              </span>
+
+              <ChevronDown
+                size={17}
+                className={catalogOpen ? "admin-chevron-open" : ""}
+              />
+            </button>
+          )}
+
+          {/* CATALOGO COLLAPSED */}
+
+          {collapsed && (
+            <button
+              type="button"
+              className={`admin-nav-item admin-catalog-button ${
+                isCatalogActive ? "active" : ""
+              }`}
+              onClick={handleCatalogClick}
+              title={t("admin.sidebar.catalog")}
+            >
+              <IceCreamBowl size={19} />
+            </button>
+          )}
+
+          {/* SOTTO MENU CATALOGO */}
+
+          {!collapsed && catalogOpen && (
+            <div className="admin-submenu">
+              <AdminSubNavItem
+                to="/admin/catalog/flavors"
+                icon={<IceCreamBowl size={16} />}
+                label={t("admin.sidebar.flavors")}
+              />
+
+              <AdminSubNavItem
+                to="/admin/catalog/tubs"
+                icon={<Box size={16} />}
+                label={t("admin.sidebar.tubs")}
+              />
+
+              <AdminSubNavItem
+                to="/admin/catalog/categories"
+                icon={<Tags size={16} />}
+                label={t("admin.sidebar.categories")}
+              />
+            </div>
+          )}
+
+          {/* CLIENTI */}
 
           <AdminNavItem
             to="/admin/customers"
@@ -91,9 +177,13 @@ function AdminLayout() {
             collapsed={collapsed}
           />
 
-          <div className="admin-section-title">
-            {!collapsed && t("admin.sidebar.store")}
-          </div>
+          {/* NEGOZIO */}
+
+          {!collapsed && (
+            <div className="admin-section-title">
+              {t("admin.sidebar.store")}
+            </div>
+          )}
 
           <AdminNavItem
             to="/admin/shipments"
@@ -142,6 +232,10 @@ function AdminLayout() {
   )
 }
 
+/* -------------------------------------------------------------------------- */
+/* MAIN NAV ITEM */
+/* -------------------------------------------------------------------------- */
+
 interface AdminNavItemProps {
   to: string
   icon: React.ReactNode
@@ -167,6 +261,31 @@ function AdminNavItem({
       {icon}
 
       {!collapsed && <span>{label}</span>}
+    </NavLink>
+  )
+}
+
+/* -------------------------------------------------------------------------- */
+/* CATALOG SUB ITEM */
+/* -------------------------------------------------------------------------- */
+
+interface AdminSubNavItemProps {
+  to: string
+  icon: React.ReactNode
+  label: string
+}
+
+function AdminSubNavItem({ to, icon, label }: AdminSubNavItemProps) {
+  return (
+    <NavLink
+      to={to}
+      className={({ isActive }) =>
+        `admin-subnav-item ${isActive ? "active" : ""}`
+      }
+    >
+      {icon}
+
+      <span>{label}</span>
     </NavLink>
   )
 }
