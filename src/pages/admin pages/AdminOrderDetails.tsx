@@ -34,11 +34,15 @@ function AdminOrderDetails() {
   const { id } = useParams<{ id: string }>()
 
   const [order, setOrder] = useState<Order | null>(null)
+
   const [orderItems, setOrderItems] = useState<OrderItem[]>([])
+
   const [payment, setPayment] = useState<Payment | null>(null)
+
   const [shipment, setShipment] = useState<Shipment | null>(null)
 
   const [loading, setLoading] = useState(true)
+
   const [actionLoading, setActionLoading] = useState(false)
 
   const [error, setError] = useState("")
@@ -101,6 +105,10 @@ function AdminOrderDetails() {
       return
     }
 
+    if (newStatus === order.orderStatus) {
+      return
+    }
+
     try {
       setActionLoading(true)
       setError("")
@@ -109,7 +117,7 @@ function AdminOrderDetails() {
        * PAID → PREPARING
        */
 
-      if (newStatus === "PREPARING") {
+      if (newStatus === "PREPARING" && order.orderStatus === "PAID") {
         const updatedOrder = await prepareOrder(order.id)
 
         setOrder(updatedOrder)
@@ -119,12 +127,9 @@ function AdminOrderDetails() {
 
       /*
        * PREPARING → SHIPPED
-       *
-       * Se non abbiamo ancora una shipment,
-       * apriamo il form.
        */
 
-      if (newStatus === "SHIPPED") {
+      if (newStatus === "SHIPPED" && order.orderStatus === "PREPARING") {
         if (!shipment) {
           setShowShipmentForm(true)
           return
@@ -146,7 +151,7 @@ function AdminOrderDetails() {
        * SHIPPED → DELIVERED
        */
 
-      if (newStatus === "DELIVERED") {
+      if (newStatus === "DELIVERED" && order.orderStatus === "SHIPPED") {
         if (!shipment) {
           return
         }
@@ -190,8 +195,9 @@ function AdminOrderDetails() {
 
       /*
        * La shipment nasce PENDING.
-       * La portiamo subito a SHIPPED perché
-       * l'admin ha selezionato "Spedito".
+       * La portiamo subito a SHIPPED
+       * perché l'admin ha selezionato
+       * "Spedito".
        */
 
       const shippedShipment = await updateShipmentStatus(
@@ -218,7 +224,54 @@ function AdminOrderDetails() {
     }
   }
 
-  const getShipmentForOrder = shipment
+  const getStatusStyle = (status: string): React.CSSProperties => {
+    switch (status) {
+      case "PAID":
+        return {
+          backgroundColor: "#d1e7dd",
+          color: "#0f5132",
+          borderColor: "#a3cfbb",
+        }
+
+      case "PREPARING":
+        return {
+          backgroundColor: "#fff3cd",
+          color: "#664d03",
+          borderColor: "#ffecb5",
+        }
+
+      case "SHIPPED":
+        return {
+          backgroundColor: "#cfe2ff",
+          color: "#084298",
+          borderColor: "#9ec5fe",
+        }
+
+      case "DELIVERED":
+        return {
+          backgroundColor: "#d1e7dd",
+          color: "#0f5132",
+          borderColor: "#a3cfbb",
+        }
+
+      case "PENDING_PAYMENT":
+        return {
+          backgroundColor: "#e2e3e5",
+          color: "#41464b",
+          borderColor: "#d3d6d8",
+        }
+
+      case "CANCELLED":
+        return {
+          backgroundColor: "#f8d7da",
+          color: "#842029",
+          borderColor: "#f1aeb5",
+        }
+
+      default:
+        return {}
+    }
+  }
 
   if (loading) {
     return <Loading />
@@ -233,6 +286,7 @@ function AdminOrderDetails() {
           onClick={() => navigate("/admin/orders")}
         >
           <ArrowLeft size={18} className="me-1" />
+
           {t("admin.orderDetails.backToOrders")}
         </button>
 
@@ -273,6 +327,7 @@ function AdminOrderDetails() {
             onClick={() => navigate("/admin/orders")}
           >
             <ArrowLeft size={18} className="me-1" />
+
             {t("admin.orderDetails.backToOrders")}
           </button>
 
@@ -296,9 +351,13 @@ function AdminOrderDetails() {
           </label>
 
           <select
-            className={`form-select status-select ${getStatusClass(
-              order.orderStatus,
-            )}`}
+            className="form-select"
+            style={{
+              width: "190px",
+              fontWeight: 600,
+              cursor: "pointer",
+              ...getStatusStyle(order.orderStatus),
+            }}
             value={order.orderStatus}
             disabled={actionLoading}
             onChange={(event) => handleStatusChange(event.target.value)}
@@ -343,6 +402,7 @@ function AdminOrderDetails() {
             <div className="card-body">
               <h2 className="h5 mb-4">
                 <User size={20} className="me-2" />
+
                 {t("admin.orderDetails.customer")}
               </h2>
 
@@ -366,6 +426,7 @@ function AdminOrderDetails() {
 
                   <h3 className="h6 mb-3">
                     <MapPin size={18} className="me-2" />
+
                     {t("admin.orderDetails.address")}
                   </h3>
 
@@ -395,6 +456,7 @@ function AdminOrderDetails() {
             <div className="card-body">
               <h2 className="h5 mb-4">
                 <Package size={20} className="me-2" />
+
                 {t("admin.orderDetails.products")}
               </h2>
 
@@ -444,6 +506,7 @@ function AdminOrderDetails() {
             <div className="card-body">
               <h2 className="h5 mb-4">
                 <CreditCard size={20} className="me-2" />
+
                 {t("admin.orderDetails.payment")}
               </h2>
 
@@ -456,7 +519,7 @@ function AdminOrderDetails() {
 
                   <InfoRow
                     label={t("admin.orderDetails.paymentStatus")}
-                    value={payment.status}
+                    value={t(`paymentStatus.${payment.status}`)}
                   />
 
                   <InfoRow
@@ -502,33 +565,32 @@ function AdminOrderDetails() {
             <div className="card-body">
               <h2 className="h5 mb-4">
                 <Truck size={20} className="me-2" />
+
                 {t("admin.orderDetails.shipment")}
               </h2>
 
-              {getShipmentForOrder ? (
+              {shipment ? (
                 <>
                   <InfoRow
                     label={t("admin.orderDetails.carrier")}
-                    value={getShipmentForOrder.carrier}
+                    value={shipment.carrier}
                   />
 
                   <InfoRow
                     label={t("admin.orderDetails.trackingNumber")}
-                    value={getShipmentForOrder.trackingNumber}
+                    value={shipment.trackingNumber}
                   />
 
                   <InfoRow
                     label={t("admin.orderDetails.shipmentStatus")}
-                    value={t(
-                      `admin.shipmentStatus.${getShipmentForOrder.status}`,
-                    )}
+                    value={t(`admin.shipmentStatus.${shipment.status}`)}
                   />
 
-                  {getShipmentForOrder.deliveredAt && (
+                  {shipment.deliveredAt && (
                     <InfoRow
                       label={t("admin.orderDetails.deliveredAt")}
                       value={new Date(
-                        getShipmentForOrder.deliveredAt,
+                        shipment.deliveredAt,
                       ).toLocaleDateString()}
                     />
                   )}
@@ -546,6 +608,8 @@ function AdminOrderDetails() {
                       disabled={actionLoading}
                       onClick={() => setShowShipmentForm(true)}
                     >
+                      <Truck size={17} className="me-1" />
+
                       {t("admin.orders.createShipment")}
                     </button>
                   )}
@@ -584,6 +648,8 @@ function AdminOrderDetails() {
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">
+                  <Truck size={20} className="me-2" />
+
                   {t("admin.orders.createShipment")}
                 </h5>
 
@@ -610,6 +676,7 @@ function AdminOrderDetails() {
                         carrier: event.target.value,
                       })
                     }
+                    placeholder="GLS"
                   />
                 </div>
 
@@ -636,6 +703,7 @@ function AdminOrderDetails() {
                 <button
                   type="button"
                   className="btn btn-outline-secondary"
+                  disabled={actionLoading}
                   onClick={() => setShowShipmentForm(false)}
                 >
                   {t("admin.orders.cancel")}
@@ -665,17 +733,20 @@ function AdminOrderDetails() {
 }
 
 /* -------------------------------------------------------------------------- */
-/* PRODUCT                                                                      */
+/* PRODUCT */
 /* -------------------------------------------------------------------------- */
 
 function OrderProduct({ item }: { item: OrderItem }) {
   const [flavorName, setFlavorName] = useState("")
+
   const [flavorImage, setFlavorImage] = useState("")
-  const { t } = useTranslation()
+
   const [tub, setTub] = useState<{
     weight: number
     price: number
   } | null>(null)
+
+  const { t } = useTranslation()
 
   useEffect(() => {
     const loadProductData = async () => {
@@ -686,6 +757,7 @@ function OrderProduct({ item }: { item: OrderItem }) {
         ])
 
         setFlavorName(flavorData.name)
+
         setFlavorImage(flavorData.image ?? "")
 
         setTub({
@@ -755,7 +827,7 @@ function OrderProduct({ item }: { item: OrderItem }) {
 }
 
 /* -------------------------------------------------------------------------- */
-/* INFO ROW                                                                    */
+/* INFO ROW */
 /* -------------------------------------------------------------------------- */
 
 function InfoRow({ label, value }: { label: string; value: string }) {
@@ -766,35 +838,6 @@ function InfoRow({ label, value }: { label: string; value: string }) {
       <span className="text-end fw-semibold text-break">{value}</span>
     </div>
   )
-}
-
-/* -------------------------------------------------------------------------- */
-/* STATUS                                                                       */
-/* -------------------------------------------------------------------------- */
-
-function getStatusClass(status: string) {
-  switch (status) {
-    case "PAID":
-      return "text-bg-success"
-
-    case "PREPARING":
-      return "text-bg-warning"
-
-    case "SHIPPED":
-      return "text-bg-info"
-
-    case "DELIVERED":
-      return "text-bg-success"
-
-    case "PENDING_PAYMENT":
-      return "text-bg-secondary"
-
-    case "CANCELLED":
-      return "text-bg-danger"
-
-    default:
-      return "text-bg-secondary"
-  }
 }
 
 export default AdminOrderDetails
