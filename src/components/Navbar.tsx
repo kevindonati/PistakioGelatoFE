@@ -6,6 +6,7 @@ import type { Language } from "../types/Language"
 import { CartFill } from "react-bootstrap-icons"
 import { useCart } from "../context/CartContext"
 import { useState, useRef, useEffect } from "react"
+import "../styles/Logo.css"
 
 const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth()
@@ -50,8 +51,28 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg bg-white border-bottom">
       <div className="container">
         <Link to="/" className="navbar-brand fw-bold">
-          <span className="verde-pistakio">Pistakio</span>
-          <span className="rosa-pistakio">Gelato</span>
+          {/* <span className="verde-pistakio">Pistakio</span>
+          <span className="rosa-pistakio">Gelato</span> */}
+          <div className="logo">
+            <div className="top">
+              <div className="circle-logo pink"></div>
+              <div className="top-green">
+                <div className="circle-logo green"></div>
+                <div className="circle-logo green"></div>
+                <div className="circle-logo green"></div>
+              </div>
+            </div>
+
+            <div className="bottom">
+              <div className="triangle pink">
+                <div></div>
+              </div>
+
+              <div className="triangle green">
+                <div></div>
+              </div>
+            </div>
+          </div>
         </Link>
 
         <button

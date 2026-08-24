@@ -3,7 +3,7 @@
     "home": "Home",
     "catalog": "Catalog",
     "cart": "Cart",
-    "login": "Log in",
+    "login": "Login",
     "register": "Register",
     "logout": "Log out",
     "account": "Account",
@@ -449,7 +449,16 @@
       "noResults": "No customers match the selected filters",
       "loadError": "Unable to load customers.",
       "deleteConfirm": "Are you sure you want to delete this customer?",
-      "deleteError": "Unable to delete the customer."
+      "deleteError": "Unable to delete the customer.",
+      "details": {
+        "subtitle": "Customer details",
+        "back": "Back to customers",
+        "loadError": "Unable to load customer data.",
+        "notFound": "Customer not found",
+        "orders": "Orders",
+        "ordersCount": "{{count}} orders",
+        "noOrders": "This customer has not placed any orders yet."
+      }
     }
   }
 }

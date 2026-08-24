@@ -449,7 +449,16 @@
       "noResults": "Aucun client ne correspond aux filtres sélectionnés",
       "loadError": "Impossible de charger les clients.",
       "deleteConfirm": "Êtes-vous sûr de vouloir supprimer ce client ?",
-      "deleteError": "Impossible de supprimer le client."
+      "deleteError": "Impossible de supprimer le client.",
+      "details": {
+        "subtitle": "Détails du client",
+        "back": "Retour aux clients",
+        "loadError": "Impossible de charger les données du client.",
+        "notFound": "Client introuvable",
+        "orders": "Commandes",
+        "ordersCount": "{{count}} commandes",
+        "noOrders": "Ce client n'a encore passé aucune commande."
+      }
     }
   }
 }

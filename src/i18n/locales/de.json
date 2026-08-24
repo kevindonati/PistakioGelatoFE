@@ -449,7 +449,16 @@
       "noResults": "Keine Kunden entsprechen den ausgewählten Filtern",
       "loadError": "Kunden konnten nicht geladen werden.",
       "deleteConfirm": "Möchtest du diesen Kunden wirklich löschen?",
-      "deleteError": "Der Kunde konnte nicht gelöscht werden."
+      "deleteError": "Der Kunde konnte nicht gelöscht werden.",
+      "details": {
+        "subtitle": "Kundendetails",
+        "back": "Zurück zu den Kunden",
+        "loadError": "Kundendaten konnten nicht geladen werden.",
+        "notFound": "Kunde nicht gefunden",
+        "orders": "Bestellungen",
+        "ordersCount": "{{count}} Bestellungen",
+        "noOrders": "Dieser Kunde hat noch keine Bestellungen aufgegeben."
+      }
     }
   }
 }

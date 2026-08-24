@@ -464,7 +464,16 @@
       "noResults": "Nessun cliente corrisponde ai filtri selezionati",
       "loadError": "Impossibile caricare i clienti.",
       "deleteConfirm": "Sei sicuro di voler eliminare questo cliente?",
-      "deleteError": "Impossibile eliminare il cliente."
+      "deleteError": "Impossibile eliminare il cliente.",
+      "details": {
+        "subtitle": "Dettagli del cliente",
+        "back": "Torna ai clienti",
+        "loadError": "Impossibile caricare i dati del cliente.",
+        "notFound": "Cliente non trovato",
+        "orders": "Ordini",
+        "ordersCount": "{{count}} ordini",
+        "noOrders": "Questo cliente non ha ancora effettuato ordini."
+      }
     }
   }
 }

@@ -27,6 +27,7 @@ import AdminTubForm from "./pages/admin pages/AdminTubForm"
 import AdminCategories from "./pages/admin pages/AdminCategories"
 import AdminCategoryForm from "./pages/admin pages/AdminCategoryForm"
 import AdminCustomers from "./pages/admin pages/AdminCustomers"
+import AdminCustomerDetails from "./pages/admin pages/AdminCustomerDetails"
 
 function Home() {
   return <h1>Home</h1>
@@ -89,6 +90,10 @@ function AppContent() {
               element={<AdminCategoryForm />}
             />
             <Route path="/admin/customers" element={<AdminCustomers />} />
+            <Route
+              path="/admin/customers/:id"
+              element={<AdminCustomerDetails />}
+            />
             {/* 
             
             <Route

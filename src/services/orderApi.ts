@@ -159,6 +159,7 @@ export interface OrderFilters {
   size?: number
   direction?: "asc" | "desc"
   id?: string
+  userId?: string
   customer?: string
   status?: string
   minTotal?: number
@@ -172,6 +173,7 @@ export const getAllOrders = async ({
   size = 15,
   direction = "desc",
   id,
+  userId,
   customer,
   status,
   minTotal,
@@ -190,6 +192,7 @@ export const getAllOrders = async ({
       orderBy: "createdAt",
       direction,
       id: id || undefined,
+      userId: userId || undefined,
       customer: customer || undefined,
       status: status || undefined,
       minTotal,
@@ -259,13 +262,6 @@ export const updateShipmentStatus = async (
   })
 
   return response.data
-}
-
-export interface Payment {
-  id: string
-  order: {
-    id: string
-  }
 }
 
 export interface Payment {

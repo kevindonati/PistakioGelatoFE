@@ -352,7 +352,7 @@ function AdminCustomers() {
                             className="btn btn-sm btn-outline-secondary"
                             title={t("admin.customers.edit")}
                             onClick={() =>
-                              navigate(`/admin/customers/${user.id}/edit`)
+                              navigate(`/admin/customers/${user.id}`)
                             }
                           >
                             <Edit size={16} />
