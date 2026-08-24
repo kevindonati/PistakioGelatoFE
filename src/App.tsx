@@ -24,6 +24,8 @@ import AdminFlavors from "./pages/admin pages/AdminFlavors"
 import AdminFlavorForm from "./pages/admin pages/AdminFlavorForm"
 import AdminTubs from "./pages/admin pages/AdminTubs"
 import AdminTubForm from "./pages/admin pages/AdminTubForm"
+import AdminCategories from "./pages/admin pages/AdminCategories"
+import AdminCategoryForm from "./pages/admin pages/AdminCategoryForm"
 
 function Home() {
   return <h1>Home</h1>
@@ -70,6 +72,20 @@ function AppContent() {
             <Route
               path="/admin/catalog/tubs/:id/edit"
               element={<AdminTubForm />}
+            />
+            <Route
+              path="/admin/catalog/categories"
+              element={<AdminCategories />}
+            />
+
+            <Route
+              path="/admin/catalog/categories/new"
+              element={<AdminCategoryForm />}
+            />
+
+            <Route
+              path="/admin/catalog/categories/:id/edit"
+              element={<AdminCategoryForm />}
             />
             {/* 
             <Route

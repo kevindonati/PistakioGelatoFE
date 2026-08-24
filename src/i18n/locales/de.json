@@ -385,6 +385,43 @@
       "descriptionRequired": "Gib die Beschreibung des Bechers auf {{language}} ein.",
       "loadError": "Der Becher konnte nicht geladen werden.",
       "saveError": "Der Becher konnte nicht gespeichert werden."
+    },
+    "categories": {
+      "title": "Kategorien",
+      "subtitle": "Verwalte die im Katalog verfügbaren Kategorien",
+      "newCategory": "Neue Kategorie",
+      "image": "Bild",
+      "name": "Name",
+      "description": "Beschreibung",
+      "actions": "Aktionen",
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "empty": "Keine Kategorien gefunden",
+      "loadError": "Kategorien konnten nicht geladen werden.",
+      "deleteConfirm": "Möchtest du diese Kategorie wirklich löschen?",
+      "deleteError": "Die Kategorie konnte nicht gelöscht werden. (Mit dieser Kategorie sind noch einige Geschmacksrichtungen verbunden, Wechsel)"
+    },
+    "categoryForm": {
+      "createTitle": "Neue Kategorie",
+      "editTitle": "Kategorie bearbeiten",
+      "createSubtitle": "Füge eine neue Kategorie zum Katalog hinzu",
+      "editSubtitle": "Bearbeite die Informationen der Kategorie",
+      "backToCategories": "Zurück zu den Kategorien",
+      "image": "Bild",
+      "imageUrl": "Bild-URL",
+      "imageRequired": "Gib die Bild-URL ein.",
+      "translations": "Übersetzungen",
+      "translationsDescription": "Gib den Namen und die Beschreibung der Kategorie in den verfügbaren Sprachen ein.",
+      "name": "Name",
+      "description": "Beschreibung",
+      "nameRequired": "Gib den Namen der Kategorie auf {{language}} ein.",
+      "descriptionRequired": "Gib die Beschreibung der Kategorie auf {{language}} ein.",
+      "cancel": "Abbrechen",
+      "createCategory": "Kategorie erstellen",
+      "saveChanges": "Änderungen speichern",
+      "saving": "Speichern...",
+      "loadError": "Die Kategorie konnte nicht geladen werden.",
+      "saveError": "Die Kategorie konnte nicht gespeichert werden."
     }
   }
 }

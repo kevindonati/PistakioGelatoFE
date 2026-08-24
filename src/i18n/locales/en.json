@@ -385,6 +385,43 @@
       "descriptionRequired": "Enter the tub description in {{language}}.",
       "loadError": "Unable to load the tub.",
       "saveError": "Unable to save the tub."
+    },
+    "categories": {
+      "title": "Categories",
+      "subtitle": "Manage the categories available in the catalog",
+      "newCategory": "New category",
+      "image": "Image",
+      "name": "Name",
+      "description": "Description",
+      "actions": "Actions",
+      "edit": "Edit",
+      "delete": "Delete",
+      "empty": "No categories found",
+      "loadError": "Unable to load the categories.",
+      "deleteConfirm": "Are you sure you want to delete this category?",
+      "deleteError": "Unable to delete the category. (There are still some flavors associated with this category, bills of exchange)"
+    },
+    "categoryForm": {
+      "createTitle": "New category",
+      "editTitle": "Edit category",
+      "createSubtitle": "Add a new category to the catalog",
+      "editSubtitle": "Edit the category information",
+      "backToCategories": "Back to categories",
+      "image": "Image",
+      "imageUrl": "Image URL",
+      "imageRequired": "Enter the image URL.",
+      "translations": "Translations",
+      "translationsDescription": "Enter the category name and description in the available languages.",
+      "name": "Name",
+      "description": "Description",
+      "nameRequired": "Enter the category name in {{language}}.",
+      "descriptionRequired": "Enter the category description in {{language}}.",
+      "cancel": "Cancel",
+      "createCategory": "Create category",
+      "saveChanges": "Save changes",
+      "saving": "Saving...",
+      "loadError": "Unable to load the category.",
+      "saveError": "Unable to save the category."
     }
   }
 }

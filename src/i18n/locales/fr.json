@@ -385,6 +385,43 @@
       "descriptionRequired": "Saisissez la description du bac en {{language}}.",
       "loadError": "Impossible de charger le bac.",
       "saveError": "Impossible d'enregistrer le bac."
+    },
+    "categories": {
+      "title": "Catégories",
+      "subtitle": "Gérez les catégories disponibles dans le catalogue",
+      "newCategory": "Nouvelle catégorie",
+      "image": "Image",
+      "name": "Nom",
+      "description": "Description",
+      "actions": "Actions",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "empty": "Aucune catégorie trouvée",
+      "loadError": "Impossible de charger les catégories.",
+      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer cette catégorie ?",
+      "deleteError": "Impossible de supprimer la catégorie. (Il existe encore quelques saveurs associées à cette catégorie, les lettres de change)"
+    },
+    "categoryForm": {
+      "createTitle": "Nouvelle catégorie",
+      "editTitle": "Modifier la catégorie",
+      "createSubtitle": "Ajoutez une nouvelle catégorie au catalogue",
+      "editSubtitle": "Modifiez les informations de la catégorie",
+      "backToCategories": "Retour aux catégories",
+      "image": "Image",
+      "imageUrl": "URL de l'image",
+      "imageRequired": "Saisissez l'URL de l'image.",
+      "translations": "Traductions",
+      "translationsDescription": "Saisissez le nom et la description de la catégorie dans les langues disponibles.",
+      "name": "Nom",
+      "description": "Description",
+      "nameRequired": "Saisissez le nom de la catégorie en {{language}}.",
+      "descriptionRequired": "Saisissez la description de la catégorie en {{language}}.",
+      "cancel": "Annuler",
+      "createCategory": "Créer la catégorie",
+      "saveChanges": "Enregistrer les modifications",
+      "saving": "Enregistrement...",
+      "loadError": "Impossible de charger la catégorie.",
+      "saveError": "Impossible d'enregistrer la catégorie."
     }
   }
 }

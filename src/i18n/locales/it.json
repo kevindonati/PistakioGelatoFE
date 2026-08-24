@@ -400,6 +400,43 @@
       "descriptionRequired": "Inserisci la descrizione della vaschetta in {{language}}.",
       "loadError": "Impossibile caricare la vaschetta.",
       "saveError": "Impossibile salvare la vaschetta."
+    },
+    "categories": {
+      "title": "Categorie",
+      "subtitle": "Gestisci le categorie disponibili nel catalogo",
+      "newCategory": "Nuova categoria",
+      "image": "Immagine",
+      "name": "Nome",
+      "description": "Descrizione",
+      "actions": "Azioni",
+      "edit": "Modifica",
+      "delete": "Elimina",
+      "empty": "Nessuna categoria trovata",
+      "loadError": "Impossibile caricare le categorie.",
+      "deleteConfirm": "Sei sicuro di voler eliminare questa categoria?",
+      "deleteError": "Impossibile eliminare la categoria. (Ci sono ancora dei gusti associati a questa categoria, cambiali)"
+    },
+    "categoryForm": {
+      "createTitle": "Nuova categoria",
+      "editTitle": "Modifica categoria",
+      "createSubtitle": "Aggiungi una nuova categoria al catalogo",
+      "editSubtitle": "Modifica le informazioni della categoria",
+      "backToCategories": "Torna alle categorie",
+      "image": "Immagine",
+      "imageUrl": "URL dell'immagine",
+      "imageRequired": "Inserisci l'URL dell'immagine.",
+      "translations": "Traduzioni",
+      "translationsDescription": "Inserisci nome e descrizione della categoria nelle lingue disponibili.",
+      "name": "Nome",
+      "description": "Descrizione",
+      "nameRequired": "Inserisci il nome della categoria in {{language}}.",
+      "descriptionRequired": "Inserisci la descrizione della categoria in {{language}}.",
+      "cancel": "Annulla",
+      "createCategory": "Crea categoria",
+      "saveChanges": "Salva modifiche",
+      "saving": "Salvataggio...",
+      "loadError": "Impossibile caricare la categoria.",
+      "saveError": "Impossibile salvare la categoria."
     }
   }
 }
