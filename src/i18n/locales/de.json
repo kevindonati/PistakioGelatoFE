@@ -422,6 +422,34 @@
       "saving": "Speichern...",
       "loadError": "Die Kategorie konnte nicht geladen werden.",
       "saveError": "Die Kategorie konnte nicht gespeichert werden."
+    },
+    "customers": {
+      "title": "Kunden",
+      "subtitle": "Verwalte die in deinem Shop registrierten Benutzer",
+      "search": "Suchen",
+      "searchPlaceholder": "Nach Name, Nachname oder E-Mail suchen...",
+      "role": "Rolle",
+      "allRoles": "Alle Rollen",
+      "user": "Kunde",
+      "admin": "Administrator",
+      "status": "Status",
+      "allStatuses": "Alle Status",
+      "active": "Aktiv",
+      "disabled": "Deaktiviert",
+      "resetFilters": "Filter zurücksetzen",
+      "results": "{{count}} Ergebnisse",
+      "customer": "Kunde",
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "language": "Sprache",
+      "actions": "Aktionen",
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "empty": "Keine Kunden gefunden",
+      "noResults": "Keine Kunden entsprechen den ausgewählten Filtern",
+      "loadError": "Kunden konnten nicht geladen werden.",
+      "deleteConfirm": "Möchtest du diesen Kunden wirklich löschen?",
+      "deleteError": "Der Kunde konnte nicht gelöscht werden."
     }
   }
 }

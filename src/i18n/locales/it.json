@@ -437,6 +437,34 @@
       "saving": "Salvataggio...",
       "loadError": "Impossibile caricare la categoria.",
       "saveError": "Impossibile salvare la categoria."
+    },
+    "customers": {
+      "title": "Clienti",
+      "subtitle": "Gestisci gli utenti registrati al tuo negozio",
+      "search": "Cerca",
+      "searchPlaceholder": "Cerca per nome, cognome o email...",
+      "role": "Ruolo",
+      "allRoles": "Tutti i ruoli",
+      "user": "Cliente",
+      "admin": "Amministratore",
+      "status": "Stato",
+      "allStatuses": "Tutti gli stati",
+      "active": "Attivo",
+      "disabled": "Disabilitato",
+      "resetFilters": "Reimposta filtri",
+      "results": "{{count}} risultati",
+      "customer": "Cliente",
+      "email": "Email",
+      "phone": "Telefono",
+      "language": "Lingua",
+      "actions": "Azioni",
+      "edit": "Modifica",
+      "delete": "Elimina",
+      "empty": "Nessun cliente trovato",
+      "noResults": "Nessun cliente corrisponde ai filtri selezionati",
+      "loadError": "Impossibile caricare i clienti.",
+      "deleteConfirm": "Sei sicuro di voler eliminare questo cliente?",
+      "deleteError": "Impossibile eliminare il cliente."
     }
   }
 }

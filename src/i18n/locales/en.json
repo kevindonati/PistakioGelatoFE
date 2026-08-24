@@ -422,6 +422,34 @@
       "saving": "Saving...",
       "loadError": "Unable to load the category.",
       "saveError": "Unable to save the category."
+    },
+    "customers": {
+      "title": "Customers",
+      "subtitle": "Manage the users registered in your store",
+      "search": "Search",
+      "searchPlaceholder": "Search by name, surname or email...",
+      "role": "Role",
+      "allRoles": "All roles",
+      "user": "Customer",
+      "admin": "Administrator",
+      "status": "Status",
+      "allStatuses": "All statuses",
+      "active": "Active",
+      "disabled": "Disabled",
+      "resetFilters": "Reset filters",
+      "results": "{{count}} results",
+      "customer": "Customer",
+      "email": "Email",
+      "phone": "Phone",
+      "language": "Language",
+      "actions": "Actions",
+      "edit": "Edit",
+      "delete": "Delete",
+      "empty": "No customers found",
+      "noResults": "No customers match the selected filters",
+      "loadError": "Unable to load customers.",
+      "deleteConfirm": "Are you sure you want to delete this customer?",
+      "deleteError": "Unable to delete the customer."
     }
   }
 }

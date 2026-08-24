@@ -26,6 +26,7 @@ import AdminTubs from "./pages/admin pages/AdminTubs"
 import AdminTubForm from "./pages/admin pages/AdminTubForm"
 import AdminCategories from "./pages/admin pages/AdminCategories"
 import AdminCategoryForm from "./pages/admin pages/AdminCategoryForm"
+import AdminCustomers from "./pages/admin pages/AdminCustomers"
 
 function Home() {
   return <h1>Home</h1>
@@ -87,11 +88,9 @@ function AppContent() {
               path="/admin/catalog/categories/:id/edit"
               element={<AdminCategoryForm />}
             />
+            <Route path="/admin/customers" element={<AdminCustomers />} />
             {/* 
-            <Route
-              path="/admin/customers"
-              element={<AdminCustomers />}
-            />
+            
             <Route
               path="/admin/shipments"
               element={<AdminShipments />}

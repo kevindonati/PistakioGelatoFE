@@ -422,6 +422,34 @@
       "saving": "Enregistrement...",
       "loadError": "Impossible de charger la catégorie.",
       "saveError": "Impossible d'enregistrer la catégorie."
+    },
+    "customers": {
+      "title": "Clients",
+      "subtitle": "Gérez les utilisateurs inscrits dans votre boutique",
+      "search": "Rechercher",
+      "searchPlaceholder": "Rechercher par nom, prénom ou e-mail...",
+      "role": "Rôle",
+      "allRoles": "Tous les rôles",
+      "user": "Client",
+      "admin": "Administrateur",
+      "status": "Statut",
+      "allStatuses": "Tous les statuts",
+      "active": "Actif",
+      "disabled": "Désactivé",
+      "resetFilters": "Réinitialiser les filtres",
+      "results": "{{count}} résultats",
+      "customer": "Client",
+      "email": "E-mail",
+      "phone": "Téléphone",
+      "language": "Langue",
+      "actions": "Actions",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "empty": "Aucun client trouvé",
+      "noResults": "Aucun client ne correspond aux filtres sélectionnés",
+      "loadError": "Impossible de charger les clients.",
+      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer ce client ?",
+      "deleteError": "Impossible de supprimer le client."
     }
   }
 }
