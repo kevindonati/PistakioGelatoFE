@@ -1,14 +1,31 @@
 .logo-loading {
   height: auto;
-  display: flex;
-  flex-direction: column;
   padding: 0 px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .top-loading {
   display: flex;
   padding-left: 50px;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contenitore-palline {
+  display: flex;
 }
 
 .top-green-loading {
@@ -36,11 +53,11 @@
 }
 
 .pink-loading {
-  background: #cc5e8d;
+  background: #f24892;
 }
 
 .green-loading {
-  background: #778d4f;
+  background: #8bbf2c;
 }
 
 .bottom-loading {
@@ -56,11 +73,11 @@
 }
 
 .triangle-loading.pink-loading {
-  background: #cc5e8d;
+  background: #f24892;
 }
 
 .triangle-loading.green-loading {
-  background: #778d4f;
+  background: #8bbf2c;
   transform: rotate(180deg);
 }
 
@@ -103,4 +120,11 @@
   100% {
     transform: translate(0, 0);
   }
+}
+
+.prova {
+  font-family: "Ubuntu Sans Mono", monospace;
+  color: #8bbf2c;
+  font-size: 15em;
+  margin-top: 30px;
 }

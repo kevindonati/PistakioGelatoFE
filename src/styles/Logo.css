@@ -1,77 +1,8 @@
 .logo {
-  width: 90px;
+  width: 120px;
   height: auto;
   display: flex;
   flex-direction: column;
   padding: 0 px;
   box-sizing: border-box;
-}
-
-.top {
-  display: flex;
-  padding-left: 10px;
-}
-
-.top-green {
-  display: flex;
-  padding-left: 7px;
-}
-
-.circle-logo {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  position: relative;
-}
-
-.circle-logo::after {
-  content: "";
-  position: absolute;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #fafafa;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.pink {
-  background: #cc5e8d;
-}
-
-.green {
-  background: #778d4f;
-}
-
-.bottom {
-  display: flex;
-  padding-top: 4px;
-}
-
-.triangle {
-  width: 35px;
-  height: 42px;
-  position: relative;
-  clip-path: polygon(50% 0, 100% 100%, 0 100%);
-}
-
-.triangle.pink {
-  background: #cc5e8d;
-}
-
-.triangle.green {
-  background: #778d4f;
-  transform: rotate(180deg);
-}
-
-.triangle::after {
-  content: "";
-  position: absolute;
-  width: 55%;
-  height: 55%;
-  left: 22.5%;
-  top: 32%;
-  background: #fafafa;
-  clip-path: polygon(50% 0, 100% 100%, 0 100%);
 }
