@@ -8,10 +8,21 @@ import axios from "axios"
 
 import { useTranslation } from "react-i18next"
 
+import {
+  Eye,
+  EyeOff,
+  User,
+  Mail,
+  Lock,
+  Phone,
+  Globe,
+  ArrowRight,
+  AlertCircle,
+} from "lucide-react"
+
 import logo from "../../assets/LOGO CON SCRITTA PIST DEF.png"
 
 import "../../styles/Register.css"
-import { Eye, EyeOff } from "lucide-react"
 
 function Register() {
   const navigate = useNavigate()
@@ -73,8 +84,7 @@ function Register() {
         {/* Header */}
         <div className="register-header">
           <h1>{t("auth.register")}</h1>
-
-          <p>Crea il tuo account Pistakio</p>
+          <p>{t("auth.registerSubtitle")}</p>
         </div>
 
         <form onSubmit={handleSubmit}>
@@ -84,16 +94,14 @@ function Register() {
               <label htmlFor="name">{t("auth.name")}</label>
 
               <div className="register-input-wrapper">
-                <span className="register-input-icon">
-                  <i className="bi bi-person"></i>
-                </span>
+                <User className="register-input-icon" size={18} />
 
                 <input
                   id="name"
                   type="text"
                   value={name}
                   onChange={(event) => setName(event.target.value)}
-                  placeholder="Nome"
+                  placeholder={t("auth.namePlaceholder")}
                   autoComplete="given-name"
                   required
                 />
@@ -104,16 +112,14 @@ function Register() {
               <label htmlFor="surname">{t("auth.surname")}</label>
 
               <div className="register-input-wrapper">
-                <span className="register-input-icon">
-                  <i className="bi bi-person"></i>
-                </span>
+                <User className="register-input-icon" size={18} />
 
                 <input
                   id="surname"
                   type="text"
                   value={surname}
                   onChange={(event) => setSurname(event.target.value)}
-                  placeholder="Cognome"
+                  placeholder={t("auth.surnamePlaceholder")}
                   autoComplete="family-name"
                   required
                 />
@@ -126,16 +132,14 @@ function Register() {
             <label htmlFor="register-email">{t("auth.email")}</label>
 
             <div className="register-input-wrapper">
-              <span className="register-input-icon">
-                <i className="bi bi-envelope"></i>
-              </span>
+              <Mail className="register-input-icon" size={18} />
 
               <input
                 id="register-email"
                 type="email"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
-                placeholder="La tua email"
+                placeholder={t("auth.emailPlaceholder")}
                 autoComplete="email"
                 required
               />
@@ -147,16 +151,14 @@ function Register() {
             <label htmlFor="register-password">{t("auth.password")}</label>
 
             <div className="register-input-wrapper">
-              <span className="register-input-icon">
-                <i className="bi bi-lock"></i>
-              </span>
+              <Lock className="register-input-icon" size={18} />
 
               <input
                 id="register-password"
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
-                placeholder="La tua password"
+                placeholder={t("auth.passwordPlaceholder")}
                 autoComplete="new-password"
                 required
               />
@@ -166,7 +168,7 @@ function Register() {
                 className="register-password-toggle"
                 onClick={() => setShowPassword(!showPassword)}
                 aria-label={
-                  showPassword ? "Nascondi password" : "Mostra password"
+                  showPassword ? t("auth.hidePassword") : t("auth.showPassword")
                 }
               >
                 {showPassword ? (
@@ -183,16 +185,14 @@ function Register() {
             <label htmlFor="phone">{t("auth.phone")}</label>
 
             <div className="register-input-wrapper">
-              <span className="register-input-icon">
-                <i className="bi bi-telephone"></i>
-              </span>
+              <Phone className="register-input-icon" size={18} />
 
               <input
                 id="phone"
                 type="tel"
                 value={phone}
                 onChange={(event) => setPhone(event.target.value)}
-                placeholder="Il tuo numero di telefono"
+                placeholder={t("auth.phonePlaceholder")}
                 autoComplete="tel"
                 required
               />
@@ -204,19 +204,17 @@ function Register() {
             <label htmlFor="language">{t("auth.language")}</label>
 
             <div className="register-input-wrapper">
-              <span className="register-input-icon">
-                <i className="bi bi-globe"></i>
-              </span>
+              <Globe className="register-input-icon" size={18} />
 
               <select
                 id="language"
                 value={language}
                 onChange={(event) => setLanguage(event.target.value)}
               >
-                <option value="IT">🇮🇹 Italiano</option>
-                <option value="EN">🇬🇧 English</option>
-                <option value="FR">🇫🇷 Français</option>
-                <option value="DE">🇩🇪 Deutsch</option>
+                <option value="IT">Italiano</option>
+                <option value="EN">English</option>
+                <option value="FR">Français</option>
+                <option value="DE">Deutsch</option>
               </select>
             </div>
           </div>
@@ -224,7 +222,7 @@ function Register() {
           {/* Errore */}
           {error && (
             <div className="register-error" role="alert">
-              <i className="bi bi-exclamation-circle"></i>
+              <AlertCircle size={18} />
               <span>{error}</span>
             </div>
           )}
@@ -240,13 +238,14 @@ function Register() {
                 <span
                   className="spinner-border spinner-border-sm"
                   aria-hidden="true"
-                ></span>
-                Registrazione in corso...
+                />
+
+                {t("auth.registering")}
               </>
             ) : (
               <>
                 {t("auth.register")}
-                <i className="bi bi-arrow-right"></i>
+                <ArrowRight size={18} />
               </>
             )}
           </button>
@@ -254,10 +253,10 @@ function Register() {
 
         {/* Login */}
         <div className="register-login">
-          <span>Hai già un account?</span>
+          <span>{t("auth.hasAccount")}</span>
 
           <button type="button" onClick={() => navigate("/login")}>
-            Accedi
+            {t("auth.login")}
           </button>
         </div>
       </div>

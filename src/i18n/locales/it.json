@@ -22,7 +22,20 @@
     "language": "Lingua",
     "loginError": "Email o password non corretti",
     "registerError": "Registrazione non riuscita",
-    "emailAlreadyRegistered": "Questa email è già registrata."
+    "emailAlreadyRegistered": "Questa email è già registrata.",
+    "namePlaceholder": "Inserisci il tuo nome",
+    "surnamePlaceholder": "Inserisci il tuo cognome",
+    "emailPlaceholder": "Inserisci la tua email",
+    "passwordPlaceholder": "Inserisci la tua password",
+    "phonePlaceholder": "Inserisci il tuo numero di telefono",
+    "loginSubtitle": "Accedi al tuo account per continuare",
+    "registerSubtitle": "Crea il tuo account Pistakio",
+    "forgotPassword": "Hai dimenticato la password?",
+    "noAccount": "Non hai ancora un account?",
+    "hasAccount": "Hai già un account?",
+    "access": "Accedi",
+    "registering": "Registrazione in corso...",
+    "loggingIn": "Accesso in corso..."
   },
 
   "common": {

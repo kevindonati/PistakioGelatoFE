@@ -5,10 +5,11 @@ import { useAuth } from "../../context/useAuth"
 import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 
+import { Eye, EyeOff, Mail, Lock, ArrowRight, AlertCircle } from "lucide-react"
+
 import logo from "../../assets/LOGO CON SCRITTA PIST DEF.png"
+
 import "../../styles/Login.css"
-import { EyeOff } from "lucide-react"
-import { Eye } from "react-bootstrap-icons"
 
 function Login() {
   const [email, setEmail] = useState("")
@@ -41,15 +42,13 @@ function Login() {
   return (
     <div className="login-page">
       <div className="login-card">
-        {/* Logo */}
         <div className="login-logo">
           <img src={logo} alt="Pistakio Gelato" />
         </div>
 
-        {/* Titolo */}
         <div className="login-header">
           <h1>{t("auth.login")}</h1>
-          <p>Accedi al tuo account per continuare</p>
+          <p>{t("auth.loginSubtitle")}</p>
         </div>
 
         <form onSubmit={handleSubmit}>
@@ -58,16 +57,14 @@ function Login() {
             <label htmlFor="email">{t("auth.email")}</label>
 
             <div className="input-wrapper">
-              <span className="input-icon">
-                <i className="bi bi-envelope"></i>
-              </span>
+              <Mail className="input-icon" size={18} />
 
               <input
                 id="email"
                 type="email"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
-                placeholder="La tua email"
+                placeholder={t("auth.emailPlaceholder")}
                 autoComplete="email"
                 required
               />
@@ -76,31 +73,27 @@ function Login() {
 
           {/* Password */}
           <div className="login-field">
-            <div className="password-label">
-              <label htmlFor="password">{t("auth.password")}</label>
-            </div>
+            <label htmlFor="password">{t("auth.password")}</label>
 
             <div className="input-wrapper">
-              <span className="input-icon">
-                <i className="bi bi-lock"></i>
-              </span>
+              <Lock className="input-icon" size={18} />
 
               <input
                 id="password"
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
-                placeholder="La tua password"
+                placeholder={t("auth.passwordPlaceholder")}
                 autoComplete="current-password"
                 required
               />
 
               <button
                 type="button"
-                className="register-password-toggle"
+                className="password-toggle"
                 onClick={() => setShowPassword(!showPassword)}
                 aria-label={
-                  showPassword ? "Nascondi password" : "Mostra password"
+                  showPassword ? t("auth.hidePassword") : t("auth.showPassword")
                 }
               >
                 {showPassword ? (
@@ -115,14 +108,14 @@ function Login() {
           {/* Password dimenticata */}
           <div className="forgot-password">
             <button type="button" onClick={() => {}}>
-              Hai dimenticato la password?
+              {t("auth.forgotPassword")}
             </button>
           </div>
 
           {/* Errore */}
           {error && (
             <div className="login-error" role="alert">
-              <i className="bi bi-exclamation-circle"></i>
+              <AlertCircle size={18} />
               <span>{error}</span>
             </div>
           )}
@@ -134,13 +127,14 @@ function Login() {
                 <span
                   className="spinner-border spinner-border-sm"
                   aria-hidden="true"
-                ></span>
-                Accesso in corso...
+                />
+
+                {t("auth.loggingIn")}
               </>
             ) : (
               <>
                 {t("auth.login")}
-                <i className="bi bi-arrow-right"></i>
+                <ArrowRight size={18} />
               </>
             )}
           </button>
@@ -148,10 +142,10 @@ function Login() {
 
         {/* Register */}
         <div className="login-register">
-          <span>Non hai ancora un account?</span>
+          <span>{t("auth.noAccount")}</span>
 
           <button type="button" onClick={() => navigate("/register")}>
-            Registrati
+            {t("auth.register")}
           </button>
         </div>
       </div>
