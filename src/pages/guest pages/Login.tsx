@@ -7,6 +7,8 @@ import { useTranslation } from "react-i18next"
 
 import logo from "../../assets/LOGO CON SCRITTA PIST DEF.png"
 import "../../styles/Login.css"
+import { EyeOff } from "lucide-react"
+import { Eye } from "react-bootstrap-icons"
 
 function Login() {
   const [email, setEmail] = useState("")
@@ -95,15 +97,17 @@ function Login() {
 
               <button
                 type="button"
-                className="password-toggle"
+                className="register-password-toggle"
                 onClick={() => setShowPassword(!showPassword)}
                 aria-label={
                   showPassword ? "Nascondi password" : "Mostra password"
                 }
               >
-                <i
-                  className={showPassword ? "bi bi-eye-slash" : "bi bi-eye"}
-                ></i>
+                {showPassword ? (
+                  <EyeOff size={19} strokeWidth={2} />
+                ) : (
+                  <Eye size={19} strokeWidth={2} />
+                )}
               </button>
             </div>
           </div>
