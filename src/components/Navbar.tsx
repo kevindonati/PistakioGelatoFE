@@ -86,15 +86,20 @@ const Navbar = () => {
         {/* MOBILE ACTIONS */}
         <div className="navbar-mobile-actions">
           {/* Carrello */}
-          <Link
-            to="/cart"
-            className="navbar-icon-button"
-            aria-label={t("navbar.cart")}
-          >
-            <ShoppingCart size={22} />
 
-            {totalItems > 0 && <span className="cart-badge">{totalItems}</span>}
-          </Link>
+          {isAuthenticated && (
+            <Link
+              to="/cart"
+              className="navbar-icon-button"
+              aria-label={t("navbar.cart")}
+            >
+              <ShoppingCart size={22} />
+
+              {totalItems > 0 && (
+                <span className="cart-badge">{totalItems}</span>
+              )}
+            </Link>
+          )}
 
           {/* Avatar mobile */}
           {isAuthenticated && (
@@ -200,15 +205,17 @@ const Navbar = () => {
           {/* DESKTOP ACTIONS */}
           <div className="navbar-desktop-actions">
             {/* Carrello */}
-            <Link to="/cart" className="navbar-cart-button">
-              <ShoppingCart size={19} />
+            {isAuthenticated && (
+              <Link to="/cart" className="navbar-cart-button">
+                <ShoppingCart size={19} />
 
-              <span>{t("navbar.cart")}</span>
+                <span>{t("navbar.cart")}</span>
 
-              {totalItems > 0 && (
-                <span className="cart-badge">{totalItems}</span>
-              )}
-            </Link>
+                {totalItems > 0 && (
+                  <span className="cart-badge">{totalItems}</span>
+                )}
+              </Link>
+            )}
 
             {/* Lingua */}
             <select

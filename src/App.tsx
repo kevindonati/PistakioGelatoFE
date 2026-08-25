@@ -28,14 +28,8 @@ import AdminCategories from "./pages/admin pages/AdminCategories"
 import AdminCategoryForm from "./pages/admin pages/AdminCategoryForm"
 import AdminCustomers from "./pages/admin pages/AdminCustomers"
 import AdminCustomerDetails from "./pages/admin pages/AdminCustomerDetails"
-
-function Home() {
-  return <h1>Home</h1>
-}
-
-function Account() {
-  return <h1>Account</h1>
-}
+import Home from "./pages/guest pages/Home"
+import Footer from "./components/Footer"
 
 function NotFound() {
   return <h1>404 - Pagina non trovata</h1>
@@ -45,6 +39,8 @@ function AppContent() {
   const location = useLocation()
 
   const isAdminRoute = location.pathname.startsWith("/admin")
+  const isLoginRoute = location.pathname.startsWith("/login")
+  const isRegisterRoute = location.pathname.startsWith("/register")
 
   return (
     <>
@@ -136,7 +132,7 @@ function AppContent() {
 
         <Route element={<ProtectedRoute />}>
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/account" element={<Account />} />
+          {/* <Route path="/account" element={<Account />} /> */}
           <Route path="/account/addresses/new" element={<NewAddress />} />
           <Route path="/payment/success" element={<PaymentSuccess />} />
           <Route path="/orders" element={<Orders />} />
@@ -151,6 +147,7 @@ function AppContent() {
 
         <Route path="*" element={<NotFound />} />
       </Routes>
+      {!isAdminRoute && !isLoginRoute && !isRegisterRoute && <Footer />}
     </>
   )
 }

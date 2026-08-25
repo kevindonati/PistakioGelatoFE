@@ -59,19 +59,106 @@
     "flavorNotFound": "Parfum introuvable",
     "backToCatalog": "Retour au catalogue"
   },
+  "home": {
+    "hero": {
+      "eyebrow": "Pistakio Gelato",
+      "title": "Votre glace, directement chez vous.",
+      "description": "Découvrez nos parfums artisanaux et choisissez le format qui vous convient.",
+      "cta": "Découvrir les parfums"
+    },
+
+    "flavors": {
+      "label": "Nos parfums",
+      "title": "Choisissez votre préféré",
+      "description": "Découvrez une sélection de nos parfums les plus appréciés.",
+      "pistachio": "Pistache",
+      "hazelnut": "Noisette",
+      "chocolate": "Chocolat",
+      "strawberry": "Fraise",
+      "discover": "Découvrir",
+      "viewAll": "Voir tous les parfums"
+    },
+
+    "formats": {
+      "label": "Le format qui vous convient",
+      "title": "La glace comme vous l'aimez",
+      "description": "Choisissez la quantité parfaite pour vous, votre famille ou pour partager un moment spécial.",
+      "cta": "Découvrir les formats",
+      "small": "Parfait pour vous",
+      "medium": "Idéal à partager",
+      "large": "Pour toute la famille"
+    },
+
+    "brand": {
+      "label": "Pistakio",
+      "title": "Votre parfum préféré, toujours à portée de cuillère.",
+      "description": "Nous apportons le plaisir de la glace directement à votre table.",
+      "cta": "Découvrir le catalogue"
+    },
+
+    "benefits": {
+      "label": "Pourquoi Pistakio",
+      "title": "Simple. Bon. Pistakio.",
+
+      "quality": {
+        "title": "Qualité artisanale",
+        "description": "Nous préparons chaque parfum avec soin pour vous offrir une glace au goût authentique."
+      },
+
+      "ingredients": {
+        "title": "Ingrédients sélectionnés",
+        "description": "Nous choisissons des ingrédients de qualité pour rendre chaque cuillère spéciale."
+      },
+
+      "delivery": {
+        "title": "Livraison à domicile",
+        "description": "Commandez en ligne et recevez votre glace directement chez vous."
+      }
+    },
+
+    "reviews": {
+      "label": "Vos avis",
+      "title": "Ce que vous pensez de nous",
+
+      "one": {
+        "text": "La glace à la pistache est incroyable. Crémeuse et pleine de saveur !",
+        "author": "Marco"
+      },
+
+      "two": {
+        "text": "Je peux enfin commander ma glace préférée directement en ligne.",
+        "author": "Giulia"
+      },
+
+      "three": {
+        "text": "Excellente qualité et des parfums vraiment délicieux. Je reviendrai !",
+        "author": "Luca"
+      }
+    },
+
+    "final": {
+      "title": "Avez-vous déjà choisi votre parfum ?",
+      "description": "Découvrez tous les parfums disponibles et créez votre commande.",
+      "cta": "Voir le catalogue"
+    }
+  },
   "cart": {
     "add": "Ajouter au panier",
     "title": "Votre panier",
     "empty": "Votre panier est vide.",
     "clear": "Vider le panier",
-    "remove": "Supprimer",
-    "summary": "Résumé",
-    "items": "Portions",
-    "checkout": "Passer à la caisse",
-    "tubSize": "Taille du pot",
-    "quantity": "Quantité",
-    "noTubAvailable": "Aucun pot disponible",
-    "total": "Total"
+    "remove": "Supprimer le produit",
+    "tubSize": "Format",
+    "summary": "Résumé de la commande",
+    "items": "Produits",
+    "subtotal": "Sous-total",
+    "total": "Total",
+    "checkout": "Passer au paiement",
+    "continueShopping": "Continuer les achats",
+    "product": "produit",
+    "products": "produits",
+    "decreaseQuantity": "Diminuer la quantité",
+    "increaseQuantity": "Augmenter la quantité"
   },
   "checkout": {
     "title": "Paiement",
@@ -475,5 +562,12 @@
         "noOrders": "Ce client n'a encore passé aucune commande."
       }
     }
+  },
+  "footer": {
+    "description": "Le plaisir de la glace artisanale directement chez vous.",
+    "linksTitle": "Navigation",
+    "accountTitle": "Compte",
+    "followUs": "Suivez-nous",
+    "rights": "Tous droits réservés."
   }
 }

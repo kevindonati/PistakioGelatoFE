@@ -64,14 +64,101 @@
     "title": "Your cart",
     "empty": "Your cart is empty.",
     "clear": "Clear cart",
-    "remove": "Remove",
-    "summary": "Summary",
-    "items": "Portions",
+    "remove": "Remove product",
+    "tubSize": "Size",
+    "summary": "Order summary",
+    "items": "Products",
+    "subtotal": "Subtotal",
+    "total": "Total",
     "checkout": "Proceed to checkout",
-    "tubSize": "Tub size",
-    "quantity": "Quantity",
-    "noTubAvailable": "No tubs available",
-    "total": "Total"
+    "continueShopping": "Continue shopping",
+    "product": "product",
+    "products": "products",
+    "decreaseQuantity": "Decrease quantity",
+    "increaseQuantity": "Increase quantity"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Pistakio Gelato",
+      "title": "Your gelato, delivered straight to your home.",
+      "description": "Discover our artisan flavors and choose the size that suits you best.",
+      "cta": "Discover our flavors"
+    },
+
+    "flavors": {
+      "label": "Our flavors",
+      "title": "Choose your favorite",
+      "description": "Discover a selection of our most loved flavors.",
+      "pistachio": "Pistachio",
+      "hazelnut": "Hazelnut",
+      "chocolate": "Chocolate",
+      "strawberry": "Strawberry",
+      "discover": "Discover",
+      "viewAll": "View all flavors"
+    },
+
+    "formats": {
+      "label": "The right size for you",
+      "title": "Gelato the way you want it",
+      "description": "Choose the perfect quantity for yourself, your family or to share a special moment.",
+      "cta": "Discover the sizes",
+      "small": "Perfect for you",
+      "medium": "Ideal for sharing",
+      "large": "For the whole family"
+    },
+
+    "brand": {
+      "label": "Pistakio",
+      "title": "Your favorite flavor, always within reach.",
+      "description": "We bring the pleasure of gelato straight to your table.",
+      "cta": "Discover the catalog"
+    },
+
+    "benefits": {
+      "label": "Why Pistakio",
+      "title": "Simple. Good. Pistakio.",
+
+      "quality": {
+        "title": "Artisan quality",
+        "description": "We carefully prepare every flavor to offer you an authentic gelato experience."
+      },
+
+      "ingredients": {
+        "title": "Selected ingredients",
+        "description": "We choose quality ingredients to make every spoonful special."
+      },
+
+      "delivery": {
+        "title": "Home delivery",
+        "description": "Order online and receive your gelato comfortably at home."
+      }
+    },
+
+    "reviews": {
+      "label": "Your opinions",
+      "title": "What people say about us",
+
+      "one": {
+        "text": "The pistachio gelato is amazing. Creamy and full of flavor!",
+        "author": "Marco"
+      },
+
+      "two": {
+        "text": "I can finally order my favorite gelato directly online.",
+        "author": "Giulia"
+      },
+
+      "three": {
+        "text": "Great quality and truly delicious flavors. I'll definitely be back!",
+        "author": "Luca"
+      }
+    },
+
+    "final": {
+      "title": "Have you chosen your flavor?",
+      "description": "Discover all the available flavors and create your order.",
+      "cta": "Go to catalog"
+    }
   },
   "checkout": {
     "title": "Checkout",
@@ -475,5 +562,12 @@
         "noOrders": "This customer has not placed any orders yet."
       }
     }
+  },
+  "footer": {
+    "description": "The pleasure of artisan gelato, delivered straight to your home.",
+    "linksTitle": "Navigation",
+    "accountTitle": "Account",
+    "followUs": "Follow us",
+    "rights": "All rights reserved."
   }
 }

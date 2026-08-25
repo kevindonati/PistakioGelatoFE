@@ -61,17 +61,104 @@
   },
   "cart": {
     "add": "In den Warenkorb",
-    "title": "Ihr Warenkorb",
-    "empty": "Ihr Warenkorb ist leer.",
+    "title": "Dein Warenkorb",
+    "empty": "Dein Warenkorb ist leer.",
     "clear": "Warenkorb leeren",
-    "remove": "Entfernen",
-    "summary": "Zusammenfassung",
-    "items": "Portionen",
+    "remove": "Produkt entfernen",
+    "tubSize": "Größe",
+    "summary": "Bestellübersicht",
+    "items": "Produkte",
+    "subtotal": "Zwischensumme",
+    "total": "Gesamt",
     "checkout": "Zur Kasse",
-    "tubSize": "Bechergröße",
-    "quantity": "Menge",
-    "noTubAvailable": "Keine Becher verfügbar",
-    "total": "Gesamt"
+    "continueShopping": "Weiter einkaufen",
+    "product": "Produkt",
+    "products": "Produkte",
+    "decreaseQuantity": "Menge verringern",
+    "increaseQuantity": "Menge erhöhen"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Pistakio Gelato",
+      "title": "Dein Gelato, direkt zu dir nach Hause.",
+      "description": "Entdecke unsere handwerklich hergestellten Sorten und wähle die passende Größe.",
+      "cta": "Sorten entdecken"
+    },
+
+    "flavors": {
+      "label": "Unsere Sorten",
+      "title": "Wähle deinen Favoriten",
+      "description": "Entdecke eine Auswahl unserer beliebtesten Sorten.",
+      "pistachio": "Pistazie",
+      "hazelnut": "Haselnuss",
+      "chocolate": "Schokolade",
+      "strawberry": "Erdbeere",
+      "discover": "Entdecken",
+      "viewAll": "Alle Sorten ansehen"
+    },
+
+    "formats": {
+      "label": "Die richtige Größe für dich",
+      "title": "Gelato, wie du es möchtest",
+      "description": "Wähle die perfekte Menge für dich, deine Familie oder zum Teilen.",
+      "cta": "Größen entdecken",
+      "small": "Perfekt für dich",
+      "medium": "Ideal zum Teilen",
+      "large": "Für die ganze Familie"
+    },
+
+    "brand": {
+      "label": "Pistakio",
+      "title": "Dein Lieblingsgeschmack, immer griffbereit.",
+      "description": "Wir bringen den Genuss von Gelato direkt auf deinen Tisch.",
+      "cta": "Katalog entdecken"
+    },
+
+    "benefits": {
+      "label": "Warum Pistakio",
+      "title": "Einfach. Gut. Pistakio.",
+
+      "quality": {
+        "title": "Handwerkliche Qualität",
+        "description": "Wir bereiten jede Sorte mit Sorgfalt zu, um dir authentischen Gelato-Geschmack zu bieten."
+      },
+
+      "ingredients": {
+        "title": "Ausgewählte Zutaten",
+        "description": "Wir wählen hochwertige Zutaten, damit jeder Löffel etwas Besonderes wird."
+      },
+
+      "delivery": {
+        "title": "Lieferung nach Hause",
+        "description": "Bestelle online und erhalte dein Gelato bequem zu Hause."
+      }
+    },
+
+    "reviews": {
+      "label": "Eure Meinungen",
+      "title": "Was unsere Kunden sagen",
+
+      "one": {
+        "text": "Das Pistazien-Gelato ist unglaublich. Cremig und voller Geschmack!",
+        "author": "Marco"
+      },
+
+      "two": {
+        "text": "Endlich kann ich mein Lieblingsgelato direkt online bestellen.",
+        "author": "Giulia"
+      },
+
+      "three": {
+        "text": "Tolle Qualität und wirklich leckere Sorten. Ich komme definitiv wieder!",
+        "author": "Luca"
+      }
+    },
+
+    "final": {
+      "title": "Hast du schon deine Sorte gewählt?",
+      "description": "Entdecke alle verfügbaren Sorten und erstelle deine Bestellung.",
+      "cta": "Zum Katalog"
+    }
   },
   "checkout": {
     "title": "Kasse",
@@ -475,5 +562,12 @@
         "noOrders": "Dieser Kunde hat noch keine Bestellungen aufgegeben."
       }
     }
+  },
+  "footer": {
+    "description": "Der Genuss von handwerklich hergestelltem Gelato direkt zu dir nach Hause.",
+    "linksTitle": "Navigation",
+    "accountTitle": "Konto",
+    "followUs": "Folge uns",
+    "rights": "Alle Rechte vorbehalten."
   }
 }

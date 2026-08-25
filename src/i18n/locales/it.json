@@ -67,16 +67,104 @@
   "cart": {
     "add": "Aggiungi al carrello",
     "title": "Il tuo carrello",
-    "empty": "Il carrello è vuoto.",
+    "empty": "Il tuo carrello è vuoto.",
     "clear": "Svuota carrello",
-    "remove": "Rimuovi",
-    "summary": "Riepilogo",
-    "items": "Porzioni",
+    "remove": "Rimuovi prodotto",
+    "tubSize": "Formato",
+    "summary": "Riepilogo ordine",
+    "items": "Prodotti",
+    "subtotal": "Subtotale",
+    "total": "Totale",
     "checkout": "Procedi al checkout",
-    "tubSize": "Grandezza vaschetta",
-    "quantity": "Quantità",
-    "noTubAvailable": "Nessuna vaschetta disponibile",
-    "total": "Totale"
+    "continueShopping": "Continua lo shopping",
+    "product": "prodotto",
+    "products": "prodotti",
+    "decreaseQuantity": "Diminuisci quantità",
+    "increaseQuantity": "Aumenta quantità"
+  },
+
+  "home": {
+    "hero": {
+      "eyebrow": "Pistakio Gelato",
+      "title": "Il tuo gelato, direttamente a casa.",
+      "description": "Scopri i nostri gusti artigianali e scegli il formato che preferisci.",
+      "cta": "Scopri i gusti"
+    },
+
+    "flavors": {
+      "label": "I nostri gusti",
+      "title": "Scegli il tuo preferito",
+      "description": "Scopri una selezione dei nostri gusti più amati.",
+      "pistachio": "Pistacchio",
+      "hazelnut": "Nocciola",
+      "chocolate": "Cioccolato",
+      "strawberry": "Fragola",
+      "discover": "Scopri",
+      "viewAll": "Vedi tutti i gusti"
+    },
+
+    "formats": {
+      "label": "Il formato giusto per te",
+      "title": "Il gelato come lo vuoi tu",
+      "description": "Scegli la quantità perfetta per te, per la tua famiglia o per condividere un momento speciale.",
+      "cta": "Scopri i formati",
+      "small": "Perfetto per te",
+      "medium": "Ideale da condividere",
+      "large": "Per tutta la famiglia"
+    },
+
+    "brand": {
+      "label": "Pistakio",
+      "title": "Il tuo gusto preferito, sempre a portata di cucchiaio.",
+      "description": "Portiamo il piacere del gelato direttamente sulla tua tavola.",
+      "cta": "Scopri il catalogo"
+    },
+
+    "benefits": {
+      "label": "Perché Pistakio",
+      "title": "Semplice. Buono. Pistakio.",
+
+      "quality": {
+        "title": "Qualità artigianale",
+        "description": "Prepariamo ogni gusto con cura per offrirti un gelato dal sapore autentico."
+      },
+
+      "ingredients": {
+        "title": "Ingredienti selezionati",
+        "description": "Scegliamo ingredienti di qualità per rendere ogni cucchiaio speciale."
+      },
+
+      "delivery": {
+        "title": "Consegna a casa",
+        "description": "Ordina online e ricevi il tuo gelato comodamente a casa."
+      }
+    },
+
+    "reviews": {
+      "label": "Le vostre opinioni",
+      "title": "Cosa dicono di noi",
+
+      "one": {
+        "text": "Il gelato al pistacchio è spettacolare. Cremoso e pieno di sapore!",
+        "author": "Marco"
+      },
+
+      "two": {
+        "text": "Finalmente posso ordinare il mio gelato preferito direttamente online.",
+        "author": "Giulia"
+      },
+
+      "three": {
+        "text": "Ottima qualità e gusti davvero buonissimi. Tornerò sicuramente!",
+        "author": "Luca"
+      }
+    },
+
+    "final": {
+      "title": "Hai già scelto il tuo gusto?",
+      "description": "Scopri tutti i gusti disponibili e crea il tuo ordine.",
+      "cta": "Vai al catalogo"
+    }
   },
 
   "checkout": {
@@ -490,5 +578,12 @@
         "noOrders": "Questo cliente non ha ancora effettuato ordini."
       }
     }
+  },
+  "footer": {
+    "description": "Il piacere del gelato artigianale direttamente a casa tua.",
+    "linksTitle": "Navigazione",
+    "accountTitle": "Account",
+    "followUs": "Seguici",
+    "rights": "Tutti i diritti riservati."
   }
 }
