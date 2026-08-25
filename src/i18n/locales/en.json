@@ -3,12 +3,14 @@
     "home": "Home",
     "catalog": "Catalog",
     "cart": "Cart",
-    "login": "Login",
-    "register": "Register",
+    "language": "Language",
+    "orders": "My orders",
+    "account": "My account",
+    "admin": "Administration",
     "logout": "Log out",
-    "account": "Account",
-    "admin": "Admin",
-    "orders": "My orders"
+    "login": "Log in",
+    "register": "Sign up",
+    "menu": "Menu"
   },
   "auth": {
     "login": "Log in",

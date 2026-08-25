@@ -3,12 +3,14 @@
     "home": "Accueil",
     "catalog": "Catalogue",
     "cart": "Panier",
+    "language": "Langue",
+    "orders": "Mes commandes",
+    "account": "Mon compte",
+    "admin": "Administration",
+    "logout": "Se déconnecter",
     "login": "Se connecter",
     "register": "S'inscrire",
-    "logout": "Se déconnecter",
-    "account": "Compte",
-    "admin": "Admin",
-    "orders": "Mes commandes"
+    "menu": "Menu"
   },
   "auth": {
     "login": "Se connecter",

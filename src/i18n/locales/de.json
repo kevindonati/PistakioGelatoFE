@@ -3,12 +3,14 @@
     "home": "Startseite",
     "catalog": "Katalog",
     "cart": "Warenkorb",
+    "language": "Sprache",
+    "orders": "Meine Bestellungen",
+    "account": "Mein Konto",
+    "admin": "Administration",
+    "logout": "Abmelden",
     "login": "Anmelden",
     "register": "Registrieren",
-    "logout": "Abmelden",
-    "account": "Konto",
-    "admin": "Admin",
-    "orders": "Meine Bestellungen"
+    "menu": "Menü"
   },
   "auth": {
     "login": "Anmelden",

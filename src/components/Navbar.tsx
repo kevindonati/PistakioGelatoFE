@@ -1,12 +1,28 @@
 import { Link } from "react-router-dom"
+
 import { useAuth } from "../context/useAuth"
 import { useTranslation } from "react-i18next"
+
 import { setLanguage } from "../services/language"
 import type { Language } from "../types/Language"
-import { CartFill } from "react-bootstrap-icons"
+
+import {
+  ShoppingCart,
+  Menu,
+  X,
+  Package,
+  Settings,
+  LogOut,
+  Shield,
+} from "lucide-react"
+
 import { useCart } from "../context/CartContext"
+
 import { useState, useRef, useEffect } from "react"
+
 import "../styles/Logo.css"
+import "../styles/Navbar.css"
+
 import logo from "../assets/LOGO CON SCRITTA PIST DEF.png"
 
 const Navbar = () => {
@@ -15,13 +31,14 @@ const Navbar = () => {
   const { totalItems } = useCart()
 
   const [dropdownOpen, setDropdownOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   const getInitials = () => {
     if (!user) return ""
 
     const firstName = user.name?.trim() || ""
-
     const parts = firstName.split(" ").filter(Boolean)
 
     if (parts.length >= 2) {
@@ -48,63 +65,159 @@ const Navbar = () => {
     }
   }, [])
 
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false)
+  }
+
+  const handleLogout = () => {
+    setDropdownOpen(false)
+    closeMobileMenu()
+    logout()
+  }
+
   return (
-    <nav className="navbar navbar-expand-lg bg-white border-bottom">
+    <nav className="navbar navbar-pistakio">
       <div className="container">
-        <Link to="/" className="navbar-brand fw-bold">
+        {/* LOGO */}
+        <Link to="/" className="navbar-brand" onClick={closeMobileMenu}>
           <img src={logo} alt="Logo Pistakio Gelato" className="logo" />
         </Link>
 
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarContent"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
+        {/* MOBILE ACTIONS */}
+        <div className="navbar-mobile-actions">
+          {/* Carrello */}
+          <Link
+            to="/cart"
+            className="navbar-icon-button"
+            aria-label={t("navbar.cart")}
+          >
+            <ShoppingCart size={22} />
 
-        <div className="collapse navbar-collapse" id="navbarContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <Link to="/" className="nav-link">
+            {totalItems > 0 && <span className="cart-badge">{totalItems}</span>}
+          </Link>
+
+          {/* Avatar mobile */}
+          {isAuthenticated && (
+            <div className="navbar-user-mobile" ref={dropdownRef}>
+              <button
+                type="button"
+                className="navbar-avatar-button"
+                onClick={() => setDropdownOpen((current) => !current)}
+                aria-expanded={dropdownOpen}
+              >
+                <div className="navbar-avatar">{getInitials()}</div>
+              </button>
+
+              {dropdownOpen && (
+                <div className="navbar-user-dropdown">
+                  <div className="navbar-user-info">
+                    <div className="navbar-user-name">{user?.name}</div>
+
+                    <small>{user?.email}</small>
+                  </div>
+
+                  <div className="navbar-dropdown-divider" />
+
+                  <Link
+                    to="/orders"
+                    className="navbar-dropdown-item"
+                    onClick={() => setDropdownOpen(false)}
+                  >
+                    <Package size={17} />
+                    {t("navbar.orders")}
+                  </Link>
+
+                  <Link
+                    to="/account"
+                    className="navbar-dropdown-item"
+                    onClick={() => setDropdownOpen(false)}
+                  >
+                    <Settings size={17} />
+                    {t("navbar.account")}
+                  </Link>
+
+                  {user?.role === "ADMIN" && (
+                    <>
+                      <div className="navbar-dropdown-divider" />
+
+                      <Link
+                        to="/admin"
+                        className="navbar-dropdown-item"
+                        onClick={() => setDropdownOpen(false)}
+                      >
+                        <Shield size={17} />
+                        {t("navbar.admin")}
+                      </Link>
+                    </>
+                  )}
+
+                  <div className="navbar-dropdown-divider" />
+
+                  <button
+                    type="button"
+                    className="navbar-dropdown-item logout"
+                    onClick={handleLogout}
+                  >
+                    <LogOut size={17} />
+                    {t("navbar.logout")}
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Hamburger */}
+          <button
+            type="button"
+            className="navbar-menu-button"
+            onClick={() => setMobileMenuOpen((current) => !current)}
+            aria-label={t("navbar.menu")}
+            aria-expanded={mobileMenuOpen}
+          >
+            {mobileMenuOpen ? <X size={25} /> : <Menu size={25} />}
+          </button>
+        </div>
+
+        {/* NAVBAR CONTENT */}
+        <div
+          className={`navbar-collapse-custom ${mobileMenuOpen ? "open" : ""}`}
+        >
+          {/* LINKS */}
+          <ul className="navbar-nav-custom">
+            <li>
+              <Link to="/" onClick={closeMobileMenu}>
                 {t("navbar.home")}
               </Link>
             </li>
 
-            <li className="nav-item">
-              <Link to="/catalog" className="nav-link">
+            <li>
+              <Link to="/catalog" onClick={closeMobileMenu}>
                 {t("navbar.catalog")}
               </Link>
             </li>
           </ul>
 
-          <div className="d-flex align-items-center gap-3">
-            {/* CARRELLO */}
+          {/* DESKTOP ACTIONS */}
+          <div className="navbar-desktop-actions">
+            {/* Carrello */}
+            <Link to="/cart" className="navbar-cart-button">
+              <ShoppingCart size={19} />
 
-            <Link
-              to="/cart"
-              className="btn btn-outline-dark position-relative d-flex align-items-center gap-2"
-            >
-              <CartFill />
-
-              {t("navbar.cart")}
+              <span>{t("navbar.cart")}</span>
 
               {totalItems > 0 && (
-                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-danger">
-                  {totalItems}
-                </span>
+                <span className="cart-badge">{totalItems}</span>
               )}
             </Link>
 
-            {/* LINGUA */}
-
+            {/* Lingua */}
             <select
               value={i18n.language}
               onChange={(event) => {
                 setLanguage(event.target.value as Language)
               }}
-              className="form-select form-select-sm"
+              className="navbar-language-select"
+              aria-label={t("navbar.language")}
             >
               <option value="IT">IT</option>
               <option value="EN">EN</option>
@@ -112,100 +225,125 @@ const Navbar = () => {
               <option value="DE">DE</option>
             </select>
 
-            {/* UTENTE */}
-
+            {/* Utente */}
             {isAuthenticated ? (
-              <div className="position-relative" ref={dropdownRef}>
+              <div className="navbar-user-desktop" ref={dropdownRef}>
                 <button
                   type="button"
-                  className="btn p-0 border-0"
+                  className="navbar-avatar-button"
                   onClick={() => setDropdownOpen((current) => !current)}
                   aria-expanded={dropdownOpen}
                 >
-                  <div
-                    className="rounded-circle bg-dark text-white d-flex align-items-center justify-content-center fw-semibold"
-                    style={{
-                      width: "42px",
-                      height: "42px",
-                    }}
-                  >
-                    {getInitials()}
-                  </div>
+                  <div className="navbar-avatar">{getInitials()}</div>
                 </button>
 
                 {dropdownOpen && (
-                  <div
-                    className="dropdown-menu dropdown-menu-end show"
-                    style={{
-                      position: "absolute",
-                      right: 0,
-                      top: "calc(100% + 8px)",
-                      minWidth: "210px",
-                    }}
-                  >
-                    <div className="px-3 py-2">
-                      <div className="fw-semibold">{user?.name}</div>
+                  <div className="navbar-user-dropdown">
+                    <div className="navbar-user-info">
+                      <div className="navbar-user-name">{user?.name}</div>
 
-                      <small className="text-muted">{user?.email}</small>
+                      <small>{user?.email}</small>
                     </div>
 
-                    <div className="dropdown-divider"></div>
+                    <div className="navbar-dropdown-divider" />
 
                     <Link
                       to="/orders"
-                      className="dropdown-item"
+                      className="navbar-dropdown-item"
                       onClick={() => setDropdownOpen(false)}
                     >
+                      <Package size={17} />
                       {t("navbar.orders")}
                     </Link>
 
                     <Link
                       to="/account"
-                      className="dropdown-item"
+                      className="navbar-dropdown-item"
                       onClick={() => setDropdownOpen(false)}
                     >
+                      <Settings size={17} />
                       {t("navbar.account")}
                     </Link>
 
                     {user?.role === "ADMIN" && (
                       <>
-                        <div className="dropdown-divider"></div>
+                        <div className="navbar-dropdown-divider" />
 
                         <Link
                           to="/admin"
-                          className="dropdown-item"
+                          className="navbar-dropdown-item"
                           onClick={() => setDropdownOpen(false)}
                         >
+                          <Shield size={17} />
                           {t("navbar.admin")}
                         </Link>
                       </>
                     )}
 
-                    <div className="dropdown-divider"></div>
+                    <div className="navbar-dropdown-divider" />
 
                     <button
                       type="button"
-                      className="dropdown-item text-danger"
-                      onClick={() => {
-                        setDropdownOpen(false)
-                        logout()
-                      }}
+                      className="navbar-dropdown-item logout"
+                      onClick={handleLogout}
                     >
+                      <LogOut size={17} />
                       {t("navbar.logout")}
                     </button>
                   </div>
                 )}
               </div>
             ) : (
-              <>
-                <Link to="/login" className="btn btn-outline-dark">
+              <div className="navbar-auth-desktop">
+                <Link to="/login" className="navbar-login-button">
                   {t("navbar.login")}
                 </Link>
 
-                <Link to="/register" className="btn btn-dark">
+                <Link to="/register" className="navbar-register-button">
                   {t("navbar.register")}
                 </Link>
-              </>
+              </div>
+            )}
+          </div>
+
+          {/* MOBILE CONTENT */}
+          <div className="navbar-mobile-content">
+            {/* Lingua */}
+            <div className="navbar-language">
+              <label>{t("navbar.language")}</label>
+
+              <select
+                value={i18n.language}
+                onChange={(event) => {
+                  setLanguage(event.target.value as Language)
+                }}
+              >
+                <option value="IT">🇮🇹 Italiano</option>
+                <option value="EN">🇬🇧 English</option>
+                <option value="FR">🇫🇷 Français</option>
+                <option value="DE">🇩🇪 Deutsch</option>
+              </select>
+            </div>
+
+            {/* Login / Register */}
+            {!isAuthenticated && (
+              <div className="navbar-auth-mobile">
+                <Link
+                  to="/login"
+                  className="navbar-login-button"
+                  onClick={closeMobileMenu}
+                >
+                  {t("navbar.login")}
+                </Link>
+
+                <Link
+                  to="/register"
+                  className="navbar-register-button"
+                  onClick={closeMobileMenu}
+                >
+                  {t("navbar.register")}
+                </Link>
+              </div>
             )}
           </div>
         </div>
