@@ -10,7 +10,8 @@
     "logout": "Esci",
     "login": "Accedi",
     "register": "Registrati",
-    "menu": "Menu"
+    "menu": "Menu",
+    "addresses": "I miei indirizzi"
   },
 
   "auth": {
@@ -49,7 +50,7 @@
   },
 
   "catalog": {
-    "title": "Il nostro catalogo",
+    "title": "I nostri gusti",
     "loadError": "Non è stato possibile caricare il catalogo.",
     "noCategories": "Nessuna categoria disponibile.",
     "all": "Tutti",
@@ -61,7 +62,14 @@
     "available": "Disponibili",
     "noFlavors": "Nessun gusto disponibile",
     "flavorNotFound": "Gusto non trovato",
-    "backToCatalog": "Torna al catalogo"
+    "backToCatalog": "Torna al catalogo",
+    "description": "Scopri tutti i nostri gusti di gelato e trova il tuo preferito.",
+    "filters": "Filtri",
+    "clearFilters": "Cancella filtri",
+    "results": "Risultati:",
+    "filtersActive": "Filtri attivi",
+    "discover": "Scopri il gusto",
+    "noFlavorsDescription": "Prova a modificare o rimuovere i filtri per trovare altri gusti."
   },
 
   "cart": {
@@ -198,7 +206,30 @@
     "save": "Salva indirizzo",
     "saving": "Salvataggio...",
     "backToCheckout": "Torna al checkout",
-    "createError": "Impossibile creare l'indirizzo."
+    "createError": "Impossibile creare l'indirizzo.",
+    "cancel": "Annulla",
+    "saveChanges": "Salva modifiche"
+  },
+
+  "addresses": {
+    "title": "I miei indirizzi",
+    "subtitle": "Gestisci i tuoi indirizzi di consegna.",
+    "backToAccount": "Torna al mio account",
+    "backToAddresses": "Torna ai miei indirizzi",
+    "new": "Nuovo indirizzo",
+    "address": "Indirizzo",
+    "edit": "Modifica",
+    "delete": "Elimina",
+    "empty": "Nessun indirizzo",
+    "emptyDescription": "Non hai ancora aggiunto nessun indirizzo di consegna.",
+    "deleteConfirm": "Sei sicuro di voler eliminare questo indirizzo?",
+    "loadError": "Impossibile caricare gli indirizzi.",
+    "deleteError": "Impossibile eliminare l'indirizzo.",
+    "notFound": "Indirizzo non trovato.",
+    "loadAddressError": "Impossibile caricare l'indirizzo.",
+    "updateError": "Impossibile aggiornare l'indirizzo.",
+    "editTitle": "Modifica indirizzo",
+    "editSubtitle": "Modifica i dati del tuo indirizzo di consegna."
   },
 
   "paymentSuccess": {
@@ -585,5 +616,19 @@
     "accountTitle": "Account",
     "followUs": "Seguici",
     "rights": "Tutti i diritti riservati."
+  },
+  "account": {
+    "title": "Il mio account",
+    "subtitle": "Gestisci le tue informazioni personali e le tue preferenze.",
+    "personalInfo": "Informazioni personali",
+    "save": "Salva modifiche",
+    "saving": "Salvataggio...",
+    "updateSuccess": "Profilo aggiornato con successo.",
+    "loadError": "Impossibile caricare il profilo.",
+    "updateError": "Impossibile aggiornare il profilo.",
+    "orders": "I miei ordini",
+    "ordersDescription": "Visualizza e gestisci i tuoi ordini.",
+    "addresses": "I miei indirizzi",
+    "addressesDescription": "Gestisci i tuoi indirizzi di consegna."
   }
 }

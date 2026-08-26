@@ -14,6 +14,7 @@ import {
   Settings,
   LogOut,
   Shield,
+  MapPin,
 } from "lucide-react"
 
 import { useCart } from "../context/CartContext"
@@ -270,6 +271,15 @@ const Navbar = () => {
                     >
                       <Settings size={17} />
                       {t("navbar.account")}
+                    </Link>
+
+                    <Link
+                      to="/account/addresses"
+                      className="navbar-dropdown-item"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      <MapPin size={17} />
+                      {t("navbar.addresses")}
                     </Link>
 
                     {user?.role === "ADMIN" && (

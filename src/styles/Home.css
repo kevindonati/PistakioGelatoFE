@@ -131,18 +131,24 @@
 ========================================================= */
 
 .home-hero {
-  min-height: 610px;
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: 50% 76%;
+  background-repeat: no-repeat;
+}
 
-  display: flex;
-  align-items: center;
+.home-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.563);
+  pointer-events: none;
+}
 
-  background:
-    radial-gradient(
-      circle at 80% 20%,
-      rgba(139, 191, 44, 0.12),
-      transparent 35%
-    ),
-    #f8f8f8;
+.home-hero .container {
+  position: relative;
+  z-index: 1;
 }
 
 .home-hero-content {

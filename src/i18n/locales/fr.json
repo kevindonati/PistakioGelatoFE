@@ -10,7 +10,8 @@
     "logout": "Se déconnecter",
     "login": "Se connecter",
     "register": "S'inscrire",
-    "menu": "Menu"
+    "menu": "Menu",
+    "addresses": "Mes adresses"
   },
   "auth": {
     "login": "Se connecter",
@@ -190,7 +191,29 @@
     "save": "Enregistrer l'adresse",
     "saving": "Enregistrement...",
     "backToCheckout": "Retour au paiement",
-    "createError": "Impossible de créer l'adresse."
+    "createError": "Impossible de créer l'adresse.",
+    "cancel": "Annuler",
+    "saveChanges": "Enregistrer les modifications"
+  },
+  "addresses": {
+    "title": "Mes adresses",
+    "subtitle": "Gérez vos adresses de livraison.",
+    "backToAccount": "Retour à mon compte",
+    "backToAddresses": "Retour à mes adresses",
+    "new": "Nouvelle adresse",
+    "address": "Adresse",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "empty": "Aucune adresse",
+    "emptyDescription": "Vous n'avez pas encore ajouté d'adresse de livraison.",
+    "deleteConfirm": "Êtes-vous sûr de vouloir supprimer cette adresse ?",
+    "loadError": "Impossible de charger vos adresses.",
+    "deleteError": "Impossible de supprimer l'adresse.",
+    "notFound": "Adresse introuvable.",
+    "loadAddressError": "Impossible de charger l'adresse.",
+    "updateError": "Impossible de mettre à jour l'adresse.",
+    "editTitle": "Modifier l'adresse",
+    "editSubtitle": "Modifiez les informations de votre adresse de livraison."
   },
   "paymentSuccess": {
     "title": "Paiement effectué !",
@@ -569,5 +592,19 @@
     "accountTitle": "Compte",
     "followUs": "Suivez-nous",
     "rights": "Tous droits réservés."
+  },
+  "account": {
+    "title": "Mon compte",
+    "subtitle": "Gérez vos informations personnelles et vos préférences.",
+    "personalInfo": "Informations personnelles",
+    "save": "Enregistrer les modifications",
+    "saving": "Enregistrement...",
+    "updateSuccess": "Profil mis à jour avec succès.",
+    "loadError": "Impossible de charger votre profil.",
+    "updateError": "Impossible de mettre à jour votre profil.",
+    "orders": "Mes commandes",
+    "ordersDescription": "Consultez et gérez vos commandes.",
+    "addresses": "Mes adresses",
+    "addressesDescription": "Gérez vos adresses de livraison."
   }
 }

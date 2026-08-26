@@ -49,6 +49,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
     setUser(null)
   }
 
+  const updateUser = (updatedUser: User) => {
+    setUser(updatedUser)
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -57,6 +61,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         isAuthenticated: user !== null,
         login,
         logout,
+        updateUser,
       }}
     >
       {children}

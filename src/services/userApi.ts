@@ -67,3 +67,37 @@ export const getUserById = async (id: string): Promise<AdminUser> => {
 export const deleteUser = async (id: string): Promise<void> => {
   await api.delete(`/users/${id}`)
 }
+
+export interface UserProfile {
+  id: string
+  name: string
+  surname: string
+  email: string
+  phone: string
+  role: "USER" | "ADMIN"
+  enabled: boolean
+  language: "IT" | "EN" | "FR" | "DE"
+}
+
+export interface UpdateUserData {
+  name: string
+  surname: string
+  email: string
+  phone: string
+  language: "IT" | "EN" | "FR" | "DE"
+}
+
+export const getMe = async (): Promise<UserProfile> => {
+  const response = await api.get<UserProfile>("/users/me")
+
+  return response.data
+}
+
+export const updateMe = async (
+  id: string,
+  data: UpdateUserData,
+): Promise<UserProfile> => {
+  const response = await api.put<UserProfile>(`/users/${id}`, data)
+
+  return response.data
+}

@@ -10,7 +10,8 @@
     "logout": "Abmelden",
     "login": "Anmelden",
     "register": "Registrieren",
-    "menu": "Menü"
+    "menu": "Menü",
+    "addresses": "Meine Adressen"
   },
   "auth": {
     "login": "Anmelden",
@@ -190,7 +191,29 @@
     "save": "Adresse speichern",
     "saving": "Speichern...",
     "backToCheckout": "Zurück zur Kasse",
-    "createError": "Die Adresse konnte nicht erstellt werden."
+    "createError": "Die Adresse konnte nicht erstellt werden.",
+    "cancel": "Abbrechen",
+    "saveChanges": "Änderungen speichern"
+  },
+  "addresses": {
+    "title": "Meine Adressen",
+    "subtitle": "Verwalten Sie Ihre Lieferadressen.",
+    "backToAccount": "Zurück zu meinem Konto",
+    "backToAddresses": "Zurück zu meinen Adressen",
+    "new": "Neue Adresse",
+    "address": "Adresse",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "empty": "Keine Adressen",
+    "emptyDescription": "Sie haben noch keine Lieferadresse hinzugefügt.",
+    "deleteConfirm": "Möchten Sie diese Adresse wirklich löschen?",
+    "loadError": "Adressen konnten nicht geladen werden.",
+    "deleteError": "Die Adresse konnte nicht gelöscht werden.",
+    "notFound": "Adresse nicht gefunden.",
+    "loadAddressError": "Die Adresse konnte nicht geladen werden.",
+    "updateError": "Die Adresse konnte nicht aktualisiert werden.",
+    "editTitle": "Adresse bearbeiten",
+    "editSubtitle": "Bearbeiten Sie die Daten Ihrer Lieferadresse."
   },
   "paymentSuccess": {
     "title": "Zahlung abgeschlossen!",
@@ -569,5 +592,19 @@
     "accountTitle": "Konto",
     "followUs": "Folge uns",
     "rights": "Alle Rechte vorbehalten."
+  },
+  "account": {
+    "title": "Mein Konto",
+    "subtitle": "Verwalten Sie Ihre persönlichen Daten und Einstellungen.",
+    "personalInfo": "Persönliche Informationen",
+    "save": "Änderungen speichern",
+    "saving": "Speichern...",
+    "updateSuccess": "Profil erfolgreich aktualisiert.",
+    "loadError": "Profil konnte nicht geladen werden.",
+    "updateError": "Profil konnte nicht aktualisiert werden.",
+    "orders": "Meine Bestellungen",
+    "ordersDescription": "Bestellungen anzeigen und verwalten.",
+    "addresses": "Meine Adressen",
+    "addressesDescription": "Ihre Lieferadressen verwalten."
   }
 }

@@ -30,6 +30,9 @@ import AdminCustomers from "./pages/admin pages/AdminCustomers"
 import AdminCustomerDetails from "./pages/admin pages/AdminCustomerDetails"
 import Home from "./pages/guest pages/Home"
 import Footer from "./components/Footer"
+import Account from "./pages/guest pages/Account"
+import Addresses from "./pages/guest pages/Addresses"
+import EditAddress from "./pages/guest pages/EditAddress"
 
 function NotFound() {
   return <h1>404 - Pagina non trovata</h1>
@@ -132,8 +135,10 @@ function AppContent() {
 
         <Route element={<ProtectedRoute />}>
           <Route path="/checkout" element={<Checkout />} />
-          {/* <Route path="/account" element={<Account />} /> */}
+          <Route path="/account" element={<Account />} />
           <Route path="/account/addresses/new" element={<NewAddress />} />
+          <Route path="/account/addresses" element={<Addresses />} />
+          <Route path="/account/addresses/:id/edit" element={<EditAddress />} />
           <Route path="/payment/success" element={<PaymentSuccess />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/orders/:id" element={<OrderDetails />} />

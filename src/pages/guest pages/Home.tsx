@@ -15,7 +15,7 @@ import type { Tub } from "../../types/Tub"
 import Loading from "../../components/Loading"
 
 import "../../styles/Home.css"
-
+import imageHero from "../../assets/foto gelateria.jpg"
 function Home() {
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -68,15 +68,18 @@ function Home() {
           HERO
       ========================= */}
 
-      <section className="home-hero">
+      <section
+        className="home-hero"
+        style={{ backgroundImage: `url(${imageHero})` }}
+      >
         <div className="container">
           <div className="home-hero-content">
             <div className="home-hero-text">
               <span className="home-eyebrow">{t("home.hero.eyebrow")}</span>
 
-              <h1>{t("home.hero.title")}</h1>
+              <h1 className="text-white">{t("home.hero.title")}</h1>
 
-              <p>{t("home.hero.description")}</p>
+              <p className="text-white">{t("home.hero.description")}</p>
 
               <button
                 type="button"
@@ -89,7 +92,7 @@ function Home() {
               </button>
             </div>
 
-            <div className="home-hero-decoration">
+            {/* <div className="home-hero-decoration">
               <div className="hero-circle hero-circle-one" />
 
               <div className="hero-circle hero-circle-two" />
@@ -107,7 +110,7 @@ function Home() {
                   <span />
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>

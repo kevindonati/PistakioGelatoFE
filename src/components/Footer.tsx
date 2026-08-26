@@ -55,11 +55,19 @@ function Footer() {
             <h3>{t("footer.followUs")}</h3>
 
             <div className="footer-social-icons">
-              <a href="#" aria-label="Instagram">
+              <a
+                href="https://www.instagram.com/pistakiogelato"
+                target="_blank"
+                aria-label="Instagram"
+              >
                 <InstagramLogoIcon size={19} />
               </a>
 
-              <a href="#" aria-label="Facebook">
+              <a
+                href="https://www.facebook.com/pistakiogelato"
+                target="_blank"
+                aria-label="Facebook"
+              >
                 <FacebookLogoIcon size={19} />
               </a>
             </div>
