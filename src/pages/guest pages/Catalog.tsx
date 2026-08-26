@@ -136,8 +136,6 @@ function Catalog() {
       <section className="catalog-header">
         <div className="container">
           <div className="catalog-header-content">
-            <span className="catalog-eyebrow">Pistakio Gelato</span>
-
             <h1>{t("catalog.title")}</h1>
 
             <p>{t("catalog.description")}</p>

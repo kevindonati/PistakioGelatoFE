@@ -37,16 +37,15 @@ const Navbar = () => {
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   const getInitials = () => {
-    if (!user) return ""
-
-    const firstName = user.name?.trim() || ""
-    const parts = firstName.split(" ").filter(Boolean)
-
-    if (parts.length >= 2) {
-      return `${parts[0][0]}${parts[1][0]}`.toUpperCase()
+    if (!user) {
+      return ""
     }
 
-    return firstName.slice(0, 2).toUpperCase()
+    const firstLetter = user.name?.charAt(0).toUpperCase() ?? ""
+
+    const lastLetter = user.surname?.charAt(0).toUpperCase() ?? ""
+
+    return `${firstLetter}${lastLetter}`
   }
 
   useEffect(() => {

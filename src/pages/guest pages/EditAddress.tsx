@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react"
-import { ArrowLeft, Save } from "lucide-react"
+
+import { ArrowLeft, Home, MapPin, Save } from "lucide-react"
+
 import { useTranslation } from "react-i18next"
+
 import { useNavigate, useParams } from "react-router-dom"
 
 import {
@@ -8,6 +11,8 @@ import {
   updateAddress,
   type AddressData,
 } from "../../services/addressApi"
+
+import "../../styles/EditAddress.css"
 
 function EditAddress() {
   const { t } = useTranslation()
@@ -23,7 +28,9 @@ function EditAddress() {
   })
 
   const [loading, setLoading] = useState(true)
+
   const [saving, setSaving] = useState(false)
+
   const [error, setError] = useState("")
 
   useEffect(() => {
@@ -50,6 +57,7 @@ function EditAddress() {
         })
       } catch (error) {
         console.error(error)
+
         setError(t("addresses.loadAddressError"))
       } finally {
         setLoading(false)
@@ -84,6 +92,7 @@ function EditAddress() {
       navigate("/account/addresses")
     } catch (error) {
       console.error(error)
+
       setError(t("addresses.updateError"))
     } finally {
       setSaving(false)
@@ -92,116 +101,178 @@ function EditAddress() {
 
   if (loading) {
     return (
-      <main className="container py-5">
-        <div className="text-center">{t("common.loading")}</div>
+      <main className="pistakio-edit-address">
+        <div className="container">
+          <div className="pistakio-edit-address-loading">
+            <div className="pistakio-edit-address-loading-icon">
+              <MapPin size={25} />
+            </div>
+
+            <p>{t("common.loading")}</p>
+          </div>
+        </div>
       </main>
     )
   }
 
   return (
-    <main className="container py-5">
-      <div className="mx-auto" style={{ maxWidth: "720px" }}>
-        <button
-          type="button"
-          className="btn btn-link text-dark p-0 mb-3"
-          onClick={() => navigate("/account/addresses")}
-        >
-          <ArrowLeft size={16} className="me-1" />
-          {t("addresses.backToAddresses")}
-        </button>
+    <main className="pistakio-edit-address">
+      <div className="container">
+        {/* HEADER */}
 
-        <div className="mb-4">
-          <h1 className="mb-1">{t("addresses.editTitle")}</h1>
+        <section className="pistakio-edit-address-header">
+          <div>
+            <button
+              type="button"
+              className="pistakio-edit-address-back"
+              onClick={() => navigate("/account/addresses")}
+            >
+              <ArrowLeft size={17} />
 
-          <p className="text-muted mb-0">{t("addresses.editSubtitle")}</p>
-        </div>
+              {t("addresses.backToAddresses")}
+            </button>
 
-        {error && <div className="alert alert-danger">{error}</div>}
+            <h1>{t("addresses.editTitle")}</h1>
 
-        <div className="card border-0 shadow-sm">
-          <div className="card-body p-4">
-            <form onSubmit={handleSubmit}>
-              <div className="row g-3">
-                <div className="col-12">
-                  <label className="form-label">
-                    {t("address.addressLine1")}
-                  </label>
+            <p>{t("addresses.editSubtitle")}</p>
+          </div>
+        </section>
+
+        {/* ERROR */}
+
+        {error && <div className="pistakio-edit-address-alert">{error}</div>}
+
+        {/* CONTENT */}
+
+        <div className="pistakio-edit-address-layout">
+          {/* FORM */}
+
+          <section className="pistakio-edit-address-card">
+            <div className="pistakio-edit-address-card-heading">
+              <div className="pistakio-edit-address-icon">
+                <MapPin size={20} />
+              </div>
+
+              <div>
+                <h2>{t("address.addressInformation")}</h2>
+
+                <span>{t("address.addressInformationDescription")}</span>
+              </div>
+            </div>
+
+            <form
+              onSubmit={handleSubmit}
+              className="pistakio-edit-address-form"
+            >
+              {/* ADDRESS */}
+
+              <div className="pistakio-edit-address-field">
+                <label htmlFor="edit-addressLine1">
+                  {t("address.addressLine1")}
+                </label>
+
+                <div className="pistakio-edit-address-input">
+                  <Home size={17} />
 
                   <input
+                    id="edit-addressLine1"
                     type="text"
-                    className="form-control"
                     value={form.addressLine1}
                     onChange={(event) =>
                       handleChange("addressLine1", event.target.value)
                     }
-                    required
-                  />
-                </div>
-
-                <div className="col-12">
-                  <label className="form-label">
-                    {t("address.addressLine2")}
-                  </label>
-
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={form.addressLine2}
-                    onChange={(event) =>
-                      handleChange("addressLine2", event.target.value)
-                    }
-                  />
-                </div>
-
-                <div className="col-12 col-md-4">
-                  <label className="form-label">
-                    {t("address.postalCode")}
-                  </label>
-
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={form.postalCode}
-                    onChange={(event) =>
-                      handleChange("postalCode", event.target.value)
-                    }
-                    required
-                  />
-                </div>
-
-                <div className="col-12 col-md-8">
-                  <label className="form-label">{t("address.city")}</label>
-
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={form.city}
-                    onChange={(event) =>
-                      handleChange("city", event.target.value)
-                    }
-                    required
-                  />
-                </div>
-
-                <div className="col-12">
-                  <label className="form-label">{t("address.country")}</label>
-
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={form.country}
-                    onChange={(event) =>
-                      handleChange("country", event.target.value)
-                    }
+                    placeholder={t("address.addressLine1Placeholder")}
+                    autoComplete="street-address"
                     required
                   />
                 </div>
               </div>
 
-              <div className="d-flex justify-content-end gap-2 mt-4">
+              {/* ADDRESS LINE 2 */}
+
+              <div className="pistakio-edit-address-field">
+                <label htmlFor="edit-addressLine2">
+                  {t("address.addressLine2")}
+                </label>
+
+                <div className="pistakio-edit-address-input">
+                  <MapPin size={17} />
+
+                  <input
+                    id="edit-addressLine2"
+                    type="text"
+                    value={form.addressLine2}
+                    onChange={(event) =>
+                      handleChange("addressLine2", event.target.value)
+                    }
+                    placeholder={t("address.addressLine2Placeholder")}
+                    autoComplete="address-line2"
+                  />
+                </div>
+              </div>
+
+              {/* POSTAL CODE + CITY */}
+
+              <div className="pistakio-edit-address-row">
+                <div className="pistakio-edit-address-field">
+                  <label htmlFor="edit-postalCode">
+                    {t("address.postalCode")}
+                  </label>
+
+                  <input
+                    id="edit-postalCode"
+                    type="text"
+                    value={form.postalCode}
+                    onChange={(event) =>
+                      handleChange("postalCode", event.target.value)
+                    }
+                    placeholder={t("address.postalCodePlaceholder")}
+                    autoComplete="postal-code"
+                    required
+                  />
+                </div>
+
+                <div className="pistakio-edit-address-field">
+                  <label htmlFor="edit-city">{t("address.city")}</label>
+
+                  <input
+                    id="edit-city"
+                    type="text"
+                    value={form.city}
+                    onChange={(event) =>
+                      handleChange("city", event.target.value)
+                    }
+                    placeholder={t("address.cityPlaceholder")}
+                    autoComplete="address-level2"
+                    required
+                  />
+                </div>
+              </div>
+
+              {/* COUNTRY */}
+
+              <div className="pistakio-edit-address-field">
+                <label htmlFor="edit-country">{t("address.country")}</label>
+
+                <input
+                  id="edit-country"
+                  type="text"
+                  value={form.country}
+                  onChange={(event) =>
+                    handleChange("country", event.target.value)
+                  }
+                  placeholder={t("address.countryPlaceholder")}
+                  autoComplete="country-name"
+                  required
+                />
+              </div>
+
+              {/* ACTIONS */}
+
+              <div className="pistakio-edit-address-actions">
                 <button
                   type="button"
-                  className="btn btn-outline-secondary"
+                  className="pistakio-edit-address-cancel"
                   onClick={() => navigate("/account/addresses")}
                   disabled={saving}
                 >
@@ -210,16 +281,28 @@ function EditAddress() {
 
                 <button
                   type="submit"
-                  className="btn btn-dark"
+                  className="pistakio-edit-address-save"
                   disabled={saving}
                 >
-                  <Save size={17} className="me-2" />
+                  <Save size={17} />
 
                   {saving ? t("address.saving") : t("address.saveChanges")}
                 </button>
               </div>
             </form>
-          </div>
+          </section>
+
+          {/* SIDE INFO */}
+
+          <aside className="pistakio-edit-address-info">
+            <div className="pistakio-edit-address-info-icon">
+              <MapPin size={22} />
+            </div>
+
+            <h2>{t("address.deliveryTitle")}</h2>
+
+            <p>{t("address.deliveryDescription")}</p>
+          </aside>
         </div>
       </div>
     </main>

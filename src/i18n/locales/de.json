@@ -46,7 +46,7 @@
     "notFound": "Seite nicht gefunden"
   },
   "catalog": {
-    "title": "Unser Katalog",
+    "title": "Unsere Sorten",
     "loadError": "Der Katalog konnte nicht geladen werden.",
     "noCategories": "Keine Kategorien verfügbar.",
     "all": "Alle",
@@ -56,9 +56,17 @@
     "glutenFree": "Glutenfrei",
     "sugarFree": "Zuckerfrei",
     "available": "Verfügbar",
-    "noFlavors": "Keine Geschmacksrichtungen verfügbar",
-    "flavorNotFound": "Geschmacksrichtung nicht gefunden",
-    "backToCatalog": "Zurück zum Katalog"
+    "noFlavors": "Keine Sorten verfügbar",
+    "flavorNotFound": "Sorte nicht gefunden",
+    "backToCatalog": "Zurück zum Katalog",
+    "description": "Entdecke alle unsere Gelato-Sorten und finde deinen Favoriten.",
+    "filters": "Filter",
+    "clearFilters": "Filter löschen",
+    "results": "Ergebnisse:",
+    "filtersActive": "Aktive Filter",
+    "discover": "Sorte entdecken",
+    "noFlavorsDescription": "Versuche, die Filter zu ändern oder zu entfernen, um weitere Sorten zu finden.",
+    "unavailableDescription": "Diese Sorte ist derzeit nicht verfügbar."
   },
   "cart": {
     "add": "In den Warenkorb",
@@ -76,7 +84,8 @@
     "product": "Produkt",
     "products": "Produkte",
     "decreaseQuantity": "Menge verringern",
-    "increaseQuantity": "Menge erhöhen"
+    "increaseQuantity": "Menge erhöhen",
+    "quantity": "Menge"
   },
   "home": {
     "hero": {
@@ -193,7 +202,17 @@
     "backToCheckout": "Zurück zur Kasse",
     "createError": "Die Adresse konnte nicht erstellt werden.",
     "cancel": "Abbrechen",
-    "saveChanges": "Änderungen speichern"
+    "saveChanges": "Änderungen speichern",
+    "subtitle": "Gib eine Adresse für die Lieferung deiner Bestellung ein.",
+    "addressInformation": "Adressinformationen",
+    "addressInformationDescription": "Gib die Adresse ein, an der du deine Bestellung erhalten möchtest.",
+    "addressLine1Placeholder": "Hauptstraße 10",
+    "addressLine2Placeholder": "Wohnung, Etage, Klingel...",
+    "postalCodePlaceholder": "Postleitzahl",
+    "cityPlaceholder": "Stadt",
+    "countryPlaceholder": "Land",
+    "deliveryTitle": "Wohin soll geliefert werden?",
+    "deliveryDescription": "Wir verwenden diese Adresse für die Lieferung deiner Bestellung. Überprüfe alle Angaben, bevor du sie speicherst."
   },
   "addresses": {
     "title": "Meine Adressen",
@@ -234,13 +253,17 @@
     "loadError": "Die Bestellung konnte nicht abgerufen werden."
   },
   "orders": {
-    "title": "Bestellungen",
-    "subtitle": "Bestellungen des Shops verwalten",
+    "title": "Meine Bestellungen",
+    "subtitle": "Bestellungen verwalten und überprüfen",
+    "description": "Überprüfe deine Bestellungen und sieh dir alle Details deiner Einkäufe an.",
+    "orderCount": "Bestellungen",
     "all": "Alle Bestellungen",
-    "empty": "Keine Bestellungen gefunden",
+    "empty": "Du hast noch keine Bestellungen aufgegeben",
+    "emptyMessage": "Entdecke unsere Sorten und gib deine erste Bestellung auf.",
+    "goToCatalog": "Sorten entdecken",
     "loadError": "Bestellungen konnten nicht geladen werden.",
-    "actionError": "Bei diesem Vorgang ist ein Fehler aufgetreten.",
-    "prepare": "Vorbereitung starten",
+    "actionError": "Bei der Durchführung des Vorgangs ist ein Fehler aufgetreten.",
+    "prepare": "Zubereitung starten",
     "createShipment": "Versand erstellen",
     "ship": "Als versendet markieren",
     "deliver": "Als zugestellt markieren",
@@ -250,6 +273,7 @@
     "trackingNumber": "Sendungsnummer",
     "confirmShipment": "Versand erstellen",
     "cancel": "Abbrechen",
+    "notes": "Notizen",
     "id": "Bestell-ID",
     "customer": "Kunde",
     "status": "Status",
@@ -258,7 +282,7 @@
     "dateFrom": "Datum von",
     "dateTo": "Datum bis",
     "searchId": "Nach ID suchen",
-    "searchCustomer": "Name, Nachname oder E-Mail",
+    "searchCustomer": "Vorname, Nachname oder E-Mail",
     "search": "Suchen",
     "reset": "Zurücksetzen",
     "newestFirst": "Neueste zuerst",
@@ -267,13 +291,17 @@
     "date": "Datum",
     "total": "Gesamt",
     "actions": "Aktionen",
-    "notes": "Notizen"
+    "statusPaid": "Bezahlt",
+    "statusCancelled": "Storniert",
+    "statusPending": "Ausstehend"
   },
   "orderDetails": {
     "title": "Bestelldetails",
     "orderDate": "Bestelldatum",
     "status": "Bestellstatus",
     "products": "Produkte",
+    "product": "Produkt",
+    "productsCount": "Produkte",
     "tubSize": "Becher",
     "quantity": "Menge",
     "unit": "Stück",
@@ -605,6 +633,7 @@
     "orders": "Meine Bestellungen",
     "ordersDescription": "Bestellungen anzeigen und verwalten.",
     "addresses": "Meine Adressen",
-    "addressesDescription": "Ihre Lieferadressen verwalten."
+    "addressesDescription": "Ihre Lieferadressen verwalten.",
+    "personalInfoDescription": "Verwalte deine persönlichen Daten und Kontoeinstellungen."
   }
 }

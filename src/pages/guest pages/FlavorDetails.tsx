@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react"
+
 import { useNavigate, useParams } from "react-router-dom"
+
 import { useTranslation } from "react-i18next"
+
 import {
   ArrowLeft,
+  ArrowRight,
   CandyOff,
+  Check,
   Leaf,
   MilkOffIcon,
   Minus,
@@ -13,38 +18,51 @@ import {
 } from "lucide-react"
 
 import { getFlavorById, getTubs } from "../../services/catalogApi"
+
 import { useCart } from "../../context/CartContext"
 
 import type { Flavor } from "../../types/Flavor"
+
 import type { Tub } from "../../types/Tub"
+
 import Loading from "../../components/Loading"
+
+import "../../styles/FlavorDetails.css"
 
 function FlavorDetails() {
   const { t } = useTranslation()
+
   const { id } = useParams()
+
   const navigate = useNavigate()
 
   const { addToCart } = useCart()
 
   const [flavor, setFlavor] = useState<Flavor | null>(null)
+
   const [tubs, setTubs] = useState<Tub[]>([])
+
   const [selectedTub, setSelectedTub] = useState<Tub | null>(null)
 
   const [quantity, setQuantity] = useState(1)
 
   const [loading, setLoading] = useState(true)
+
   const [error, setError] = useState("")
 
   useEffect(() => {
     const loadData = async () => {
       if (!id) {
         setError(t("catalog.flavorNotFound"))
+
         setLoading(false)
+
         return
       }
 
       try {
         setLoading(true)
+
         setError("")
 
         const [flavorData, tubsData] = await Promise.all([
@@ -63,6 +81,7 @@ function FlavorDetails() {
         }
       } catch (error) {
         console.error(error)
+
         setError(t("catalog.flavorNotFound"))
       } finally {
         setLoading(false)
@@ -78,13 +97,28 @@ function FlavorDetails() {
 
   if (error || !flavor) {
     return (
-      <main className="container py-5 text-center">
-        <p className="text-muted">{error || t("catalog.flavorNotFound")}</p>
+      <main className="flavor-details-error">
+        <div className="container">
+          <div className="flavor-error-content">
+            <div className="flavor-error-icon">
+              <CandyOff size={30} />
+            </div>
 
-        <button className="btn btn-dark" onClick={() => navigate("/catalog")}>
-          <ArrowLeft size={16} className="me-1" />
-          {t("catalog.backToCatalog")}
-        </button>
+            <h1>{t("catalog.flavorNotFound")}</h1>
+
+            <p>{error || t("catalog.flavorNotFound")}</p>
+
+            <button
+              type="button"
+              className="flavor-back-button"
+              onClick={() => navigate("/catalog")}
+            >
+              <ArrowLeft size={17} />
+
+              {t("catalog.backToCatalog")}
+            </button>
+          </div>
+        </div>
       </main>
     )
   }
@@ -107,6 +141,7 @@ function FlavorDetails() {
 
   const handleTubChange = (tub: Tub) => {
     setSelectedTub(tub)
+
     setQuantity(1)
   }
 
@@ -114,174 +149,216 @@ function FlavorDetails() {
     if (!selectedTub) {
       return
     }
+
     addToCart(flavor, selectedTub, quantity)
+
     setQuantity(1)
   }
 
   return (
-    <main className="container py-5">
-      {/* TORNA AL CATALOGO */}
+    <main className="flavor-details">
+      <div className="container">
+        {/* =================================================
+            BACK
+        ================================================= */}
 
-      <button
-        className="btn btn-outline-dark mb-4"
-        onClick={() => navigate("/catalog")}
-      >
-        <ArrowLeft size={16} className="me-1" />
-        {t("catalog.backToCatalog")}
-      </button>
+        <button
+          type="button"
+          className="flavor-back"
+          onClick={() => navigate("/catalog")}
+        >
+          <ArrowLeft size={17} />
 
-      <div className="row g-5">
-        {/* IMMAGINE */}
+          {t("catalog.backToCatalog")}
+        </button>
 
-        <div className="col-12 col-md-6">
-          {flavor.image && (
-            <img
-              src={flavor.image}
-              alt={flavor.name}
-              className="img-fluid rounded shadow-sm w-100"
-              style={{
-                maxHeight: "500px",
-                objectFit: "cover",
-              }}
-            />
-          )}
-        </div>
+        {/* =================================================
+            PRODUCT
+        ================================================= */}
 
-        {/* INFORMAZIONI */}
+        <div className="flavor-product">
+          {/* IMAGE */}
 
-        <div className="col-12 col-md-6">
-          <div className="d-flex justify-content-between align-items-start mb-3">
-            <h1 className="mb-0">{flavor.name}</h1>
+          <div className="flavor-image-wrapper">
+            {flavor.image ? (
+              <img
+                src={flavor.image}
+                alt={flavor.name}
+                className="flavor-main-image"
+              />
+            ) : (
+              <div className="flavor-no-image">
+                <CandyOff size={50} />
+              </div>
+            )}
 
             {!isAvailable && (
-              <span className="badge text-bg-secondary">
+              <span className="flavor-unavailable">
                 {t("catalog.unavailable")}
               </span>
             )}
           </div>
 
-          {flavor.description && (
-            <p className="text-muted fs-5">{flavor.description}</p>
-          )}
+          {/* INFO */}
 
-          {/* CARATTERISTICHE */}
+          <div className="flavor-info">
+            <div className="flavor-title-row">
+              <h1>{flavor.name}</h1>
 
-          <div className="d-flex flex-wrap gap-2 mt-4">
-            {flavor.vegan && (
-              <span className="badge text-bg-success d-flex align-items-center">
-                <Leaf size={16} className="me-1" />
-                {t("catalog.vegan")}
-              </span>
-            )}
+              {isAvailable && (
+                <span className="flavor-available">
+                  <span />
 
-            {flavor.lactoseFree && (
-              <span className="badge text-bg-info d-flex align-items-center">
-                <MilkOffIcon size={16} className="me-1" />
-                {t("catalog.lactoseFree")}
-              </span>
-            )}
-
-            {flavor.glutenFree && (
-              <span className="badge text-bg-warning d-flex align-items-center">
-                <WheatOffIcon size={16} className="me-1" />
-                {t("catalog.glutenFree")}
-              </span>
-            )}
-
-            {flavor.sugarFree && (
-              <span className="badge text-bg-dark d-flex align-items-center">
-                <CandyOff size={16} className="me-1" />
-                {t("catalog.sugarFree")}
-              </span>
-            )}
-          </div>
-
-          {/* DISPONIBILITÀ */}
-
-          <div className="mt-4">
-            {isAvailable ? (
-              <p className="text-success mb-0">{t("catalog.available")}</p>
-            ) : (
-              <p className="text-danger mb-0">{t("catalog.unavailable")}</p>
-            )}
-          </div>
-
-          {/* VASCHETTE */}
-
-          {isAvailable && tubs.length > 0 && (
-            <div className="mt-4">
-              <h2 className="h5 mb-3">{t("cart.tubSize")}</h2>
-
-              <div className="d-flex flex-wrap gap-2">
-                {tubs.map((tub) => (
-                  <button
-                    key={tub.id}
-                    type="button"
-                    className={`btn ${
-                      selectedTub?.id === tub.id
-                        ? "btn-dark"
-                        : "btn-outline-dark"
-                    }`}
-                    onClick={() => handleTubChange(tub)}
-                  >
-                    {tub.weight} g — € {tub.price.toFixed(2)}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* QUANTITÀ */}
-
-          {canAddToCart && (
-            <div className="mt-4">
-              <h2 className="h5 mb-3">{t("cart.quantity")}</h2>
-
-              <div className="d-flex align-items-center gap-3">
-                <button
-                  className="btn btn-outline-dark"
-                  onClick={handleDecrease}
-                  disabled={quantity <= 1}
-                >
-                  <Minus size={18} />
-                </button>
-
-                <span
-                  className="fw-semibold"
-                  style={{
-                    minWidth: "30px",
-                    textAlign: "center",
-                    fontSize: "1.2rem",
-                  }}
-                >
-                  {quantity}
+                  {t("catalog.available")}
                 </span>
+              )}
+            </div>
+
+            {/* DESCRIPTION */}
+
+            {flavor.description && (
+              <p className="flavor-description">{flavor.description}</p>
+            )}
+
+            {/* FEATURES */}
+
+            <div className="flavor-features">
+              {flavor.vegan && (
+                <span className="flavor-feature vegan">
+                  <Leaf size={15} />
+
+                  {t("catalog.vegan")}
+                </span>
+              )}
+
+              {flavor.lactoseFree && (
+                <span className="flavor-feature lactose">
+                  <MilkOffIcon size={15} />
+
+                  {t("catalog.lactoseFree")}
+                </span>
+              )}
+
+              {flavor.glutenFree && (
+                <span className="flavor-feature gluten">
+                  <WheatOffIcon size={15} />
+
+                  {t("catalog.glutenFree")}
+                </span>
+              )}
+
+              {flavor.sugarFree && (
+                <span className="flavor-feature sugar">
+                  <CandyOff size={15} />
+
+                  {t("catalog.sugarFree")}
+                </span>
+              )}
+            </div>
+
+            <div className="flavor-divider" />
+
+            {/* UNAVAILABLE */}
+
+            {!isAvailable && (
+              <div className="flavor-unavailable-message">
+                <strong>{t("catalog.unavailable")}</strong>
+
+                <p>{t("catalog.unavailableDescription")}</p>
+              </div>
+            )}
+
+            {/* TUBS */}
+
+            {isAvailable && tubs.length > 0 && (
+              <div className="flavor-option-section">
+                <div className="flavor-option-header">
+                  <h2>{t("cart.tubSize")}</h2>
+
+                  {selectedTub && <span>{selectedTub.weight} g</span>}
+                </div>
+
+                <div className="flavor-tubs">
+                  {tubs.map((tub) => {
+                    const selected = selectedTub?.id === tub.id
+
+                    return (
+                      <button
+                        key={tub.id}
+                        type="button"
+                        className={`flavor-tub ${selected ? "selected" : ""}`}
+                        onClick={() => handleTubChange(tub)}
+                      >
+                        <div className="flavor-tub-check">
+                          {selected && <Check size={13} />}
+                        </div>
+
+                        <div className="flavor-tub-info">
+                          <strong>{tub.name}</strong>
+
+                          <span>{tub.weight} g</span>
+                        </div>
+
+                        <strong className="flavor-tub-price">
+                          € {tub.price.toFixed(2)}
+                        </strong>
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* NO TUB */}
+
+            {isAvailable && tubs.length === 0 && (
+              <div className="flavor-no-tub">{t("cart.noTubAvailable")}</div>
+            )}
+
+            {/* QUANTITY */}
+
+            {canAddToCart && (
+              <div className="flavor-purchase">
+                <div className="flavor-quantity">
+                  <span>{t("cart.quantity")}</span>
+
+                  <div className="flavor-quantity-control">
+                    <button
+                      type="button"
+                      onClick={handleDecrease}
+                      disabled={quantity <= 1}
+                      aria-label={t("cart.decrease")}
+                    >
+                      <Minus size={17} />
+                    </button>
+
+                    <strong>{quantity}</strong>
+
+                    <button
+                      type="button"
+                      onClick={handleIncrease}
+                      disabled={quantity >= flavor.stockPortions}
+                      aria-label={t("cart.increase")}
+                    >
+                      <Plus size={17} />
+                    </button>
+                  </div>
+                </div>
 
                 <button
-                  className="btn btn-outline-dark"
-                  onClick={handleIncrease}
-                  disabled={quantity >= flavor.stockPortions}
+                  type="button"
+                  className="flavor-add-button"
+                  onClick={handleAddToCart}
                 >
-                  <Plus size={18} />
+                  <ShoppingCart size={19} />
+
+                  {t("cart.add")}
+
+                  <ArrowRight size={17} />
                 </button>
               </div>
-            </div>
-          )}
-
-          {/* AGGIUNGI AL CARRELLO */}
-
-          {canAddToCart && (
-            <button className="btn btn-dark mt-4" onClick={handleAddToCart}>
-              <ShoppingCart size={18} className="me-2" />
-              {t("cart.add")}
-            </button>
-          )}
-
-          {/* NESSUNA VASCHETTA */}
-
-          {isAvailable && tubs.length === 0 && (
-            <p className="text-danger mt-4">{t("cart.noTubAvailable")}</p>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </main>

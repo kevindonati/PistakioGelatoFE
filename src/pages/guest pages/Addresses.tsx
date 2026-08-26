@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react"
+
 import { ArrowLeft, MapPin, Pencil, Plus, Trash2 } from "lucide-react"
+
 import { useTranslation } from "react-i18next"
+
 import { useNavigate } from "react-router-dom"
 
 import { deleteAddress, getAddresses } from "../../services/addressApi"
 
 import type { Address } from "../../types/Address"
+
+import "../../styles/Addresses.css"
 
 function Addresses() {
   const { t } = useTranslation()
@@ -14,6 +19,7 @@ function Addresses() {
   const [addresses, setAddresses] = useState<Address[]>([])
 
   const [loading, setLoading] = useState(true)
+
   const [deletingId, setDeletingId] = useState<string | null>(null)
 
   const [error, setError] = useState("")
@@ -63,122 +69,138 @@ function Addresses() {
   }
 
   return (
-    <main className="container py-5">
-      {/* HEADER */}
+    <main className="pistakio-addresses">
+      <div className="container">
+        {/* HEADER */}
 
-      <div className="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
-        <div>
+        <section className="pistakio-addresses-header">
+          <div>
+            <button
+              type="button"
+              className="pistakio-addresses-back"
+              onClick={() => navigate("/account")}
+            >
+              <ArrowLeft size={17} />
+              {t("addresses.backToAccount")}
+            </button>
+            <h1>{t("addresses.title")}</h1>
+
+            <p>{t("addresses.subtitle")}</p>
+          </div>
+
           <button
             type="button"
-            className="btn btn-link text-dark p-0 mb-2"
-            onClick={() => navigate("/account")}
+            className="pistakio-addresses-new-button"
+            onClick={() => navigate("/account/addresses/new")}
           >
-            <ArrowLeft size={16} className="me-1" />
-            {t("addresses.backToAccount")}
+            <Plus size={18} />
+            {t("addresses.new")}
           </button>
+        </section>
 
-          <h1 className="mb-1">{t("addresses.title")}</h1>
+        {/* ERROR */}
 
-          <p className="text-muted mb-0">{t("addresses.subtitle")}</p>
-        </div>
+        {error && <div className="pistakio-addresses-alert">{error}</div>}
 
-        <button
-          type="button"
-          className="btn btn-dark"
-          onClick={() => navigate("/account/addresses/new")}
-        >
-          <Plus size={17} className="me-2" />
-          {t("addresses.new")}
-        </button>
-      </div>
+        {/* LOADING */}
 
-      {error && <div className="alert alert-danger">{error}</div>}
+        {loading && (
+          <div className="pistakio-addresses-loading">
+            <div className="pistakio-addresses-loading-icon">
+              <MapPin size={25} />
+            </div>
 
-      {/* LOADING */}
+            <p>{t("common.loading")}</p>
+          </div>
+        )}
 
-      {loading && <div className="text-center py-5">{t("common.loading")}</div>}
+        {/* EMPTY */}
 
-      {/* VUOTO */}
+        {!loading && addresses.length === 0 && (
+          <section className="pistakio-addresses-empty">
+            <div className="pistakio-addresses-empty-icon">
+              <MapPin size={30} />
+            </div>
 
-      {!loading && addresses.length === 0 && (
-        <div className="card border-0 shadow-sm">
-          <div className="card-body text-center py-5">
-            <MapPin size={50} strokeWidth={1.5} className="text-muted mb-3" />
+            <h2>{t("addresses.empty")}</h2>
 
-            <h2 className="h5 mb-2">{t("addresses.empty")}</h2>
-
-            <p className="text-muted mb-4">{t("addresses.emptyDescription")}</p>
+            <p>{t("addresses.emptyDescription")}</p>
 
             <button
               type="button"
-              className="btn btn-dark"
+              className="pistakio-addresses-new-button"
               onClick={() => navigate("/account/addresses/new")}
             >
-              <Plus size={17} className="me-2" />
-
+              <Plus size={18} />
               {t("addresses.new")}
             </button>
-          </div>
-        </div>
-      )}
+          </section>
+        )}
 
-      {/* INDIRIZZI */}
+        {/* ADDRESSES */}
 
-      {!loading && addresses.length > 0 && (
-        <div className="row g-4">
-          {addresses.map((address) => (
-            <div key={address.id} className="col-12 col-md-6 col-lg-4">
-              <div className="card border-0 shadow-sm h-100">
-                <div className="card-body p-4 d-flex flex-column">
-                  <div className="d-flex align-items-center gap-2 mb-3">
-                    <div className="bg-light rounded p-2">
-                      <MapPin size={20} />
-                    </div>
+        {!loading && addresses.length > 0 && (
+          <section className="pistakio-addresses-grid">
+            {addresses.map((address) => (
+              <article key={address.id} className="pistakio-address-card">
+                {/* CARD HEADER */}
 
-                    <h2 className="h6 mb-0">{t("addresses.address")}</h2>
+                <div className="pistakio-address-card-header">
+                  <div className="pistakio-address-card-icon">
+                    <MapPin size={20} />
                   </div>
 
-                  <div className="mb-4">
-                    <div className="fw-semibold">{address.addressLine1}</div>
+                  <div>
+                    <span>{t("addresses.address")}</span>
 
-                    {address.addressLine2 && <div>{address.addressLine2}</div>}
-
-                    <div>
-                      {address.postalCode} {address.city}
-                    </div>
-
-                    <div>{address.country}</div>
-                  </div>
-
-                  <div className="mt-auto d-flex gap-2">
-                    <button
-                      type="button"
-                      className="btn btn-outline-dark flex-grow-1"
-                      onClick={() =>
-                        navigate(`/account/addresses/${address.id}/edit`)
-                      }
-                    >
-                      <Pencil size={16} className="me-1" />
-
-                      {t("addresses.edit")}
-                    </button>
-
-                    <button
-                      type="button"
-                      className="btn btn-outline-danger"
-                      disabled={deletingId === address.id}
-                      onClick={() => handleDelete(address.id)}
-                      title={t("addresses.delete")}
-                    >
-                      <Trash2 size={16} />
-                    </button>
+                    <h2>{address.city}</h2>
                   </div>
                 </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+
+                {/* ADDRESS */}
+
+                <div className="pistakio-address-content">
+                  <strong>{address.addressLine1}</strong>
+
+                  {address.addressLine2 && <span>{address.addressLine2}</span>}
+
+                  <span>
+                    {address.postalCode} {address.city}
+                  </span>
+
+                  <span>{address.country}</span>
+                </div>
+
+                {/* ACTIONS */}
+
+                <div className="pistakio-address-actions">
+                  <button
+                    type="button"
+                    className="pistakio-address-edit"
+                    onClick={() =>
+                      navigate(`/account/addresses/${address.id}/edit`)
+                    }
+                  >
+                    <Pencil size={16} />
+                    {t("addresses.edit")}
+                  </button>
+
+                  <button
+                    type="button"
+                    className="pistakio-address-delete"
+                    disabled={deletingId === address.id}
+                    onClick={() => handleDelete(address.id)}
+                    title={t("addresses.delete")}
+                    aria-label={t("addresses.delete")}
+                  >
+                    <Trash2 size={17} />
+                  </button>
+                </div>
+              </article>
+            ))}
+          </section>
+        )}
+      </div>
     </main>
   )
 }

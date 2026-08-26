@@ -1,9 +1,20 @@
 import { useEffect, useMemo, useState } from "react"
-import { ArrowRight, LogOut, MapPin, Package, Save } from "lucide-react"
+import {
+  ArrowRight,
+  AtSign,
+  CheckCircle2,
+  LogOut,
+  MapPin,
+  Package,
+  Phone,
+  Save,
+  User,
+} from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 
 import { useAuth } from "../../context/useAuth"
+
 import {
   getMe,
   updateMe,
@@ -11,9 +22,14 @@ import {
   type UpdateUserData,
 } from "../../services/userApi"
 
+import Loading from "../../components/Loading"
+
+import "../../styles/Account.css"
+
 function Account() {
   const { t } = useTranslation()
   const navigate = useNavigate()
+
   const { logout, updateUser } = useAuth()
 
   const [user, setUser] = useState<UserProfile | null>(null)
@@ -27,8 +43,11 @@ function Account() {
   })
 
   const [loading, setLoading] = useState(true)
+
   const [saving, setSaving] = useState(false)
+
   const [error, setError] = useState("")
+
   const [success, setSuccess] = useState(false)
 
   useEffect(() => {
@@ -122,97 +141,115 @@ function Account() {
   }
 
   if (loading) {
-    return (
-      <main className="container py-5">
-        <div className="text-center">{t("common.loading")}</div>
-      </main>
-    )
+    return <Loading />
   }
 
   if (!user) {
     return (
-      <main className="container py-5">
-        <div className="alert alert-danger">
-          {error || t("account.loadError")}
+      <main className="pistakio-account-error-page">
+        <div className="container">
+          <div className="pistakio-account-error">
+            <div className="pistakio-account-error-icon">
+              <User size={30} />
+            </div>
+
+            <h1>{t("account.loadError")}</h1>
+
+            <p>{error || t("account.loadError")}</p>
+          </div>
         </div>
       </main>
     )
   }
 
   return (
-    <main className="container py-5">
-      {/* HEADER */}
+    <main className="pistakio-account">
+      <div className="container">
+        {/* HEADER */}
 
-      <div className="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-5">
-        <div>
-          <h1 className="mb-1">{t("account.title")}</h1>
+        <section className="pistakio-account-header">
+          <div>
+            <h1>{t("account.title")}</h1>
 
-          <p className="text-muted mb-0">{t("account.subtitle")}</p>
-        </div>
-
-        <button
-          type="button"
-          className="btn btn-outline-danger"
-          onClick={handleLogout}
-        >
-          <LogOut size={17} className="me-2" />
-          {t("navbar.logout")}
-        </button>
-      </div>
-
-      {/* PROFILO */}
-
-      <div className="card border-0 shadow-sm mb-4">
-        <div className="card-body p-4">
-          <div className="d-flex align-items-center gap-3">
-            <div
-              className="d-flex align-items-center justify-content-center rounded-circle bg-dark text-white fw-semibold"
-              style={{
-                width: "72px",
-                height: "72px",
-                fontSize: "24px",
-              }}
-            >
-              {initials}
-            </div>
-
-            <div>
-              <h2 className="h4 mb-1">
-                {user.name} {user.surname}
-              </h2>
-
-              <p className="text-muted mb-1">{user.email}</p>
-
-              <span className="badge bg-light text-dark border">
-                {user.role}
-              </span>
-            </div>
+            <p>{t("account.subtitle")}</p>
           </div>
-        </div>
-      </div>
 
-      {error && <div className="alert alert-danger">{error}</div>}
+          <button
+            type="button"
+            className="pistakio-account-logout"
+            onClick={handleLogout}
+          >
+            <LogOut size={17} />
+            {t("navbar.logout")}
+          </button>
+        </section>
 
-      {success && (
-        <div className="alert alert-success">{t("account.updateSuccess")}</div>
-      )}
+        {/* PROFILE CARD */}
 
-      <div className="row g-4">
-        {/* DATI PERSONALI */}
+        <section className="pistakio-account-profile">
+          <div className="pistakio-account-avatar">{initials}</div>
 
-        <div className="col-12 col-lg-8">
-          <div className="card border-0 shadow-sm">
-            <div className="card-body p-4">
-              <h2 className="h5 mb-4">{t("account.personalInfo")}</h2>
+          <div className="pistakio-account-profile-info">
+            <h2>
+              {user.name} {user.surname}
+            </h2>
 
-              <form onSubmit={handleSubmit}>
-                <div className="row g-3">
-                  <div className="col-12 col-md-6">
-                    <label className="form-label">{t("auth.name")}</label>
+            <div className="pistakio-account-profile-email">
+              <AtSign size={14} />
+              {user.email}
+            </div>
+
+            <span className="pistakio-account-role">{user.role}</span>
+          </div>
+        </section>
+
+        {/* FEEDBACK */}
+
+        {error && (
+          <div className="pistakio-account-alert pistakio-account-alert-error">
+            {error}
+          </div>
+        )}
+
+        {success && (
+          <div className="pistakio-account-alert pistakio-account-alert-success">
+            <CheckCircle2 size={18} />
+
+            {t("account.updateSuccess")}
+          </div>
+        )}
+
+        {/* CONTENT */}
+
+        <div className="pistakio-account-grid">
+          {/* PERSONAL INFO */}
+
+          <section className="pistakio-account-form-card">
+            <div className="pistakio-account-section-heading">
+              <div className="pistakio-account-section-icon">
+                <User size={19} />
+              </div>
+
+              <div>
+                <h2>{t("account.personalInfo")}</h2>
+
+                <span>{t("account.personalInfoDescription")}</span>
+              </div>
+            </div>
+
+            <form onSubmit={handleSubmit} className="pistakio-account-form">
+              <div className="pistakio-account-form-grid">
+                {/* NAME */}
+
+                <div className="pistakio-account-field">
+                  <label htmlFor="account-name">{t("auth.name")}</label>
+
+                  <div className="pistakio-account-input-wrapper">
+                    <User size={17} />
 
                     <input
+                      id="account-name"
                       type="text"
-                      className="form-control"
                       value={form.name}
                       onChange={(event) =>
                         handleChange("name", event.target.value)
@@ -220,13 +257,19 @@ function Account() {
                       required
                     />
                   </div>
+                </div>
 
-                  <div className="col-12 col-md-6">
-                    <label className="form-label">{t("auth.surname")}</label>
+                {/* SURNAME */}
+
+                <div className="pistakio-account-field">
+                  <label htmlFor="account-surname">{t("auth.surname")}</label>
+
+                  <div className="pistakio-account-input-wrapper">
+                    <User size={17} />
 
                     <input
+                      id="account-surname"
                       type="text"
-                      className="form-control"
                       value={form.surname}
                       onChange={(event) =>
                         handleChange("surname", event.target.value)
@@ -234,13 +277,19 @@ function Account() {
                       required
                     />
                   </div>
+                </div>
 
-                  <div className="col-12">
-                    <label className="form-label">{t("auth.email")}</label>
+                {/* EMAIL */}
+
+                <div className="pistakio-account-field pistakio-account-field-full">
+                  <label htmlFor="account-email">{t("auth.email")}</label>
+
+                  <div className="pistakio-account-input-wrapper">
+                    <AtSign size={17} />
 
                     <input
+                      id="account-email"
                       type="email"
-                      className="form-control"
                       value={form.email}
                       onChange={(event) =>
                         handleChange("email", event.target.value)
@@ -248,123 +297,107 @@ function Account() {
                       required
                     />
                   </div>
+                </div>
 
-                  <div className="col-12 col-md-6">
-                    <label className="form-label">{t("auth.phone")}</label>
+                {/* PHONE */}
+
+                <div className="pistakio-account-field">
+                  <label htmlFor="account-phone">{t("auth.phone")}</label>
+
+                  <div className="pistakio-account-input-wrapper">
+                    <Phone size={17} />
 
                     <input
+                      id="account-phone"
                       type="tel"
-                      className="form-control"
                       value={form.phone}
                       onChange={(event) =>
                         handleChange("phone", event.target.value)
                       }
                     />
                   </div>
-
-                  <div className="col-12 col-md-6">
-                    <label className="form-label">{t("auth.language")}</label>
-
-                    <select
-                      className="form-select"
-                      value={form.language}
-                      onChange={(event) =>
-                        handleChange("language", event.target.value)
-                      }
-                    >
-                      <option value="IT">Italiano</option>
-
-                      <option value="EN">English</option>
-
-                      <option value="FR">Français</option>
-
-                      <option value="DE">Deutsch</option>
-                    </select>
-                  </div>
                 </div>
 
-                <div className="d-flex justify-content-end mt-4">
-                  <button
-                    type="submit"
-                    className="btn btn-dark"
-                    disabled={saving}
+                {/* LANGUAGE */}
+
+                <div className="pistakio-account-field">
+                  <label htmlFor="account-language">{t("auth.language")}</label>
+
+                  <select
+                    id="account-language"
+                    value={form.language}
+                    onChange={(event) =>
+                      handleChange("language", event.target.value)
+                    }
                   >
-                    <Save size={17} className="me-2" />
+                    <option value="IT">Italiano</option>
 
-                    {saving ? t("account.saving") : t("account.save")}
-                  </button>
+                    <option value="EN">English</option>
+
+                    <option value="FR">Français</option>
+
+                    <option value="DE">Deutsch</option>
+                  </select>
                 </div>
-              </form>
-            </div>
-          </div>
-        </div>
+              </div>
 
-        {/* COLONNA DESTRA */}
+              <div className="pistakio-account-form-footer">
+                <button
+                  type="submit"
+                  className="pistakio-account-save"
+                  disabled={saving}
+                >
+                  <Save size={17} />
 
-        <div className="col-12 col-lg-4">
-          <div className="d-flex flex-column gap-3">
-            {/* ORDINI */}
+                  {saving ? t("account.saving") : t("account.save")}
+                </button>
+              </div>
+            </form>
+          </section>
+
+          {/* SIDEBAR */}
+
+          <aside className="pistakio-account-sidebar">
+            {/* ORDERS */}
 
             <button
               type="button"
-              className="card border-0 shadow-sm text-start w-100"
+              className="pistakio-account-action-card"
               onClick={() => navigate("/orders")}
-              style={{
-                cursor: "pointer",
-              }}
             >
-              <div className="card-body p-4">
-                <div className="d-flex align-items-center justify-content-between">
-                  <div className="d-flex align-items-center gap-3">
-                    <div className="bg-light rounded p-3">
-                      <Package size={22} />
-                    </div>
-
-                    <div>
-                      <h2 className="h6 mb-1">{t("account.orders")}</h2>
-
-                      <p className="text-muted small mb-0">
-                        {t("account.ordersDescription")}
-                      </p>
-                    </div>
-                  </div>
-
-                  <ArrowRight size={19} />
-                </div>
+              <div className="pistakio-account-action-icon pistakio-account-action-icon-green">
+                <Package size={22} />
               </div>
+
+              <div className="pistakio-account-action-content">
+                <h2>{t("account.orders")}</h2>
+
+                <p>{t("account.ordersDescription")}</p>
+              </div>
+
+              <ArrowRight size={19} className="pistakio-account-action-arrow" />
             </button>
 
-            {/* INDIRIZZI */}
+            {/* ADDRESSES */}
 
             <button
               type="button"
-              className="card border-0 shadow-sm text-start w-100"
+              className="pistakio-account-action-card"
               onClick={() => navigate("/account/addresses")}
-              style={{
-                cursor: "pointer",
-              }}
             >
-              <div className="card-body p-4">
-                <div className="d-flex align-items-center justify-content-between">
-                  <div className="d-flex align-items-center gap-3">
-                    <div className="bg-light rounded p-3">
-                      <MapPin size={22} />
-                    </div>
-
-                    <div>
-                      <h2 className="h6 mb-1">{t("account.addresses")}</h2>
-
-                      <p className="text-muted small mb-0">
-                        {t("account.addressesDescription")}
-                      </p>
-                    </div>
-                  </div>
-
-                  <ArrowRight size={19} />
-                </div>
+              <div className="pistakio-account-action-icon pistakio-account-action-icon-pink">
+                <MapPin size={22} />
               </div>
+
+              <div className="pistakio-account-action-content">
+                <h2>{t("account.addresses")}</h2>
+
+                <p>{t("account.addressesDescription")}</p>
+              </div>
+
+              <ArrowRight size={19} className="pistakio-account-action-arrow" />
             </button>
-          </div>
+          </aside>
         </div>
       </div>
     </main>

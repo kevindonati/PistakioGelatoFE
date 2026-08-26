@@ -46,8 +46,8 @@
     "notFound": "Page not found"
   },
   "catalog": {
-    "title": "Our catalog",
-    "loadError": "Unable to load the catalog.",
+    "title": "Our Flavors",
+    "loadError": "The catalog could not be loaded.",
     "noCategories": "No categories available.",
     "all": "All",
     "unavailable": "Unavailable",
@@ -58,7 +58,15 @@
     "available": "Available",
     "noFlavors": "No flavors available",
     "flavorNotFound": "Flavor not found",
-    "backToCatalog": "Back to catalog"
+    "backToCatalog": "Back to catalog",
+    "description": "Discover all our gelato flavors and find your favorite.",
+    "filters": "Filters",
+    "clearFilters": "Clear filters",
+    "results": "Results:",
+    "filtersActive": "Active filters",
+    "discover": "Discover the flavor",
+    "noFlavorsDescription": "Try changing or removing the filters to find more flavors.",
+    "unavailableDescription": "This flavor is currently unavailable."
   },
   "cart": {
     "add": "Add to cart",
@@ -76,7 +84,8 @@
     "product": "product",
     "products": "products",
     "decreaseQuantity": "Decrease quantity",
-    "increaseQuantity": "Increase quantity"
+    "increaseQuantity": "Increase quantity",
+    "quantity": "Quantity"
   },
   "home": {
     "hero": {
@@ -193,7 +202,17 @@
     "backToCheckout": "Back to checkout",
     "createError": "Unable to create the address.",
     "cancel": "Cancel",
-    "saveChanges": "Save changes"
+    "saveChanges": "Save changes",
+    "subtitle": "Enter an address for your order delivery.",
+    "addressInformation": "Address information",
+    "addressInformationDescription": "Enter the details of the address where you want to receive your order.",
+    "addressLine1Placeholder": "10 Main Street",
+    "addressLine2Placeholder": "Apartment, floor, doorbell...",
+    "postalCodePlaceholder": "Postal code",
+    "cityPlaceholder": "City",
+    "countryPlaceholder": "Country",
+    "deliveryTitle": "Where should we deliver?",
+    "deliveryDescription": "We will use this address to deliver your order. Make sure all the information is correct before saving."
   },
   "addresses": {
     "title": "My Addresses",
@@ -234,10 +253,14 @@
     "loadError": "Unable to retrieve the order."
   },
   "orders": {
-    "title": "Orders",
-    "subtitle": "Manage your store orders",
+    "title": "My Orders",
+    "subtitle": "Manage and check your orders",
+    "description": "Check your orders and view all the details of your purchases.",
+    "orderCount": "orders",
     "all": "All orders",
-    "empty": "No orders found",
+    "empty": "You haven't placed any orders yet",
+    "emptyMessage": "Discover our flavors and place your first order.",
+    "goToCatalog": "Discover our flavors",
     "loadError": "Unable to load orders.",
     "actionError": "An error occurred during the operation.",
     "prepare": "Start preparation",
@@ -259,7 +282,7 @@
     "dateFrom": "Date from",
     "dateTo": "Date to",
     "searchId": "Search by ID",
-    "searchCustomer": "Name, surname or email",
+    "searchCustomer": "First name, last name or email",
     "search": "Search",
     "reset": "Reset",
     "newestFirst": "Newest first",
@@ -267,13 +290,18 @@
     "order": "Order",
     "date": "Date",
     "total": "Total",
-    "actions": "Actions"
+    "actions": "Actions",
+    "statusPaid": "Paid",
+    "statusCancelled": "Cancelled",
+    "statusPending": "Pending"
   },
   "orderDetails": {
     "title": "Order details",
     "orderDate": "Order date",
     "status": "Order status",
     "products": "Products",
+    "product": "product",
+    "productsCount": "products",
     "tubSize": "Tub",
     "quantity": "Quantity",
     "unit": "piece",
@@ -605,6 +633,7 @@
     "orders": "My Orders",
     "ordersDescription": "View and manage your orders.",
     "addresses": "My Addresses",
-    "addressesDescription": "Manage your delivery addresses."
+    "addressesDescription": "Manage your delivery addresses.",
+    "personalInfoDescription": "Manage your personal information and account preferences."
   }
 }

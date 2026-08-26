@@ -46,19 +46,27 @@
     "notFound": "Page introuvable"
   },
   "catalog": {
-    "title": "Notre catalogue",
+    "title": "Nos parfums",
     "loadError": "Impossible de charger le catalogue.",
     "noCategories": "Aucune catégorie disponible.",
     "all": "Tous",
     "unavailable": "Indisponible",
-    "vegan": "Végan",
+    "vegan": "Végétalien",
     "lactoseFree": "Sans lactose",
     "glutenFree": "Sans gluten",
     "sugarFree": "Sans sucre",
     "available": "Disponibles",
     "noFlavors": "Aucun parfum disponible",
     "flavorNotFound": "Parfum introuvable",
-    "backToCatalog": "Retour au catalogue"
+    "backToCatalog": "Retour au catalogue",
+    "description": "Découvrez tous nos parfums de glace et trouvez votre préféré.",
+    "filters": "Filtres",
+    "clearFilters": "Effacer les filtres",
+    "results": "Résultats :",
+    "filtersActive": "Filtres actifs",
+    "discover": "Découvrir le parfum",
+    "noFlavorsDescription": "Essayez de modifier ou de supprimer les filtres pour trouver d'autres parfums.",
+    "unavailableDescription": "Ce parfum n'est actuellement pas disponible."
   },
   "home": {
     "hero": {
@@ -159,7 +167,8 @@
     "product": "produit",
     "products": "produits",
     "decreaseQuantity": "Diminuer la quantité",
-    "increaseQuantity": "Augmenter la quantité"
+    "increaseQuantity": "Augmenter la quantité",
+    "quantity": "Quantité"
   },
   "checkout": {
     "title": "Paiement",
@@ -193,7 +202,17 @@
     "backToCheckout": "Retour au paiement",
     "createError": "Impossible de créer l'adresse.",
     "cancel": "Annuler",
-    "saveChanges": "Enregistrer les modifications"
+    "saveChanges": "Enregistrer les modifications",
+    "subtitle": "Saisissez une adresse pour la livraison de votre commande.",
+    "addressInformation": "Informations sur l'adresse",
+    "addressInformationDescription": "Saisissez les informations de l'adresse où vous souhaitez recevoir votre commande.",
+    "addressLine1Placeholder": "10 rue de Paris",
+    "addressLine2Placeholder": "Appartement, étage, interphone...",
+    "postalCodePlaceholder": "Code postal",
+    "cityPlaceholder": "Ville",
+    "countryPlaceholder": "Pays",
+    "deliveryTitle": "Où livrer votre commande ?",
+    "deliveryDescription": "Nous utiliserons cette adresse pour livrer votre commande. Vérifiez que toutes les informations sont correctes avant d'enregistrer."
   },
   "addresses": {
     "title": "Mes adresses",
@@ -234,12 +253,16 @@
     "loadError": "Impossible de récupérer la commande."
   },
   "orders": {
-    "title": "Commandes",
-    "subtitle": "Gérez les commandes de la boutique",
+    "title": "Mes commandes",
+    "subtitle": "Gérez et consultez vos commandes",
+    "description": "Consultez vos commandes et visualisez tous les détails de vos achats.",
+    "orderCount": "commandes",
     "all": "Toutes les commandes",
-    "empty": "Aucune commande trouvée",
+    "empty": "Vous n'avez pas encore passé de commande",
+    "emptyMessage": "Découvrez nos parfums et passez votre première commande.",
+    "goToCatalog": "Découvrir nos parfums",
     "loadError": "Impossible de charger les commandes.",
-    "actionError": "Une erreur est survenue lors de l'opération.",
+    "actionError": "Une erreur s'est produite lors de l'opération.",
     "prepare": "Commencer la préparation",
     "createShipment": "Créer l'expédition",
     "ship": "Marquer comme expédiée",
@@ -259,7 +282,7 @@
     "dateFrom": "Date de début",
     "dateTo": "Date de fin",
     "searchId": "Rechercher par ID",
-    "searchCustomer": "Nom, prénom ou e-mail",
+    "searchCustomer": "Prénom, nom ou e-mail",
     "search": "Rechercher",
     "reset": "Réinitialiser",
     "newestFirst": "Plus récentes",
@@ -267,13 +290,18 @@
     "order": "Commande",
     "date": "Date",
     "total": "Total",
-    "actions": "Actions"
+    "actions": "Actions",
+    "statusPaid": "Payée",
+    "statusCancelled": "Annulée",
+    "statusPending": "En attente"
   },
   "orderDetails": {
     "title": "Détails de la commande",
     "orderDate": "Date de commande",
     "status": "Statut de la commande",
     "products": "Produits",
+    "product": "produit",
+    "productsCount": "produits",
     "tubSize": "Pot",
     "quantity": "Quantité",
     "unit": "pièce",
@@ -605,6 +633,7 @@
     "orders": "Mes commandes",
     "ordersDescription": "Consultez et gérez vos commandes.",
     "addresses": "Mes adresses",
-    "addressesDescription": "Gérez vos adresses de livraison."
+    "addressesDescription": "Gérez vos adresses de livraison.",
+    "personalInfoDescription": "Gérez vos informations personnelles et les préférences de votre compte."
   }
 }

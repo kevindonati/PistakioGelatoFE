@@ -1,10 +1,21 @@
 import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import { useTranslation } from "react-i18next"
-import { ArrowLeft, Check, MapPin, Package } from "lucide-react"
-import { createStripeCheckout } from "../../services/orderApi"
 
-import { getMyOrderById, getMyOrderItems } from "../../services/orderApi"
+import {
+  ArrowLeft,
+  Check,
+  CreditCard,
+  FileText,
+  MapPin,
+  Package,
+} from "lucide-react"
+
+import {
+  createStripeCheckout,
+  getMyOrderById,
+  getMyOrderItems,
+} from "../../services/orderApi"
 
 import { getFlavorById, getTubById } from "../../services/catalogApi"
 
@@ -14,6 +25,8 @@ import type { Flavor } from "../../types/Flavor"
 import type { Tub } from "../../types/Tub"
 
 import Loading from "../../components/Loading"
+
+import "../../styles/OrderDetails.css"
 
 interface OrderProduct {
   orderItem: OrderItem
@@ -27,7 +40,6 @@ function OrderDetails() {
 
   const [order, setOrder] = useState<Order | null>(null)
   const [items, setItems] = useState<OrderProduct[]>([])
-
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
   const [paymentLoading, setPaymentLoading] = useState(false)
@@ -46,7 +58,6 @@ function OrderDetails() {
         setError("")
 
         const orderData = await getMyOrderById(id)
-
         const orderItems = await getMyOrderItems()
 
         const currentOrderItems = orderItems.filter(
@@ -94,6 +105,7 @@ function OrderDetails() {
       window.location.href = response.url
     } catch (error) {
       console.error(error)
+
       setError(t("orderDetails.paymentError"))
       setPaymentLoading(false)
     }
@@ -105,15 +117,23 @@ function OrderDetails() {
 
   if (!order) {
     return (
-      <main className="container py-5">
-        <div className="alert alert-danger">
-          {error || t("orderDetails.orderNotFound")}
-        </div>
+      <main className="pistakio-order-error-page">
+        <div className="container">
+          <div className="pistakio-order-error-content">
+            <div className="pistakio-order-error-icon">
+              <Package size={32} />
+            </div>
 
-        <Link to="/orders" className="btn btn-dark">
-          <ArrowLeft size={17} className="me-1" />
-          {t("orderDetails.backToOrders")}
-        </Link>
+            <h1>{t("orderDetails.orderNotFound")}</h1>
+
+            <p>{error || t("orderDetails.orderNotFound")}</p>
+
+            <Link to="/orders" className="pistakio-order-error-button">
+              <ArrowLeft size={17} />
+              {t("orderDetails.backToOrders")}
+            </Link>
+          </div>
+        </div>
       </main>
     )
   }
@@ -129,237 +149,261 @@ function OrderDetails() {
 
   const isCancelled = order.orderStatus === "CANCELLED"
 
+  const getStatusLabel = (status: string) => {
+    return t(`orderStatus.${status}`)
+  }
+
   return (
-    <main className="container py-5">
-      {/* HEADER */}
+    <main className="pistakio-order-details">
+      <div className="container">
+        {/* HEADER */}
 
-      <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
-        <div>
-          <Link
-            to="/orders"
-            className="text-decoration-none text-dark d-inline-flex align-items-center mb-3"
-          >
-            <ArrowLeft size={17} className="me-1" />
-            {t("orderDetails.backToOrders")}
-          </Link>
+        <section className="pistakio-order-header">
+          <div>
+            <Link to="/orders" className="pistakio-order-back">
+              <ArrowLeft size={17} />
+              {t("orderDetails.backToOrders")}
+            </Link>
 
-          <h1 className="mb-1">{t("orderDetails.title")}</h1>
+            <h1>{t("orderDetails.title")}</h1>
 
-          <p className="text-muted mb-0 text-break">#{order.id}</p>
+            <p className="pistakio-order-id">#{order.id}</p>
+          </div>
+
+          <div className="pistakio-order-header-actions">
+            <span
+              className={`pistakio-order-status-large ${
+                isCancelled
+                  ? "pistakio-order-status-cancelled"
+                  : order.orderStatus === "PAID"
+                    ? "pistakio-order-status-paid"
+                    : "pistakio-order-status-pending"
+              }`}
+            >
+              <span />
+              {getStatusLabel(order.orderStatus)}
+            </span>
+
+            {order.orderStatus === "PENDING_PAYMENT" && (
+              <button
+                type="button"
+                className="pistakio-order-pay-button"
+                onClick={handlePayment}
+                disabled={paymentLoading}
+              >
+                <CreditCard size={18} />
+
+                {paymentLoading
+                  ? t("orderDetails.paymentLoading")
+                  : t("orderDetails.payNow")}
+              </button>
+            )}
+          </div>
+        </section>
+
+        {/* ERROR */}
+
+        {error && <div className="pistakio-order-error-message">{error}</div>}
+
+        {/* DATE */}
+
+        <div className="pistakio-order-date">
+          <span>{t("orderDetails.orderDate")}</span>
+
+          <strong>{new Date(order.createdAt).toLocaleString()}</strong>
         </div>
 
-        <span
-          className={`badge fs-6 ${
-            order.orderStatus === "PAID"
-              ? "text-bg-success"
-              : order.orderStatus === "CANCELLED"
-                ? "text-bg-danger"
-                : "text-bg-secondary"
-          }`}
-        >
-          {order.orderStatus}
-        </span>
-        {order.orderStatus === "PENDING_PAYMENT" && (
-          <button
-            type="button"
-            className="btn btn-dark"
-            onClick={handlePayment}
-            disabled={paymentLoading}
-          >
-            {paymentLoading
-              ? t("orderDetails.paymentLoading")
-              : t("orderDetails.payNow")}
-          </button>
-        )}
-      </div>
+        {/* TIMELINE */}
 
-      {/* DATE */}
+        {!isCancelled && (
+          <section className="pistakio-order-timeline">
+            <div className="pistakio-order-section-heading">
+              <div className="pistakio-order-section-icon">
+                <Package size={19} />
+              </div>
 
-      <p className="text-muted mb-4">
-        {t("orderDetails.orderDate")}:{" "}
-        {new Date(order.createdAt).toLocaleString()}
-      </p>
+              <h2>{t("orderDetails.status")}</h2>
+            </div>
 
-      {/* TIMELINE */}
-
-      {!isCancelled && (
-        <div className="card border-0 shadow-sm mb-4">
-          <div className="card-body p-4">
-            <h2 className="h5 mb-4">{t("orderDetails.status")}</h2>
-
-            <div className="row text-center">
+            <div className="pistakio-order-timeline-list">
               {statusOrder.map((status, index) => {
                 const completed = currentStatusIndex >= index
 
+                const active = currentStatusIndex === index
+
                 return (
-                  <div key={status} className="col">
-                    <div
-                      className={`rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center ${
-                        completed
-                          ? "bg-success text-white"
-                          : "bg-light text-muted"
-                      }`}
-                      style={{
-                        width: "40px",
-                        height: "40px",
-                      }}
-                    >
-                      {completed ? <Check size={19} /> : index + 1}
+                  <div
+                    key={status}
+                    className={`pistakio-order-timeline-step ${
+                      completed ? "pistakio-order-timeline-completed" : ""
+                    } ${active ? "pistakio-order-timeline-active" : ""}`}
+                  >
+                    <div className="pistakio-order-timeline-marker">
+                      {completed ? <Check size={16} /> : index + 1}
                     </div>
 
-                    <small className={completed ? "fw-semibold" : "text-muted"}>
-                      {t(`orderStatus.${status}`)}
-                    </small>
+                    <span>{getStatusLabel(status)}</span>
+
+                    {index < statusOrder.length - 1 && (
+                      <div
+                        className={`pistakio-order-timeline-line ${
+                          currentStatusIndex > index
+                            ? "pistakio-order-timeline-line-completed"
+                            : ""
+                        }`}
+                      />
+                    )}
                   </div>
                 )
               })}
             </div>
+          </section>
+        )}
+
+        {/* CANCELLED */}
+
+        {isCancelled && (
+          <div className="pistakio-order-cancelled">
+            <strong>{t("orderDetails.cancelled")}</strong>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* CANCELLED */}
+        {/* CONTENT */}
 
-      {isCancelled && (
-        <div className="alert alert-danger mb-4">
-          {t("orderDetails.cancelled")}
-        </div>
-      )}
+        <div className="pistakio-order-grid">
+          {/* PRODUCTS */}
 
-      <div className="row g-4">
-        {/* PRODUCTS */}
+          <section className="pistakio-order-products">
+            <div className="pistakio-order-section-heading">
+              <div className="pistakio-order-section-icon">
+                <Package size={19} />
+              </div>
 
-        <div className="col-12 col-lg-8">
-          <div className="card border-0 shadow-sm">
-            <div className="card-body p-4">
-              <h2 className="h5 mb-4">
-                <Package size={20} className="me-2" />
-                {t("orderDetails.products")}
-              </h2>
+              <div>
+                <h2>{t("orderDetails.products")}</h2>
 
-              <div className="d-flex flex-column gap-4">
-                {items.map(({ orderItem, flavor, tub }) => (
-                  <div
-                    key={orderItem.id}
-                    className="row align-items-center g-3"
-                  >
-                    {/* IMAGE */}
+                <span>
+                  {items.length}{" "}
+                  {items.length === 1
+                    ? t("orderDetails.product")
+                    : t("orderDetails.productsCount")}
+                </span>
+              </div>
+            </div>
 
-                    <div className="col-3 col-sm-2">
-                      {flavor.image && (
-                        <img
-                          src={flavor.image}
-                          alt={flavor.name}
-                          className="img-fluid rounded"
-                          style={{
-                            height: "75px",
-                            width: "75px",
-                            objectFit: "cover",
-                          }}
-                        />
+            <div className="pistakio-order-product-list">
+              {items.map(({ orderItem, flavor, tub }) => {
+                const itemTotal = orderItem.unitPrice * orderItem.quantity
+
+                return (
+                  <div key={orderItem.id} className="pistakio-order-product">
+                    <div className="pistakio-order-product-image">
+                      {flavor.image ? (
+                        <img src={flavor.image} alt={flavor.name} />
+                      ) : (
+                        <Package size={25} />
                       )}
                     </div>
 
-                    {/* INFO */}
+                    <div className="pistakio-order-product-info">
+                      <h3>{flavor.name}</h3>
 
-                    <div className="col-6 col-sm-7">
-                      <h3 className="h6 mb-1">{flavor.name}</h3>
-
-                      <p className="text-muted mb-1">
+                      <span>
                         {t("orderDetails.tubSize")}: {tub.weight} g
-                      </p>
+                      </span>
 
-                      <small className="text-muted">
+                      <span>
                         {t("orderDetails.quantity")}: {orderItem.quantity}
-                      </small>
+                      </span>
                     </div>
 
-                    {/* PRICE */}
+                    <div className="pistakio-order-product-price">
+                      <strong>€ {itemTotal.toFixed(2)}</strong>
 
-                    <div className="col-3 col-sm-3 text-end">
-                      <strong>
-                        €{(orderItem.unitPrice * orderItem.quantity).toFixed(2)}
-                      </strong>
-
-                      <small className="d-block text-muted">
-                        €{orderItem.unitPrice.toFixed(2)} /{" "}
+                      <span>
+                        € {orderItem.unitPrice.toFixed(2)} /{" "}
                         {t("orderDetails.unit")}
-                      </small>
+                      </span>
                     </div>
                   </div>
-                ))}
-              </div>
+                )
+              })}
+            </div>
 
-              <hr className="my-4" />
+            {/* TOTALS */}
 
-              {/* TOTALS */}
-
-              <div className="d-flex justify-content-between mb-2">
+            <div className="pistakio-order-totals">
+              <div>
                 <span>{t("orderDetails.subtotal")}</span>
 
-                <span>€ {subtotal.toFixed(2)}</span>
+                <strong>€ {subtotal.toFixed(2)}</strong>
               </div>
 
-              <div className="d-flex justify-content-between mb-3">
+              <div>
                 <span>{t("orderDetails.shipping")}</span>
 
-                <span>
+                <strong>
                   {order.shippingCost === 0
                     ? t("orderDetails.free")
                     : `€ ${order.shippingCost.toFixed(2)}`}
-                </span>
+                </strong>
               </div>
 
-              <hr />
+              <div className="pistakio-order-grand-total">
+                <span>{t("orderDetails.total")}</span>
 
-              <div className="d-flex justify-content-between">
-                <strong>{t("orderDetails.total")}</strong>
-
-                <strong className="fs-5">€ {order.total.toFixed(2)}</strong>
+                <strong>€ {order.total.toFixed(2)}</strong>
               </div>
             </div>
-          </div>
-        </div>
+          </section>
 
-        {/* SIDEBAR */}
+          {/* SIDEBAR */}
 
-        <div className="col-12 col-lg-4">
-          {/* ADDRESS */}
+          <aside className="pistakio-order-sidebar">
+            {/* ADDRESS */}
 
-          {order.address && (
-            <div className="card border-0 shadow-sm mb-4">
-              <div className="card-body p-4">
-                <h2 className="h5 mb-3">
-                  <MapPin size={19} className="me-2" />
-                  {t("orderDetails.address")}
-                </h2>
+            {order.address && (
+              <section className="pistakio-order-info-card">
+                <div className="pistakio-order-section-heading">
+                  <div className="pistakio-order-section-icon">
+                    <MapPin size={19} />
+                  </div>
 
-                <div>{order.address.addressLine1}</div>
-
-                {order.address.addressLine2 && (
-                  <div>{order.address.addressLine2}</div>
-                )}
-
-                <div>
-                  {order.address.postalCode} {order.address.city}
+                  <h2>{t("orderDetails.address")}</h2>
                 </div>
 
-                <div>{order.address.country}</div>
-              </div>
-            </div>
-          )}
+                <div className="pistakio-order-address">
+                  <div>{order.address.addressLine1}</div>
 
-          {/* NOTES */}
+                  {order.address.addressLine2 && (
+                    <div>{order.address.addressLine2}</div>
+                  )}
 
-          {order.notes && (
-            <div className="card border-0 shadow-sm">
-              <div className="card-body p-4">
-                <h2 className="h5 mb-3">{t("orderDetails.notes")}</h2>
+                  <div>
+                    {order.address.postalCode} {order.address.city}
+                  </div>
 
-                <p className="text-muted mb-0">{order.notes}</p>
-              </div>
-            </div>
-          )}
+                  <div>{order.address.country}</div>
+                </div>
+              </section>
+            )}
+
+            {/* NOTES */}
+
+            {order.notes && (
+              <section className="pistakio-order-info-card">
+                <div className="pistakio-order-section-heading">
+                  <div className="pistakio-order-section-icon">
+                    <FileText size={19} />
+                  </div>
+
+                  <h2>{t("orderDetails.notes")}</h2>
+                </div>
+
+                <p className="pistakio-order-notes">{order.notes}</p>
+              </section>
+            )}
+          </aside>
         </div>
       </div>
     </main>

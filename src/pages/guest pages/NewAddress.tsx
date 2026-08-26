@@ -1,9 +1,14 @@
 import { useState } from "react"
+
 import { useNavigate } from "react-router-dom"
+
 import { useTranslation } from "react-i18next"
-import { ArrowLeft, Save } from "lucide-react"
+
+import { ArrowLeft, Home, MapPin, Save } from "lucide-react"
 
 import api from "../../services/api"
+
+import "../../styles/NewAddresses.css"
 
 function NewAddress() {
   const { t } = useTranslation()
@@ -36,6 +41,7 @@ function NewAddress() {
       navigate("/checkout")
     } catch (error) {
       console.error(error)
+
       setError(t("address.createError"))
     } finally {
       setLoading(false)
@@ -43,125 +49,177 @@ function NewAddress() {
   }
 
   return (
-    <main className="container py-5">
-      <div className="mb-4">
-        <button
-          type="button"
-          className="btn btn-outline-dark mb-3"
-          onClick={() => navigate("/checkout")}
-        >
-          <ArrowLeft size={17} className="me-1" />
-          {t("address.backToCheckout")}
-        </button>
+    <main className="pistakio-new-address">
+      <div className="container">
+        {/* HEADER */}
 
-        <h1>{t("address.title")}</h1>
-      </div>
+        <section className="pistakio-new-address-header">
+          <div>
+            <button
+              type="button"
+              className="pistakio-new-address-back"
+              onClick={() => navigate("/checkout")}
+            >
+              <ArrowLeft size={17} />
 
-      {error && <div className="alert alert-danger">{error}</div>}
+              {t("address.backToCheckout")}
+            </button>
+            <h1>{t("address.title")}</h1>
 
-      <div className="row">
-        <div className="col-12 col-lg-7">
-          <div className="card border-0 shadow-sm">
-            <div className="card-body p-4">
-              <form onSubmit={handleSubmit}>
-                {/* INDIRIZZO */}
+            <p>{t("address.subtitle")}</p>
+          </div>
+        </section>
 
-                <div className="mb-3">
-                  <label htmlFor="addressLine1" className="form-label">
-                    {t("address.addressLine1")}
-                  </label>
+        {/* ERROR */}
+
+        {error && <div className="pistakio-new-address-alert">{error}</div>}
+
+        {/* CONTENT */}
+
+        <div className="pistakio-new-address-layout">
+          {/* FORM */}
+
+          <section className="pistakio-new-address-card">
+            <div className="pistakio-new-address-card-heading">
+              <div className="pistakio-new-address-icon">
+                <MapPin size={20} />
+              </div>
+
+              <div>
+                <h2>{t("address.addressInformation")}</h2>
+
+                <span>{t("address.addressInformationDescription")}</span>
+              </div>
+            </div>
+
+            <form onSubmit={handleSubmit} className="pistakio-new-address-form">
+              {/* INDIRIZZO */}
+
+              <div className="pistakio-new-address-field">
+                <label htmlFor="addressLine1">
+                  {t("address.addressLine1")}
+                </label>
+
+                <div className="pistakio-new-address-input">
+                  <Home size={17} />
 
                   <input
                     id="addressLine1"
                     type="text"
-                    className="form-control"
                     value={addressLine1}
                     onChange={(event) => setAddressLine1(event.target.value)}
+                    placeholder={t("address.addressLine1Placeholder")}
+                    autoComplete="street-address"
                     required
                   />
                 </div>
+              </div>
 
-                {/* INTERNO / CITOFONO */}
+              {/* INTERNO */}
 
-                <div className="mb-3">
-                  <label htmlFor="addressLine2" className="form-label">
-                    {t("address.addressLine2")}
-                  </label>
+              <div className="pistakio-new-address-field">
+                <label htmlFor="addressLine2">
+                  {t("address.addressLine2")}
+                </label>
+
+                <div className="pistakio-new-address-input">
+                  <MapPin size={17} />
 
                   <input
                     id="addressLine2"
                     type="text"
-                    className="form-control"
                     value={addressLine2}
                     onChange={(event) => setAddressLine2(event.target.value)}
+                    placeholder={t("address.addressLine2Placeholder")}
+                    autoComplete="address-line2"
                   />
                 </div>
+              </div>
 
-                {/* CAP */}
+              {/* CAP + CITTA' */}
 
-                <div className="mb-3">
-                  <label htmlFor="postalCode" className="form-label">
-                    {t("address.postalCode")}
-                  </label>
+              <div className="pistakio-new-address-row">
+                <div className="pistakio-new-address-field">
+                  <label htmlFor="postalCode">{t("address.postalCode")}</label>
 
                   <input
                     id="postalCode"
                     type="text"
-                    className="form-control"
                     value={postalCode}
                     onChange={(event) => setPostalCode(event.target.value)}
+                    placeholder={t("address.postalCodePlaceholder")}
+                    autoComplete="postal-code"
                     required
                   />
                 </div>
 
-                {/* CITTÀ */}
-
-                <div className="mb-3">
-                  <label htmlFor="city" className="form-label">
-                    {t("address.city")}
-                  </label>
+                <div className="pistakio-new-address-field">
+                  <label htmlFor="city">{t("address.city")}</label>
 
                   <input
                     id="city"
                     type="text"
-                    className="form-control"
                     value={city}
                     onChange={(event) => setCity(event.target.value)}
+                    placeholder={t("address.cityPlaceholder")}
+                    autoComplete="address-level2"
                     required
                   />
                 </div>
+              </div>
 
-                {/* PAESE */}
+              {/* PAESE */}
 
-                <div className="mb-4">
-                  <label htmlFor="country" className="form-label">
-                    {t("address.country")}
-                  </label>
+              <div className="pistakio-new-address-field">
+                <label htmlFor="country">{t("address.country")}</label>
 
-                  <input
-                    id="country"
-                    type="text"
-                    className="form-control"
-                    value={country}
-                    onChange={(event) => setCountry(event.target.value)}
-                    required
-                  />
-                </div>
+                <input
+                  id="country"
+                  type="text"
+                  value={country}
+                  onChange={(event) => setCountry(event.target.value)}
+                  placeholder={t("address.countryPlaceholder")}
+                  autoComplete="country-name"
+                  required
+                />
+              </div>
 
-                {/* SALVA */}
+              {/* BUTTONS */}
+
+              <div className="pistakio-new-address-actions">
+                <button
+                  type="button"
+                  className="pistakio-new-address-cancel"
+                  onClick={() => navigate("/checkout")}
+                  disabled={loading}
+                >
+                  {t("address.cancel")}
+                </button>
 
                 <button
                   type="submit"
-                  className="btn btn-dark w-100"
+                  className="pistakio-new-address-save"
                   disabled={loading}
                 >
-                  <Save size={17} className="me-2" />
+                  <Save size={17} />
 
                   {loading ? t("address.saving") : t("address.save")}
                 </button>
-              </form>
+              </div>
+            </form>
+          </section>
+
+          {/* SIDE INFO */}
+
+          <aside className="pistakio-new-address-info">
+            <div className="pistakio-new-address-info-icon">
+              <MapPin size={22} />
             </div>
-          </div>
+
+            <h2>{t("address.deliveryTitle")}</h2>
+
+            <p>{t("address.deliveryDescription")}</p>
+          </aside>
         </div>
       </div>
     </main>

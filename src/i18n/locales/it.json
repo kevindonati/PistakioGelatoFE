@@ -69,7 +69,8 @@
     "results": "Risultati:",
     "filtersActive": "Filtri attivi",
     "discover": "Scopri il gusto",
-    "noFlavorsDescription": "Prova a modificare o rimuovere i filtri per trovare altri gusti."
+    "noFlavorsDescription": "Prova a modificare o rimuovere i filtri per trovare altri gusti.",
+    "unavailableDescription": "Questo gusto non è attualmente disponibile."
   },
 
   "cart": {
@@ -88,7 +89,8 @@
     "product": "prodotto",
     "products": "prodotti",
     "decreaseQuantity": "Diminuisci quantità",
-    "increaseQuantity": "Aumenta quantità"
+    "increaseQuantity": "Aumenta quantità",
+    "quantity": "Quantità"
   },
 
   "home": {
@@ -208,7 +210,17 @@
     "backToCheckout": "Torna al checkout",
     "createError": "Impossibile creare l'indirizzo.",
     "cancel": "Annulla",
-    "saveChanges": "Salva modifiche"
+    "saveChanges": "Salva modifiche",
+    "subtitle": "Inserisci un indirizzo per la consegna del tuo ordine.",
+    "addressInformation": "Informazioni sull'indirizzo",
+    "addressInformationDescription": "Inserisci i dati dell'indirizzo in cui vuoi ricevere il tuo ordine.",
+    "addressLine1Placeholder": "Via Roma 10",
+    "addressLine2Placeholder": "Interno, piano, citofono...",
+    "postalCodePlaceholder": "CAP",
+    "cityPlaceholder": "Città",
+    "countryPlaceholder": "Paese",
+    "deliveryTitle": "Dove consegniamo?",
+    "deliveryDescription": "Utilizzeremo questo indirizzo per la consegna del tuo ordine. Controlla che tutti i dati siano corretti prima di salvare."
   },
 
   "addresses": {
@@ -252,10 +264,14 @@
   },
 
   "orders": {
-    "title": "Ordini",
-    "subtitle": "Gestisci gli ordini del negozio",
+    "title": "I miei ordini",
+    "subtitle": "Gestisci e controlla i tuoi ordini",
+    "description": "Controlla i tuoi ordini e visualizza tutti i dettagli dei tuoi acquisti.",
+    "orderCount": "ordini",
     "all": "Tutti gli ordini",
-    "empty": "Nessun ordine trovato",
+    "empty": "Non hai ancora effettuato ordini",
+    "emptyMessage": "Scopri i nostri gusti e crea il tuo primo ordine.",
+    "goToCatalog": "Scopri i gusti",
     "loadError": "Impossibile caricare gli ordini.",
     "actionError": "Si è verificato un errore durante l'operazione.",
     "prepare": "Inizia preparazione",
@@ -285,7 +301,10 @@
     "order": "Ordine",
     "date": "Data",
     "total": "Totale",
-    "actions": "Azioni"
+    "actions": "Azioni",
+    "statusPaid": "Pagato",
+    "statusCancelled": "Annullato",
+    "statusPending": "In attesa"
   },
 
   "orderDetails": {
@@ -293,6 +312,8 @@
     "orderDate": "Data ordine",
     "status": "Stato dell'ordine",
     "products": "Prodotti",
+    "product": "prodotto",
+    "productsCount": "prodotti",
     "tubSize": "Vaschetta",
     "quantity": "Quantità",
     "unit": "pezzo",
@@ -629,6 +650,7 @@
     "orders": "I miei ordini",
     "ordersDescription": "Visualizza e gestisci i tuoi ordini.",
     "addresses": "I miei indirizzi",
-    "addressesDescription": "Gestisci i tuoi indirizzi di consegna."
+    "addressesDescription": "Gestisci i tuoi indirizzi di consegna.",
+    "personalInfoDescription": "Gestisci i tuoi dati personali e le preferenze del tuo account."
   }
 }
