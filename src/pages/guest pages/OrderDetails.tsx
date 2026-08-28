@@ -9,10 +9,12 @@ import {
   FileText,
   MapPin,
   Package,
+  Wallet,
 } from "lucide-react"
 
 import {
   createStripeCheckout,
+  createPaypalOrder,
   getMyOrderById,
   getMyOrderItems,
 } from "../../services/orderApi"
@@ -92,17 +94,26 @@ function OrderDetails() {
     loadOrder()
   }, [id, t])
 
-  const handlePayment = async () => {
+  const handlePayment = async (method: "STRIPE" | "PAYPAL") => {
     if (!order) {
       return
     }
 
     try {
       setPaymentLoading(true)
+      setError("")
 
-      const response = await createStripeCheckout(order.id)
+      if (method === "STRIPE") {
+        const response = await createStripeCheckout(order.id)
 
-      window.location.href = response.url
+        window.location.href = response.url
+
+        return
+      }
+
+      const response = await createPaypalOrder(order.id)
+
+      window.location.href = response.approvalUrl
     } catch (error) {
       console.error(error)
 
@@ -130,6 +141,7 @@ function OrderDetails() {
 
             <Link to="/orders" className="pistakio-order-error-button">
               <ArrowLeft size={17} />
+
               {t("orderDetails.backToOrders")}
             </Link>
           </div>
@@ -162,6 +174,7 @@ function OrderDetails() {
           <div>
             <Link to="/orders" className="pistakio-order-back">
               <ArrowLeft size={17} />
+
               {t("orderDetails.backToOrders")}
             </Link>
 
@@ -181,22 +194,38 @@ function OrderDetails() {
               }`}
             >
               <span />
+
               {getStatusLabel(order.orderStatus)}
             </span>
 
             {order.orderStatus === "PENDING_PAYMENT" && (
-              <button
-                type="button"
-                className="pistakio-order-pay-button"
-                onClick={handlePayment}
-                disabled={paymentLoading}
-              >
-                <CreditCard size={18} />
+              <div className="d-flex gap-2">
+                <button
+                  type="button"
+                  className="pistakio-order-pay-button"
+                  onClick={() => handlePayment("STRIPE")}
+                  disabled={paymentLoading}
+                >
+                  <CreditCard size={18} />
 
-                {paymentLoading
-                  ? t("orderDetails.paymentLoading")
-                  : t("orderDetails.payNow")}
-              </button>
+                  {paymentLoading
+                    ? t("orderDetails.paymentLoading")
+                    : t("orderDetails.payWithStripe")}
+                </button>
+
+                <button
+                  type="button"
+                  className="pistakio-order-pay-button"
+                  onClick={() => handlePayment("PAYPAL")}
+                  disabled={paymentLoading}
+                >
+                  <Wallet size={18} />
+
+                  {paymentLoading
+                    ? t("orderDetails.paymentLoading")
+                    : t("orderDetails.payWithPaypal")}
+                </button>
+              </div>
             )}
           </div>
         </section>

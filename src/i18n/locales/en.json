@@ -188,7 +188,17 @@
     "backToCart": "Back to cart",
     "subtotal": "Subtotal",
     "shipping": "Shipping",
-    "free": "Free"
+    "free": "Free",
+    "deliveryAddressDescription": "Choose where you want to receive your order.",
+    "selected": "Selected",
+    "notesDescription": "Add any delivery instructions you may have.",
+    "paymentTitle": "Secure payment",
+    "paymentDescription": "You will be redirected to Stripe to securely complete your payment.",
+    "securePayment": "Secure and protected payment",
+    "paymentStripe": "Credit / debit card",
+    "paymentPaypal": "PayPal",
+    "payWithStripe": "Pay with card",
+    "payWithPaypal": "Pay with PayPal"
   },
   "address": {
     "title": "New address",
@@ -251,6 +261,18 @@
     "backToCatalog": "Back to catalog",
     "orderNotFound": "Order not found.",
     "loadError": "Unable to retrieve the order."
+  },
+  "paymentFailed": {
+    "title": "Payment failed",
+    "message": "Your payment could not be completed. You can try again or return to the catalog.",
+    "payment": "Payment",
+    "paymentDescription": "There was a problem processing your payment.",
+    "warning": "No payment was completed. You can try again at any time.",
+    "orderId": "Order ID",
+    "retry": "Retry payment",
+    "backToCart": "Back to cart",
+    "backToCatalog": "Back to catalog",
+    "processing": "Processing..."
   },
   "orders": {
     "title": "My Orders",
@@ -317,7 +339,9 @@
     "backToOrders": "Back to my orders",
     "payNow": "Pay now",
     "paymentLoading": "Opening payment...",
-    "paymentError": "Unable to start the payment."
+    "paymentError": "Unable to start the payment.",
+    "payWithStripe": "Pay with card",
+    "payWithPaypal": "Pay with PayPal"
   },
   "orderStatus": {
     "CART": "Cart",
@@ -353,10 +377,14 @@
     },
     "dashboard": {
       "title": "Dashboard",
-      "subtitle": "Manage your store",
+      "subtitle": "Store overview",
       "orders": "Orders",
       "customers": "Customers",
-      "revenue": "Revenue"
+      "revenue": "Revenue",
+      "pendingPayments": "Pending payments",
+      "preparingOrders": "Preparing",
+      "shippedOrders": "Shipped",
+      "deliveredOrders": "Delivered"
     },
     "orders": {
       "title": "Orders",

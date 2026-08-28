@@ -188,7 +188,17 @@
     "backToCart": "Zurück zum Warenkorb",
     "subtotal": "Zwischensumme",
     "shipping": "Versand",
-    "free": "Kostenlos"
+    "free": "Kostenlos",
+    "deliveryAddressDescription": "Wählen Sie aus, wohin Ihre Bestellung geliefert werden soll.",
+    "selected": "Ausgewählt",
+    "notesDescription": "Fügen Sie gegebenenfalls Hinweise für die Lieferung hinzu.",
+    "paymentTitle": "Sichere Zahlung",
+    "paymentDescription": "Sie werden zu Stripe weitergeleitet, um Ihre Zahlung sicher abzuschließen.",
+    "securePayment": "Sichere und geschützte Zahlung",
+    "paymentStripe": "Kredit- / Debitkarte",
+    "paymentPaypal": "PayPal",
+    "payWithStripe": "Mit Karte bezahlen",
+    "payWithPaypal": "Mit PayPal bezahlen"
   },
   "address": {
     "title": "Neue Adresse",
@@ -251,6 +261,18 @@
     "backToCatalog": "Zurück zum Katalog",
     "orderNotFound": "Bestellung nicht gefunden.",
     "loadError": "Die Bestellung konnte nicht abgerufen werden."
+  },
+  "paymentFailed": {
+    "title": "Zahlung fehlgeschlagen",
+    "message": "Die Zahlung konnte nicht abgeschlossen werden. Du kannst es erneut versuchen oder zum Katalog zurückkehren.",
+    "payment": "Zahlung",
+    "paymentDescription": "Bei der Verarbeitung deiner Zahlung ist ein Problem aufgetreten.",
+    "warning": "Es wurde keine Zahlung abgeschlossen. Du kannst es jederzeit erneut versuchen.",
+    "orderId": "Bestellnummer",
+    "retry": "Zahlung erneut versuchen",
+    "backToCart": "Zurück zum Warenkorb",
+    "backToCatalog": "Zum Katalog",
+    "processing": "Wird verarbeitet..."
   },
   "orders": {
     "title": "Meine Bestellungen",
@@ -317,7 +339,9 @@
     "backToOrders": "Zurück zu meinen Bestellungen",
     "payNow": "Jetzt bezahlen",
     "paymentLoading": "Zahlung wird geöffnet...",
-    "paymentError": "Die Zahlung konnte nicht gestartet werden."
+    "paymentError": "Die Zahlung konnte nicht gestartet werden.",
+    "payWithStripe": "Mit Karte bezahlen",
+    "payWithPaypal": "Mit PayPal bezahlen"
   },
   "orderStatus": {
     "CART": "Warenkorb",
@@ -353,10 +377,14 @@
     },
     "dashboard": {
       "title": "Dashboard",
-      "subtitle": "Verwalten Sie Ihren Shop",
+      "subtitle": "Übersicht des Shops",
       "orders": "Bestellungen",
       "customers": "Kunden",
-      "revenue": "Umsatz"
+      "revenue": "Umsatz",
+      "pendingPayments": "Ausstehende Zahlungen",
+      "preparingOrders": "In Vorbereitung",
+      "shippedOrders": "Versendet",
+      "deliveredOrders": "Zugestellt"
     },
     "orders": {
       "title": "Bestellungen",

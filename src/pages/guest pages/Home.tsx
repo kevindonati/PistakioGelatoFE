@@ -91,26 +91,6 @@ function Home() {
                 <ArrowRight size={19} />
               </button>
             </div>
-
-            {/* <div className="home-hero-decoration">
-              <div className="hero-circle hero-circle-one" />
-
-              <div className="hero-circle hero-circle-two" />
-
-              <div className="hero-gelato">
-                <div className="hero-scoop hero-scoop-pink" />
-
-                <div className="hero-scoop hero-scoop-green" />
-
-                <div className="hero-scoop hero-scoop-light" />
-
-                <div className="hero-cone">
-                  <span />
-                  <span />
-                  <span />
-                </div>
-              </div>
-            </div> */}
           </div>
         </div>
       </section>

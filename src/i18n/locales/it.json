@@ -195,7 +195,17 @@
     "backToCart": "Torna al carrello",
     "subtotal": "Subtotale",
     "shipping": "Spedizione",
-    "free": "Gratuita"
+    "free": "Gratuita",
+    "deliveryAddressDescription": "Scegli dove vuoi ricevere il tuo ordine.",
+    "selected": "Selezionato",
+    "notesDescription": "Aggiungi eventuali indicazioni per la consegna.",
+    "paymentTitle": "Pagamento sicuro",
+    "paymentDescription": "Sarai reindirizzato a Stripe per completare il pagamento in sicurezza.",
+    "securePayment": "Pagamento sicuro e protetto",
+    "paymentStripe": "Carta di credito / debito",
+    "paymentPaypal": "PayPal",
+    "payWithStripe": "Paga con carta",
+    "payWithPaypal": "Paga con PayPal"
   },
 
   "address": {
@@ -261,6 +271,19 @@
     "backToCatalog": "Torna al catalogo",
     "orderNotFound": "Ordine non trovato.",
     "loadError": "Non è stato possibile recuperare l'ordine."
+  },
+
+  "paymentFailed": {
+    "title": "Pagamento non riuscito",
+    "message": "Il pagamento non è stato completato. Puoi riprovare oppure tornare al catalogo.",
+    "payment": "Pagamento",
+    "paymentDescription": "Si è verificato un problema durante il pagamento.",
+    "warning": "Nessun pagamento è stato completato. Puoi riprovare in qualsiasi momento.",
+    "orderId": "ID ordine",
+    "retry": "Riprova il pagamento",
+    "backToCart": "Torna al carrello",
+    "backToCatalog": "Torna al catalogo",
+    "processing": "Elaborazione..."
   },
 
   "orders": {
@@ -329,7 +352,9 @@
     "backToOrders": "Torna ai miei ordini",
     "payNow": "Paga ora",
     "paymentLoading": "Apertura del pagamento...",
-    "paymentError": "Non è stato possibile avviare il pagamento."
+    "paymentError": "Non è stato possibile avviare il pagamento.",
+    "payWithStripe": "Paga con carta",
+    "payWithPaypal": "Paga con PayPal"
   },
 
   "orderStatus": {
@@ -368,11 +393,15 @@
     },
 
     "dashboard": {
-      "title": "Pannello di controllo",
-      "subtitle": "Gestisci il tuo negozio",
+      "title": "Dashboard",
+      "subtitle": "Panoramica del negozio",
       "orders": "Ordini",
       "customers": "Clienti",
-      "revenue": "Incassi"
+      "revenue": "Fatturato",
+      "pendingPayments": "Pagamenti in attesa",
+      "preparingOrders": "In preparazione",
+      "shippedOrders": "Spediti",
+      "deliveredOrders": "Consegnati"
     },
 
     "orders": {

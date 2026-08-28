@@ -33,6 +33,7 @@ import Footer from "./components/Footer"
 import Account from "./pages/guest pages/Account"
 import Addresses from "./pages/guest pages/Addresses"
 import EditAddress from "./pages/guest pages/EditAddress"
+import PaymentFailed from "./pages/guest pages/PaymentFailed"
 
 function NotFound() {
   return <h1>404 - Pagina non trovata</h1>
@@ -140,6 +141,7 @@ function AppContent() {
           <Route path="/account/addresses" element={<Addresses />} />
           <Route path="/account/addresses/:id/edit" element={<EditAddress />} />
           <Route path="/payment/success" element={<PaymentSuccess />} />
+          <Route path="/payment/failed" element={<PaymentFailed />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/orders/:id" element={<OrderDetails />} />
         </Route>

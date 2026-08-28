@@ -18,6 +18,7 @@ import { useState } from "react"
 import { useAuth } from "../context/useAuth"
 import { useTranslation } from "react-i18next"
 import "../styles/Admin.css"
+import logo from "../assets/LOGO CON SCRITTA PIST DEF NOBG.png"
 
 function AdminLayout() {
   const { logout } = useAuth()
@@ -57,11 +58,7 @@ function AdminLayout() {
 
         <div className="admin-sidebar-header">
           {!collapsed && (
-            <div className="admin-logo">
-              <span className="admin-logo-pistakio">Pistakio</span>
-
-              <span className="admin-logo-gelato">Gelato</span>
-            </div>
+            <img src={logo} alt="logo pistakio gelato" className="admin-logo" />
           )}
 
           <button

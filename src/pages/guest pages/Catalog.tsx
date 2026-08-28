@@ -128,12 +128,10 @@ function Catalog() {
   }
 
   return (
-    <main className="catalog">
-      {/* =====================================================
-          HEADER
-      ===================================================== */}
+    <main className="catalog bg-body-tertiary">
+      {/* HEADER */}
 
-      <section className="catalog-header">
+      <section className="catalog-header ">
         <div className="container">
           <div className="catalog-header-content">
             <h1>{t("catalog.title")}</h1>

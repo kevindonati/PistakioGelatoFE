@@ -142,8 +142,13 @@ export const getMyOrderById = async (id: string): Promise<Order> => {
   return response.data
 }
 
-export const getMyOrderItems = async (page = 0, size = 50) => {
-  const response = await api.get("/order-items", {
+export const getMyOrderItems = async (
+  page = 0,
+  size = 50,
+): Promise<OrderItem[]> => {
+  const response = await api.get<{
+    content: OrderItem[]
+  }>("/order-items", {
     params: {
       page,
       size,
@@ -303,4 +308,25 @@ export const getPaymentByOrderId = async (
   const response = await api.get<Payment>(`/payments/order/${orderId}`)
 
   return response.data
+}
+
+export interface PaypalCheckoutResponse {
+  orderId: string
+  approvalUrl: string
+}
+
+export const createPaypalOrder = async (
+  orderId: string,
+): Promise<PaypalCheckoutResponse> => {
+  const response = await api.post<PaypalCheckoutResponse>(
+    `/payments/paypal/${orderId}`,
+  )
+
+  return response.data
+}
+
+export const capturePaypalPayment = async (
+  paypalOrderId: string,
+): Promise<void> => {
+  await api.post(`/payments/paypal/${paypalOrderId}/capture`)
 }

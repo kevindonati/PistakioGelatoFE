@@ -188,7 +188,17 @@
     "backToCart": "Retour au panier",
     "subtotal": "Sous-total",
     "shipping": "Livraison",
-    "free": "Gratuite"
+    "free": "Gratuite",
+    "deliveryAddressDescription": "Choisissez où vous souhaitez recevoir votre commande.",
+    "selected": "Sélectionnée",
+    "notesDescription": "Ajoutez d'éventuelles instructions pour la livraison.",
+    "paymentTitle": "Paiement sécurisé",
+    "paymentDescription": "Vous serez redirigé vers Stripe pour effectuer votre paiement en toute sécurité.",
+    "securePayment": "Paiement sécurisé et protégé",
+    "paymentStripe": "Carte de crédit / débit",
+    "paymentPaypal": "PayPal",
+    "payWithStripe": "Payer par carte",
+    "payWithPaypal": "Payer avec PayPal"
   },
   "address": {
     "title": "Nouvelle adresse",
@@ -251,6 +261,18 @@
     "backToCatalog": "Retour au catalogue",
     "orderNotFound": "Commande introuvable.",
     "loadError": "Impossible de récupérer la commande."
+  },
+  "paymentFailed": {
+    "title": "Échec du paiement",
+    "message": "Votre paiement n'a pas pu être effectué. Vous pouvez réessayer ou retourner au catalogue.",
+    "payment": "Paiement",
+    "paymentDescription": "Un problème est survenu lors du traitement de votre paiement.",
+    "warning": "Aucun paiement n'a été effectué. Vous pouvez réessayer à tout moment.",
+    "orderId": "ID de la commande",
+    "retry": "Réessayer le paiement",
+    "backToCart": "Retour au panier",
+    "backToCatalog": "Retour au catalogue",
+    "processing": "Traitement..."
   },
   "orders": {
     "title": "Mes commandes",
@@ -317,7 +339,9 @@
     "backToOrders": "Retour à mes commandes",
     "payNow": "Payer maintenant",
     "paymentLoading": "Ouverture du paiement...",
-    "paymentError": "Impossible de démarrer le paiement."
+    "paymentError": "Impossible de démarrer le paiement.",
+    "payWithStripe": "Payer par carte",
+    "payWithPaypal": "Payer avec PayPal"
   },
   "orderStatus": {
     "CART": "Panier",
@@ -353,10 +377,14 @@
     },
     "dashboard": {
       "title": "Tableau de bord",
-      "subtitle": "Gérez votre boutique",
+      "subtitle": "Vue d'ensemble de la boutique",
       "orders": "Commandes",
       "customers": "Clients",
-      "revenue": "Chiffre d'affaires"
+      "revenue": "Chiffre d'affaires",
+      "pendingPayments": "Paiements en attente",
+      "preparingOrders": "En préparation",
+      "shippedOrders": "Expédiées",
+      "deliveredOrders": "Livrées"
     },
     "orders": {
       "title": "Commandes",

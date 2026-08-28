@@ -1,9 +1,23 @@
 import { useEffect, useState } from "react"
-import { Link, useSearchParams } from "react-router-dom"
-import { useTranslation } from "react-i18next"
-import { ArrowRight, CheckCircle, MapPin, Package } from "lucide-react"
 
-import { getOrderById, getOrderItems } from "../../services/orderApi"
+import { Link, useSearchParams } from "react-router-dom"
+
+import { useTranslation } from "react-i18next"
+
+import {
+  ArrowRight,
+  Check,
+  MapPin,
+  Package,
+  ShoppingBag,
+  Truck,
+} from "lucide-react"
+
+import {
+  getOrderById,
+  getOrderItems,
+  capturePaypalPayment,
+} from "../../services/orderApi"
 
 import { getFlavorById, getTubById } from "../../services/catalogApi"
 
@@ -14,6 +28,8 @@ import type { Tub } from "../../types/Tub"
 
 import Loading from "../../components/Loading"
 
+import "../../styles/PaymentSuccess.css"
+
 interface PaymentItem {
   orderItem: OrderItem
   flavor: Flavor
@@ -22,45 +38,138 @@ interface PaymentItem {
 
 function PaymentSuccess() {
   const { t } = useTranslation()
+
   const [searchParams] = useSearchParams()
 
   const orderId = searchParams.get("orderId")
 
+  /*
+   * PayPal aggiunge automaticamente il parametro "token"
+   * alla success URL.
+   *
+   * Il token corrisponde al PayPal Order ID.
+   */
+  const paypalOrderId = searchParams.get("token")
+
   const [order, setOrder] = useState<Order | null>(null)
+
   const [items, setItems] = useState<PaymentItem[]>([])
 
   const [loading, setLoading] = useState(true)
+
   const [error, setError] = useState("")
 
   useEffect(() => {
     if (!orderId) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setError(t("paymentSuccess.orderNotFound"))
+
       setLoading(false)
+
       return
     }
 
     let cancelled = false
     let attempts = 0
+    let paypalCaptureAttempted = false
 
     const loadPaymentSuccess = async () => {
       try {
         setLoading(true)
         setError("")
 
+        /*
+         * Recuperiamo l'ordine.
+         */
         const orderData = await getOrderById(orderId)
 
         if (cancelled) {
           return
         }
 
-        if (orderData.orderStatus !== "PAID" && attempts < 5) {
-          attempts++
+        /*
+         * =========================================
+         * PAYPAL CAPTURE
+         * =========================================
+         *
+         * Se nella URL c'è "token", significa che
+         * PayPal ci ha riportato dopo il pagamento.
+         *
+         * Il token è il PayPal Order ID.
+         *
+         * Facciamo la capture una sola volta.
+         */
 
-          setTimeout(loadPaymentSuccess, 1000)
+        if (
+          paypalOrderId &&
+          !paypalCaptureAttempted &&
+          orderData.orderStatus === "PENDING_PAYMENT"
+        ) {
+          paypalCaptureAttempted = true
 
-          return
+          try {
+            await capturePaypalPayment(paypalOrderId)
+
+            if (cancelled) {
+              return
+            }
+
+            /*
+             * Dopo la capture ricarichiamo l'ordine
+             * per ottenere lo stato PAID.
+             */
+
+            const updatedOrder = await getOrderById(orderId)
+
+            if (cancelled) {
+              return
+            }
+
+            if (updatedOrder.orderStatus !== "PAID") {
+              setError(t("paymentSuccess.paymentPending"))
+            }
+
+            setOrder(updatedOrder)
+          } catch (error) {
+            console.error("Errore capture PayPal:", error)
+
+            setError(t("paymentSuccess.loadError"))
+
+            /*
+             * Non interrompiamo completamente il caricamento:
+             * mostriamo comunque i dati dell'ordine.
+             */
+
+            setOrder(orderData)
+          }
+        } else {
+          /*
+           * Stripe:
+           * il webhook aggiorna il pagamento e l'ordine.
+           *
+           * Quindi continuiamo ad aspettare PAID.
+           */
+
+          if (orderData.orderStatus !== "PAID" && attempts < 5) {
+            attempts++
+
+            setTimeout(loadPaymentSuccess, 1000)
+
+            return
+          }
+
+          setOrder(orderData)
+
+          if (orderData.orderStatus !== "PAID") {
+            setError(t("paymentSuccess.paymentPending"))
+          }
         }
+
+        /*
+         * =========================================
+         * ORDER ITEMS
+         * =========================================
+         */
 
         const orderItems = await getOrderItems()
 
@@ -91,11 +200,15 @@ function PaymentSuccess() {
           return
         }
 
-        setOrder(orderData)
         setItems(completeItems)
 
-        if (orderData.orderStatus !== "PAID") {
-          setError(t("paymentSuccess.paymentPending"))
+        /*
+         * Se non abbiamo già impostato l'ordine
+         * durante la capture PayPal, lo impostiamo qui.
+         */
+
+        if (!paypalOrderId) {
+          setOrder(orderData)
         }
       } catch (error) {
         console.error(error)
@@ -115,229 +228,287 @@ function PaymentSuccess() {
     return () => {
       cancelled = true
     }
-  }, [orderId, t])
+  }, [orderId, paypalOrderId, t])
+
+  /*
+   * =========================================
+   * LOADING
+   * =========================================
+   */
 
   if (loading) {
     return <Loading />
   }
 
+  /*
+   * =========================================
+   * ORDER NOT FOUND
+   * =========================================
+   */
+
   if (!order) {
     return (
-      <main className="container py-5">
-        <div className="alert alert-danger">
-          {error || t("paymentSuccess.loadError")}
-        </div>
+      <main className="pistakio-payment">
+        <div className="container">
+          <div className="pistakio-payment-error">
+            <div className="pistakio-payment-error-icon">
+              <Package size={28} />
+            </div>
 
-        <Link to="/catalog" className="btn btn-dark">
-          {t("paymentSuccess.backToCatalog")}
-        </Link>
+            <h1>{t("paymentSuccess.orderNotFound")}</h1>
+
+            <p>{error || t("paymentSuccess.loadError")}</p>
+
+            <Link to="/catalog" className="pistakio-payment-primary-button">
+              {t("paymentSuccess.backToCatalog")}
+
+              <ArrowRight size={17} />
+            </Link>
+          </div>
+        </div>
       </main>
     )
   }
 
   const isPaid = order.orderStatus === "PAID"
 
+  /*
+   * =========================================
+   * TOTALS
+   * =========================================
+   */
+
   const subtotal = items.reduce(
     (total, item) => total + item.orderItem.unitPrice * item.orderItem.quantity,
     0,
   )
 
+  const orderDate = new Date(order.createdAt).toLocaleString()
+
   return (
-    <main className="container py-5">
-      <div className="row justify-content-center">
-        <div className="col-12 col-lg-8">
-          {/* HEADER */}
+    <main className="pistakio-payment">
+      <div className="container">
+        <div className="pistakio-payment-wrapper">
+          {/* =========================================
+              SUCCESS HEADER
+          ========================================= */}
 
-          <div className="text-center mb-5">
-            <CheckCircle
-              size={72}
-              strokeWidth={1.5}
-              className="text-success mb-3"
-            />
+          <section
+            className={`pistakio-payment-hero ${
+              isPaid ? "is-success" : "is-pending"
+            }`}
+          >
+            <div className="pistakio-payment-check">
+              {isPaid ? <Check size={40} /> : <Package size={38} />}
+            </div>
 
-            <h1 className="mb-2">
+            <h1>
               {isPaid
                 ? t("paymentSuccess.title")
                 : t("paymentSuccess.paymentPending")}
             </h1>
 
-            <p className="text-muted mb-0">
+            <p>
               {isPaid
                 ? t("paymentSuccess.message")
                 : t("paymentSuccess.pendingMessage")}
             </p>
-          </div>
+          </section>
 
-          {/* ORDER */}
+          {/* =========================================
+              PENDING WARNING
+          ========================================= */}
 
-          <div className="card border-0 shadow-sm mb-4">
-            <div className="card-body p-4">
-              <div className="d-flex justify-content-between align-items-center mb-4">
-                <h2 className="h5 mb-0">
-                  <Package size={20} className="me-2" />
+          {!isPaid && error && (
+            <div className="pistakio-payment-pending-alert">{error}</div>
+          )}
 
-                  {t("paymentSuccess.order")}
-                </h2>
+          {/* =========================================
+              ORDER INFO
+          ========================================= */}
 
-                <span
-                  className={`badge ${
-                    isPaid ? "text-bg-success" : "text-bg-warning"
-                  }`}
-                >
-                  {order.orderStatus}
-                </span>
+          <section className="pistakio-payment-card">
+            <div className="pistakio-payment-card-header">
+              <div className="pistakio-payment-section-icon">
+                <Package size={20} />
               </div>
 
-              {/* ORDER ID */}
+              <div>
+                <h2>{t("paymentSuccess.order")}</h2>
 
-              <div className="mb-3">
-                <small className="text-muted d-block">
-                  {t("paymentSuccess.orderId")}
-                </small>
-
-                <span className="text-break">{order.id}</span>
+                <p>
+                  {t("paymentSuccess.orderDate")}: {orderDate}
+                </p>
               </div>
 
-              {/* DATE */}
+              <span
+                className={`pistakio-payment-status ${
+                  isPaid ? "paid" : "pending"
+                }`}
+              >
+                {isPaid ? <Check size={14} /> : null}
 
-              <div className="mb-4">
-                <small className="text-muted d-block">
-                  {t("paymentSuccess.orderDate")}
-                </small>
+                {order.orderStatus}
+              </span>
+            </div>
 
-                <span>{new Date(order.createdAt).toLocaleString()}</span>
+            <div className="pistakio-payment-order-id">
+              <span>{t("paymentSuccess.orderId")}</span>
+
+              <strong>{order.id}</strong>
+            </div>
+          </section>
+
+          {/* =========================================
+              PRODUCTS
+          ========================================= */}
+
+          <section className="pistakio-payment-card">
+            <div className="pistakio-payment-card-header">
+              <div className="pistakio-payment-section-icon pistakio-payment-section-icon-pink">
+                <ShoppingBag size={20} />
               </div>
 
-              <hr />
+              <div>
+                <h2>{t("paymentSuccess.products")}</h2>
 
-              {/* PRODUCTS */}
-
-              <h3 className="h6 mb-3">{t("paymentSuccess.products")}</h3>
-
-              <div className="d-flex flex-column gap-3">
-                {items.length === 0 ? (
-                  <p className="text-muted mb-0">
-                    {t("paymentSuccess.noProducts")}
-                  </p>
-                ) : (
-                  items.map(({ orderItem, flavor, tub }) => (
-                    <div
-                      key={orderItem.id}
-                      className="d-flex justify-content-between align-items-center gap-3"
-                    >
-                      <div className="d-flex align-items-center gap-3">
-                        {flavor.image && (
-                          <img
-                            src={flavor.image}
-                            alt={flavor.name}
-                            style={{
-                              width: "60px",
-                              height: "60px",
-                              objectFit: "cover",
-                              borderRadius: "8px",
-                            }}
-                          />
-                        )}
-
-                        <div>
-                          <div className="fw-semibold">{flavor.name}</div>
-
-                          <small className="text-muted">
-                            {tub.weight} g × {orderItem.quantity}
-                          </small>
-                        </div>
-                      </div>
-
-                      <div className="text-nowrap">
-                        €{(orderItem.unitPrice * orderItem.quantity).toFixed(2)}
-                      </div>
-                    </div>
-                  ))
-                )}
-              </div>
-
-              <hr />
-
-              {/* SUBTOTAL */}
-
-              <div className="d-flex justify-content-between mb-2">
-                <span>{t("paymentSuccess.subtotal")}</span>
-
-                <span>€ {subtotal.toFixed(2)}</span>
-              </div>
-
-              {/* SHIPPING */}
-
-              <div className="d-flex justify-content-between mb-3">
-                <span>{t("checkout.shipping")}</span>
-
-                <span>
-                  {order.shippingCost === 0
-                    ? t("checkout.free")
-                    : `€ ${order.shippingCost.toFixed(2)}`}
-                </span>
-              </div>
-
-              <hr />
-
-              {/* TOTAL */}
-
-              <div className="d-flex justify-content-between align-items-center">
-                <span className="fw-semibold">{t("cart.total")}</span>
-
-                <span className="fw-bold fs-4">€ {order.total.toFixed(2)}</span>
+                <p>
+                  {items.length} {items.length === 1 ? "item" : "items"}
+                </p>
               </div>
             </div>
-          </div>
 
-          {/* ADDRESS */}
+            {items.length === 0 ? (
+              <div className="pistakio-payment-empty-products">
+                {t("paymentSuccess.noProducts")}
+              </div>
+            ) : (
+              <div className="pistakio-payment-products">
+                {items.map(({ orderItem, flavor, tub }) => (
+                  <div key={orderItem.id} className="pistakio-payment-product">
+                    <div className="pistakio-payment-product-image">
+                      {flavor.image ? (
+                        <img src={flavor.image} alt={flavor.name} />
+                      ) : (
+                        <ShoppingBag size={22} />
+                      )}
+                    </div>
+
+                    <div className="pistakio-payment-product-info">
+                      <strong>{flavor.name}</strong>
+
+                      <span>
+                        {tub.weight} g × {orderItem.quantity}
+                      </span>
+                    </div>
+
+                    <strong className="pistakio-payment-product-price">
+                      €{(orderItem.unitPrice * orderItem.quantity).toFixed(2)}
+                    </strong>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div className="pistakio-payment-divider" />
+
+            {/* PRICES */}
+
+            <div className="pistakio-payment-price-row">
+              <span>{t("paymentSuccess.subtotal")}</span>
+
+              <strong>€ {subtotal.toFixed(2)}</strong>
+            </div>
+
+            <div className="pistakio-payment-price-row">
+              <span className="d-flex align-items-center gap-2">
+                <Truck size={15} />
+
+                {t("checkout.shipping")}
+              </span>
+
+              <strong>
+                {order.shippingCost === 0
+                  ? t("checkout.free")
+                  : `€ ${order.shippingCost.toFixed(2)}`}
+              </strong>
+            </div>
+
+            <div className="pistakio-payment-divider" />
+
+            <div className="pistakio-payment-total">
+              <span>{t("cart.total")}</span>
+
+              <strong>€ {order.total.toFixed(2)}</strong>
+            </div>
+          </section>
+
+          {/* =========================================
+              DELIVERY ADDRESS
+          ========================================= */}
 
           {order.address && (
-            <div className="card border-0 shadow-sm mb-4">
-              <div className="card-body p-4">
-                <h2 className="h5 mb-3">
-                  <MapPin size={19} className="me-2" />
-
-                  {t("paymentSuccess.deliveryAddress")}
-                </h2>
-
-                <div>{order.address.addressLine1}</div>
-
-                {order.address.addressLine2 && (
-                  <div>{order.address.addressLine2}</div>
-                )}
-
-                <div>
-                  {order.address.postalCode} {order.address.city}
+            <section className="pistakio-payment-card">
+              <div className="pistakio-payment-card-header">
+                <div className="pistakio-payment-section-icon">
+                  <MapPin size={20} />
                 </div>
 
-                <div>{order.address.country}</div>
+                <div>
+                  <h2>{t("paymentSuccess.deliveryAddress")}</h2>
+
+                  <p>{t("checkout.deliveryAddressDescription")}</p>
+                </div>
               </div>
-            </div>
+
+              <div className="pistakio-payment-address">
+                <strong>{order.address.addressLine1}</strong>
+
+                {order.address.addressLine2 && (
+                  <span>{order.address.addressLine2}</span>
+                )}
+
+                <span>
+                  {order.address.postalCode} {order.address.city}
+                </span>
+
+                <span>{order.address.country}</span>
+              </div>
+            </section>
           )}
 
-          {/* NOTES */}
+          {/* =========================================
+              NOTES
+          ========================================= */}
 
           {order.notes && (
-            <div className="card border-0 shadow-sm mb-4">
-              <div className="card-body p-4">
-                <h2 className="h5 mb-2">{t("paymentSuccess.notes")}</h2>
+            <section className="pistakio-payment-card">
+              <div className="pistakio-payment-card-header">
+                <div className="pistakio-payment-section-icon pistakio-payment-section-icon-pink">
+                  <Package size={20} />
+                </div>
 
-                <p className="mb-0 text-muted">{order.notes}</p>
+                <div>
+                  <h2>{t("paymentSuccess.notes")}</h2>
+                </div>
               </div>
-            </div>
+
+              <p className="pistakio-payment-notes">{order.notes}</p>
+            </section>
           )}
 
-          {/* ACTIONS */}
+          {/* =========================================
+              ACTIONS
+          ========================================= */}
 
-          <div className="d-flex flex-column flex-sm-row gap-2 justify-content-center">
-            <Link to="/orders" className="btn btn-dark">
+          <div className="pistakio-payment-actions">
+            <Link to="/orders" className="pistakio-payment-primary-button">
               {t("paymentSuccess.myOrders")}
 
-              <ArrowRight size={17} className="ms-2" />
+              <ArrowRight size={17} />
             </Link>
 
-            <Link to="/catalog" className="btn btn-outline-dark">
+            <Link to="/catalog" className="pistakio-payment-secondary-button">
               {t("paymentSuccess.backToCatalog")}
             </Link>
           </div>

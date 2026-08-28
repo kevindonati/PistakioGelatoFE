@@ -32,17 +32,7 @@
 }
 
 .admin-logo {
-  font-size: 19px;
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-.admin-logo-pistakio {
-  color: rgb(6, 234, 67);
-}
-
-.admin-logo-gelato {
-  color: rgb(244, 24, 152);
+  width: 100px;
 }
 
 .admin-collapse-button {

@@ -1,13 +1,6 @@
 .pistakio-order-details {
   min-height: 100vh;
   padding: 55px 0 90px;
-  background:
-    radial-gradient(
-      circle at 90% 5%,
-      rgba(139, 191, 44, 0.08),
-      transparent 28%
-    ),
-    #ffffff;
 }
 
 /* =========================================================

@@ -1,7 +1,5 @@
 .catalog {
   min-height: 100vh;
-
-  background: #ffffff;
 }
 
 /* =========================================================
@@ -10,14 +8,6 @@
 
 .catalog-header {
   padding: 75px 0 65px;
-
-  background:
-    radial-gradient(
-      circle at 85% 20%,
-      rgba(139, 191, 44, 0.12),
-      transparent 32%
-    ),
-    #f8f8f8;
 }
 
 .catalog-header-content {
