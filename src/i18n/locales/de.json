@@ -641,6 +641,26 @@
         "ordersCount": "{{count}} Bestellungen",
         "noOrders": "Dieser Kunde hat noch keine Bestellungen aufgegeben."
       }
+    },
+    "settings": {
+      "title": "Einstellungen",
+      "subtitle": "Shop-Einstellungen verwalten",
+      "loading": "Wird geladen...",
+      "loadError": "Einstellungen konnten nicht geladen werden",
+      "saveError": "Einstellungen konnten nicht gespeichert werden",
+      "saved": "Einstellungen erfolgreich gespeichert",
+      "saving": "Speichern...",
+      "save": "Speichern",
+      "shipping": {
+        "title": "Versand",
+        "description": "Versandkosten basierend auf dem Gesamtgewicht der Bestellung konfigurieren.",
+        "tier1": "Stufe 1",
+        "tier2": "Stufe 2",
+        "tier3": "Stufe 3",
+        "over": "Über der letzten Stufe",
+        "maxWeight": "Maximalgewicht",
+        "cost": "Kosten"
+      }
     }
   },
   "footer": {

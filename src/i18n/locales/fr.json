@@ -641,6 +641,26 @@
         "ordersCount": "{{count}} commandes",
         "noOrders": "Ce client n'a encore passé aucune commande."
       }
+    },
+    "settings": {
+      "title": "Paramètres",
+      "subtitle": "Gérer les paramètres de la boutique",
+      "loading": "Chargement...",
+      "loadError": "Impossible de charger les paramètres",
+      "saveError": "Impossible d'enregistrer les paramètres",
+      "saved": "Paramètres enregistrés avec succès",
+      "saving": "Enregistrement...",
+      "save": "Enregistrer",
+      "shipping": {
+        "title": "Livraison",
+        "description": "Configurez les frais de livraison en fonction du poids total de la commande.",
+        "tier1": "Tranche 1",
+        "tier2": "Tranche 2",
+        "tier3": "Tranche 3",
+        "over": "Au-delà de la dernière tranche",
+        "maxWeight": "Poids maximum",
+        "cost": "Coût"
+      }
     }
   },
   "footer": {

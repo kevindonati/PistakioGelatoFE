@@ -13,11 +13,11 @@ import { useCart } from "../../context/CartContext"
 import { getAddresses } from "../../services/addressApi"
 import {
   checkoutOrder,
-  getShippingCost,
   createStripeCheckout,
   createPaypalOrder,
   getOrderById,
   getMyOrderItems,
+  getOrderShippingCost,
 } from "../../services/orderApi"
 import type { Address } from "../../types/Address"
 import type { Order } from "../../types/Order"
@@ -36,12 +36,12 @@ function Checkout() {
   const [addresses, setAddresses] = useState<Address[]>([])
   const [selectedAddress, setSelectedAddress] = useState<string | null>(null)
   const [notes, setNotes] = useState("")
-  const [shippingCost, setShippingCost] = useState(0)
   const [order, setOrder] = useState<Order | null>(null)
   const [items, setItems] = useState<CartItem[]>([])
   const [loading, setLoading] = useState(true)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState("")
+  const [shippingCost, setShippingCost] = useState(0)
   const [paymentMethod, setPaymentMethod] = useState<"STRIPE" | "PAYPAL">(
     "STRIPE",
   )
@@ -54,13 +54,9 @@ function Checkout() {
         setLoading(true)
         setError("")
 
-        const [addressesData, shippingCostData] = await Promise.all([
-          getAddresses(),
-          getShippingCost(),
-        ])
+        const addressesData = await getAddresses()
 
         setAddresses(addressesData)
-        setShippingCost(shippingCostData)
 
         if (addressesData.length > 0) {
           setSelectedAddress(addressesData[0].id)
@@ -97,6 +93,9 @@ function Checkout() {
           setOrder(orderData)
           setItems(checkoutItems)
 
+          const shipping = await getOrderShippingCost(orderData.id)
+          setShippingCost(shipping)
+
           return
         }
 
@@ -104,6 +103,11 @@ function Checkout() {
 
         setOrder(cartOrder)
         setItems(cartItems)
+        if (cartOrder) {
+          const shipping = await getOrderShippingCost(cartOrder.id)
+
+          setShippingCost(shipping)
+        }
       } catch (error) {
         console.error(error)
 
@@ -113,7 +117,7 @@ function Checkout() {
       }
     }
 
-    /* norml checkout wait for CartContext to load */
+    /* normal checkout wait for CartContext to load */
     /* but if i have the orderId, i can load directly the order */
 
     if (orderId || !cartLoading) {
@@ -168,8 +172,8 @@ function Checkout() {
     0,
   )
 
-  /* if the order is PENDING_PAYMENT, the total is already been calcolated from be */
-  /* if it's a normal checkout, it will calcolate subtotal + shipping */
+  /* if the order is PENDING_PAYMENT, the total is already calculated from BE */
+  /* if it's a normal checkout, the total will be calculated from BE after checkout */
 
   const totalPrice =
     order.orderStatus === "PENDING_PAYMENT"
@@ -200,13 +204,17 @@ function Checkout() {
       setError("")
 
       /* only order with status CART can be checked out.
-      if the order has PENDING_PAYMENT status, it will skip checkoutOrder() */
+         if the order has PENDING_PAYMENT status, it will skip checkoutOrder() */
 
-      if (order.orderStatus === "CART") {
-        await checkoutOrder(order.id, {
+      let currentOrder = order
+
+      if (currentOrder.orderStatus === "CART") {
+        currentOrder = await checkoutOrder(currentOrder.id, {
           address: selectedAddress,
           notes: notes.trim() || undefined,
         })
+
+        setOrder(currentOrder)
       }
 
       /* STRIPE */
@@ -214,7 +222,7 @@ function Checkout() {
       if (method === "STRIPE") {
         setPaymentMethod("STRIPE")
 
-        const stripeResponse = await createStripeCheckout(order.id)
+        const stripeResponse = await createStripeCheckout(currentOrder.id)
 
         window.location.href = stripeResponse.url
 
@@ -225,13 +233,14 @@ function Checkout() {
 
       setPaymentMethod("PAYPAL")
 
-      const paypalResponse = await createPaypalOrder(order.id)
+      const paypalResponse = await createPaypalOrder(currentOrder.id)
 
       window.location.href = paypalResponse.approvalUrl
     } catch (error) {
       console.error(error)
 
       setError(t("checkout.error"))
+
       setSubmitting(false)
     }
   }
@@ -467,7 +476,7 @@ function Checkout() {
 
                 {/* PAYMENT BUTTONS */}
 
-                <div className=" gap-2 mt-3">
+                <div className="gap-2 mt-3">
                   <button
                     type="button"
                     className="pistakio-checkout-confirm flex-grow-1 mb-2"
@@ -491,7 +500,7 @@ function Checkout() {
                     }
                     onClick={(event) => handleSubmit(event, "PAYPAL")}
                   >
-                    <Paypal size={18}></Paypal>
+                    <Paypal size={18} />
 
                     {submitting && paymentMethod === "PAYPAL"
                       ? t("checkout.processing")

@@ -659,6 +659,26 @@
         "ordersCount": "{{count}} ordini",
         "noOrders": "Questo cliente non ha ancora effettuato ordini."
       }
+    },
+    "settings": {
+      "title": "Impostazioni",
+      "subtitle": "Gestisci le impostazioni del negozio",
+      "loading": "Caricamento...",
+      "loadError": "Impossibile caricare le impostazioni",
+      "saveError": "Impossibile salvare le impostazioni",
+      "saved": "Impostazioni salvate con successo",
+      "saving": "Salvataggio...",
+      "save": "Salva",
+      "shipping": {
+        "title": "Spedizione",
+        "description": "Configura i costi di spedizione in base al peso totale dell'ordine.",
+        "tier1": "Fascia 1",
+        "tier2": "Fascia 2",
+        "tier3": "Fascia 3",
+        "over": "Oltre l'ultima fascia",
+        "maxWeight": "Peso massimo",
+        "cost": "Costo"
+      }
     }
   },
   "footer": {

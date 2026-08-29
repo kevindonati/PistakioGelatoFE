@@ -34,6 +34,7 @@ import Account from "./pages/guest pages/Account"
 import Addresses from "./pages/guest pages/Addresses"
 import EditAddress from "./pages/guest pages/EditAddress"
 import PaymentFailed from "./pages/guest pages/PaymentFailed"
+import AdminSettings from "./pages/admin pages/AdminSettings"
 
 function NotFound() {
   return <h1>404 - Pagina non trovata</h1>
@@ -94,6 +95,7 @@ function AppContent() {
               path="/admin/customers/:id"
               element={<AdminCustomerDetails />}
             />
+            <Route path="/admin/settings" element={<AdminSettings />} />
             {/* 
             
             <Route
@@ -103,10 +105,6 @@ function AppContent() {
             <Route
               path="/admin/payments"
               element={<AdminPayments />}
-            />
-            <Route
-              path="/admin/settings"
-              element={<AdminSettings />}
             />
             */}
           </Route>

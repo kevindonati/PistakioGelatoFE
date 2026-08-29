@@ -641,6 +641,26 @@
         "ordersCount": "{{count}} orders",
         "noOrders": "This customer has not placed any orders yet."
       }
+    },
+    "settings": {
+      "title": "Settings",
+      "subtitle": "Manage store settings",
+      "loading": "Loading...",
+      "loadError": "Unable to load settings",
+      "saveError": "Unable to save settings",
+      "saved": "Settings saved successfully",
+      "saving": "Saving...",
+      "save": "Save",
+      "shipping": {
+        "title": "Shipping",
+        "description": "Configure shipping costs based on the total order weight.",
+        "tier1": "Tier 1",
+        "tier2": "Tier 2",
+        "tier3": "Tier 3",
+        "over": "Over the last tier",
+        "maxWeight": "Maximum weight",
+        "cost": "Cost"
+      }
     }
   },
   "footer": {

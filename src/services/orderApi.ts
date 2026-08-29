@@ -330,3 +330,11 @@ export const capturePaypalPayment = async (
 ): Promise<void> => {
   await api.post(`/payments/paypal/${paypalOrderId}/capture`)
 }
+
+export const getOrderShippingCost = async (
+  orderId: string,
+): Promise<number> => {
+  const response = await api.get<number>(`/orders/${orderId}/shipping-cost`)
+
+  return response.data
+}
