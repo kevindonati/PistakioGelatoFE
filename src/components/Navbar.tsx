@@ -1,11 +1,8 @@
 import { Link } from "react-router-dom"
-
 import { useAuth } from "../context/useAuth"
 import { useTranslation } from "react-i18next"
-
 import { setLanguage } from "../services/language"
 import type { Language } from "../types/Language"
-
 import {
   ShoppingCart,
   Menu,
@@ -16,35 +13,26 @@ import {
   Shield,
   MapPin,
 } from "lucide-react"
-
 import { useCart } from "../context/CartContext"
-
 import { useState, useRef, useEffect } from "react"
-
 import "../styles/Logo.css"
 import "../styles/Navbar.css"
-
 import logo from "../assets/LOGO CON SCRITTA PIST DEF.png"
 
 const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth()
   const { t, i18n } = useTranslation()
   const { totalItems } = useCart()
-
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   const getInitials = () => {
     if (!user) {
       return ""
     }
-
     const firstLetter = user.name?.charAt(0).toUpperCase() ?? ""
-
     const lastLetter = user.surname?.charAt(0).toUpperCase() ?? ""
-
     return `${firstLetter}${lastLetter}`
   }
 
@@ -85,7 +73,7 @@ const Navbar = () => {
 
         {/* MOBILE ACTIONS */}
         <div className="navbar-mobile-actions">
-          {/* Carrello */}
+          {/* CART */}
 
           {isAuthenticated && (
             <Link
@@ -204,7 +192,7 @@ const Navbar = () => {
 
           {/* DESKTOP ACTIONS */}
           <div className="navbar-desktop-actions">
-            {/* Carrello */}
+            {/* CART */}
             {isAuthenticated && (
               <Link to="/cart" className="navbar-cart-button">
                 <ShoppingCart size={19} />
@@ -217,7 +205,7 @@ const Navbar = () => {
               </Link>
             )}
 
-            {/* Lingua */}
+            {/* LANGUAGE */}
             <select
               value={i18n.language}
               onChange={(event) => {
@@ -232,7 +220,7 @@ const Navbar = () => {
               <option value="DE">DE</option>
             </select>
 
-            {/* Utente */}
+            {/* USER */}
             {isAuthenticated ? (
               <div className="navbar-user-desktop" ref={dropdownRef}>
                 <button
@@ -324,7 +312,7 @@ const Navbar = () => {
 
           {/* MOBILE CONTENT */}
           <div className="navbar-mobile-content">
-            {/* Lingua */}
+            {/* LANGUAGE */}
             <div className="navbar-language">
               <label>{t("navbar.language")}</label>
 

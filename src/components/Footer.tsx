@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom"
-
 import { useTranslation } from "react-i18next"
-
 import "../styles/Footer.css"
 import { FacebookLogoIcon, InstagramLogoIcon } from "@phosphor-icons/react"
 import logo from "../assets/LOGO CON SCRITTA PIST DEF NOBG.png"

@@ -25,11 +25,8 @@ function AdminLayout() {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const location = useLocation()
-
   const [collapsed, setCollapsed] = useState(false)
-
   const isCatalogActive = location.pathname.startsWith("/admin/catalog")
-
   const [catalogOpen, setCatalogOpen] = useState(isCatalogActive)
 
   const handleLogout = () => {
@@ -88,7 +85,7 @@ function AdminLayout() {
             end
           />
 
-          {/* GESTIONE */}
+          {/* GESTION */}
 
           {!collapsed && (
             <div className="admin-section-title">
@@ -103,7 +100,7 @@ function AdminLayout() {
             collapsed={collapsed}
           />
 
-          {/* CATALOGO */}
+          {/* CATALOG */}
 
           {!collapsed && (
             <button
@@ -126,7 +123,7 @@ function AdminLayout() {
             </button>
           )}
 
-          {/* CATALOGO COLLAPSED */}
+          {/* CATALOG COLLAPSED */}
 
           {collapsed && (
             <button
@@ -141,7 +138,7 @@ function AdminLayout() {
             </button>
           )}
 
-          {/* SOTTO MENU CATALOGO */}
+          {/* CATALOG MENU */}
 
           {!collapsed && catalogOpen && (
             <div className="admin-submenu">
@@ -165,7 +162,7 @@ function AdminLayout() {
             </div>
           )}
 
-          {/* CLIENTI */}
+          {/* CUSTOMERS */}
 
           <AdminNavItem
             to="/admin/customers"
@@ -174,7 +171,7 @@ function AdminLayout() {
             collapsed={collapsed}
           />
 
-          {/* NEGOZIO */}
+          {/* SHOP */}
 
           {!collapsed && (
             <div className="admin-section-title">
@@ -220,7 +217,7 @@ function AdminLayout() {
         </div>
       </aside>
 
-      {/* CONTENUTO */}
+      {/* CONTENT */}
 
       <main className="admin-content">
         <Outlet />
@@ -229,9 +226,7 @@ function AdminLayout() {
   )
 }
 
-/* -------------------------------------------------------------------------- */
 /* MAIN NAV ITEM */
-/* -------------------------------------------------------------------------- */
 
 interface AdminNavItemProps {
   to: string
@@ -262,9 +257,7 @@ function AdminNavItem({
   )
 }
 
-/* -------------------------------------------------------------------------- */
 /* CATALOG SUB ITEM */
-/* -------------------------------------------------------------------------- */
 
 interface AdminSubNavItemProps {
   to: string
