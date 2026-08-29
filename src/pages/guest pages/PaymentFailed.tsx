@@ -2,21 +2,15 @@ import { Link, useSearchParams } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { ArrowLeft, CreditCard, RefreshCcw, X } from "lucide-react"
 import { useState } from "react"
-
 import "../../styles/PaymentSuccess.css"
-
 import { createStripeCheckout } from "../../services/orderApi"
 
 function PaymentFailed() {
   const { t } = useTranslation()
-
   const [searchParams] = useSearchParams()
-
   const orderId = searchParams.get("orderId")
-
   const [paymentLoading, setPaymentLoading] = useState(false)
   const [error, setError] = useState("")
-
   const handlePayment = async () => {
     if (!orderId) {
       setError(t("orderDetails.paymentError"))
@@ -42,9 +36,7 @@ function PaymentFailed() {
     <main className="pistakio-payment">
       <div className="container">
         <div className="pistakio-payment-wrapper">
-          {/* =========================================
-              FAILED HEADER
-          ========================================= */}
+          {/* FAILED HEADER */}
 
           <section className="pistakio-payment-hero is-failed">
             <div className="pistakio-payment-check">
@@ -56,9 +48,7 @@ function PaymentFailed() {
             <p>{t("paymentFailed.message")}</p>
           </section>
 
-          {/* =========================================
-              PAYMENT INFO
-          ========================================= */}
+          {/* PAYMENT INFO */}
 
           <section className="pistakio-payment-card">
             <div className="pistakio-payment-card-header">
@@ -86,9 +76,7 @@ function PaymentFailed() {
             )}
           </section>
 
-          {/* =========================================
-              ACTIONS
-          ========================================= */}
+          {/* ACTIONS */}
 
           <div className="pistakio-payment-actions">
             {orderId && (

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import { useTranslation } from "react-i18next"
-
 import {
   ArrowLeft,
   Check,
@@ -11,23 +10,18 @@ import {
   Package,
   Wallet,
 } from "lucide-react"
-
 import {
   createStripeCheckout,
   createPaypalOrder,
   getMyOrderById,
   getMyOrderItems,
 } from "../../services/orderApi"
-
 import { getFlavorById, getTubById } from "../../services/catalogApi"
-
 import type { Order } from "../../types/Order"
 import type { OrderItem } from "../../types/OrderItem"
 import type { Flavor } from "../../types/Flavor"
 import type { Tub } from "../../types/Tub"
-
 import Loading from "../../components/Loading"
-
 import "../../styles/OrderDetails.css"
 
 interface OrderProduct {
@@ -39,7 +33,6 @@ interface OrderProduct {
 function OrderDetails() {
   const { t } = useTranslation()
   const { id } = useParams()
-
   const [order, setOrder] = useState<Order | null>(null)
   const [items, setItems] = useState<OrderProduct[]>([])
   const [loading, setLoading] = useState(true)
@@ -154,13 +147,9 @@ function OrderDetails() {
     (total, item) => total + item.orderItem.unitPrice * item.orderItem.quantity,
     0,
   )
-
   const statusOrder = ["PAID", "PREPARING", "SHIPPED", "DELIVERED"]
-
   const currentStatusIndex = statusOrder.indexOf(order.orderStatus)
-
   const isCancelled = order.orderStatus === "CANCELLED"
-
   const getStatusLabel = (status: string) => {
     return t(`orderStatus.${status}`)
   }

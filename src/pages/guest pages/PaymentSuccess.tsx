@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react"
-
 import { Link, useSearchParams } from "react-router-dom"
-
 import { useTranslation } from "react-i18next"
-
 import {
   ArrowRight,
   Check,
@@ -12,22 +9,17 @@ import {
   ShoppingBag,
   Truck,
 } from "lucide-react"
-
 import {
   getOrderById,
   getOrderItems,
   capturePaypalPayment,
 } from "../../services/orderApi"
-
 import { getFlavorById, getTubById } from "../../services/catalogApi"
-
 import type { Order } from "../../types/Order"
 import type { OrderItem } from "../../types/OrderItem"
 import type { Flavor } from "../../types/Flavor"
 import type { Tub } from "../../types/Tub"
-
 import Loading from "../../components/Loading"
-
 import "../../styles/PaymentSuccess.css"
 
 interface PaymentItem {
@@ -38,25 +30,13 @@ interface PaymentItem {
 
 function PaymentSuccess() {
   const { t } = useTranslation()
-
   const [searchParams] = useSearchParams()
-
   const orderId = searchParams.get("orderId")
-
-  /*
-   * PayPal aggiunge automaticamente il parametro "token"
-   * alla success URL.
-   *
-   * Il token corrisponde al PayPal Order ID.
-   */
+  /* Paypal add automatically the params "token" */
   const paypalOrderId = searchParams.get("token")
-
   const [order, setOrder] = useState<Order | null>(null)
-
   const [items, setItems] = useState<PaymentItem[]>([])
-
   const [loading, setLoading] = useState(true)
-
   const [error, setError] = useState("")
 
   useEffect(() => {
@@ -78,28 +58,12 @@ function PaymentSuccess() {
         setLoading(true)
         setError("")
 
-        /*
-         * Recuperiamo l'ordine.
-         */
         const orderData = await getOrderById(orderId)
-
         if (cancelled) {
           return
         }
 
-        /*
-         * =========================================
-         * PAYPAL CAPTURE
-         * =========================================
-         *
-         * Se nella URL c'è "token", significa che
-         * PayPal ci ha riportato dopo il pagamento.
-         *
-         * Il token è il PayPal Order ID.
-         *
-         * Facciamo la capture una sola volta.
-         */
-
+        /* PAYPAL CAPTURE */
         if (
           paypalOrderId &&
           !paypalCaptureAttempted &&
@@ -113,14 +77,7 @@ function PaymentSuccess() {
             if (cancelled) {
               return
             }
-
-            /*
-             * Dopo la capture ricarichiamo l'ordine
-             * per ottenere lo stato PAID.
-             */
-
             const updatedOrder = await getOrderById(orderId)
-
             if (cancelled) {
               return
             }
@@ -134,25 +91,11 @@ function PaymentSuccess() {
             console.error("Errore capture PayPal:", error)
 
             setError(t("paymentSuccess.loadError"))
-
-            /*
-             * Non interrompiamo completamente il caricamento:
-             * mostriamo comunque i dati dell'ordine.
-             */
-
             setOrder(orderData)
           }
         } else {
-          /*
-           * Stripe:
-           * il webhook aggiorna il pagamento e l'ordine.
-           *
-           * Quindi continuiamo ad aspettare PAID.
-           */
-
           if (orderData.orderStatus !== "PAID" && attempts < 5) {
             attempts++
-
             setTimeout(loadPaymentSuccess, 1000)
 
             return
@@ -165,11 +108,7 @@ function PaymentSuccess() {
           }
         }
 
-        /*
-         * =========================================
-         * ORDER ITEMS
-         * =========================================
-         */
+        /* ORDER ITEMS */
 
         const orderItems = await getOrderItems()
 
@@ -199,13 +138,7 @@ function PaymentSuccess() {
         if (cancelled) {
           return
         }
-
         setItems(completeItems)
-
-        /*
-         * Se non abbiamo già impostato l'ordine
-         * durante la capture PayPal, lo impostiamo qui.
-         */
 
         if (!paypalOrderId) {
           setOrder(orderData)
@@ -230,21 +163,13 @@ function PaymentSuccess() {
     }
   }, [orderId, paypalOrderId, t])
 
-  /*
-   * =========================================
-   * LOADING
-   * =========================================
-   */
+  /* LOADING */
 
   if (loading) {
     return <Loading />
   }
 
-  /*
-   * =========================================
-   * ORDER NOT FOUND
-   * =========================================
-   */
+  /* ORDER NOT FOUND */
 
   if (!order) {
     return (
@@ -272,11 +197,7 @@ function PaymentSuccess() {
 
   const isPaid = order.orderStatus === "PAID"
 
-  /*
-   * =========================================
-   * TOTALS
-   * =========================================
-   */
+  /* TOTALS */
 
   const subtotal = items.reduce(
     (total, item) => total + item.orderItem.unitPrice * item.orderItem.quantity,
@@ -289,9 +210,7 @@ function PaymentSuccess() {
     <main className="pistakio-payment">
       <div className="container">
         <div className="pistakio-payment-wrapper">
-          {/* =========================================
-              SUCCESS HEADER
-          ========================================= */}
+          {/* SUCCESS HEADER */}
 
           <section
             className={`pistakio-payment-hero ${
@@ -315,17 +234,13 @@ function PaymentSuccess() {
             </p>
           </section>
 
-          {/* =========================================
-              PENDING WARNING
-          ========================================= */}
+          {/* PENDING WARNING */}
 
           {!isPaid && error && (
             <div className="pistakio-payment-pending-alert">{error}</div>
           )}
 
-          {/* =========================================
-              ORDER INFO
-          ========================================= */}
+          {/* ORDER INFO */}
 
           <section className="pistakio-payment-card">
             <div className="pistakio-payment-card-header">
@@ -359,9 +274,7 @@ function PaymentSuccess() {
             </div>
           </section>
 
-          {/* =========================================
-              PRODUCTS
-          ========================================= */}
+          {/* PRODUCTS */}
 
           <section className="pistakio-payment-card">
             <div className="pistakio-payment-card-header">
@@ -443,9 +356,7 @@ function PaymentSuccess() {
             </div>
           </section>
 
-          {/* =========================================
-              DELIVERY ADDRESS
-          ========================================= */}
+          {/* DELIVERY ADDRESS */}
 
           {order.address && (
             <section className="pistakio-payment-card">
@@ -477,9 +388,7 @@ function PaymentSuccess() {
             </section>
           )}
 
-          {/* =========================================
-              NOTES
-          ========================================= */}
+          {/* NOTES */}
 
           {order.notes && (
             <section className="pistakio-payment-card">
@@ -497,9 +406,7 @@ function PaymentSuccess() {
             </section>
           )}
 
-          {/* =========================================
-              ACTIONS
-          ========================================= */}
+          {/* ACTIONS */}
 
           <div className="pistakio-payment-actions">
             <Link to="/orders" className="pistakio-payment-primary-button">

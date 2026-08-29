@@ -1,26 +1,16 @@
 import { useEffect, useState } from "react"
-
 import { Link } from "react-router-dom"
-
 import { useTranslation } from "react-i18next"
-
 import { ArrowRight, Package } from "lucide-react"
-
 import { getMyOrders } from "../../services/orderApi"
-
 import type { Order } from "../../types/Order"
-
 import Loading from "../../components/Loading"
-
 import "../../styles/Order.css"
 
 function Orders() {
   const { t } = useTranslation()
-
   const [orders, setOrders] = useState<Order[]>([])
-
   const [loading, setLoading] = useState(true)
-
   const [error, setError] = useState("")
 
   useEffect(() => {
@@ -84,11 +74,9 @@ function Orders() {
   }
 
   return (
-    <main className="orders">
+    <main className="orders bg-body-tertiary">
       <div className="container">
-        {/* =================================================
-            HEADER
-        ================================================= */}
+        {/* HEADER */}
 
         <section className="orders-header">
           <div>
@@ -98,15 +86,11 @@ function Orders() {
           </div>
         </section>
 
-        {/* =================================================
-            ERROR
-        ================================================= */}
+        {/* ERROR */}
 
         {error && <div className="orders-error">{error}</div>}
 
-        {/* =================================================
-            EMPTY
-        ================================================= */}
+        {/* EMPTY */}
 
         {!error && visibleOrders.length === 0 && (
           <div className="orders-empty">
@@ -126,9 +110,7 @@ function Orders() {
           </div>
         )}
 
-        {/* =================================================
-            ORDERS
-        ================================================= */}
+        {/* ORDERS */}
 
         {!error && visibleOrders.length > 0 && (
           <div className="orders-list">

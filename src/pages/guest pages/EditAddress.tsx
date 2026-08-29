@@ -1,24 +1,18 @@
 import { useEffect, useState } from "react"
-
 import { ArrowLeft, Home, MapPin, Save } from "lucide-react"
-
 import { useTranslation } from "react-i18next"
-
 import { useNavigate, useParams } from "react-router-dom"
-
 import {
   getAddressById,
   updateAddress,
   type AddressData,
 } from "../../services/addressApi"
-
 import "../../styles/EditAddress.css"
 
 function EditAddress() {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const { id } = useParams<{ id: string }>()
-
   const [form, setForm] = useState<AddressData>({
     addressLine1: "",
     addressLine2: "",
@@ -26,11 +20,8 @@ function EditAddress() {
     city: "",
     country: "",
   })
-
   const [loading, setLoading] = useState(true)
-
   const [saving, setSaving] = useState(false)
-
   const [error, setError] = useState("")
 
   useEffect(() => {
@@ -101,7 +92,7 @@ function EditAddress() {
 
   if (loading) {
     return (
-      <main className="pistakio-edit-address">
+      <main className="pistakio-edit-address bg-body-tertiary">
         <div className="container">
           <div className="pistakio-edit-address-loading">
             <div className="pistakio-edit-address-loading-icon">

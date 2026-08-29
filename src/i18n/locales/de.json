@@ -66,7 +66,8 @@
     "filtersActive": "Aktive Filter",
     "discover": "Sorte entdecken",
     "noFlavorsDescription": "Versuche, die Filter zu ändern oder zu entfernen, um weitere Sorten zu finden.",
-    "unavailableDescription": "Diese Sorte ist derzeit nicht verfügbar."
+    "unavailableDescription": "Diese Sorte ist derzeit nicht verfügbar.",
+    "loginToPurchase": "Zum Kaufen anmelden"
   },
   "cart": {
     "add": "In den Warenkorb",

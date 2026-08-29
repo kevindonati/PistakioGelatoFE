@@ -1,14 +1,10 @@
 import { useState } from "react"
 import type { FormEvent } from "react"
-
 import { useAuth } from "../../context/useAuth"
 import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
-
 import { Eye, EyeOff, Mail, Lock, ArrowRight, AlertCircle } from "lucide-react"
-
 import logo from "../../assets/LOGO CON SCRITTA PIST DEF.png"
-
 import "../../styles/Login.css"
 
 function Login() {
@@ -17,7 +13,6 @@ function Login() {
   const [error, setError] = useState("")
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-
   const { login } = useAuth()
   const navigate = useNavigate()
   const { t } = useTranslation()
@@ -40,7 +35,7 @@ function Login() {
   }
 
   return (
-    <div className="login-page">
+    <div className="login-page bg-body-tertiary">
       <div className="login-card">
         <div className="login-logo">
           <img src={logo} alt="Pistakio Gelato" />
@@ -105,14 +100,14 @@ function Login() {
             </div>
           </div>
 
-          {/* Password dimenticata */}
+          {/* Forgot password */}
           <div className="forgot-password">
             <button type="button" onClick={() => {}}>
               {t("auth.forgotPassword")}
             </button>
           </div>
 
-          {/* Errore */}
+          {/* Error */}
           {error && (
             <div className="login-error" role="alert">
               <AlertCircle size={18} />

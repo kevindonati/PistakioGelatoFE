@@ -334,10 +334,10 @@ const Navbar = () => {
                   setLanguage(event.target.value as Language)
                 }}
               >
-                <option value="IT">🇮🇹 Italiano</option>
-                <option value="EN">🇬🇧 English</option>
-                <option value="FR">🇫🇷 Français</option>
-                <option value="DE">🇩🇪 Deutsch</option>
+                <option value="IT">Italiano</option>
+                <option value="EN">English</option>
+                <option value="FR">Français</option>
+                <option value="DE">Deutsch</option>
               </select>
             </div>
 

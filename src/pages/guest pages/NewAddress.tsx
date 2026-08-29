@@ -1,25 +1,18 @@
 import { useState } from "react"
-
 import { useNavigate } from "react-router-dom"
-
 import { useTranslation } from "react-i18next"
-
 import { ArrowLeft, Home, MapPin, Save } from "lucide-react"
-
 import api from "../../services/api"
-
 import "../../styles/NewAddresses.css"
 
 function NewAddress() {
   const { t } = useTranslation()
   const navigate = useNavigate()
-
   const [addressLine1, setAddressLine1] = useState("")
   const [addressLine2, setAddressLine2] = useState("")
   const [postalCode, setPostalCode] = useState("")
   const [city, setCity] = useState("")
   const [country, setCountry] = useState("Italy")
-
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
 
@@ -93,7 +86,7 @@ function NewAddress() {
             </div>
 
             <form onSubmit={handleSubmit} className="pistakio-new-address-form">
-              {/* INDIRIZZO */}
+              {/* ADDRESS */}
 
               <div className="pistakio-new-address-field">
                 <label htmlFor="addressLine1">
@@ -136,7 +129,7 @@ function NewAddress() {
                 </div>
               </div>
 
-              {/* CAP + CITTA' */}
+              {/* CAP + CITY' */}
 
               <div className="pistakio-new-address-row">
                 <div className="pistakio-new-address-field">
@@ -168,7 +161,7 @@ function NewAddress() {
                 </div>
               </div>
 
-              {/* PAESE */}
+              {/* NATION */}
 
               <div className="pistakio-new-address-field">
                 <label htmlFor="country">{t("address.country")}</label>

@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react"
-
 import { useNavigate, useParams } from "react-router-dom"
-
 import { useTranslation } from "react-i18next"
-
 import {
   ArrowLeft,
   ArrowRight,
@@ -16,38 +13,25 @@ import {
   ShoppingCart,
   WheatOffIcon,
 } from "lucide-react"
-
 import { getFlavorById, getTubs } from "../../services/catalogApi"
-
 import { useCart } from "../../context/CartContext"
-
 import type { Flavor } from "../../types/Flavor"
-
 import type { Tub } from "../../types/Tub"
-
 import Loading from "../../components/Loading"
-
 import "../../styles/FlavorDetails.css"
+import { useAuth } from "../../context/useAuth"
 
 function FlavorDetails() {
   const { t } = useTranslation()
-
   const { id } = useParams()
-
   const navigate = useNavigate()
-
   const { addToCart } = useCart()
-
+  const { isAuthenticated } = useAuth()
   const [flavor, setFlavor] = useState<Flavor | null>(null)
-
   const [tubs, setTubs] = useState<Tub[]>([])
-
   const [selectedTub, setSelectedTub] = useState<Tub | null>(null)
-
   const [quantity, setQuantity] = useState(1)
-
   const [loading, setLoading] = useState(true)
-
   const [error, setError] = useState("")
 
   useEffect(() => {
@@ -124,8 +108,7 @@ function FlavorDetails() {
   }
 
   const isAvailable = flavor.available && flavor.stockPortions > 0
-
-  const canAddToCart = isAvailable && selectedTub !== null
+  const canPurchase = isAvailable && selectedTub !== null
 
   const handleIncrease = () => {
     if (quantity < flavor.stockPortions) {
@@ -156,11 +139,9 @@ function FlavorDetails() {
   }
 
   return (
-    <main className="flavor-details">
+    <main className="flavor-details bg-body-tertiary">
       <div className="container">
-        {/* =================================================
-            BACK
-        ================================================= */}
+        {/* BACK */}
 
         <button
           type="button"
@@ -172,9 +153,7 @@ function FlavorDetails() {
           {t("catalog.backToCatalog")}
         </button>
 
-        {/* =================================================
-            PRODUCT
-        ================================================= */}
+        {/* PRODUCT */}
 
         <div className="flavor-product">
           {/* IMAGE */}
@@ -204,14 +183,6 @@ function FlavorDetails() {
           <div className="flavor-info">
             <div className="flavor-title-row">
               <h1>{flavor.name}</h1>
-
-              {isAvailable && (
-                <span className="flavor-available">
-                  <span />
-
-                  {t("catalog.available")}
-                </span>
-              )}
             </div>
 
             {/* DESCRIPTION */}
@@ -317,7 +288,7 @@ function FlavorDetails() {
 
             {/* QUANTITY */}
 
-            {canAddToCart && (
+            {canPurchase && (
               <div className="flavor-purchase">
                 <div className="flavor-quantity">
                   <span>{t("cart.quantity")}</span>
@@ -345,17 +316,31 @@ function FlavorDetails() {
                   </div>
                 </div>
 
-                <button
-                  type="button"
-                  className="flavor-add-button"
-                  onClick={handleAddToCart}
-                >
-                  <ShoppingCart size={19} />
+                {isAuthenticated ? (
+                  <button
+                    type="button"
+                    className="flavor-add-button"
+                    onClick={handleAddToCart}
+                  >
+                    <ShoppingCart size={19} />
 
-                  {t("cart.add")}
+                    {t("cart.add")}
 
-                  <ArrowRight size={17} />
-                </button>
+                    <ArrowRight size={17} />
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    className="flavor-add-button"
+                    onClick={() => navigate("/login")}
+                  >
+                    <ShoppingCart size={19} />
+
+                    {t("catalog.loginToPurchase")}
+
+                    <ArrowRight size={17} />
+                  </button>
+                )}
               </div>
             )}
           </div>

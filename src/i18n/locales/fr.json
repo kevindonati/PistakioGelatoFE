@@ -66,7 +66,8 @@
     "filtersActive": "Filtres actifs",
     "discover": "Découvrir le parfum",
     "noFlavorsDescription": "Essayez de modifier ou de supprimer les filtres pour trouver d'autres parfums.",
-    "unavailableDescription": "Ce parfum n'est actuellement pas disponible."
+    "unavailableDescription": "Ce parfum n'est actuellement pas disponible.",
+    "loginToPurchase": "Connectez-vous pour acheter"
   },
   "home": {
     "hero": {

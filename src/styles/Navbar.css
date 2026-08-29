@@ -5,30 +5,22 @@
   position: relative;
   z-index: 1000;
 }
-
 .navbar-pistakio .container {
   position: relative;
 }
 
-/* =========================
-   LOGO
-========================= */
-
+/* LOGO */
 .navbar-pistakio .navbar-brand {
   padding: 0;
   margin: 0;
 }
-
 .navbar-pistakio .logo {
   width: 150px;
   height: auto;
   display: block;
 }
 
-/* =========================
-   NAVBAR CONTENT
-========================= */
-
+/* NAVBAR CONTENT */
 .navbar-collapse-custom {
   display: flex;
   align-items: center;
@@ -37,560 +29,381 @@
   margin-left: 45px;
 }
 
-/* =========================
-   NAVIGATION LINKS
-========================= */
-
+/* NAVIGATION LINKS */
 .navbar-nav-custom {
   display: flex;
   align-items: center;
   gap: 10px;
-
   list-style: none;
   margin: 0;
   padding: 0;
 }
-
 .navbar-nav-custom a {
   display: block;
-
   padding: 10px 14px;
-
   color: #333333;
   text-decoration: none;
-
   font-size: 15px;
   font-weight: 500;
-
   border-radius: 8px;
-
   transition: 0.2s ease;
 }
-
 .navbar-nav-custom a:hover {
   color: #8bbf2c;
   background: rgba(139, 191, 44, 0.08);
 }
 
-/* =========================
-   DESKTOP ACTIONS
-========================= */
-
+/* DESKTOP ACTIONS */
 .navbar-desktop-actions {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-/* =========================
-   DESKTOP CART
-========================= */
-
+/* DESKTOP CART */
 .navbar-cart-button {
   position: relative;
-
   height: 40px;
-
   display: flex;
   align-items: center;
   gap: 8px;
-
   padding: 0 13px;
-
   border: 1px solid #8bbf2c;
   border-radius: 10px;
-
   background: #ffffff;
   color: #333333;
-
   text-decoration: none;
-
   font-size: 14px;
   font-weight: 500;
-
   transition: 0.2s ease;
 }
-
 .navbar-cart-button:hover {
   background: rgba(139, 191, 44, 0.08);
   color: #8bbf2c;
 }
 
-/* =========================
-   CART BADGE
-========================= */
-
+/* CART BADGE */
 .navbar-cart-button .cart-badge,
 .navbar-icon-button .cart-badge {
   position: absolute;
-
   top: -7px;
   right: -7px;
-
   min-width: 18px;
   height: 18px;
-
   padding: 0 4px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   background: #f24892;
   color: #ffffff;
-
   border-radius: 50%;
-
   font-size: 10px;
   font-weight: 700;
 }
 
-/* =========================
-   DESKTOP LANGUAGE
-========================= */
-
+/* DESKTOP LANGUAGE */
 .navbar-language-select {
   height: 40px;
-
   padding: 0 10px;
-
   border: 1px solid #dddddd;
   border-radius: 10px;
-
   background: #ffffff;
   color: #333333;
-
   font-size: 13px;
-
   outline: none;
   cursor: pointer;
 }
-
 .navbar-language-select:focus {
   border-color: #8bbf2c;
 }
 
-/* =========================
-   DESKTOP AUTH
-========================= */
-
+/* DESKTOP AUTH */
 .navbar-auth-desktop {
   display: flex;
   align-items: center;
   gap: 8px;
 }
-
 .navbar-login-button,
 .navbar-register-button {
   height: 40px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   padding: 0 15px;
-
   border-radius: 10px;
-
   font-size: 14px;
   font-weight: 600;
-
   text-decoration: none;
-
   transition: 0.2s ease;
 }
-
 .navbar-login-button {
   border: 1px solid #8bbf2c;
-
   color: #8bbf2c;
   background: #ffffff;
 }
-
 .navbar-login-button:hover {
   background: rgba(139, 191, 44, 0.08);
   color: #8bbf2c;
 }
-
 .navbar-register-button {
   border: 1px solid #8bbf2c;
-
   background: #8bbf2c;
   color: #ffffff;
 }
-
 .navbar-register-button:hover {
   background: #78a823;
   color: #ffffff;
 }
 
-/* =========================
-   USER AVATAR
-========================= */
-
+/* USER AVATAR */
 .navbar-user-desktop,
 .navbar-user-mobile {
   position: relative;
 }
-
 .navbar-avatar-button {
   border: none;
   background: transparent;
   padding: 0;
   cursor: pointer;
 }
-
 .navbar-avatar {
   width: 40px;
   height: 40px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   border-radius: 50%;
-
   background: #8bbf2c;
   color: #ffffff;
-
   font-size: 14px;
   font-weight: 700;
-
   transition: 0.2s ease;
 }
-
 .navbar-avatar-button:hover .navbar-avatar {
   background: #78a823;
   transform: scale(1.03);
 }
 
-/* =========================
-   USER DROPDOWN
-========================= */
-
+/* USER DROPDOWN */
 .navbar-user-dropdown {
   position: absolute;
-
   right: 0;
   top: calc(100% + 10px);
-
   width: 230px;
-
   padding: 8px;
-
   background: #ffffff;
-
   border: 1px solid #eeeeee;
   border-radius: 14px;
-
   box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
 }
-
 .navbar-user-info {
   padding: 10px 10px 12px;
 }
-
 .navbar-user-name {
   font-weight: 600;
   color: #333333;
 }
-
 .navbar-user-info small {
   color: #888888;
   font-size: 12px;
 }
-
 .navbar-dropdown-divider {
   height: 1px;
-
   background: #eeeeee;
-
   margin: 5px 0;
 }
-
 .navbar-dropdown-item {
   width: 100%;
-
   display: flex;
   align-items: center;
   gap: 10px;
-
   padding: 10px;
-
   border: none;
   border-radius: 8px;
-
   background: transparent;
-
   color: #333333;
   text-decoration: none;
-
   font-size: 14px;
   text-align: left;
-
   cursor: pointer;
-
   transition: 0.2s ease;
 }
-
 .navbar-dropdown-item:hover {
   background: #f7f7f7;
   color: #8bbf2c;
 }
-
 .navbar-dropdown-item.logout {
   color: #f24892;
 }
-
 .navbar-dropdown-item.logout:hover {
   background: rgba(242, 72, 146, 0.08);
   color: #f24892;
 }
 
-/* =========================
-   MOBILE ACTIONS
-========================= */
-
+/* MOBILE ACTIONS */
 .navbar-mobile-actions {
   display: none;
 }
-
 .navbar-menu-button {
   display: none;
 }
 
-/* =========================
-   MOBILE CONTENT
-========================= */
-
+/* MOBILE CONTENT */
 .navbar-mobile-content {
   display: none;
 }
 
-/* =========================
-   MOBILE
-========================= */
-
+/* MOBILE */
 @media (max-width: 991.98px) {
   .navbar-pistakio {
     min-height: 64px;
   }
-
   .navbar-pistakio .container {
     min-height: 64px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
-
   /* LOGO */
-
   .navbar-pistakio .logo {
     width: 125px;
   }
-
   /* MOBILE ACTIONS */
-
   .navbar-mobile-actions {
     display: flex;
     align-items: center;
     gap: 8px;
   }
-
   /* MOBILE ICON BUTTON */
-
   .navbar-icon-button {
     position: relative;
-
     width: 40px;
     height: 40px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     color: #333333;
     text-decoration: none;
-
     border-radius: 10px;
-
     transition: 0.2s ease;
   }
-
   .navbar-icon-button:hover {
     color: #8bbf2c;
     background: rgba(139, 191, 44, 0.08);
   }
-
   /* MOBILE MENU BUTTON */
-
   .navbar-menu-button {
     width: 40px;
     height: 40px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     border: none;
     border-radius: 10px;
-
     background: transparent;
     color: #333333;
-
     cursor: pointer;
-
     transition: 0.2s ease;
   }
-
   .navbar-menu-button:hover {
     color: #8bbf2c;
     background: rgba(139, 191, 44, 0.08);
   }
-
   /* DESKTOP HIDE */
-
   .navbar-desktop-actions {
     display: none;
   }
-
   /* MOBILE MENU */
-
   .navbar-collapse-custom {
     display: none;
-
     position: absolute;
-
     top: calc(100% + 1px);
     left: 0;
     right: 0;
-
     margin: 0;
-
     padding: 18px 20px 22px;
-
     background: #ffffff;
-
     border-bottom: 1px solid #eeeeee;
-
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
   }
-
   .navbar-collapse-custom.open {
     display: block;
   }
-
   /* MOBILE NAV LINKS */
-
   .navbar-nav-custom {
     display: flex;
-
     flex-direction: column;
     align-items: stretch;
-
     gap: 4px;
-
     padding: 0;
   }
-
   .navbar-nav-custom li {
     width: 100%;
   }
-
   .navbar-nav-custom a {
     padding: 13px 12px;
-
     font-size: 15px;
   }
-
   /* MOBILE CONTENT */
-
   .navbar-mobile-content {
     display: block;
-
     margin-top: 12px;
     padding-top: 16px;
-
     border-top: 1px solid #eeeeee;
   }
-
   /* MOBILE LANGUAGE */
-
   .navbar-language {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     gap: 20px;
-
     padding: 5px 12px 15px;
   }
-
   .navbar-language label {
     font-size: 14px;
     font-weight: 600;
     color: #333333;
   }
-
   .navbar-language select {
     border: 1px solid #dddddd;
     border-radius: 8px;
-
     padding: 7px 10px;
-
     background: #ffffff;
-
     font-size: 13px;
-
     outline: none;
   }
-
   .navbar-language select:focus {
     border-color: #8bbf2c;
   }
-
   /* MOBILE AUTH */
-
   .navbar-auth-mobile {
     display: grid;
-
     grid-template-columns: 1fr 1fr;
-
     gap: 10px;
-
     margin-top: 5px;
   }
-
   .navbar-auth-mobile .navbar-login-button,
   .navbar-auth-mobile .navbar-register-button {
     height: 44px;
   }
 }
 
-/* =========================
-   SMALL MOBILE
-========================= */
-
+/* SMALL MOBILE */
 @media (max-width: 400px) {
   .navbar-pistakio .logo {
     width: 110px;
   }
-
   .navbar-mobile-actions {
     gap: 4px;
   }
-
   .navbar-icon-button,
   .navbar-menu-button {
     width: 36px;
     height: 36px;
   }
-
   .navbar-avatar {
     width: 36px;
     height: 36px;
-
     font-size: 12px;
   }
 }

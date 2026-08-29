@@ -70,7 +70,8 @@
     "filtersActive": "Filtri attivi",
     "discover": "Scopri il gusto",
     "noFlavorsDescription": "Prova a modificare o rimuovere i filtri per trovare altri gusti.",
-    "unavailableDescription": "Questo gusto non è attualmente disponibile."
+    "unavailableDescription": "Questo gusto non è attualmente disponibile.",
+    "loginToPurchase": "Accedi per acquistare"
   },
 
   "cart": {

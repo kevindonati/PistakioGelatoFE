@@ -1,27 +1,17 @@
 import { useEffect, useState } from "react"
-
 import { ArrowLeft, MapPin, Pencil, Plus, Trash2 } from "lucide-react"
-
 import { useTranslation } from "react-i18next"
-
 import { useNavigate } from "react-router-dom"
-
 import { deleteAddress, getAddresses } from "../../services/addressApi"
-
 import type { Address } from "../../types/Address"
-
 import "../../styles/Addresses.css"
 
 function Addresses() {
   const { t } = useTranslation()
   const navigate = useNavigate()
-
   const [addresses, setAddresses] = useState<Address[]>([])
-
   const [loading, setLoading] = useState(true)
-
   const [deletingId, setDeletingId] = useState<string | null>(null)
-
   const [error, setError] = useState("")
 
   const loadAddresses = async () => {
@@ -69,7 +59,7 @@ function Addresses() {
   }
 
   return (
-    <main className="pistakio-addresses">
+    <main className="pistakio-addresses bg-body-tertiary">
       <div className="container">
         {/* HEADER */}
 

@@ -1,13 +1,9 @@
 import { useState } from "react"
 import type { FormEvent } from "react"
-
 import { useNavigate } from "react-router-dom"
-
 import api from "../../services/api"
 import axios from "axios"
-
 import { useTranslation } from "react-i18next"
-
 import {
   Eye,
   EyeOff,
@@ -19,22 +15,18 @@ import {
   ArrowRight,
   AlertCircle,
 } from "lucide-react"
-
 import logo from "../../assets/LOGO CON SCRITTA PIST DEF.png"
-
 import "../../styles/Register.css"
 
 function Register() {
   const navigate = useNavigate()
   const { t } = useTranslation()
-
   const [name, setName] = useState("")
   const [surname, setSurname] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [phone, setPhone] = useState("")
   const [language, setLanguage] = useState("IT")
-
   const [error, setError] = useState("")
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -88,7 +80,7 @@ function Register() {
         </div>
 
         <form onSubmit={handleSubmit}>
-          {/* Nome + Cognome */}
+          {/* Name + Surname */}
           <div className="register-row">
             <div className="register-field">
               <label htmlFor="name">{t("auth.name")}</label>
@@ -180,7 +172,7 @@ function Register() {
             </div>
           </div>
 
-          {/* Telefono */}
+          {/* Phone */}
           <div className="register-field">
             <label htmlFor="phone">{t("auth.phone")}</label>
 
@@ -199,7 +191,7 @@ function Register() {
             </div>
           </div>
 
-          {/* Lingua */}
+          {/* Language */}
           <div className="register-field">
             <label htmlFor="language">{t("auth.language")}</label>
 
@@ -219,7 +211,7 @@ function Register() {
             </div>
           </div>
 
-          {/* Errore */}
+          {/* Error */}
           {error && (
             <div className="register-error" role="alert">
               <AlertCircle size={18} />

@@ -1,22 +1,16 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
-
 import { useTranslation } from "react-i18next"
-
 import {
   ArrowLeft,
   Check,
-  CreditCard,
   MapPin,
   Plus,
   ShoppingBag,
   Truck,
 } from "lucide-react"
-
 import { useCart } from "../../context/CartContext"
-
 import { getAddresses } from "../../services/addressApi"
-
 import {
   checkoutOrder,
   getShippingCost,
@@ -25,47 +19,34 @@ import {
   getOrderById,
   getMyOrderItems,
 } from "../../services/orderApi"
-
 import type { Address } from "../../types/Address"
 import type { Order } from "../../types/Order"
 import type { CartItem } from "../../context/CartContext"
-
 import Loading from "../../components/Loading"
-
 import "../../styles/Checkout.css"
 import { getFlavorById, getTubById } from "../../services/catalogApi"
-import { Paypal } from "react-bootstrap-icons"
+import { Paypal, Stripe } from "react-bootstrap-icons"
 
 function Checkout() {
   const { t } = useTranslation()
   const navigate = useNavigate()
-
   const [searchParams] = useSearchParams()
   const orderId = searchParams.get("orderId")
-
   const { items: cartItems, order: cartOrder, loading: cartLoading } = useCart()
-
   const [addresses, setAddresses] = useState<Address[]>([])
   const [selectedAddress, setSelectedAddress] = useState<string | null>(null)
   const [notes, setNotes] = useState("")
   const [shippingCost, setShippingCost] = useState(0)
-
   const [order, setOrder] = useState<Order | null>(null)
   const [items, setItems] = useState<CartItem[]>([])
-
   const [loading, setLoading] = useState(true)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState("")
-
   const [paymentMethod, setPaymentMethod] = useState<"STRIPE" | "PAYPAL">(
     "STRIPE",
   )
 
-  /*
-   * =========================================
-   * LOAD CHECKOUT DATA
-   * =========================================
-   */
+  /* LOAD CHECKOUT DATA */
 
   useEffect(() => {
     const loadCheckoutData = async () => {
@@ -85,12 +66,7 @@ function Checkout() {
           setSelectedAddress(addressesData[0].id)
         }
 
-        /*
-         * Se arriva orderId dalla URL,
-         * stiamo riprovando un ordine già esistente.
-         *
-         * In questo caso NON usiamo il carrello.
-         */
+        /* if orderId comes first from url, don't use the cart */
 
         if (orderId) {
           const [orderData, orderItemsData] = await Promise.all([
@@ -124,10 +100,7 @@ function Checkout() {
           return
         }
 
-        /*
-         * Checkout normale:
-         * usiamo il carrello corrente.
-         */
+        /* checkout from cart */
 
         setOrder(cartOrder)
         setItems(cartItems)
@@ -140,24 +113,15 @@ function Checkout() {
       }
     }
 
-    /*
-     * Per il checkout normale aspettiamo che il CartContext
-     * abbia finito di caricarsi.
-     *
-     * Se invece abbiamo orderId possiamo caricare
-     * direttamente l'ordine.
-     */
+    /* norml checkout wait for CartContext to load */
+    /* but if i have the orderId, i can load directly the order */
 
     if (orderId || !cartLoading) {
       loadCheckoutData()
     }
   }, [orderId, cartLoading, cartOrder, cartItems, t])
 
-  /*
-   * =========================================
-   * LOADING
-   * =========================================
-   */
+  /* LOADING */
 
   if (cartLoading && !orderId) {
     return <Loading />
@@ -167,11 +131,7 @@ function Checkout() {
     return <Loading />
   }
 
-  /*
-   * =========================================
-   * EMPTY
-   * =========================================
-   */
+  /* EMPTY */
 
   if (!order || items.length === 0) {
     return (
@@ -201,35 +161,22 @@ function Checkout() {
     )
   }
 
-  /*
-   * =========================================
-   * TOTALS
-   * =========================================
-   */
+  /* TOTALS */
 
   const subtotal = items.reduce(
     (total, item) => total + item.tub.price * item.quantity,
     0,
   )
 
-  /*
-   * Per un ordine PENDING_PAYMENT il totale
-   * è già stato calcolato dal backend.
-   *
-   * Per il checkout normale calcoliamo:
-   * subtotal + shipping.
-   */
+  /* if the order is PENDING_PAYMENT, the total is already been calcolated from be */
+  /* if it's a normal checkout, it will calcolate subtotal + shipping */
 
   const totalPrice =
     order.orderStatus === "PENDING_PAYMENT"
       ? order.total
       : subtotal + shippingCost
 
-  /*
-   * =========================================
-   * SUBMIT
-   * =========================================
-   */
+  /* SUBMIT */
 
   const handleSubmit = async (
     event: React.FormEvent,
@@ -252,13 +199,8 @@ function Checkout() {
       setSubmitting(true)
       setError("")
 
-      /*
-       * SOLO un ordine CART può essere checkoutato.
-       *
-       * Se siamo arrivati qui con un ordine
-       * PENDING_PAYMENT, saltiamo completamente
-       * checkoutOrder().
-       */
+      /* only order with status CART can be checked out.
+      if the order has PENDING_PAYMENT status, it will skip checkoutOrder() */
 
       if (order.orderStatus === "CART") {
         await checkoutOrder(order.id, {
@@ -267,9 +209,7 @@ function Checkout() {
         })
       }
 
-      /*
-       * STRIPE
-       */
+      /* STRIPE */
 
       if (method === "STRIPE") {
         setPaymentMethod("STRIPE")
@@ -281,9 +221,7 @@ function Checkout() {
         return
       }
 
-      /*
-       * PAYPAL
-       */
+      /* PAYPAL */
 
       setPaymentMethod("PAYPAL")
 
@@ -299,7 +237,7 @@ function Checkout() {
   }
 
   return (
-    <main className="pistakio-checkout">
+    <main className="pistakio-checkout bg-body-tertiary">
       <div className="container">
         {/* HEADER */}
 
@@ -323,9 +261,7 @@ function Checkout() {
 
         <form onSubmit={(event) => handleSubmit(event)}>
           <div className="pistakio-checkout-layout">
-            {/* =========================================
-                LEFT
-            ========================================= */}
+            {/* LEFT */}
 
             <div className="pistakio-checkout-main">
               {/* ADDRESS */}
@@ -447,9 +383,7 @@ function Checkout() {
               </section>
             </div>
 
-            {/* =========================================
-                RIGHT - SUMMARY
-            ========================================= */}
+            {/* RIGHT - SUMMARY */}
 
             <aside className="pistakio-checkout-summary">
               <div className="pistakio-checkout-summary-card">
@@ -533,16 +467,16 @@ function Checkout() {
 
                 {/* PAYMENT BUTTONS */}
 
-                <div className="d-flex gap-2 mt-3">
+                <div className=" gap-2 mt-3">
                   <button
                     type="button"
-                    className="pistakio-checkout-confirm flex-grow-1"
+                    className="pistakio-checkout-confirm flex-grow-1 mb-2"
                     disabled={
                       submitting || addresses.length === 0 || !selectedAddress
                     }
                     onClick={(event) => handleSubmit(event, "STRIPE")}
                   >
-                    <CreditCard size={18} />
+                    <Stripe size={18} />
 
                     {submitting && paymentMethod === "STRIPE"
                       ? t("checkout.processing")

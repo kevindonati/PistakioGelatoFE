@@ -12,28 +12,21 @@ import {
 } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
-
 import { useAuth } from "../../context/useAuth"
-
 import {
   getMe,
   updateMe,
   type UserProfile,
   type UpdateUserData,
 } from "../../services/userApi"
-
 import Loading from "../../components/Loading"
-
 import "../../styles/Account.css"
 
 function Account() {
   const { t } = useTranslation()
   const navigate = useNavigate()
-
   const { logout, updateUser } = useAuth()
-
   const [user, setUser] = useState<UserProfile | null>(null)
-
   const [form, setForm] = useState<UpdateUserData>({
     name: "",
     surname: "",
@@ -41,13 +34,9 @@ function Account() {
     phone: "",
     language: "IT",
   })
-
   const [loading, setLoading] = useState(true)
-
   const [saving, setSaving] = useState(false)
-
   const [error, setError] = useState("")
-
   const [success, setSuccess] = useState(false)
 
   useEffect(() => {
@@ -74,7 +63,6 @@ function Account() {
         setLoading(false)
       }
     }
-
     loadProfile()
   }, [t])
 
@@ -84,7 +72,6 @@ function Account() {
     }
 
     const firstLetter = user.name?.charAt(0).toUpperCase() ?? ""
-
     const lastLetter = user.surname?.charAt(0).toUpperCase() ?? ""
 
     return `${firstLetter}${lastLetter}`

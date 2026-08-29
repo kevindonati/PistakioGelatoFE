@@ -1,25 +1,17 @@
 import { useEffect, useState } from "react"
-
 import { useTranslation } from "react-i18next"
-
 import { useNavigate } from "react-router-dom"
-
 import { ArrowRight, Award, Heart, Truck, ShoppingBag } from "lucide-react"
-
 import { getFlavors, getTubs } from "../../services/catalogApi"
-
 import type { Flavor } from "../../types/Flavor"
-
 import type { Tub } from "../../types/Tub"
-
 import Loading from "../../components/Loading"
-
 import "../../styles/Home.css"
 import imageHero from "../../assets/foto gelateria.jpg"
+
 function Home() {
   const { t } = useTranslation()
   const navigate = useNavigate()
-
   const [flavors, setFlavors] = useState<Flavor[]>([])
   const [tubs, setTubs] = useState<Tub[]>([])
   const [loading, setLoading] = useState(true)
@@ -31,7 +23,6 @@ function Home() {
           getFlavors(0, 50),
           getTubs(),
         ])
-
         setFlavors(flavorsData.content)
         setTubs(tubsData)
       } catch (error) {
@@ -40,7 +31,6 @@ function Home() {
         setLoading(false)
       }
     }
-
     loadHomeData()
   }, [])
 
@@ -64,9 +54,7 @@ function Home() {
 
   return (
     <main className="home">
-      {/* =========================
-          HERO
-      ========================= */}
+      {/* HERO */}
 
       <section
         className="home-hero"
@@ -95,9 +83,7 @@ function Home() {
         </div>
       </section>
 
-      {/* =========================
-          FLAVORS
-      ========================= */}
+      {/* FLAVORS */}
 
       <section className="home-flavors">
         <div className="container">
@@ -156,9 +142,7 @@ function Home() {
         </div>
       </section>
 
-      {/* =========================
-          TUBS
-      ========================= */}
+      {/* TUBS */}
 
       <section className="home-formats">
         <div className="container">
@@ -210,9 +194,7 @@ function Home() {
         </div>
       </section>
 
-      {/* =========================
-          BRAND
-      ========================= */}
+      {/* BRAND */}
 
       <section className="home-brand">
         <div className="container">
@@ -238,9 +220,7 @@ function Home() {
         </div>
       </section>
 
-      {/* =========================
-          BENEFITS
-      ========================= */}
+      {/* BENEFITS */}
 
       <section className="home-benefits">
         <div className="container">
@@ -286,9 +266,7 @@ function Home() {
         </div>
       </section>
 
-      {/* =========================
-          REVIEWS
-      ========================= */}
+      {/* REVIEWS */}
 
       <section className="home-reviews">
         <div className="container">
@@ -328,9 +306,7 @@ function Home() {
         </div>
       </section>
 
-      {/* =========================
-          FINAL CTA
-      ========================= */}
+      {/* FINAL CTA */}
 
       <section className="home-final-cta">
         <div className="container">

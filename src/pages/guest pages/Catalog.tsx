@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react"
-
 import { useTranslation } from "react-i18next"
-
 import {
   CandyOff,
   Leaf,
@@ -10,17 +8,11 @@ import {
   ArrowRight,
   SlidersHorizontal,
 } from "lucide-react"
-
 import { getCategories, getFlavors } from "../../services/catalogApi"
-
 import type { Category } from "../../types/Category"
-
 import type { Flavor } from "../../types/Flavor"
-
 import Loading from "../../components/Loading"
-
 import { useNavigate } from "react-router-dom"
-
 import "../../styles/Catalog.css"
 
 type FlavorFilter =
@@ -32,19 +24,12 @@ type FlavorFilter =
 
 function Catalog() {
   const { t } = useTranslation()
-
   const [categories, setCategories] = useState<Category[]>([])
-
   const [flavors, setFlavors] = useState<Flavor[]>([])
-
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
-
   const [activeFilters, setActiveFilters] = useState<FlavorFilter[]>([])
-
   const [loading, setLoading] = useState(true)
-
   const [error, setError] = useState("")
-
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -141,21 +126,15 @@ function Catalog() {
         </div>
       </section>
 
-      {/* =====================================================
-          CATALOG CONTENT
-      ===================================================== */}
+      {/* CATALOG CONTENT */}
 
       <section className="catalog-content">
         <div className="container">
-          {/* =================================================
-              ERROR
-          ================================================= */}
+          {/* ERROR */}
 
           {error && <div className="catalog-error">{error}</div>}
 
-          {/* =================================================
-              FILTERS
-          ================================================= */}
+          {/* FILTERS */}
 
           <div className="catalog-filters">
             <div className="catalog-filter-header">
@@ -261,9 +240,7 @@ function Catalog() {
             </div>
           </div>
 
-          {/* =================================================
-              CATEGORIES
-          ================================================= */}
+          {/* CATEGORIES */}
 
           <div className="catalog-categories">
             <div className="catalog-categories-list">
@@ -292,9 +269,7 @@ function Catalog() {
             </div>
           </div>
 
-          {/* =================================================
-              RESULTS HEADER
-          ================================================= */}
+          {/* RESULTS HEADER */}
 
           <div className="catalog-results-header">
             <div>
@@ -312,9 +287,7 @@ function Catalog() {
             )}
           </div>
 
-          {/* =================================================
-              FLAVORS
-          ================================================= */}
+          {/* FLAVORS */}
 
           {filteredFlavors.length === 0 ? (
             <div className="catalog-empty">

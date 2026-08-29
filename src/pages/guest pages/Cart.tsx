@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next"
-
 import {
   Minus,
   Plus,
@@ -8,19 +7,14 @@ import {
   ArrowRight,
   ShoppingBag,
 } from "lucide-react"
-
 import { useCart } from "../../context/CartContext"
-
 import { useNavigate } from "react-router-dom"
-
 import Loading from "../../components/Loading"
-
 import "../../styles/Cart.css"
 
 function Cart() {
   const { t } = useTranslation()
   const navigate = useNavigate()
-
   const {
     items,
     removeFromCart,
@@ -36,7 +30,7 @@ function Cart() {
 
   if (items.length === 0) {
     return (
-      <main className="cart-page">
+      <main className="cart-page bg-body-tertiary">
         <div className="cart-empty">
           <div className="cart-empty-icon">
             <ShoppingCart size={42} strokeWidth={1.7} />
