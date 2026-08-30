@@ -35,6 +35,8 @@ import Addresses from "./pages/guest pages/Addresses"
 import EditAddress from "./pages/guest pages/EditAddress"
 import PaymentFailed from "./pages/guest pages/PaymentFailed"
 import AdminSettings from "./pages/admin pages/AdminSettings"
+import ForgotPassword from "./pages/guest pages/ForgotPassword"
+import ResetPassword from "./pages/guest pages/ResetPassword"
 
 function NotFound() {
   return <h1>404 - Pagina non trovata</h1>
@@ -119,6 +121,8 @@ function AppContent() {
         <Route element={<GuestRoute />}>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
         </Route>
 
         {/* CATALOGO */}

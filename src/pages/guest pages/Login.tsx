@@ -1,7 +1,7 @@
 import { useState } from "react"
 import type { FormEvent } from "react"
 import { useAuth } from "../../context/useAuth"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { Eye, EyeOff, Mail, Lock, ArrowRight, AlertCircle } from "lucide-react"
 import logo from "../../assets/LOGO CON SCRITTA PIST DEF.png"
@@ -101,10 +101,8 @@ function Login() {
           </div>
 
           {/* Forgot password */}
-          <div className="forgot-password">
-            <button type="button" onClick={() => {}}>
-              {t("auth.forgotPassword")}
-            </button>
+          <div className="forgot-password login-register">
+            <Link to="/forgot-password">{t("auth.forgotPassword")}</Link>
           </div>
 
           {/* Error */}

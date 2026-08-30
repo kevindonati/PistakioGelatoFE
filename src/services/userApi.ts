@@ -101,3 +101,19 @@ export const updateMe = async (
 
   return response.data
 }
+
+export const forgotPassword = async (email: string): Promise<void> => {
+  await api.post("/users/forgot-password", {
+    email,
+  })
+}
+
+export const resetPassword = async (
+  token: string,
+  password: string,
+): Promise<void> => {
+  await api.post("/users/reset-password", {
+    token,
+    password,
+  })
+}

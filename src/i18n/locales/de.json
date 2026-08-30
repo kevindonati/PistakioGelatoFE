@@ -684,5 +684,35 @@
     "addresses": "Meine Adressen",
     "addressesDescription": "Ihre Lieferadressen verwalten.",
     "personalInfoDescription": "Verwalte deine persönlichen Daten und Kontoeinstellungen."
+  },
+  "forgotPassword": {
+    "title": "Passwort vergessen?",
+    "description": "Gib deine E-Mail-Adresse ein und wir senden dir einen Link zum Zurücksetzen deines Passworts.",
+    "email": "E-Mail",
+    "emailPlaceholder": "E-Mail-Adresse eingeben",
+    "send": "Link senden",
+    "sending": "Wird gesendet...",
+    "error": "Es ist ein Fehler aufgetreten. Bitte versuche es erneut.",
+    "successTitle": "Überprüfe deine E-Mails",
+    "successMessage": "Wenn die E-Mail-Adresse mit einem Konto verknüpft ist, erhältst du eine E-Mail mit Anweisungen zum Zurücksetzen deines Passworts.",
+    "backToLogin": "Zurück zum Login"
+  },
+  "resetPassword": {
+    "title": "Passwort zurücksetzen",
+    "description": "Gib dein neues Passwort ein.",
+    "password": "Neues Passwort",
+    "passwordPlaceholder": "Neues Passwort eingeben",
+    "confirmPassword": "Passwort bestätigen",
+    "confirmPasswordPlaceholder": "Neues Passwort wiederholen",
+    "passwordTooShort": "Das Passwort muss mindestens 8 Zeichen enthalten.",
+    "passwordMismatch": "Die Passwörter stimmen nicht überein.",
+    "invalidToken": "Der Link zum Zurücksetzen des Passworts ist ungültig.",
+    "error": "Der Link ist abgelaufen oder ungültig.",
+    "submit": "Passwort zurücksetzen",
+    "saving": "Wird gespeichert...",
+    "successTitle": "Passwort aktualisiert",
+    "successMessage": "Dein Passwort wurde erfolgreich zurückgesetzt.",
+    "goToLogin": "Zum Login",
+    "backToLogin": "Zurück zum Login"
   }
 }

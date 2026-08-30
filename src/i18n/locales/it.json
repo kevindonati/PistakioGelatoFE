@@ -702,5 +702,35 @@
     "addresses": "I miei indirizzi",
     "addressesDescription": "Gestisci i tuoi indirizzi di consegna.",
     "personalInfoDescription": "Gestisci i tuoi dati personali e le preferenze del tuo account."
+  },
+  "forgotPassword": {
+    "title": "Password dimenticata?",
+    "description": "Inserisci la tua email e ti invieremo un link per reimpostare la password.",
+    "email": "Email",
+    "emailPlaceholder": "Inserisci la tua email",
+    "send": "Invia link",
+    "sending": "Invio...",
+    "error": "Si è verificato un errore. Riprova.",
+    "successTitle": "Controlla la tua email",
+    "successMessage": "Se l'indirizzo è associato a un account, riceverai un'email con le istruzioni per reimpostare la password.",
+    "backToLogin": "Torna al login"
+  },
+  "resetPassword": {
+    "title": "Reimposta password",
+    "description": "Inserisci la tua nuova password.",
+    "password": "Nuova password",
+    "passwordPlaceholder": "Inserisci la nuova password",
+    "confirmPassword": "Conferma password",
+    "confirmPasswordPlaceholder": "Ripeti la nuova password",
+    "passwordTooShort": "La password deve contenere almeno 8 caratteri.",
+    "passwordMismatch": "Le password non coincidono.",
+    "invalidToken": "Il link per reimpostare la password non è valido.",
+    "error": "Il link è scaduto o non è valido.",
+    "submit": "Reimposta password",
+    "saving": "Salvataggio...",
+    "successTitle": "Password aggiornata",
+    "successMessage": "La tua password è stata reimpostata con successo.",
+    "goToLogin": "Vai al login",
+    "backToLogin": "Torna al login"
   }
 }

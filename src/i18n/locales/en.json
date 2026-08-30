@@ -684,5 +684,35 @@
     "addresses": "My Addresses",
     "addressesDescription": "Manage your delivery addresses.",
     "personalInfoDescription": "Manage your personal information and account preferences."
+  },
+  "forgotPassword": {
+    "title": "Forgot your password?",
+    "description": "Enter your email and we'll send you a link to reset your password.",
+    "email": "Email",
+    "emailPlaceholder": "Enter your email",
+    "send": "Send link",
+    "sending": "Sending...",
+    "error": "Something went wrong. Please try again.",
+    "successTitle": "Check your email",
+    "successMessage": "If the email address is associated with an account, you will receive an email with instructions to reset your password.",
+    "backToLogin": "Back to login"
+  },
+  "resetPassword": {
+    "title": "Reset password",
+    "description": "Enter your new password.",
+    "password": "New password",
+    "passwordPlaceholder": "Enter your new password",
+    "confirmPassword": "Confirm password",
+    "confirmPasswordPlaceholder": "Repeat your new password",
+    "passwordTooShort": "The password must contain at least 8 characters.",
+    "passwordMismatch": "The passwords do not match.",
+    "invalidToken": "The password reset link is invalid.",
+    "error": "The link has expired or is invalid.",
+    "submit": "Reset password",
+    "saving": "Saving...",
+    "successTitle": "Password updated",
+    "successMessage": "Your password has been successfully reset.",
+    "goToLogin": "Go to login",
+    "backToLogin": "Back to login"
   }
 }
