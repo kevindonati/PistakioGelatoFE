@@ -74,8 +74,8 @@ function ForgotPassword() {
               </button>
             </form>
 
-            <div className="login-register">
-              <Link to="/login">
+            <div className="forgot-password">
+              <Link to="/login" className="forgot-text">
                 <ArrowLeft size={15} />
 
                 {t("forgotPassword.backToLogin")}
@@ -94,8 +94,8 @@ function ForgotPassword() {
 
             <p>{t("forgotPassword.successMessage")}</p>
 
-            <div className="login-register">
-              <Link to="/login">
+            <div className="forgot-password">
+              <Link to="/login" className="forgot-text">
                 <ArrowLeft size={15} />
 
                 {t("forgotPassword.backToLogin")}

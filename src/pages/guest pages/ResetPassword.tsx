@@ -69,8 +69,10 @@ function ResetPassword() {
 
             <p>{t("resetPassword.successMessage")}</p>
 
-            <div className="login-register">
-              <Link to="/login">{t("resetPassword.goToLogin")}</Link>
+            <div className="forgot-password">
+              <Link to="/login" className="forgot-text">
+                {t("resetPassword.goToLogin")}
+              </Link>
             </div>
           </div>
         </div>
@@ -155,8 +157,8 @@ function ResetPassword() {
           </button>
         </form>
 
-        <div className="login-register">
-          <Link to="/login">
+        <div className="forgot-password">
+          <Link to="/login" className="forgot-text">
             <ArrowLeft size={15} />
 
             {t("resetPassword.backToLogin")}

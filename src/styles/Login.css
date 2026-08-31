@@ -141,11 +141,11 @@
 .forgot-password {
   display: flex;
   justify-content: flex-end;
-  margin-top: -8px;
+  margin-top: 12px;
   margin-bottom: 22px;
 }
 
-.forgot-password button {
+.forgot-text {
   border: none;
   background: none;
   padding: 0;
@@ -153,9 +153,10 @@
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
+  text-decoration: none;
 }
 
-.forgot-password button:hover {
+.forgot-text:hover {
   text-decoration: underline;
 }
 

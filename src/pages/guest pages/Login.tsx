@@ -101,8 +101,10 @@ function Login() {
           </div>
 
           {/* Forgot password */}
-          <div className="forgot-password login-register">
-            <Link to="/forgot-password">{t("auth.forgotPassword")}</Link>
+          <div className="forgot-password">
+            <Link to="/forgot-password" className="forgot-text">
+              {t("auth.forgotPassword")}
+            </Link>
           </div>
 
           {/* Error */}
