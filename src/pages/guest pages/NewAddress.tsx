@@ -31,7 +31,7 @@ function NewAddress() {
         country,
       })
 
-      navigate("/checkout")
+      navigate("/account/addresses")
     } catch (error) {
       console.error(error)
 
