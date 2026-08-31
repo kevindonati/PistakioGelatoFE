@@ -674,8 +674,23 @@
         "notFound": "Kunde nicht gefunden",
         "orders": "Bestellungen",
         "ordersCount": "{{count}} Bestellungen",
-        "noOrders": "Dieser Kunde hat noch keine Bestellungen aufgegeben."
-      }
+        "noOrders": "Dieser Kunde hat noch keine Bestellungen aufgegeben.",
+        "totalOrders": "Bestellungen insgesamt",
+        "totalSpent": "Gesamtausgaben",
+        "averageOrder": "Durchschnittliche Bestellung",
+        "lastOrder": "Letzte Bestellung",
+        "sendEmail": "E-Mail senden",
+        "call": "Anrufen",
+        "edit": "Bearbeiten",
+        "name": "Vorname",
+        "surname": "Nachname",
+        "role": "Rolle",
+        "updateError": "Fehler beim Aktualisieren des Kunden",
+        "adminRoleWarning": "Möchten Sie diesem Benutzer wirklich die Administratorrolle zuweisen? Dies ist eine riskante Aktion: Der Benutzer erhält Zugriff auf die Administrationsfunktionen."
+      },
+      "createdAt": "Registrierungsdatum",
+      "name": "Vorname",
+      "surname": "Nachname"
     },
     "settings": {
       "title": "Einstellungen",

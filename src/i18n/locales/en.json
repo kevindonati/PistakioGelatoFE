@@ -674,8 +674,23 @@
         "notFound": "Customer not found",
         "orders": "Orders",
         "ordersCount": "{{count}} orders",
-        "noOrders": "This customer has not placed any orders yet."
-      }
+        "noOrders": "This customer has not placed any orders yet.",
+        "totalOrders": "Total orders",
+        "totalSpent": "Total spent",
+        "averageOrder": "Average order",
+        "lastOrder": "Last order",
+        "sendEmail": "Send email",
+        "call": "Call",
+        "edit": "Edit",
+        "name": "First name",
+        "surname": "Last name",
+        "role": "Role",
+        "updateError": "Error updating customer",
+        "adminRoleWarning": "Are you sure you want to assign the administrator role to this user? This is a risky action: the user will have access to administrative features."
+      },
+      "createdAt": "Registration date",
+      "name": "First name",
+      "surname": "Last name"
     },
     "settings": {
       "title": "Settings",

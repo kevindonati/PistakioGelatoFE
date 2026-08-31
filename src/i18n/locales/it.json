@@ -692,8 +692,23 @@
         "notFound": "Cliente non trovato",
         "orders": "Ordini",
         "ordersCount": "{{count}} ordini",
-        "noOrders": "Questo cliente non ha ancora effettuato ordini."
-      }
+        "noOrders": "Questo cliente non ha ancora effettuato ordini.",
+        "totalOrders": "Ordini totali",
+        "totalSpent": "Spesa totale",
+        "averageOrder": "Ordine medio",
+        "lastOrder": "Ultimo ordine",
+        "sendEmail": "Invia email",
+        "call": "Chiama",
+        "edit": "Modifica",
+        "name": "Nome",
+        "surname": "Cognome",
+        "role": "Ruolo",
+        "updateError": "Errore durante l'aggiornamento del cliente",
+        "adminRoleWarning": "Sei sicuro di voler assegnare il ruolo di amministratore a questo utente? È un'azione rischiosa: l'utente avrà accesso alle funzionalità amministrative."
+      },
+      "createdAt": "Data registrazione",
+      "name": "Nome",
+      "surname": "Cognome"
     },
     "settings": {
       "title": "Impostazioni",

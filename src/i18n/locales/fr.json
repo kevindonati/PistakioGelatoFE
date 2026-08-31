@@ -674,8 +674,23 @@
         "notFound": "Client introuvable",
         "orders": "Commandes",
         "ordersCount": "{{count}} commandes",
-        "noOrders": "Ce client n'a encore passé aucune commande."
-      }
+        "noOrders": "Ce client n'a encore passé aucune commande.",
+        "totalOrders": "Commandes totales",
+        "totalSpent": "Total dépensé",
+        "averageOrder": "Commande moyenne",
+        "lastOrder": "Dernière commande",
+        "sendEmail": "Envoyer un e-mail",
+        "call": "Appeler",
+        "edit": "Modifier",
+        "name": "Prénom",
+        "surname": "Nom",
+        "role": "Rôle",
+        "updateError": "Erreur lors de la mise à jour du client",
+        "adminRoleWarning": "Êtes-vous sûr de vouloir attribuer le rôle d'administrateur à cet utilisateur ? Cette action est risquée : l'utilisateur aura accès aux fonctionnalités d'administration."
+      },
+      "createdAt": "Date d'inscription",
+      "name": "Prénom",
+      "surname": "Nom"
     },
     "settings": {
       "title": "Paramètres",

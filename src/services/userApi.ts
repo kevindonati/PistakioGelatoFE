@@ -9,7 +9,7 @@ export interface AdminUser {
   role: "USER" | "ADMIN"
   enabled: boolean
   language: "IT" | "EN" | "FR" | "DE"
-  createdAt?: string
+  createdAt: string
 }
 
 export interface PaginatedUsers {
@@ -116,4 +116,23 @@ export const resetPassword = async (
     token,
     password,
   })
+}
+
+export interface AdminUserUpdateData {
+  name: string
+  surname: string
+  email: string
+  phone?: string
+  language: "IT" | "EN" | "FR" | "DE"
+  role: "USER" | "ADMIN"
+  enabled: boolean
+}
+
+export const updateUserByAdmin = async (
+  userId: string,
+  data: AdminUserUpdateData,
+): Promise<AdminUser> => {
+  const response = await api.put<AdminUser>(`/users/${userId}/admin`, data)
+
+  return response.data
 }
