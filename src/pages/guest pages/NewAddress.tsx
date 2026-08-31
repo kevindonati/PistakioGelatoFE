@@ -33,7 +33,7 @@ function NewAddress() {
         country,
       })
 
-      navigate("/checkout")
+      navigate("/account/addresses")
     } catch (error) {
       console.error(error)
       setError(t("address.createError"))
@@ -148,17 +148,28 @@ function NewAddress() {
                   />
                 </div>
 
-                {/* SALVA */}
+                {/* BUTTONS */}
 
-                <button
-                  type="submit"
-                  className="btn btn-dark w-100"
-                  disabled={loading}
-                >
-                  <Save size={17} className="me-2" />
+                <div className="pistakio-new-address-actions">
+                  <button
+                    type="button"
+                    className="pistakio-new-address-cancel"
+                    onClick={() => navigate("/account/addresses")}
+                    disabled={loading}
+                  >
+                    {t("address.cancel")}
+                  </button>
 
-                  {loading ? t("address.saving") : t("address.save")}
-                </button>
+                  <button
+                    type="submit"
+                    className="btn btn-dark w-100"
+                    disabled={loading}
+                  >
+                    <Save size={17} className="me-2" />
+
+                    {loading ? t("address.saving") : t("address.save")}
+                  </button>
+                </div>
               </form>
             </div>
           </div>

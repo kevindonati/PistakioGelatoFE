@@ -1,4 +1,5 @@
 import { Outlet, NavLink, useNavigate, useLocation } from "react-router-dom"
+
 import {
   LayoutDashboard,
   ShoppingBag,
@@ -9,19 +10,23 @@ import {
   ChevronLeft,
   ChevronRight,
   ChevronDown,
-  Truck,
-  CreditCard,
   Box,
   Tags,
+  Home,
+  Languages,
 } from "lucide-react"
+
 import { useState } from "react"
+
 import { useAuth } from "../context/useAuth"
 import { useTranslation } from "react-i18next"
+
 import "../styles/Admin.css"
 
 function AdminLayout() {
   const { logout } = useAuth()
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -46,15 +51,22 @@ function AdminLayout() {
     setCatalogOpen((current) => !current)
   }
 
+  const handleLanguageChange = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    const language = event.target.value
+
+    i18n.changeLanguage(language)
+    localStorage.setItem("language", language)
+  }
+
   return (
     <div
       className={`admin-layout ${collapsed ? "admin-layout-collapsed" : ""}`}
     >
       {/* SIDEBAR */}
-
       <aside className="admin-sidebar">
         {/* LOGO */}
-
         <div className="admin-sidebar-header">
           {!collapsed && (
             <div className="admin-logo">
@@ -79,10 +91,8 @@ function AdminLayout() {
         </div>
 
         {/* MENU */}
-
         <nav className="admin-nav">
           {/* DASHBOARD */}
-
           <AdminNavItem
             to="/admin"
             icon={<LayoutDashboard size={19} />}
@@ -92,7 +102,6 @@ function AdminLayout() {
           />
 
           {/* GESTIONE */}
-
           {!collapsed && (
             <div className="admin-section-title">
               {t("admin.sidebar.management")}
@@ -106,8 +115,7 @@ function AdminLayout() {
             collapsed={collapsed}
           />
 
-          {/* CATALOGO */}
-
+          {/* CATALOG */}
           {!collapsed && (
             <button
               type="button"
@@ -129,8 +137,7 @@ function AdminLayout() {
             </button>
           )}
 
-          {/* CATALOGO COLLAPSED */}
-
+          {/* CATALOG COLLAPSED */}
           {collapsed && (
             <button
               type="button"
@@ -144,8 +151,7 @@ function AdminLayout() {
             </button>
           )}
 
-          {/* SOTTO MENU CATALOGO */}
-
+          {/* CATALOG MENU */}
           {!collapsed && catalogOpen && (
             <div className="admin-submenu">
               <AdminSubNavItem
@@ -168,8 +174,7 @@ function AdminLayout() {
             </div>
           )}
 
-          {/* CLIENTI */}
-
+          {/* CUSTOMERS */}
           <AdminNavItem
             to="/admin/customers"
             icon={<Users size={19} />}
@@ -177,8 +182,7 @@ function AdminLayout() {
             collapsed={collapsed}
           />
 
-          {/* NEGOZIO */}
-
+          {/* SHOP */}
           {!collapsed && (
             <div className="admin-section-title">
               {t("admin.sidebar.store")}
@@ -186,30 +190,47 @@ function AdminLayout() {
           )}
 
           <AdminNavItem
-            to="/admin/shipments"
-            icon={<Truck size={19} />}
-            label={t("admin.sidebar.shipments")}
-            collapsed={collapsed}
-          />
-
-          <AdminNavItem
-            to="/admin/payments"
-            icon={<CreditCard size={19} />}
-            label={t("admin.sidebar.payments")}
-            collapsed={collapsed}
-          />
-
-          <AdminNavItem
             to="/admin/settings"
             icon={<Settings size={19} />}
             label={t("admin.sidebar.settings")}
             collapsed={collapsed}
           />
+
+          {/* HOME */}
+          <AdminNavItem
+            to="/"
+            icon={<Home size={19} />}
+            label={t("admin.sidebar.home")}
+            collapsed={collapsed}
+          />
         </nav>
 
-        {/* LOGOUT */}
-
+        {/* FOOTER SIDEBAR */}
         <div className="admin-sidebar-footer">
+          {/* LANGUAGE */}
+          <div
+            className={`admin-language ${
+              collapsed ? "admin-language-collapsed" : ""
+            }`}
+            title={t("admin.sidebar.language")}
+          >
+            <Languages size={19} />
+
+            {!collapsed && (
+              <select
+                value={i18n.language}
+                onChange={handleLanguageChange}
+                aria-label={t("admin.sidebar.language")}
+              >
+                <option value="IT">Italiano</option>
+                <option value="EN">English</option>
+                <option value="FR">Français</option>
+                <option value="DE">Deutsch</option>
+              </select>
+            )}
+          </div>
+
+          {/* LOGOUT */}
           <button
             type="button"
             className="admin-logout"
@@ -223,8 +244,7 @@ function AdminLayout() {
         </div>
       </aside>
 
-      {/* CONTENUTO */}
-
+      {/* CONTENT */}
       <main className="admin-content">
         <Outlet />
       </main>
@@ -259,7 +279,6 @@ function AdminNavItem({
       title={collapsed ? label : undefined}
     >
       {icon}
-
       {!collapsed && <span>{label}</span>}
     </NavLink>
   )
@@ -284,7 +303,6 @@ function AdminSubNavItem({ to, icon, label }: AdminSubNavItemProps) {
       }
     >
       {icon}
-
       <span>{label}</span>
     </NavLink>
   )

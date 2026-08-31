@@ -209,15 +209,54 @@
       "tubs": "Vaschette",
       "categories": "Categorie",
       "openMenu": "Apri menu",
-      "closeMenu": "Chiudi menu"
+      "closeMenu": "Chiudi menu",
+      "home": "Home",
+      "language": "Lingua"
     },
 
     "dashboard": {
       "title": "Pannello di controllo",
       "subtitle": "Gestisci il tuo negozio",
       "orders": "Ordini",
-      "customers": "Clienti",
-      "revenue": "Incassi"
+      "customers": "Nuovi clienti",
+      "revenue": "Fatturato",
+      "pendingPayments": "Pagamenti in attesa",
+      "preparingOrders": "In preparazione",
+      "shippedOrders": "Spediti",
+      "deliveredOrders": "Consegnati",
+      "period": {
+        "day": "Giorno",
+        "week": "Settimana",
+        "month": "Mese",
+        "year": "Anno"
+      },
+      "selectedPeriod": "Periodo selezionato",
+      "newCustomers": "nuovi",
+      "averageOrder": "Media ordine",
+      "sales": "Vendite",
+      "salesDescription": "Andamento delle vendite nel periodo selezionato",
+      "ordersToManage": "Ordini da gestire",
+      "ordersToManageDescription": "Situazione attuale degli ordini",
+      "pendingPaymentsDescription": "In attesa di pagamento",
+      "preparingDescription": "In preparazione",
+      "shippedDescription": "In consegna",
+      "deliveredDescription": "Completati",
+      "day": "Giorno",
+      "week": "Settimana",
+      "month": "Mese",
+      "year": "Anno",
+      "dayPrevious": "Giorno -1",
+      "weekPrevious": "Settimana -1",
+      "monthPrevious": "Mese -1",
+      "yearPrevious": "Anno -1",
+      "date": "Data",
+      "noSales": "Nessuna vendita",
+      "recentSales": "Ultime 10 vendite",
+      "last10Sales": "Le 10 vendite più recenti",
+      "customer": "Cliente",
+      "order": "Ordine",
+      "total": "Totale",
+      "status": "Stato dell'ordine"
     },
 
     "orders": {
