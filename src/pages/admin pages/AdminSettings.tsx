@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react"
-
 import { useTranslation } from "react-i18next"
-
 import { Save, Truck } from "lucide-react"
-
 import {
   getShippingSettings,
   updateShippingSettings,
   type ShippingSettings,
 } from "../../services/settingsApi"
+import "../../styles/AdminSettings.css"
 
 function AdminSettings() {
   const { t } = useTranslation()
@@ -24,11 +22,8 @@ function AdminSettings() {
   })
 
   const [loading, setLoading] = useState(true)
-
   const [saving, setSaving] = useState(false)
-
   const [success, setSuccess] = useState(false)
-
   const [error, setError] = useState("")
 
   useEffect(() => {
@@ -42,7 +37,6 @@ function AdminSettings() {
         setSettings(data)
       } catch (error) {
         console.error(error)
-
         setError(t("admin.settings.loadError"))
       } finally {
         setLoading(false)
@@ -71,11 +65,9 @@ function AdminSettings() {
       const updated = await updateShippingSettings(settings)
 
       setSettings(updated)
-
       setSuccess(true)
     } catch (error) {
       console.error(error)
-
       setError(t("admin.settings.saveError"))
     } finally {
       setSaving(false)
@@ -84,16 +76,21 @@ function AdminSettings() {
 
   if (loading) {
     return (
-      <div>
-        <div className="mb-4">
-          <h1 className="mb-1">{t("admin.settings.title")}</h1>
-
-          <p className="text-muted mb-0">{t("admin.settings.subtitle")}</p>
+      <div className="admin-settings">
+        <div className="admin-settings-header">
+          <div>
+            <h1>{t("admin.settings.title")}</h1>
+            <p>{t("admin.settings.subtitle")}</p>
+          </div>
         </div>
 
-        <div className="card border-0 shadow-sm">
-          <div className="card-body p-4">
-            <p className="text-muted mb-0">{t("admin.settings.loading")}</p>
+        <div className="admin-settings-card">
+          <div className="admin-settings-loading">
+            <div className="admin-settings-loading-icon">
+              <Truck size={24} />
+            </div>
+
+            <p>{t("admin.settings.loading")}</p>
           </div>
         </div>
       </div>
@@ -101,69 +98,80 @@ function AdminSettings() {
   }
 
   return (
-    <div>
-      <div className="mb-4">
-        <h1 className="mb-1">{t("admin.settings.title")}</h1>
-
-        <p className="text-muted mb-0">{t("admin.settings.subtitle")}</p>
+    <div className="admin-settings">
+      <div className="admin-settings-header">
+        <div>
+          <h1>{t("admin.settings.title")}</h1>
+          <p>{t("admin.settings.subtitle")}</p>
+        </div>
       </div>
 
-      <div className="card border-0 shadow-sm">
-        <div className="card-body p-4">
-          <div className="d-flex align-items-center gap-3 mb-4">
-            <div>
-              <Truck size={28} className="text-muted" />
-            </div>
+      {error && <div className="admin-settings-error">{error}</div>}
 
-            <div>
-              <h2 className="h5 mb-1">{t("admin.settings.shipping.title")}</h2>
+      {success && (
+        <div className="admin-settings-success">
+          {t("admin.settings.saved")}
+        </div>
+      )}
 
-              <p className="text-muted mb-0">
-                {t("admin.settings.shipping.description")}
-              </p>
-            </div>
+      <div className="admin-settings-card">
+        <div className="admin-settings-card-header">
+          <div className="admin-settings-icon">
+            <Truck size={24} />
           </div>
 
-          {/* FASCIA 1 */}
+          <div>
+            <h2>{t("admin.settings.shipping.title")}</h2>
+            <p>{t("admin.settings.shipping.description")}</p>
+          </div>
+        </div>
 
-          <div className="border rounded p-3 mb-3">
-            <h3 className="h6 mb-3">{t("admin.settings.shipping.tier1")}</h3>
+        <div className="admin-settings-tiers">
+          <div className="admin-settings-tier">
+            <div className="admin-settings-tier-header">
+              <div className="admin-settings-tier-number">1</div>
 
-            <div className="row g-3">
-              <div className="col-12 col-md-6">
-                <label className="form-label">
+              <div>
+                <h3>{t("admin.settings.shipping.tier1")}</h3>
+                <p>{t("admin.settings.shipping.maxWeight")}</p>
+              </div>
+            </div>
+
+            <div className="admin-settings-fields">
+              <div className="admin-settings-field">
+                <label htmlFor="weight1">
                   {t("admin.settings.shipping.maxWeight")}
                 </label>
 
-                <div className="input-group">
+                <div className="admin-settings-input-wrapper">
                   <input
+                    id="weight1"
                     type="number"
                     min="0.01"
                     step="0.01"
-                    className="form-control"
                     value={settings.weight1}
                     onChange={(event) =>
                       handleChange("weight1", event.target.value)
                     }
                   />
 
-                  <span className="input-group-text">kg</span>
+                  <span>kg</span>
                 </div>
               </div>
 
-              <div className="col-12 col-md-6">
-                <label className="form-label">
+              <div className="admin-settings-field">
+                <label htmlFor="cost1">
                   {t("admin.settings.shipping.cost")}
                 </label>
 
-                <div className="input-group">
-                  <span className="input-group-text">€</span>
+                <div className="admin-settings-input-wrapper currency">
+                  <span>€</span>
 
                   <input
+                    id="cost1"
                     type="number"
                     min="0"
                     step="0.01"
-                    className="form-control"
                     value={settings.cost1}
                     onChange={(event) =>
                       handleChange("cost1", event.target.value)
@@ -174,46 +182,51 @@ function AdminSettings() {
             </div>
           </div>
 
-          {/* FASCIA 2 */}
+          <div className="admin-settings-tier">
+            <div className="admin-settings-tier-header">
+              <div className="admin-settings-tier-number">2</div>
 
-          <div className="border rounded p-3 mb-3">
-            <h3 className="h6 mb-3">{t("admin.settings.shipping.tier2")}</h3>
+              <div>
+                <h3>{t("admin.settings.shipping.tier2")}</h3>
+                <p>{t("admin.settings.shipping.maxWeight")}</p>
+              </div>
+            </div>
 
-            <div className="row g-3">
-              <div className="col-12 col-md-6">
-                <label className="form-label">
+            <div className="admin-settings-fields">
+              <div className="admin-settings-field">
+                <label htmlFor="weight2">
                   {t("admin.settings.shipping.maxWeight")}
                 </label>
 
-                <div className="input-group">
+                <div className="admin-settings-input-wrapper">
                   <input
+                    id="weight2"
                     type="number"
                     min="0.01"
                     step="0.01"
-                    className="form-control"
                     value={settings.weight2}
                     onChange={(event) =>
                       handleChange("weight2", event.target.value)
                     }
                   />
 
-                  <span className="input-group-text">kg</span>
+                  <span>kg</span>
                 </div>
               </div>
 
-              <div className="col-12 col-md-6">
-                <label className="form-label">
+              <div className="admin-settings-field">
+                <label htmlFor="cost2">
                   {t("admin.settings.shipping.cost")}
                 </label>
 
-                <div className="input-group">
-                  <span className="input-group-text">€</span>
+                <div className="admin-settings-input-wrapper currency">
+                  <span>€</span>
 
                   <input
+                    id="cost2"
                     type="number"
                     min="0"
                     step="0.01"
-                    className="form-control"
                     value={settings.cost2}
                     onChange={(event) =>
                       handleChange("cost2", event.target.value)
@@ -224,46 +237,51 @@ function AdminSettings() {
             </div>
           </div>
 
-          {/* FASCIA 3 */}
+          <div className="admin-settings-tier">
+            <div className="admin-settings-tier-header">
+              <div className="admin-settings-tier-number">3</div>
 
-          <div className="border rounded p-3 mb-3">
-            <h3 className="h6 mb-3">{t("admin.settings.shipping.tier3")}</h3>
+              <div>
+                <h3>{t("admin.settings.shipping.tier3")}</h3>
+                <p>{t("admin.settings.shipping.maxWeight")}</p>
+              </div>
+            </div>
 
-            <div className="row g-3">
-              <div className="col-12 col-md-6">
-                <label className="form-label">
+            <div className="admin-settings-fields">
+              <div className="admin-settings-field">
+                <label htmlFor="weight3">
                   {t("admin.settings.shipping.maxWeight")}
                 </label>
 
-                <div className="input-group">
+                <div className="admin-settings-input-wrapper">
                   <input
+                    id="weight3"
                     type="number"
                     min="0.01"
                     step="0.01"
-                    className="form-control"
                     value={settings.weight3}
                     onChange={(event) =>
                       handleChange("weight3", event.target.value)
                     }
                   />
 
-                  <span className="input-group-text">kg</span>
+                  <span>kg</span>
                 </div>
               </div>
 
-              <div className="col-12 col-md-6">
-                <label className="form-label">
+              <div className="admin-settings-field">
+                <label htmlFor="cost3">
                   {t("admin.settings.shipping.cost")}
                 </label>
 
-                <div className="input-group">
-                  <span className="input-group-text">€</span>
+                <div className="admin-settings-input-wrapper currency">
+                  <span>€</span>
 
                   <input
+                    id="cost3"
                     type="number"
                     min="0"
                     step="0.01"
-                    className="form-control"
                     value={settings.cost3}
                     onChange={(event) =>
                       handleChange("cost3", event.target.value)
@@ -274,25 +292,30 @@ function AdminSettings() {
             </div>
           </div>
 
-          {/* OLTRE */}
+          <div className="admin-settings-tier admin-settings-tier-over">
+            <div className="admin-settings-tier-header">
+              <div className="admin-settings-tier-number">+</div>
 
-          <div className="border rounded p-3 mb-4">
-            <h3 className="h6 mb-3">{t("admin.settings.shipping.over")}</h3>
+              <div>
+                <h3>{t("admin.settings.shipping.over")}</h3>
+                <p>{t("admin.settings.shipping.cost")}</p>
+              </div>
+            </div>
 
-            <div className="row">
-              <div className="col-12 col-md-6">
-                <label className="form-label">
+            <div className="admin-settings-fields">
+              <div className="admin-settings-field">
+                <label htmlFor="costOver">
                   {t("admin.settings.shipping.cost")}
                 </label>
 
-                <div className="input-group">
-                  <span className="input-group-text">€</span>
+                <div className="admin-settings-input-wrapper currency">
+                  <span>€</span>
 
                   <input
+                    id="costOver"
                     type="number"
                     min="0"
                     step="0.01"
-                    className="form-control"
                     value={settings.costOver}
                     onChange={(event) =>
                       handleChange("costOver", event.target.value)
@@ -302,31 +325,19 @@ function AdminSettings() {
               </div>
             </div>
           </div>
+        </div>
 
-          {/* MESSAGGI */}
+        <div className="admin-settings-footer">
+          <button
+            type="button"
+            className="admin-settings-save-button"
+            onClick={handleSave}
+            disabled={saving}
+          >
+            <Save size={17} />
 
-          {error && <div className="alert alert-danger mb-3">{error}</div>}
-
-          {success && (
-            <div className="alert alert-success mb-3">
-              {t("admin.settings.saved")}
-            </div>
-          )}
-
-          {/* SALVA */}
-
-          <div className="d-flex justify-content-end">
-            <button
-              type="button"
-              className="btn btn-primary d-flex align-items-center gap-2"
-              onClick={handleSave}
-              disabled={saving}
-            >
-              <Save size={17} />
-
-              {saving ? t("admin.settings.saving") : t("admin.settings.save")}
-            </button>
-          </div>
+            {saving ? t("admin.settings.saving") : t("admin.settings.save")}
+          </button>
         </div>
       </div>
     </div>

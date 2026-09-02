@@ -2,10 +2,9 @@ import { useEffect, useMemo, useState } from "react"
 import { Edit, Plus, Search, Trash2 } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
-
 import { deleteFlavor, getFlavors, type Flavor } from "../../services/flavorApi"
-
 import { getCategories, type Category } from "../../services/categoryApi"
+import "../../styles/AdminFlavor.css"
 
 function AdminFlavors() {
   const { t, i18n } = useTranslation()
@@ -56,7 +55,6 @@ function AdminFlavors() {
       setTotalElements(data.totalElements)
     } catch (error) {
       console.error(error)
-
       setError(t("admin.flavors.loadError"))
     } finally {
       setLoading(false)
@@ -80,11 +78,13 @@ function AdminFlavors() {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     loadFlavors()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, pageSize, orderBy, language])
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     loadCategories()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [language])
 
   const filteredFlavors = useMemo(() => {
@@ -137,13 +137,6 @@ function AdminFlavors() {
 
       await deleteFlavor(flavor.id)
 
-      /*
-       * Se eliminiamo l'ultimo elemento
-       * dell'ultima pagina, torniamo
-       * automaticamente alla pagina
-       * precedente.
-       */
-
       if (flavors.length === 1 && page > 0) {
         setPage((currentPage) => currentPage - 1)
       } else {
@@ -151,7 +144,6 @@ function AdminFlavors() {
       }
     } catch (error) {
       console.error(error)
-
       setError(t("admin.flavors.deleteError"))
     } finally {
       setDeleteLoading(false)
@@ -165,297 +157,233 @@ function AdminFlavors() {
   }
 
   return (
-    <div>
-      {/* HEADER */}
+    <div className="admin-flavors-page">
+      <div className="admin-flavors-container">
+        <header className="admin-flavors-header">
+          <div>
+            <h1>{t("admin.flavors.title")}</h1>
+            <p>{t("admin.flavors.subtitle")}</p>
+          </div>
 
-      <div className="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
-        <div>
-          <h1 className="mb-1">{t("admin.flavors.title")}</h1>
+          <button
+            type="button"
+            className="admin-flavors-primary-button"
+            onClick={() => navigate("/admin/catalog/flavors/new")}
+          >
+            <Plus size={18} />
+            {t("admin.flavors.newFlavor")}
+          </button>
+        </header>
 
-          <p className="text-muted mb-0">{t("admin.flavors.subtitle")}</p>
-        </div>
+        {error && <div className="admin-flavors-error">{error}</div>}
 
-        <button
-          type="button"
-          className="btn btn-dark d-flex align-items-center"
-          onClick={() => navigate("/admin/catalog/flavors/new")}
-        >
-          <Plus size={18} className="me-2" />
+        <section className="admin-flavors-filters">
+          <div className="admin-flavors-field admin-flavors-search-field">
+            <label>{t("admin.flavors.search")}</label>
 
-          {t("admin.flavors.newFlavor")}
-        </button>
-      </div>
+            <div className="admin-flavors-input-wrapper">
+              <Search size={17} />
 
-      {/* ERROR */}
-
-      {error && <div className="alert alert-danger">{error}</div>}
-
-      {/* FILTRI */}
-
-      <div className="card border-0 shadow-sm mb-4">
-        <div className="card-body">
-          <div className="row g-3">
-            {/* RICERCA */}
-
-            <div className="col-12 col-md-6 col-lg-5">
-              <label className="form-label">{t("admin.flavors.search")}</label>
-
-              <div className="input-group">
-                <span className="input-group-text">
-                  <Search size={16} />
-                </span>
-
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder={t("admin.flavors.searchPlaceholder")}
-                  value={searchInput}
-                  onChange={(event) => setSearchInput(event.target.value)}
-                  onKeyDown={(event) => {
-                    if (event.key === "Enter") {
-                      handleSearch()
-                    }
-                  }}
-                />
-              </div>
-            </div>
-
-            {/* CATEGORIA */}
-
-            <div className="col-12 col-md-6 col-lg-3">
-              <label className="form-label">
-                {t("admin.flavors.category")}
-              </label>
-
-              <select
-                className="form-select"
-                value={categoryFilter}
-                onChange={(event) => {
-                  setCategoryFilter(event.target.value)
-                  setPage(0)
+              <input
+                type="text"
+                placeholder={t("admin.flavors.searchPlaceholder")}
+                value={searchInput}
+                onChange={(event) => setSearchInput(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") {
+                    handleSearch()
+                  }
                 }}
-              >
-                <option value="ALL">{t("admin.flavors.allCategories")}</option>
-
-                {categories.map((category) => (
-                  <option key={category.id} value={category.id}>
-                    {category.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {/* DISPONIBILITÀ */}
-
-            <div className="col-12 col-md-6 col-lg-2">
-              <label className="form-label">
-                {t("admin.flavors.availability")}
-              </label>
-
-              <select
-                className="form-select"
-                value={availabilityFilter}
-                onChange={(event) => {
-                  setAvailabilityFilter(event.target.value)
-                  setPage(0)
-                }}
-              >
-                <option value="ALL">{t("admin.flavors.all")}</option>
-
-                <option value="AVAILABLE">
-                  {t("admin.flavors.available")}
-                </option>
-
-                <option value="UNAVAILABLE">
-                  {t("admin.flavors.unavailable")}
-                </option>
-              </select>
-            </div>
-
-            {/* CERCA / RESET */}
-
-            <div className="col-12 col-md-6 col-lg-2 d-flex align-items-end gap-2">
-              <button
-                type="button"
-                className="btn btn-dark"
-                onClick={handleSearch}
-              >
-                <Search size={16} className="me-1" />
-
-                {t("admin.flavors.searchButton")}
-              </button>
-
-              <button
-                type="button"
-                className="btn btn-outline-secondary"
-                onClick={handleReset}
-              >
-                {t("admin.flavors.reset")}
-              </button>
+              />
             </div>
           </div>
+
+          <div className="admin-flavors-field">
+            <label>{t("admin.flavors.category")}</label>
+
+            <select
+              value={categoryFilter}
+              onChange={(event) => {
+                setCategoryFilter(event.target.value)
+                setPage(0)
+              }}
+            >
+              <option value="ALL">{t("admin.flavors.allCategories")}</option>
+
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="admin-flavors-field">
+            <label>{t("admin.flavors.availability")}</label>
+
+            <select
+              value={availabilityFilter}
+              onChange={(event) => {
+                setAvailabilityFilter(event.target.value)
+                setPage(0)
+              }}
+            >
+              <option value="ALL">{t("admin.flavors.all")}</option>
+
+              <option value="AVAILABLE">{t("admin.flavors.available")}</option>
+
+              <option value="UNAVAILABLE">
+                {t("admin.flavors.unavailable")}
+              </option>
+            </select>
+          </div>
+
+          <div className="admin-flavors-filter-actions">
+            <button
+              type="button"
+              className="admin-flavors-search-button"
+              onClick={handleSearch}
+            >
+              <Search size={16} />
+              {t("admin.flavors.searchButton")}
+            </button>
+
+            <button
+              type="button"
+              className="admin-flavors-reset-button"
+              onClick={handleReset}
+            >
+              {t("admin.flavors.reset")}
+            </button>
+          </div>
+        </section>
+
+        <div className="admin-flavors-toolbar">
+          <span>
+            {totalElements} {t("admin.flavors.total")}
+          </span>
+
+          <select
+            value={orderBy}
+            onChange={(event) => {
+              setOrderBy(event.target.value)
+              setPage(0)
+            }}
+          >
+            <option value="referralCode">{t("admin.flavors.sortCode")}</option>
+
+            <option value="stockPortions">
+              {t("admin.flavors.sortStock")}
+            </option>
+          </select>
         </div>
-      </div>
 
-      {/* ORDINAMENTO */}
-
-      <div className="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
-        <span className="text-muted">
-          {totalElements} {t("admin.flavors.total")}
-        </span>
-
-        <select
-          className="form-select"
-          style={{
-            width: "220px",
-          }}
-          value={orderBy}
-          onChange={(event) => {
-            setOrderBy(event.target.value)
-            setPage(0)
-          }}
-        >
-          <option value="referralCode">{t("admin.flavors.sortCode")}</option>
-
-          <option value="stockPortions">{t("admin.flavors.sortStock")}</option>
-        </select>
-      </div>
-
-      {/* TABELLA */}
-
-      <div className="card border-0 shadow-sm">
-        <div className="card-body p-0">
-          <div className="table-responsive">
-            <table className="table table-hover align-middle mb-0">
+        <section className="admin-flavors-table-card">
+          <div className="admin-flavors-table-wrapper">
+            <table className="admin-flavors-table">
               <thead>
                 <tr>
                   <th>{t("admin.flavors.image")}</th>
-
                   <th>{t("admin.flavors.name")}</th>
-
                   <th>{t("admin.flavors.category")}</th>
-
                   <th>{t("admin.flavors.stock")}</th>
-
                   <th>{t("admin.flavors.features")}</th>
-
                   <th>{t("admin.flavors.availability")}</th>
-
-                  <th className="text-end">{t("admin.flavors.actions")}</th>
+                  <th>{t("admin.flavors.actions")}</th>
                 </tr>
               </thead>
 
               <tbody>
                 {loading ? (
                   <tr>
-                    <td colSpan={7} className="text-center py-5">
-                      {t("common.loading")}
+                    <td colSpan={7}>
+                      <div className="admin-flavors-empty">
+                        {t("common.loading")}
+                      </div>
                     </td>
                   </tr>
                 ) : filteredFlavors.length === 0 ? (
                   <tr>
-                    <td colSpan={7} className="text-center py-5 text-muted">
-                      {t("admin.flavors.empty")}
+                    <td colSpan={7}>
+                      <div className="admin-flavors-empty">
+                        {t("admin.flavors.empty")}
+                      </div>
                     </td>
                   </tr>
                 ) : (
                   filteredFlavors.map((flavor) => (
                     <tr key={flavor.id}>
-                      {/* IMMAGINE */}
-
                       <td>
-                        <div
-                          style={{
-                            width: "55px",
-                            height: "55px",
-                          }}
-                        >
+                        <div className="admin-flavors-image">
                           {flavor.image ? (
-                            <img
-                              src={flavor.image}
-                              alt={flavor.name}
-                              className="rounded"
-                              style={{
-                                width: "100%",
-                                height: "100%",
-                                objectFit: "cover",
-                              }}
-                            />
+                            <img src={flavor.image} alt={flavor.name} />
                           ) : (
-                            <div className="bg-light rounded w-100 h-100 d-flex align-items-center justify-content-center">
+                            <div className="admin-flavors-image-placeholder">
                               🍦
                             </div>
                           )}
                         </div>
                       </td>
 
-                      {/* NOME */}
-
                       <td>
-                        <div className="fw-semibold">{flavor.name}</div>
+                        <div className="admin-flavors-name">{flavor.name}</div>
 
-                        <small className="text-muted">
-                          {flavor.referralCode}
-                        </small>
+                        <small>{flavor.referralCode}</small>
                       </td>
 
-                      {/* CATEGORIA */}
-
-                      <td>{getCategoryName(flavor.category)}</td>
-
-                      {/* STOCK */}
+                      <td>
+                        <span className="admin-flavors-category">
+                          {getCategoryName(flavor.category)}
+                        </span>
+                      </td>
 
                       <td>
                         <span
                           className={
                             flavor.stockPortions === 0
-                              ? "text-danger fw-semibold"
-                              : "fw-semibold"
+                              ? "admin-flavors-stock admin-flavors-stock-empty"
+                              : "admin-flavors-stock"
                           }
                         >
                           {flavor.stockPortions}
                         </span>
                       </td>
 
-                      {/* CARATTERISTICHE */}
-
                       <td>
-                        <div className="d-flex flex-wrap gap-1">
+                        <div className="admin-flavors-features">
                           {flavor.vegan && (
-                            <span className="badge text-bg-success">
+                            <span className="admin-flavors-feature vegan">
                               {t("catalog.vegan")}
                             </span>
                           )}
 
                           {flavor.lactoseFree && (
-                            <span className="badge text-bg-info">
+                            <span className="admin-flavors-feature lactose">
                               {t("catalog.lactoseFree")}
                             </span>
                           )}
 
                           {flavor.glutenFree && (
-                            <span className="badge text-bg-warning">
+                            <span className="admin-flavors-feature gluten">
                               {t("catalog.glutenFree")}
                             </span>
                           )}
 
                           {flavor.sugarFree && (
-                            <span className="badge text-bg-secondary">
+                            <span className="admin-flavors-feature sugar">
                               {t("catalog.sugarFree")}
                             </span>
                           )}
                         </div>
                       </td>
 
-                      {/* DISPONIBILITÀ */}
-
                       <td>
                         <span
-                          className={`badge ${
+                          className={
                             flavor.available
-                              ? "text-bg-success"
-                              : "text-bg-danger"
-                          }`}
+                              ? "admin-flavors-availability available"
+                              : "admin-flavors-availability unavailable"
+                          }
                         >
                           {flavor.available
                             ? t("admin.flavors.available")
@@ -463,13 +391,11 @@ function AdminFlavors() {
                         </span>
                       </td>
 
-                      {/* AZIONI */}
-
-                      <td className="text-end">
-                        <div className="d-flex justify-content-end gap-2">
+                      <td>
+                        <div className="admin-flavors-actions">
                           <button
                             type="button"
-                            className="btn btn-outline-dark btn-sm"
+                            className="admin-flavors-action edit"
                             title={t("admin.flavors.edit")}
                             onClick={() =>
                               navigate(
@@ -482,7 +408,7 @@ function AdminFlavors() {
 
                           <button
                             type="button"
-                            className="btn btn-outline-danger btn-sm"
+                            className="admin-flavors-action delete"
                             title={t("admin.flavors.delete")}
                             disabled={deleteLoading}
                             onClick={() => handleDelete(flavor)}
@@ -497,36 +423,32 @@ function AdminFlavors() {
               </tbody>
             </table>
           </div>
-        </div>
+        </section>
+
+        {totalPages > 1 && (
+          <div className="admin-flavors-pagination">
+            <button
+              type="button"
+              disabled={page === 0 || loading}
+              onClick={() => setPage((currentPage) => currentPage - 1)}
+            >
+              ‹
+            </button>
+
+            <span>
+              {page + 1} / {totalPages}
+            </span>
+
+            <button
+              type="button"
+              disabled={page >= totalPages - 1 || loading}
+              onClick={() => setPage((currentPage) => currentPage + 1)}
+            >
+              ›
+            </button>
+          </div>
+        )}
       </div>
-
-      {/* PAGINAZIONE */}
-
-      {totalPages > 1 && (
-        <div className="d-flex justify-content-center align-items-center gap-3 mt-4">
-          <button
-            type="button"
-            className="btn btn-outline-secondary"
-            disabled={page === 0 || loading}
-            onClick={() => setPage((currentPage) => currentPage - 1)}
-          >
-            ‹
-          </button>
-
-          <span>
-            {page + 1} / {totalPages}
-          </span>
-
-          <button
-            type="button"
-            className="btn btn-outline-secondary"
-            disabled={page >= totalPages - 1 || loading}
-            onClick={() => setPage((currentPage) => currentPage + 1)}
-          >
-            ›
-          </button>
-        </div>
-      )}
     </div>
   )
 }

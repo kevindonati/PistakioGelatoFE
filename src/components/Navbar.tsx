@@ -25,7 +25,8 @@ const Navbar = () => {
   const { totalItems } = useCart()
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const dropdownRef = useRef<HTMLDivElement>(null)
+  const mobileDropdownRef = useRef<HTMLDivElement>(null)
+  const desktopDropdownRef = useRef<HTMLDivElement>(null)
 
   const getInitials = () => {
     if (!user) {
@@ -38,10 +39,13 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
+      const target = event.target as Node
+
+      const clickedInsideMobile = mobileDropdownRef.current?.contains(target)
+
+      const clickedInsideDesktop = desktopDropdownRef.current?.contains(target)
+
+      if (!clickedInsideMobile && !clickedInsideDesktop) {
         setDropdownOpen(false)
       }
     }
@@ -91,7 +95,7 @@ const Navbar = () => {
 
           {/* Avatar mobile */}
           {isAuthenticated && (
-            <div className="navbar-user-mobile" ref={dropdownRef}>
+            <div className="navbar-user-mobile" ref={mobileDropdownRef}>
               <button
                 type="button"
                 className="navbar-avatar-button"
@@ -127,6 +131,15 @@ const Navbar = () => {
                   >
                     <Settings size={17} />
                     {t("navbar.account")}
+                  </Link>
+
+                  <Link
+                    to="/account/addresses"
+                    className="navbar-dropdown-item"
+                    onClick={() => setDropdownOpen(false)}
+                  >
+                    <MapPin size={17} />
+                    {t("navbar.addresses")}
                   </Link>
 
                   {user?.role === "ADMIN" && (
@@ -222,7 +235,7 @@ const Navbar = () => {
 
             {/* USER */}
             {isAuthenticated ? (
-              <div className="navbar-user-desktop" ref={dropdownRef}>
+              <div className="navbar-user-desktop" ref={desktopDropdownRef}>
                 <button
                   type="button"
                   className="navbar-avatar-button"

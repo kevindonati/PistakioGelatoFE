@@ -63,8 +63,22 @@ export const getCategoryById = async (
 
 export const createCategory = async (
   data: CategoryFormData,
+  file?: File | null,
 ): Promise<{ id: string }> => {
-  const response = await api.post<{ id: string }>("/categories", data)
+  const formData = new FormData()
+
+  formData.append(
+    "data",
+    new Blob([JSON.stringify(data)], {
+      type: "application/json",
+    }),
+  )
+
+  if (file) {
+    formData.append("file", file)
+  }
+
+  const response = await api.post<{ id: string }>("/categories", formData)
 
   return response.data
 }
@@ -72,8 +86,22 @@ export const createCategory = async (
 export const updateCategory = async (
   id: string,
   data: CategoryFormData,
+  file?: File | null,
 ): Promise<Category> => {
-  const response = await api.put<Category>(`/categories/${id}`, data)
+  const formData = new FormData()
+
+  formData.append(
+    "data",
+    new Blob([JSON.stringify(data)], {
+      type: "application/json",
+    }),
+  )
+
+  if (file) {
+    formData.append("file", file)
+  }
+
+  const response = await api.put<Category>(`/categories/${id}`, formData)
 
   return response.data
 }

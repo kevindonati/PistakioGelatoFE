@@ -3,7 +3,6 @@ import { useEffect, useState } from "react"
 import type { ChangeEvent, FormEvent } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { useTranslation } from "react-i18next"
-
 import {
   createTub,
   getTubById,
@@ -12,8 +11,9 @@ import {
   type TubTranslation,
 } from "../../services/tubApi"
 
-type Language = "IT" | "EN" | "FR" | "DE"
+import "../../styles/AdminTubsForm.css"
 
+type Language = "IT" | "EN" | "FR" | "DE"
 const languages: Language[] = ["IT", "EN", "FR", "DE"]
 
 const createEmptyTranslations = (): TubTranslation[] =>
@@ -26,23 +26,15 @@ const createEmptyTranslations = (): TubTranslation[] =>
 function AdminTubForm() {
   const { t } = useTranslation()
   const navigate = useNavigate()
-
   const { id } = useParams<{
     id: string
   }>()
-
   const isEditMode = Boolean(id)
-
   const [loading, setLoading] = useState(isEditMode)
-
   const [saving, setSaving] = useState(false)
-
   const [error, setError] = useState("")
-
   const [imagePreview, setImagePreview] = useState<string | null>(null)
-
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
-
   const [formData, setFormData] = useState<TubFormData>({
     weight: 0,
     price: 0,
@@ -243,181 +235,144 @@ function AdminTubForm() {
   }
 
   return (
-    <div>
-      {/* HEADER */}
+    <div className="admin-tub-form-page">
+      <div className="admin-tub-form-container">
+        <div className="admin-tub-form-header">
+          <div>
+            <button
+              type="button"
+              className="admin-tub-form-back"
+              onClick={() => navigate("/admin/catalog/tubs")}
+            >
+              <ArrowLeft size={18} />
+              {t("admin.tubForm.backToTubs")}
+            </button>
 
-      <div className="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-4">
-        <div>
-          <button
-            type="button"
-            className="btn btn-link px-0 mb-2"
-            onClick={() => navigate("/admin/catalog/tubs")}
-          >
-            <ArrowLeft size={18} className="me-1" />
+            <h1>
+              {isEditMode
+                ? t("admin.tubForm.editTitle")
+                : t("admin.tubForm.createTitle")}
+            </h1>
 
-            {t("admin.tubForm.backToTubs")}
-          </button>
-
-          <h1 className="mb-1">
-            {isEditMode
-              ? t("admin.tubForm.editTitle")
-              : t("admin.tubForm.createTitle")}
-          </h1>
-
-          <p className="text-muted mb-0">
-            {isEditMode
-              ? t("admin.tubForm.editSubtitle")
-              : t("admin.tubForm.createSubtitle")}
-          </p>
+            <p>
+              {isEditMode
+                ? t("admin.tubForm.editSubtitle")
+                : t("admin.tubForm.createSubtitle")}
+            </p>
+          </div>
         </div>
-      </div>
 
-      {/* ERROR */}
+        {error && <div className="admin-tub-form-error">{error}</div>}
 
-      {error && <div className="alert alert-danger">{error}</div>}
+        <form onSubmit={handleSubmit}>
+          <div className="admin-tub-form-grid">
+            <div className="admin-tub-form-card admin-tub-form-general">
+              <div className="admin-tub-form-card-body">
+                <h2>{t("admin.tubForm.general")}</h2>
 
-      <form onSubmit={handleSubmit}>
-        <div className="row g-4">
-          {/* INFORMAZIONI GENERALI */}
-
-          <div className="col-12 col-lg-8">
-            <div className="card border-0 shadow-sm h-100">
-              <div className="card-body">
-                <h2 className="h5 mb-4">{t("admin.tubForm.general")}</h2>
-
-                <div className="row g-3">
-                  {/* PESO */}
-
-                  <div className="col-12 col-md-6">
-                    <label className="form-label">
+                <div className="admin-tub-form-fields">
+                  <div className="admin-tub-form-field">
+                    <label htmlFor="tub-weight">
                       {t("admin.tubForm.weight")}
                     </label>
 
-                    <div className="input-group">
+                    <div className="admin-tub-form-input-group">
                       <input
+                        id="tub-weight"
                         type="number"
                         name="weight"
                         min="1"
                         step="1"
-                        className="form-control"
                         value={formData.weight}
                         onChange={handleChange}
                       />
-
-                      <span className="input-group-text">g</span>
+                      <span>g</span>
                     </div>
                   </div>
 
-                  {/* PREZZO */}
-
-                  <div className="col-12 col-md-6">
-                    <label className="form-label">
+                  <div className="admin-tub-form-field">
+                    <label htmlFor="tub-price">
                       {t("admin.tubForm.price")}
                     </label>
 
-                    <div className="input-group">
+                    <div className="admin-tub-form-input-group">
                       <input
+                        id="tub-price"
                         type="number"
                         name="price"
                         min="0"
                         step="0.01"
-                        className="form-control"
                         value={formData.price}
                         onChange={handleChange}
                       />
-
-                      <span className="input-group-text">€</span>
+                      <span>€</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* IMMAGINE */}
+            <div className="admin-tub-form-card admin-tub-form-image-card">
+              <div className="admin-tub-form-card-body">
+                <h2>{t("admin.tubForm.image")}</h2>
 
-          <div className="col-12 col-lg-4">
-            <div className="card border-0 shadow-sm h-100">
-              <div className="card-body">
-                <h2 className="h5 mb-4">{t("admin.tubForm.image")}</h2>
-
-                <div
-                  className="border rounded d-flex align-items-center justify-content-center overflow-hidden mb-3"
-                  style={{
-                    height: "240px",
-                    backgroundColor: "#f8f9fa",
-                  }}
-                >
+                <div className="admin-tub-form-image-preview">
                   {imagePreview ? (
                     <img
                       src={imagePreview}
                       alt={formData.translations[0]?.name || "Tub"}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                      }}
                     />
                   ) : (
-                    <div className="text-center text-muted">
-                      <ImagePlus size={40} className="mb-2" />
-
-                      <div>{t("admin.tubForm.noImage")}</div>
+                    <div className="admin-tub-form-image-empty">
+                      <ImagePlus size={42} />
+                      <span>{t("admin.tubForm.noImage")}</span>
                     </div>
                   )}
                 </div>
 
-                <label className="form-label">
+                <label htmlFor="tub-image" className="admin-tub-form-label">
                   {t("admin.tubForm.chooseImage")}
                 </label>
 
                 <input
+                  id="tub-image"
                   type="file"
-                  className="form-control"
+                  className="admin-tub-form-file"
                   accept="image/png,image/jpeg,image/webp"
                   onChange={handleImageChange}
                 />
               </div>
             </div>
-          </div>
 
-          {/* DISPONIBILITÀ */}
+            <div className="admin-tub-form-card admin-tub-form-availability">
+              <div className="admin-tub-form-card-body">
+                <h2>{t("admin.tubForm.features")}</h2>
 
-          <div className="col-12">
-            <div className="card border-0 shadow-sm">
-              <div className="card-body">
-                <h2 className="h5 mb-4">{t("admin.tubForm.features")}</h2>
-
-                <div className="form-check">
+                <label className="admin-tub-form-checkbox">
                   <input
                     id="tub-available"
                     type="checkbox"
                     name="available"
-                    className="form-check-input"
                     checked={formData.available}
                     onChange={handleChange}
                   />
 
-                  <label htmlFor="tub-available" className="form-check-label">
-                    {t("admin.tubForm.available")}
-                  </label>
-                </div>
+                  <span className="admin-tub-form-checkbox-custom" />
+
+                  <span>{t("admin.tubForm.available")}</span>
+                </label>
               </div>
             </div>
-          </div>
 
-          {/* TRADUZIONI */}
+            <div className="admin-tub-form-card admin-tub-form-translations">
+              <div className="admin-tub-form-card-body">
+                <h2>{t("admin.tubForm.translations")}</h2>
 
-          <div className="col-12">
-            <div className="card border-0 shadow-sm">
-              <div className="card-body">
-                <h2 className="h5 mb-1">{t("admin.tubForm.translations")}</h2>
-
-                <p className="text-muted small mb-4">
+                <p className="admin-tub-form-description">
                   {t("admin.tubForm.translationsDescription")}
                 </p>
 
-                <div className="row g-4">
+                <div className="admin-tub-form-translations-grid">
                   {languages.map((language) => {
                     const translation = formData.translations.find(
                       (item) => item.language === language,
@@ -428,59 +383,46 @@ function AdminTubForm() {
                     }
 
                     return (
-                      <div className="col-12 col-lg-6" key={language}>
-                        <div className="border rounded p-3 h-100">
-                          <div className="d-flex justify-content-between align-items-center mb-3">
-                            <h3 className="h6 mb-0">
-                              {getLanguageName(language)}
-                            </h3>
+                      <div
+                        className="admin-tub-form-language-card"
+                        key={language}
+                      >
+                        <div className="admin-tub-form-language-header">
+                          <h3>{getLanguageName(language)}</h3>
 
-                            <span className="badge text-bg-light">
-                              {language}
-                            </span>
-                          </div>
+                          <span>{language}</span>
+                        </div>
 
-                          {/* NOME */}
+                        <div className="admin-tub-form-field">
+                          <label>{t("admin.tubForm.name")}</label>
 
-                          <div className="mb-3">
-                            <label className="form-label">
-                              {t("admin.tubForm.name")}
-                            </label>
+                          <input
+                            type="text"
+                            value={translation.name}
+                            onChange={(event) =>
+                              handleTranslationChange(
+                                language,
+                                "name",
+                                event.target.value,
+                              )
+                            }
+                          />
+                        </div>
 
-                            <input
-                              type="text"
-                              className="form-control"
-                              value={translation.name}
-                              onChange={(event) =>
-                                handleTranslationChange(
-                                  language,
-                                  "name",
-                                  event.target.value,
-                                )
-                              }
-                            />
-                          </div>
+                        <div className="admin-tub-form-field">
+                          <label>{t("admin.tubForm.description")}</label>
 
-                          {/* DESCRIZIONE */}
-
-                          <div>
-                            <label className="form-label">
-                              {t("admin.tubForm.description")}
-                            </label>
-
-                            <textarea
-                              className="form-control"
-                              rows={4}
-                              value={translation.description}
-                              onChange={(event) =>
-                                handleTranslationChange(
-                                  language,
-                                  "description",
-                                  event.target.value,
-                                )
-                              }
-                            />
-                          </div>
+                          <textarea
+                            rows={4}
+                            value={translation.description}
+                            onChange={(event) =>
+                              handleTranslationChange(
+                                language,
+                                "description",
+                                event.target.value,
+                              )
+                            }
+                          />
                         </div>
                       </div>
                     )
@@ -489,31 +431,33 @@ function AdminTubForm() {
               </div>
             </div>
           </div>
-        </div>
 
-        {/* AZIONI */}
+          <div className="admin-tub-form-actions">
+            <button
+              type="button"
+              className="admin-tub-form-cancel"
+              disabled={saving}
+              onClick={() => navigate("/admin/catalog/tubs")}
+            >
+              {t("admin.tubForm.cancel")}
+            </button>
 
-        <div className="d-flex justify-content-end gap-2 mt-4 mb-5">
-          <button
-            type="button"
-            className="btn btn-outline-secondary"
-            disabled={saving}
-            onClick={() => navigate("/admin/catalog/tubs")}
-          >
-            {t("admin.tubForm.cancel")}
-          </button>
+            <button
+              type="submit"
+              className="admin-tub-form-submit"
+              disabled={saving}
+            >
+              <Save size={17} />
 
-          <button type="submit" className="btn btn-dark" disabled={saving}>
-            <Save size={17} className="me-2" />
-
-            {saving
-              ? t("admin.tubForm.saving")
-              : isEditMode
-                ? t("admin.tubForm.saveChanges")
-                : t("admin.tubForm.createTub")}
-          </button>
-        </div>
-      </form>
+              {saving
+                ? t("admin.tubForm.saving")
+                : isEditMode
+                  ? t("admin.tubForm.saveChanges")
+                  : t("admin.tubForm.createTub")}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   )
 }

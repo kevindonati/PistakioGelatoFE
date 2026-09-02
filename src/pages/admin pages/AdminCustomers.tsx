@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 
 import { deleteUser, getUsers, type AdminUser } from "../../services/userApi"
+import "../../styles/AdminCustomers.css"
 
 function AdminCustomers() {
   const { t } = useTranslation()
@@ -39,7 +40,6 @@ function AdminCustomers() {
       setTotalPages(data.totalPages)
     } catch (error) {
       console.error(error)
-
       setError(t("admin.customers.loadError"))
     } finally {
       setLoading(false)
@@ -102,288 +102,220 @@ function AdminCustomers() {
       }
     } catch (error) {
       console.error(error)
-
       setError(t("admin.customers.deleteError"))
     }
   }
 
   if (loading) {
-    return <div className="text-center py-5">{t("common.loading")}</div>
+    return <div className="admin-customers-loading">{t("common.loading")}</div>
   }
 
   return (
-    <div>
-      {/* HEADER */}
-
-      <div className="mb-4">
-        <h1 className="mb-1">{t("admin.customers.title")}</h1>
-
-        <p className="text-muted mb-0">{t("admin.customers.subtitle")}</p>
-      </div>
-
-      {/* ERROR */}
-
-      {error && <div className="alert alert-danger">{error}</div>}
-
-      {/* FILTRI */}
-
-      <div className="card border-0 shadow-sm mb-4">
-        <div className="card-body">
-          <div className="row g-3 align-items-end">
-            {/* RICERCA */}
-
-            <div className="col-12 col-lg-5">
-              <label className="form-label">
-                {t("admin.customers.search")}
-              </label>
-
-              <div className="input-group">
-                <span className="input-group-text bg-white">
-                  <Search size={17} />
-                </span>
-
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder={t("admin.customers.searchPlaceholder")}
-                  value={search}
-                  onChange={(event) => {
-                    setSearch(event.target.value)
-                    setPage(0)
-                  }}
-                />
-              </div>
-            </div>
-
-            {/* RUOLO */}
-
-            <div className="col-12 col-md-6 col-lg-3">
-              <label className="form-label">{t("admin.customers.role")}</label>
-
-              <select
-                className="form-select"
-                value={roleFilter}
-                onChange={(event) => {
-                  setRoleFilter(event.target.value as "ALL" | "USER" | "ADMIN")
-                  setPage(0)
-                }}
-              >
-                <option value="ALL">{t("admin.customers.allRoles")}</option>
-
-                <option value="USER">{t("admin.customers.user")}</option>
-
-                <option value="ADMIN">{t("admin.customers.admin")}</option>
-              </select>
-            </div>
-
-            {/* STATO */}
-
-            <div className="col-12 col-md-6 col-lg-3">
-              <label className="form-label">
-                {t("admin.customers.status")}
-              </label>
-
-              <select
-                className="form-select"
-                value={statusFilter}
-                onChange={(event) => {
-                  setStatusFilter(
-                    event.target.value as "ALL" | "ACTIVE" | "DISABLED",
-                  )
-                  setPage(0)
-                }}
-              >
-                <option value="ALL">{t("admin.customers.allStatuses")}</option>
-
-                <option value="ACTIVE">{t("admin.customers.active")}</option>
-
-                <option value="DISABLED">
-                  {t("admin.customers.disabled")}
-                </option>
-              </select>
-            </div>
-
-            {/* RESET */}
-
-            <div className="col-12 col-lg-1">
-              {hasFilters && (
-                <button
-                  type="button"
-                  className="btn btn-outline-secondary w-100"
-                  onClick={resetFilters}
-                  title={t("admin.customers.resetFilters")}
-                >
-                  <X size={17} />
-                </button>
-              )}
-            </div>
-          </div>
+    <div className="admin-customers-page">
+      <div className="admin-customers-header">
+        <div>
+          <h1>{t("admin.customers.title")}</h1>
+          <p>{t("admin.customers.subtitle")}</p>
         </div>
       </div>
 
-      {/* RISULTATI */}
+      {error && <div className="admin-customers-error">{error}</div>}
 
-      <div className="d-flex justify-content-between align-items-center mb-3">
-        <span className="text-muted small">
+      <div className="admin-customers-filters">
+        <div className="admin-customers-field admin-customers-search-field">
+          <label>{t("admin.customers.search")}</label>
+
+          <div className="admin-customers-input-wrapper">
+            <Search size={17} />
+
+            <input
+              type="text"
+              placeholder={t("admin.customers.searchPlaceholder")}
+              value={search}
+              onChange={(event) => {
+                setSearch(event.target.value)
+                setPage(0)
+              }}
+            />
+          </div>
+        </div>
+
+        <div className="admin-customers-field">
+          <label>{t("admin.customers.role")}</label>
+
+          <select
+            value={roleFilter}
+            onChange={(event) => {
+              setRoleFilter(event.target.value as "ALL" | "USER" | "ADMIN")
+              setPage(0)
+            }}
+          >
+            <option value="ALL">{t("admin.customers.allRoles")}</option>
+
+            <option value="USER">{t("admin.customers.user")}</option>
+
+            <option value="ADMIN">{t("admin.customers.admin")}</option>
+          </select>
+        </div>
+
+        <div className="admin-customers-field">
+          <label>{t("admin.customers.status")}</label>
+
+          <select
+            value={statusFilter}
+            onChange={(event) => {
+              setStatusFilter(
+                event.target.value as "ALL" | "ACTIVE" | "DISABLED",
+              )
+              setPage(0)
+            }}
+          >
+            <option value="ALL">{t("admin.customers.allStatuses")}</option>
+
+            <option value="ACTIVE">{t("admin.customers.active")}</option>
+
+            <option value="DISABLED">{t("admin.customers.disabled")}</option>
+          </select>
+        </div>
+
+        {hasFilters && (
+          <button
+            type="button"
+            className="admin-customers-reset-button"
+            onClick={resetFilters}
+            title={t("admin.customers.resetFilters")}
+          >
+            <X size={17} />
+          </button>
+        )}
+      </div>
+
+      <div className="admin-customers-toolbar">
+        <span>
           {t("admin.customers.results", {
             count: filteredUsers.length,
           })}
         </span>
       </div>
 
-      {/* TABELLA */}
+      <div className="admin-customers-table-card">
+        {filteredUsers.length === 0 ? (
+          <div className="admin-customers-empty">
+            <UserRound size={42} />
 
-      <div className="card border-0 shadow-sm">
-        <div className="card-body p-0">
-          {filteredUsers.length === 0 ? (
-            <div className="text-center py-5 text-muted">
-              <UserRound size={42} className="mb-3" />
-
-              <div>
-                {t(
-                  hasFilters
-                    ? "admin.customers.noResults"
-                    : "admin.customers.empty",
-                )}
-              </div>
+            <div>
+              {t(
+                hasFilters
+                  ? "admin.customers.noResults"
+                  : "admin.customers.empty",
+              )}
             </div>
-          ) : (
-            <div className="table-responsive">
-              <table className="table align-middle mb-0">
-                <thead>
-                  <tr>
-                    <th>{t("admin.customers.customer")}</th>
+          </div>
+        ) : (
+          <div className="admin-customers-table-wrapper">
+            <table className="admin-customers-table">
+              <thead>
+                <tr>
+                  <th>{t("admin.customers.customer")}</th>
+                  <th>{t("admin.customers.email")}</th>
+                  <th>{t("admin.customers.phone")}</th>
+                  <th>{t("admin.customers.language")}</th>
+                  <th>{t("admin.customers.role")}</th>
+                  <th>{t("admin.customers.status")}</th>
+                  <th>{t("admin.customers.actions")}</th>
+                </tr>
+              </thead>
 
-                    <th>{t("admin.customers.email")}</th>
+              <tbody>
+                {filteredUsers.map((user) => (
+                  <tr key={user.id}>
+                    <td>
+                      <div className="admin-customers-user">
+                        <div className="admin-customers-avatar">
+                          <UserRound size={19} />
+                        </div>
 
-                    <th>{t("admin.customers.phone")}</th>
-
-                    <th>{t("admin.customers.language")}</th>
-
-                    <th>{t("admin.customers.role")}</th>
-
-                    <th>{t("admin.customers.status")}</th>
-
-                    <th className="text-end">{t("admin.customers.actions")}</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {filteredUsers.map((user) => (
-                    <tr key={user.id}>
-                      {/* CLIENTE */}
-
-                      <td>
-                        <div className="d-flex align-items-center gap-3">
-                          <div
-                            className="d-flex align-items-center justify-content-center rounded-circle bg-light"
-                            style={{
-                              width: 42,
-                              height: 42,
-                              flexShrink: 0,
-                            }}
-                          >
-                            <UserRound size={19} className="text-muted" />
+                        <div>
+                          <div className="admin-customers-user-name">
+                            {user.name} {user.surname}
                           </div>
 
-                          <div>
-                            <div className="fw-semibold">
-                              {user.name} {user.surname}
-                            </div>
-
-                            <div className="text-muted small">
-                              {user.id.slice(0, 8)}
-                              ...
-                            </div>
+                          <div className="admin-customers-user-id">
+                            {user.id.slice(0, 8)}...
                           </div>
                         </div>
-                      </td>
+                      </div>
+                    </td>
 
-                      {/* EMAIL */}
+                    <td>{user.email}</td>
 
-                      <td>{user.email}</td>
+                    <td>{user.phone || "—"}</td>
 
-                      {/* TELEFONO */}
+                    <td>
+                      <span className="admin-customers-language">
+                        {user.language}
+                      </span>
+                    </td>
 
-                      <td>{user.phone || "—"}</td>
-
-                      {/* LINGUA */}
-
-                      <td>
-                        <span className="badge text-bg-light">
-                          {user.language}
+                    <td>
+                      {user.role === "ADMIN" ? (
+                        <span className="admin-customers-badge admin">
+                          {t("admin.customers.admin")}
                         </span>
-                      </td>
+                      ) : (
+                        <span className="admin-customers-badge user">
+                          {t("admin.customers.user")}
+                        </span>
+                      )}
+                    </td>
 
-                      {/* RUOLO */}
+                    <td>
+                      {user.enabled ? (
+                        <span className="admin-customers-badge active">
+                          {t("admin.customers.active")}
+                        </span>
+                      ) : (
+                        <span className="admin-customers-badge disabled">
+                          {t("admin.customers.disabled")}
+                        </span>
+                      )}
+                    </td>
 
-                      <td>
-                        {user.role === "ADMIN" ? (
-                          <span className="badge text-bg-dark">
-                            {t("admin.customers.admin")}
-                          </span>
-                        ) : (
-                          <span className="badge text-bg-light">
-                            {t("admin.customers.user")}
-                          </span>
-                        )}
-                      </td>
+                    <td>
+                      <div className="admin-customers-actions">
+                        <button
+                          type="button"
+                          className="admin-customers-action edit"
+                          title={t("admin.customers.edit")}
+                          onClick={() =>
+                            navigate(`/admin/customers/${user.id}`)
+                          }
+                        >
+                          <Edit size={16} />
+                        </button>
 
-                      {/* STATO */}
-
-                      <td>
-                        {user.enabled ? (
-                          <span className="badge text-bg-success">
-                            {t("admin.customers.active")}
-                          </span>
-                        ) : (
-                          <span className="badge text-bg-secondary">
-                            {t("admin.customers.disabled")}
-                          </span>
-                        )}
-                      </td>
-
-                      {/* AZIONI */}
-
-                      <td>
-                        <div className="d-flex justify-content-end gap-2">
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-outline-secondary"
-                            title={t("admin.customers.edit")}
-                            onClick={() =>
-                              navigate(`/admin/customers/${user.id}`)
-                            }
-                          >
-                            <Edit size={16} />
-                          </button>
-
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-outline-danger"
-                            title={t("admin.customers.delete")}
-                            onClick={() => handleDelete(user.id)}
-                          >
-                            <Trash2 size={16} />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
+                        <button
+                          type="button"
+                          className="admin-customers-action delete"
+                          title={t("admin.customers.delete")}
+                          onClick={() => handleDelete(user.id)}
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
 
-      {/* PAGINAZIONE */}
-
       {totalPages > 1 && (
-        <div className="d-flex justify-content-center align-items-center gap-2 mt-4">
+        <div className="admin-customers-pagination">
           <button
             type="button"
-            className="btn btn-outline-secondary btn-sm"
             disabled={page === 0}
             onClick={() => setPage((current) => current - 1)}
           >
@@ -398,9 +330,7 @@ function AdminCustomers() {
               <button
                 key={index}
                 type="button"
-                className={`btn btn-sm ${
-                  page === index ? "btn-dark" : "btn-outline-secondary"
-                }`}
+                className={page === index ? "active" : ""}
                 onClick={() => setPage(index)}
               >
                 {index + 1}
@@ -410,7 +340,6 @@ function AdminCustomers() {
 
           <button
             type="button"
-            className="btn btn-outline-secondary btn-sm"
             disabled={page === totalPages - 1}
             onClick={() => setPage((current) => current + 1)}
           >

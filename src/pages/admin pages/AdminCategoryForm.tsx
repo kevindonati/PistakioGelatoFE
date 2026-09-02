@@ -1,9 +1,8 @@
-import { ArrowLeft, Save } from "lucide-react"
+import { ArrowLeft, ImagePlus, Save, X } from "lucide-react"
 import { useEffect, useState } from "react"
 import type { ChangeEvent, FormEvent } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { useTranslation } from "react-i18next"
-
 import {
   createCategory,
   getCategoryById,
@@ -11,9 +10,9 @@ import {
   type CategoryFormData,
   type CategoryTranslation,
 } from "../../services/categoryApi"
+import "../../styles/AdminCategoryForm.css"
 
 type Language = "IT" | "EN" | "FR" | "DE"
-
 const languages: Language[] = ["IT", "EN", "FR", "DE"]
 
 const createEmptyTranslations = (): CategoryTranslation[] =>
@@ -34,9 +33,7 @@ function AdminCategoryForm() {
   const isEditMode = Boolean(id)
 
   const [loading, setLoading] = useState(isEditMode)
-
   const [saving, setSaving] = useState(false)
-
   const [error, setError] = useState("")
 
   const [formData, setFormData] = useState<CategoryFormData>({
@@ -44,9 +41,8 @@ function AdminCategoryForm() {
     translations: createEmptyTranslations(),
   })
 
-  /*
-   * CARICA CATEGORIA IN MODIFICA
-   */
+  const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  const [previewUrl, setPreviewUrl] = useState("")
 
   useEffect(() => {
     if (!id) {
@@ -67,7 +63,6 @@ function AdminCategoryForm() {
 
         setFormData({
           image: it.image ?? "",
-
           translations: [
             {
               language: "IT",
@@ -91,9 +86,10 @@ function AdminCategoryForm() {
             },
           ],
         })
+
+        setPreviewUrl(it.image ?? "")
       } catch (error) {
         console.error(error)
-
         setError(t("admin.categoryForm.loadError"))
       } finally {
         setLoading(false)
@@ -103,20 +99,57 @@ function AdminCategoryForm() {
     loadCategory()
   }, [id, t])
 
-  /*
-   * CAMBIO IMMAGINE
-   */
+  useEffect(() => {
+    return () => {
+      if (previewUrl.startsWith("blob:")) {
+        URL.revokeObjectURL(previewUrl)
+      }
+    }
+  }, [previewUrl])
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setFormData((current) => ({
-      ...current,
-      image: event.target.value,
-    }))
+    const file = event.target.files?.[0]
+
+    if (!file) {
+      return
+    }
+
+    if (!file.type.startsWith("image/")) {
+      setError(t("admin.categoryForm.invalidImage"))
+      event.target.value = ""
+      return
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      setError(t("admin.categoryForm.imageTooLarge"))
+      event.target.value = ""
+      return
+    }
+
+    setError("")
+
+    if (previewUrl.startsWith("blob:")) {
+      URL.revokeObjectURL(previewUrl)
+    }
+
+    const newPreviewUrl = URL.createObjectURL(file)
+
+    setSelectedFile(file)
+    setPreviewUrl(newPreviewUrl)
   }
 
-  /*
-   * CAMBIO TRADUZIONE
-   */
+  const handleRemoveImage = () => {
+    if (previewUrl.startsWith("blob:")) {
+      URL.revokeObjectURL(previewUrl)
+    }
+
+    setSelectedFile(null)
+    setPreviewUrl("")
+    setFormData((current) => ({
+      ...current,
+      image: "",
+    }))
+  }
 
   const handleTranslationChange = (
     language: Language,
@@ -125,7 +158,6 @@ function AdminCategoryForm() {
   ) => {
     setFormData((current) => ({
       ...current,
-
       translations: current.translations.map((translation) =>
         translation.language === language
           ? {
@@ -137,12 +169,8 @@ function AdminCategoryForm() {
     }))
   }
 
-  /*
-   * VALIDAZIONE
-   */
-
   const validateForm = () => {
-    if (!formData.image.trim()) {
+    if (!isEditMode && !selectedFile && !formData.image) {
       return t("admin.categoryForm.imageRequired")
     }
 
@@ -163,10 +191,6 @@ function AdminCategoryForm() {
     return null
   }
 
-  /*
-   * SUBMIT
-   */
-
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
 
@@ -182,15 +206,14 @@ function AdminCategoryForm() {
       setError("")
 
       if (isEditMode && id) {
-        await updateCategory(id, formData)
+        await updateCategory(id, formData, selectedFile)
       } else {
-        await createCategory(formData)
+        await createCategory(formData, selectedFile)
       }
 
       navigate("/admin/catalog/categories")
     } catch (error) {
       console.error(error)
-
       setError(t("admin.categoryForm.saveError"))
     } finally {
       setSaving(false)
@@ -202,173 +225,186 @@ function AdminCategoryForm() {
   }
 
   return (
-    <div>
-      {/* HEADER */}
+    <div className="admin-category-form">
+      <div className="admin-category-form-header">
+        <div>
+          <button
+            type="button"
+            className="admin-category-form-back"
+            onClick={() => navigate("/admin/catalog/categories")}
+          >
+            <ArrowLeft size={18} />
+            {t("admin.categoryForm.backToCategories")}
+          </button>
 
-      <div className="mb-4">
-        <button
-          type="button"
-          className="btn btn-link px-0 mb-2"
-          onClick={() => navigate("/admin/catalog/categories")}
-        >
-          <ArrowLeft size={18} className="me-1" />
+          <h1>
+            {isEditMode
+              ? t("admin.categoryForm.editTitle")
+              : t("admin.categoryForm.createTitle")}
+          </h1>
 
-          {t("admin.categoryForm.backToCategories")}
-        </button>
-
-        <h1 className="mb-1">
-          {isEditMode
-            ? t("admin.categoryForm.editTitle")
-            : t("admin.categoryForm.createTitle")}
-        </h1>
-
-        <p className="text-muted mb-0">
-          {isEditMode
-            ? t("admin.categoryForm.editSubtitle")
-            : t("admin.categoryForm.createSubtitle")}
-        </p>
+          <p>
+            {isEditMode
+              ? t("admin.categoryForm.editSubtitle")
+              : t("admin.categoryForm.createSubtitle")}
+          </p>
+        </div>
       </div>
 
-      {/* ERROR */}
-
-      {error && <div className="alert alert-danger">{error}</div>}
+      {error && <div className="admin-category-form-error">{error}</div>}
 
       <form onSubmit={handleSubmit}>
-        <div className="row g-4">
-          {/* IMMAGINE */}
-
-          <div className="col-12">
-            <div className="card border-0 shadow-sm">
-              <div className="card-body">
-                <h2 className="h5 mb-4">{t("admin.categoryForm.image")}</h2>
-
-                <label className="form-label">
-                  {t("admin.categoryForm.imageUrl")}
-                </label>
-
-                <input
-                  type="url"
-                  className="form-control"
-                  value={formData.image}
-                  onChange={handleImageChange}
-                  placeholder="https://..."
-                />
-
-                {formData.image && (
-                  <div className="mt-3">
-                    <img
-                      src={formData.image}
-                      alt="Preview"
-                      style={{
-                        width: 160,
-                        height: 100,
-                        objectFit: "cover",
-                        borderRadius: 10,
-                      }}
-                    />
-                  </div>
-                )}
-              </div>
+        <div className="admin-category-form-section">
+          <div className="admin-category-form-section-header">
+            <div>
+              <h2>{t("admin.categoryForm.image")}</h2>
+              <p>{t("admin.categoryForm.imageDescription")}</p>
             </div>
           </div>
 
-          {/* TRADUZIONI */}
+          <div className="admin-category-image-upload">
+            {previewUrl ? (
+              <div className="admin-category-image-preview">
+                <img
+                  src={previewUrl}
+                  alt={t("admin.categoryForm.imagePreview")}
+                />
 
-          <div className="col-12">
-            <div className="card border-0 shadow-sm">
-              <div className="card-body">
-                <h2 className="h5 mb-1">
-                  {t("admin.categoryForm.translations")}
-                </h2>
-
-                <p className="text-muted small mb-4">
-                  {t("admin.categoryForm.translationsDescription")}
-                </p>
-
-                <div className="row g-4">
-                  {languages.map((language) => {
-                    const translation = formData.translations.find(
-                      (item) => item.language === language,
-                    )
-
-                    if (!translation) {
-                      return null
-                    }
-
-                    return (
-                      <div className="col-12 col-lg-6" key={language}>
-                        <div className="border rounded p-3 h-100">
-                          <div className="d-flex justify-content-between align-items-center mb-3">
-                            <h3 className="h6 mb-0">
-                              {getLanguageName(language)}
-                            </h3>
-
-                            <span className="badge text-bg-light">
-                              {language}
-                            </span>
-                          </div>
-
-                          <div className="mb-3">
-                            <label className="form-label">
-                              {t("admin.categoryForm.name")}
-                            </label>
-
-                            <input
-                              type="text"
-                              className="form-control"
-                              value={translation.name}
-                              onChange={(event) =>
-                                handleTranslationChange(
-                                  language,
-                                  "name",
-                                  event.target.value,
-                                )
-                              }
-                            />
-                          </div>
-
-                          <div>
-                            <label className="form-label">
-                              {t("admin.categoryForm.description")}
-                            </label>
-
-                            <textarea
-                              className="form-control"
-                              rows={4}
-                              value={translation.description}
-                              onChange={(event) =>
-                                handleTranslationChange(
-                                  language,
-                                  "description",
-                                  event.target.value,
-                                )
-                              }
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    )
-                  })}
-                </div>
+                <button
+                  type="button"
+                  className="admin-category-image-remove"
+                  onClick={handleRemoveImage}
+                  disabled={saving}
+                  title={t("admin.categoryForm.removeImage")}
+                >
+                  <X size={18} />
+                </button>
               </div>
+            ) : (
+              <label
+                htmlFor="category-image"
+                className="admin-category-image-placeholder"
+              >
+                <ImagePlus size={32} />
+
+                <span>{t("admin.categoryForm.chooseImage")}</span>
+
+                <small>{t("admin.categoryForm.imageFormats")}</small>
+              </label>
+            )}
+
+            <div className="admin-category-image-controls">
+              <label
+                htmlFor="category-image"
+                className="admin-category-image-button"
+              >
+                <ImagePlus size={17} />
+
+                {previewUrl
+                  ? t("admin.categoryForm.changeImage")
+                  : t("admin.categoryForm.chooseImage")}
+              </label>
+
+              <input
+                id="category-image"
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                disabled={saving}
+                hidden
+              />
+
+              {selectedFile && (
+                <span className="admin-category-image-name">
+                  {selectedFile.name}
+                </span>
+              )}
             </div>
           </div>
         </div>
 
-        {/* AZIONI */}
+        <div className="admin-category-form-section">
+          <div className="admin-category-form-section-header">
+            <div>
+              <h2>{t("admin.categoryForm.translations")}</h2>
 
-        <div className="d-flex justify-content-end gap-2 mt-4 mb-5">
+              <p>{t("admin.categoryForm.translationsDescription")}</p>
+            </div>
+          </div>
+
+          <div className="admin-category-translations">
+            {languages.map((language) => {
+              const translation = formData.translations.find(
+                (item) => item.language === language,
+              )
+
+              if (!translation) {
+                return null
+              }
+
+              return (
+                <div className="admin-category-translation" key={language}>
+                  <div className="admin-category-translation-header">
+                    <h3>{getLanguageName(language)}</h3>
+
+                    <span>{language}</span>
+                  </div>
+
+                  <div className="admin-category-field">
+                    <label>{t("admin.categoryForm.name")}</label>
+
+                    <input
+                      type="text"
+                      value={translation.name}
+                      onChange={(event) =>
+                        handleTranslationChange(
+                          language,
+                          "name",
+                          event.target.value,
+                        )
+                      }
+                      disabled={saving}
+                    />
+                  </div>
+
+                  <div className="admin-category-field">
+                    <label>{t("admin.categoryForm.description")}</label>
+
+                    <textarea
+                      rows={4}
+                      value={translation.description}
+                      onChange={(event) =>
+                        handleTranslationChange(
+                          language,
+                          "description",
+                          event.target.value,
+                        )
+                      }
+                      disabled={saving}
+                    />
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+
+        <div className="admin-category-form-actions">
           <button
             type="button"
-            className="btn btn-outline-secondary"
+            className="admin-category-cancel-button"
             disabled={saving}
             onClick={() => navigate("/admin/catalog/categories")}
           >
             {t("admin.categoryForm.cancel")}
           </button>
 
-          <button type="submit" className="btn btn-dark" disabled={saving}>
-            <Save size={17} className="me-2" />
+          <button
+            type="submit"
+            className="admin-category-save-button"
+            disabled={saving}
+          >
+            <Save size={17} />
 
             {saving
               ? t("admin.categoryForm.saving")

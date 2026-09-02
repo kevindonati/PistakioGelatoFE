@@ -9,10 +9,8 @@ import {
 } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { useNavigate, useParams } from "react-router-dom"
-
 import type { Order } from "../../types/Order"
 import type { OrderItem } from "../../types/OrderItem"
-
 import {
   createShipment,
   getMyOrderItems,
@@ -24,9 +22,9 @@ import {
   type Payment,
   type Shipment,
 } from "../../services/orderApi"
-
 import Loading from "../../components/Loading"
 import { getFlavorById, getTubById } from "../../services/catalogApi"
+import "../../styles/AdminOrderDetails.css"
 
 function AdminOrderDetails() {
   const { t } = useTranslation()
@@ -34,17 +32,12 @@ function AdminOrderDetails() {
   const { id } = useParams<{ id: string }>()
 
   const [order, setOrder] = useState<Order | null>(null)
-
   const [orderItems, setOrderItems] = useState<OrderItem[]>([])
-
   const [payment, setPayment] = useState<Payment | null>(null)
-
   const [shipment, setShipment] = useState<Shipment | null>(null)
 
   const [loading, setLoading] = useState(true)
-
   const [actionLoading, setActionLoading] = useState(false)
-
   const [error, setError] = useState("")
 
   const [shipmentForm, setShipmentForm] = useState({
@@ -78,7 +71,6 @@ function AdminOrderDetails() {
       )
 
       setOrderItems(itemsForOrder)
-
       setPayment(paymentData)
 
       const orderShipment = shipmentsData.content.find(
@@ -88,7 +80,6 @@ function AdminOrderDetails() {
       setShipment(orderShipment ?? null)
     } catch (error) {
       console.error(error)
-
       setError(t("admin.orderDetails.loadError"))
     } finally {
       setLoading(false)
@@ -98,6 +89,7 @@ function AdminOrderDetails() {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     loadData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
 
   const handleStatusChange = async (newStatus: string) => {
@@ -113,10 +105,6 @@ function AdminOrderDetails() {
       setActionLoading(true)
       setError("")
 
-      /*
-       * PAID → PREPARING
-       */
-
       if (newStatus === "PREPARING" && order.orderStatus === "PAID") {
         const updatedOrder = await prepareOrder(order.id)
 
@@ -124,10 +112,6 @@ function AdminOrderDetails() {
 
         return
       }
-
-      /*
-       * PREPARING → SHIPPED
-       */
 
       if (newStatus === "SHIPPED" && order.orderStatus === "PREPARING") {
         if (!shipment) {
@@ -147,10 +131,6 @@ function AdminOrderDetails() {
         return
       }
 
-      /*
-       * SHIPPED → DELIVERED
-       */
-
       if (newStatus === "DELIVERED" && order.orderStatus === "SHIPPED") {
         if (!shipment) {
           return
@@ -167,7 +147,6 @@ function AdminOrderDetails() {
       }
     } catch (error) {
       console.error(error)
-
       setError(t("admin.orderDetails.actionError"))
     } finally {
       setActionLoading(false)
@@ -193,20 +172,12 @@ function AdminOrderDetails() {
         order: order.id,
       })
 
-      /*
-       * La shipment nasce PENDING.
-       * La portiamo subito a SHIPPED
-       * perché l'admin ha selezionato
-       * "Spedito".
-       */
-
       const shippedShipment = await updateShipmentStatus(
         createdShipment.id,
         "SHIPPED",
       )
 
       setShipment(shippedShipment)
-
       setShowShipmentForm(false)
 
       setShipmentForm({
@@ -217,7 +188,6 @@ function AdminOrderDetails() {
       await loadData()
     } catch (error) {
       console.error(error)
-
       setError(t("admin.orderDetails.actionError"))
     } finally {
       setActionLoading(false)
@@ -279,208 +249,187 @@ function AdminOrderDetails() {
 
   if (error && !order) {
     return (
-      <div>
-        <button
-          type="button"
-          className="btn btn-link px-0 mb-4"
-          onClick={() => navigate("/admin/orders")}
-        >
-          <ArrowLeft size={18} className="me-1" />
+      <main className="admin-order-details-page">
+        <div className="admin-order-details-container">
+          <button
+            type="button"
+            className="admin-order-details-back"
+            onClick={() => navigate("/admin/orders")}
+          >
+            <ArrowLeft size={18} />
+            {t("admin.orderDetails.backToOrders")}
+          </button>
 
-          {t("admin.orderDetails.backToOrders")}
-        </button>
-
-        <div className="alert alert-danger">{error}</div>
-      </div>
+          <div className="admin-order-details-error">{error}</div>
+        </div>
+      </main>
     )
   }
 
   if (!order) {
     return (
-      <div className="text-center py-5">
-        <Package size={50} className="text-muted mb-3" />
+      <main className="admin-order-details-page">
+        <div className="admin-order-details-container">
+          <div className="admin-order-details-not-found">
+            <div className="admin-order-details-not-found-icon">
+              <Package size={46} strokeWidth={1.5} />
+            </div>
 
-        <h2>{t("admin.orderDetails.orderNotFound")}</h2>
+            <h2>{t("admin.orderDetails.orderNotFound")}</h2>
 
-        <button
-          type="button"
-          className="btn btn-dark mt-3"
-          onClick={() => navigate("/admin/orders")}
-        >
-          {t("admin.orderDetails.backToOrders")}
-        </button>
-      </div>
+            <button
+              type="button"
+              className="admin-order-details-primary-button"
+              onClick={() => navigate("/admin/orders")}
+            >
+              {t("admin.orderDetails.backToOrders")}
+            </button>
+          </div>
+        </div>
+      </main>
     )
   }
 
   const subtotal = order.total - order.shippingCost
 
   return (
-    <div>
-      {/* HEADER */}
-
-      <div className="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-4">
-        <div>
-          <button
-            type="button"
-            className="btn btn-link px-0 mb-2"
-            onClick={() => navigate("/admin/orders")}
-          >
-            <ArrowLeft size={18} className="me-1" />
-
-            {t("admin.orderDetails.backToOrders")}
-          </button>
-
-          <h1 className="mb-1">
-            {t("admin.orderDetails.title")}{" "}
-            <span className="text-muted">
-              #{order.id.slice(0, 8).toUpperCase()}
-            </span>
-          </h1>
-
-          <p className="text-muted mb-0">
-            {new Date(order.createdAt).toLocaleString()}
-          </p>
-        </div>
-
-        {/* STATO */}
-
-        <div>
-          <label className="form-label fw-semibold">
-            {t("admin.orderDetails.status")}
-          </label>
-
-          <select
-            className="form-select"
-            style={{
-              width: "190px",
-              fontWeight: 600,
-              cursor: "pointer",
-              ...getStatusStyle(order.orderStatus),
-            }}
-            value={order.orderStatus}
-            disabled={actionLoading}
-            onChange={(event) => handleStatusChange(event.target.value)}
-          >
-            <option value="CART" disabled>
-              {t("orderStatus.CART")}
-            </option>
-
-            <option value="PENDING_PAYMENT" disabled>
-              {t("orderStatus.PENDING_PAYMENT")}
-            </option>
-
-            <option value="PAID" disabled>
-              {t("orderStatus.PAID")}
-            </option>
-
-            <option value="PREPARING">{t("orderStatus.PREPARING")}</option>
-
-            <option value="SHIPPED">{t("orderStatus.SHIPPED")}</option>
-
-            <option
-              value="DELIVERED"
-              disabled={!shipment || shipment.status !== "SHIPPED"}
+    <main className="admin-order-details-page">
+      <div className="admin-order-details-container">
+        <header className="admin-order-details-header">
+          <div className="admin-order-details-header-left">
+            <button
+              type="button"
+              className="admin-order-details-back"
+              onClick={() => navigate("/admin/orders")}
             >
-              {t("orderStatus.DELIVERED")}
-            </option>
+              <ArrowLeft size={18} />
+              {t("admin.orderDetails.backToOrders")}
+            </button>
 
-            <option value="CANCELLED" disabled>
-              {t("orderStatus.CANCELLED")}
-            </option>
-          </select>
-        </div>
-      </div>
+            <h1>
+              {t("admin.orderDetails.title")}{" "}
+              <span>#{order.id.slice(0, 8).toUpperCase()}</span>
+            </h1>
 
-      {error && <div className="alert alert-danger">{error}</div>}
+            <p>{new Date(order.createdAt).toLocaleString()}</p>
+          </div>
 
-      <div className="row g-4">
-        {/* CLIENTE */}
+          <div className="admin-order-details-status">
+            <label>{t("admin.orderDetails.status")}</label>
 
-        <div className="col-12 col-lg-4">
-          <div className="card border-0 shadow-sm h-100">
-            <div className="card-body">
-              <h2 className="h5 mb-4">
-                <User size={20} className="me-2" />
+            <select
+              value={order.orderStatus}
+              disabled={actionLoading}
+              onChange={(event) => handleStatusChange(event.target.value)}
+              style={getStatusStyle(order.orderStatus)}
+            >
+              <option value="CART" disabled>
+                {t("orderStatus.CART")}
+              </option>
 
-                {t("admin.orderDetails.customer")}
-              </h2>
+              <option value="PENDING_PAYMENT" disabled>
+                {t("orderStatus.PENDING_PAYMENT")}
+              </option>
 
-              <div className="mb-3">
-                <div className="fw-semibold">
-                  {order.user.name} {order.user.surname}
-                </div>
+              <option value="PAID" disabled>
+                {t("orderStatus.PAID")}
+              </option>
 
-                <div className="text-muted">{order.user.email}</div>
+              <option value="PREPARING">{t("orderStatus.PREPARING")}</option>
 
-                {order.user.phone && (
-                  <div className="text-muted">{order.user.phone}</div>
-                )}
+              <option value="SHIPPED">{t("orderStatus.SHIPPED")}</option>
+
+              <option
+                value="DELIVERED"
+                disabled={!shipment || shipment.status !== "SHIPPED"}
+              >
+                {t("orderStatus.DELIVERED")}
+              </option>
+
+              <option value="CANCELLED" disabled>
+                {t("orderStatus.CANCELLED")}
+              </option>
+            </select>
+          </div>
+        </header>
+
+        {error && <div className="admin-order-details-error">{error}</div>}
+
+        <div className="admin-order-details-grid">
+          <section className="admin-order-details-card admin-order-details-customer-card">
+            <div className="admin-order-details-card-header">
+              <div className="admin-order-details-card-icon">
+                <User size={20} />
               </div>
 
-              {/* INDIRIZZO */}
+              <h2>{t("admin.orderDetails.customer")}</h2>
+            </div>
 
-              {order.address && (
-                <>
-                  <hr />
+            <div className="admin-order-details-customer-info">
+              <div className="admin-order-details-customer-name">
+                {order.user.name} {order.user.surname}
+              </div>
 
-                  <h3 className="h6 mb-3">
-                    <MapPin size={18} className="me-2" />
+              <div>{order.user.email}</div>
 
-                    {t("admin.orderDetails.address")}
-                  </h3>
+              {order.user.phone && <div>{order.user.phone}</div>}
+            </div>
+
+            {order.address && (
+              <div className="admin-order-details-address">
+                <div className="admin-order-details-section-divider" />
+
+                <div className="admin-order-details-subtitle">
+                  <MapPin size={18} />
+                  {t("admin.orderDetails.address")}
+                </div>
+
+                <div className="admin-order-details-address-text">
+                  <div>{order.address.addressLine1}</div>
+
+                  {order.address.addressLine2 && (
+                    <div>{order.address.addressLine2}</div>
+                  )}
 
                   <div>
-                    <div>{order.address.addressLine1}</div>
-
-                    {order.address.addressLine2 && (
-                      <div>{order.address.addressLine2}</div>
-                    )}
-
-                    <div>
-                      {order.address.postalCode} {order.address.city}
-                    </div>
-
-                    <div>{order.address.country}</div>
+                    {order.address.postalCode} {order.address.city}
                   </div>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
 
-        {/* PRODOTTI */}
-
-        <div className="col-12 col-lg-8">
-          <div className="card border-0 shadow-sm">
-            <div className="card-body">
-              <h2 className="h5 mb-4">
-                <Package size={20} className="me-2" />
-
-                {t("admin.orderDetails.products")}
-              </h2>
-
-              {orderItems.length === 0 ? (
-                <p className="text-muted">
-                  {t("admin.orderDetails.noProducts")}
-                </p>
-              ) : (
-                <div>
-                  {orderItems.map((item) => (
-                    <OrderProduct key={item.id} item={item} />
-                  ))}
+                  <div>{order.address.country}</div>
                 </div>
-              )}
+              </div>
+            )}
+          </section>
 
-              <hr />
+          <section className="admin-order-details-card admin-order-details-products-card">
+            <div className="admin-order-details-card-header">
+              <div className="admin-order-details-card-icon">
+                <Package size={20} />
+              </div>
 
-              <div className="d-flex justify-content-between mb-2">
+              <h2>{t("admin.orderDetails.products")}</h2>
+            </div>
+
+            {orderItems.length === 0 ? (
+              <p className="admin-order-details-empty">
+                {t("admin.orderDetails.noProducts")}
+              </p>
+            ) : (
+              <div className="admin-order-details-products">
+                {orderItems.map((item) => (
+                  <OrderProduct key={item.id} item={item} />
+                ))}
+              </div>
+            )}
+
+            <div className="admin-order-details-summary">
+              <div>
                 <span>{t("admin.orderDetails.subtotal")}</span>
 
                 <span>€ {subtotal.toFixed(2)}</span>
               </div>
 
-              <div className="d-flex justify-content-between mb-2">
+              <div>
                 <span>{t("admin.orderDetails.shipping")}</span>
 
                 <span>
@@ -490,185 +439,166 @@ function AdminOrderDetails() {
                 </span>
               </div>
 
-              <div className="d-flex justify-content-between pt-2 border-top">
+              <div className="admin-order-details-total">
                 <strong>{t("admin.orderDetails.total")}</strong>
 
                 <strong>€ {order.total.toFixed(2)}</strong>
               </div>
             </div>
-          </div>
-        </div>
+          </section>
 
-        {/* PAGAMENTO */}
-
-        <div className="col-12 col-lg-6">
-          <div className="card border-0 shadow-sm h-100">
-            <div className="card-body">
-              <h2 className="h5 mb-4">
-                <CreditCard size={20} className="me-2" />
-
-                {t("admin.orderDetails.payment")}
-              </h2>
-
-              {payment ? (
-                <>
-                  <InfoRow
-                    label={t("admin.orderDetails.provider")}
-                    value={payment.provider}
-                  />
-
-                  <InfoRow
-                    label={t("admin.orderDetails.paymentStatus")}
-                    value={t(`paymentStatus.${payment.status}`)}
-                  />
-
-                  <InfoRow
-                    label={t("admin.orderDetails.amount")}
-                    value={`€ ${payment.amount.toFixed(2)}`}
-                  />
-
-                  <InfoRow
-                    label={t("admin.orderDetails.currency")}
-                    value={payment.currency}
-                  />
-
-                  <InfoRow
-                    label={t("admin.orderDetails.transaction")}
-                    value={payment.idTransaction}
-                  />
-
-                  <InfoRow
-                    label={t("admin.orderDetails.paymentDate")}
-                    value={new Date(payment.paymentDate).toLocaleString()}
-                  />
-
-                  {payment.stripeEventId && (
-                    <InfoRow
-                      label={t("admin.orderDetails.stripeEvent")}
-                      value={payment.stripeEventId}
-                    />
-                  )}
-                </>
-              ) : (
-                <p className="text-muted mb-0">
-                  {t("admin.orderDetails.noPayment")}
-                </p>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* SPEDIZIONE */}
-
-        <div className="col-12 col-lg-6">
-          <div className="card border-0 shadow-sm h-100">
-            <div className="card-body">
-              <h2 className="h5 mb-4">
-                <Truck size={20} className="me-2" />
-
-                {t("admin.orderDetails.shipment")}
-              </h2>
-
-              {shipment ? (
-                <>
-                  <InfoRow
-                    label={t("admin.orderDetails.carrier")}
-                    value={shipment.carrier}
-                  />
-
-                  <InfoRow
-                    label={t("admin.orderDetails.trackingNumber")}
-                    value={shipment.trackingNumber}
-                  />
-
-                  <InfoRow
-                    label={t("admin.orderDetails.shipmentStatus")}
-                    value={t(`admin.shipmentStatus.${shipment.status}`)}
-                  />
-
-                  {shipment.deliveredAt && (
-                    <InfoRow
-                      label={t("admin.orderDetails.deliveredAt")}
-                      value={new Date(
-                        shipment.deliveredAt,
-                      ).toLocaleDateString()}
-                    />
-                  )}
-                </>
-              ) : (
-                <>
-                  <p className="text-muted">
-                    {t("admin.orderDetails.noShipment")}
-                  </p>
-
-                  {order.orderStatus === "PREPARING" && (
-                    <button
-                      type="button"
-                      className="btn btn-dark"
-                      disabled={actionLoading}
-                      onClick={() => setShowShipmentForm(true)}
-                    >
-                      <Truck size={17} className="me-1" />
-
-                      {t("admin.orders.createShipment")}
-                    </button>
-                  )}
-                </>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* NOTE */}
-
-        {order.notes && (
-          <div className="col-12">
-            <div className="card border-0 shadow-sm">
-              <div className="card-body">
-                <h2 className="h5 mb-3">{t("admin.orderDetails.notes")}</h2>
-
-                <p className="mb-0">{order.notes}</p>
+          <section className="admin-order-details-card">
+            <div className="admin-order-details-card-header">
+              <div className="admin-order-details-card-icon">
+                <CreditCard size={20} />
               </div>
+
+              <h2>{t("admin.orderDetails.payment")}</h2>
             </div>
-          </div>
-        )}
-      </div>
 
-      {/* MODALE SPEDIZIONE */}
+            {payment ? (
+              <div className="admin-order-details-info-list">
+                <InfoRow
+                  label={t("admin.orderDetails.provider")}
+                  value={payment.provider}
+                />
 
-      {showShipmentForm && (
-        <div
-          className="modal d-block"
-          tabIndex={-1}
-          style={{
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-          }}
-        >
-          <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">
-                  <Truck size={20} className="me-2" />
+                <InfoRow
+                  label={t("admin.orderDetails.paymentStatus")}
+                  value={t(`paymentStatus.${payment.status}`)}
+                />
 
-                  {t("admin.orders.createShipment")}
-                </h5>
+                <InfoRow
+                  label={t("admin.orderDetails.amount")}
+                  value={`€ ${payment.amount.toFixed(2)}`}
+                />
+
+                <InfoRow
+                  label={t("admin.orderDetails.currency")}
+                  value={payment.currency}
+                />
+
+                <InfoRow
+                  label={t("admin.orderDetails.transaction")}
+                  value={payment.idTransaction}
+                />
+
+                <InfoRow
+                  label={t("admin.orderDetails.paymentDate")}
+                  value={new Date(payment.paymentDate).toLocaleString()}
+                />
+
+                {payment.stripeEventId && (
+                  <InfoRow
+                    label={t("admin.orderDetails.stripeEvent")}
+                    value={payment.stripeEventId}
+                  />
+                )}
+              </div>
+            ) : (
+              <p className="admin-order-details-empty">
+                {t("admin.orderDetails.noPayment")}
+              </p>
+            )}
+          </section>
+
+          <section className="admin-order-details-card">
+            <div className="admin-order-details-card-header">
+              <div className="admin-order-details-card-icon">
+                <Truck size={20} />
+              </div>
+
+              <h2>{t("admin.orderDetails.shipment")}</h2>
+            </div>
+
+            {shipment ? (
+              <div className="admin-order-details-info-list">
+                <InfoRow
+                  label={t("admin.orderDetails.carrier")}
+                  value={shipment.carrier}
+                />
+
+                <InfoRow
+                  label={t("admin.orderDetails.trackingNumber")}
+                  value={shipment.trackingNumber}
+                />
+
+                <InfoRow
+                  label={t("admin.orderDetails.shipmentStatus")}
+                  value={t(`admin.shipmentStatus.${shipment.status}`)}
+                />
+
+                {shipment.deliveredAt && (
+                  <InfoRow
+                    label={t("admin.orderDetails.deliveredAt")}
+                    value={new Date(shipment.deliveredAt).toLocaleDateString()}
+                  />
+                )}
+              </div>
+            ) : (
+              <>
+                <p className="admin-order-details-empty">
+                  {t("admin.orderDetails.noShipment")}
+                </p>
+
+                {order.orderStatus === "PREPARING" && (
+                  <button
+                    type="button"
+                    className="admin-order-details-primary-button"
+                    disabled={actionLoading}
+                    onClick={() => setShowShipmentForm(true)}
+                  >
+                    <Truck size={17} />
+                    {t("admin.orders.createShipment")}
+                  </button>
+                )}
+              </>
+            )}
+          </section>
+
+          {order.notes && (
+            <section className="admin-order-details-card admin-order-details-notes-card">
+              <div className="admin-order-details-card-header">
+                <div className="admin-order-details-card-icon">
+                  <Package size={20} />
+                </div>
+
+                <h2>{t("admin.orderDetails.notes")}</h2>
+              </div>
+
+              <p className="admin-order-details-notes">{order.notes}</p>
+            </section>
+          )}
+        </div>
+
+        {showShipmentForm && (
+          <div className="admin-order-details-modal-overlay">
+            <div className="admin-order-details-modal">
+              <div className="admin-order-details-modal-header">
+                <div className="admin-order-details-modal-title">
+                  <div className="admin-order-details-modal-icon">
+                    <Truck size={20} />
+                  </div>
+
+                  <h2>{t("admin.orders.createShipment")}</h2>
+                </div>
 
                 <button
                   type="button"
-                  className="btn-close"
+                  className="admin-order-details-modal-close"
                   onClick={() => setShowShipmentForm(false)}
-                />
+                  aria-label="Close"
+                >
+                  ×
+                </button>
               </div>
 
-              <div className="modal-body">
-                <div className="mb-3">
-                  <label className="form-label">
-                    {t("admin.orders.carrier")}
-                  </label>
+              <div className="admin-order-details-modal-body">
+                <div className="admin-order-details-field">
+                  <label>{t("admin.orders.carrier")}</label>
 
                   <input
                     type="text"
-                    className="form-control"
                     value={shipmentForm.carrier}
                     onChange={(event) =>
                       setShipmentForm({
@@ -680,14 +610,11 @@ function AdminOrderDetails() {
                   />
                 </div>
 
-                <div>
-                  <label className="form-label">
-                    {t("admin.orders.trackingNumber")}
-                  </label>
+                <div className="admin-order-details-field">
+                  <label>{t("admin.orders.trackingNumber")}</label>
 
                   <input
                     type="text"
-                    className="form-control"
                     value={shipmentForm.trackingNumber}
                     onChange={(event) =>
                       setShipmentForm({
@@ -699,10 +626,10 @@ function AdminOrderDetails() {
                 </div>
               </div>
 
-              <div className="modal-footer">
+              <div className="admin-order-details-modal-footer">
                 <button
                   type="button"
-                  className="btn btn-outline-secondary"
+                  className="admin-order-details-modal-cancel"
                   disabled={actionLoading}
                   onClick={() => setShowShipmentForm(false)}
                 >
@@ -711,7 +638,7 @@ function AdminOrderDetails() {
 
                 <button
                   type="button"
-                  className="btn btn-dark"
+                  className="admin-order-details-modal-confirm"
                   disabled={
                     actionLoading ||
                     !shipmentForm.carrier ||
@@ -726,19 +653,14 @@ function AdminOrderDetails() {
               </div>
             </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </main>
   )
 }
 
-/* -------------------------------------------------------------------------- */
-/* PRODUCT */
-/* -------------------------------------------------------------------------- */
-
 function OrderProduct({ item }: { item: OrderItem }) {
   const [flavorName, setFlavorName] = useState("")
-
   const [flavorImage, setFlavorImage] = useState("")
 
   const [tub, setTub] = useState<{
@@ -757,7 +679,6 @@ function OrderProduct({ item }: { item: OrderItem }) {
         ])
 
         setFlavorName(flavorData.name)
-
         setFlavorImage(flavorData.image ?? "")
 
         setTub({
@@ -775,67 +696,43 @@ function OrderProduct({ item }: { item: OrderItem }) {
   const rowTotal = item.unitPrice * item.quantity
 
   return (
-    <div className="d-flex align-items-center gap-3 py-3 border-bottom">
-      {/* FOTO */}
-
-      <div
-        style={{
-          width: "80px",
-          height: "80px",
-          flexShrink: 0,
-        }}
-      >
+    <div className="admin-order-details-product">
+      <div className="admin-order-details-product-image">
         {flavorImage ? (
-          <img
-            src={flavorImage}
-            alt={flavorName}
-            className="img-fluid rounded"
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-            }}
-          />
+          <img src={flavorImage} alt={flavorName} />
         ) : (
-          <div className="bg-light rounded w-100 h-100 d-flex align-items-center justify-content-center">
-            <Package size={25} className="text-muted" />
+          <div className="admin-order-details-product-placeholder">
+            <Package size={25} />
           </div>
         )}
       </div>
 
-      {/* PRODOTTO */}
-
-      <div className="flex-grow-1">
-        <h3 className="h6 mb-1">{flavorName || "—"}</h3>
+      <div className="admin-order-details-product-info">
+        <h3>{flavorName || "—"}</h3>
 
         {tub && (
-          <div className="text-muted small mb-1">
+          <div>
             {t("admin.orderDetails.tub")}: {tub.weight} g
           </div>
         )}
 
-        <div className="text-muted small">
+        <div>
           {item.quantity} × €{item.unitPrice.toFixed(2)}
         </div>
       </div>
 
-      {/* TOTALE */}
-
-      <strong>€ {rowTotal.toFixed(2)}</strong>
+      <strong className="admin-order-details-product-total">
+        € {rowTotal.toFixed(2)}
+      </strong>
     </div>
   )
 }
 
-/* -------------------------------------------------------------------------- */
-/* INFO ROW */
-/* -------------------------------------------------------------------------- */
-
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="d-flex justify-content-between gap-3 py-2 border-bottom">
-      <span className="text-muted">{label}</span>
-
-      <span className="text-end fw-semibold text-break">{value}</span>
+    <div className="admin-order-details-info-row">
+      <span>{label}</span>
+      <strong>{value}</strong>
     </div>
   )
 }

@@ -3,7 +3,6 @@ import type { ChangeEvent, FormEvent } from "react"
 import { ArrowLeft, ImagePlus, Save } from "lucide-react"
 import { useNavigate, useParams } from "react-router-dom"
 import { useTranslation } from "react-i18next"
-
 import {
   createFlavor,
   getFlavorById,
@@ -11,8 +10,9 @@ import {
   type FlavorFormData,
   type FlavorTranslation,
 } from "../../services/flavorApi"
-
 import { getCategories, type Category } from "../../services/categoryApi"
+
+import "../../styles/AdminFlavorForm.css"
 
 type Language = "IT" | "EN" | "FR" | "DE"
 
@@ -36,15 +36,11 @@ function AdminFlavorForm() {
   const isEditMode = Boolean(id)
 
   const [categories, setCategories] = useState<Category[]>([])
-
   const [loading, setLoading] = useState(isEditMode)
-
   const [saving, setSaving] = useState(false)
-
   const [error, setError] = useState("")
 
   const [imagePreview, setImagePreview] = useState<string | null>(null)
-
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
 
   const [formData, setFormData] = useState<FlavorFormData>({
@@ -59,10 +55,6 @@ function AdminFlavorForm() {
     translations: createEmptyTranslations(),
   })
 
-  /*
-   * CARICA CATEGORIE
-   */
-
   useEffect(() => {
     const loadCategories = async () => {
       try {
@@ -75,17 +67,12 @@ function AdminFlavorForm() {
         setCategories(data.content)
       } catch (error) {
         console.error(error)
-
         setError(t("admin.flavorForm.categoriesLoadError"))
       }
     }
 
     loadCategories()
   }, [t])
-
-  /*
-   * CARICA GUSTO IN MODIFICA
-   */
 
   useEffect(() => {
     if (!id) {
@@ -106,21 +93,13 @@ function AdminFlavorForm() {
 
         setFormData({
           referralCode: it.referralCode,
-
           stockPortions: it.stockPortions,
-
           available: it.available,
-
           vegan: it.vegan,
-
           lactoseFree: it.lactoseFree,
-
           glutenFree: it.glutenFree,
-
           sugarFree: it.sugarFree,
-
           category: it.category,
-
           translations: [
             {
               language: "IT",
@@ -148,7 +127,6 @@ function AdminFlavorForm() {
         setImagePreview(it.image ?? null)
       } catch (error) {
         console.error(error)
-
         setError(t("admin.flavorForm.loadError"))
       } finally {
         setLoading(false)
@@ -157,10 +135,6 @@ function AdminFlavorForm() {
 
     loadFlavor()
   }, [id, t])
-
-  /*
-   * CAMBIO CAMPI PRINCIPALI
-   */
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
@@ -174,7 +148,6 @@ function AdminFlavorForm() {
 
     setFormData((current) => ({
       ...current,
-
       [name]:
         type === "checkbox"
           ? checked
@@ -184,10 +157,6 @@ function AdminFlavorForm() {
     }))
   }
 
-  /*
-   * CAMBIO TRADUZIONI
-   */
-
   const handleTranslationChange = (
     language: Language,
     field: "name" | "description",
@@ -195,7 +164,6 @@ function AdminFlavorForm() {
   ) => {
     setFormData((current) => ({
       ...current,
-
       translations: current.translations.map((translation) =>
         translation.language === language
           ? {
@@ -206,10 +174,6 @@ function AdminFlavorForm() {
       ),
     }))
   }
-
-  /*
-   * CAMBIO IMMAGINE
-   */
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
@@ -224,10 +188,6 @@ function AdminFlavorForm() {
 
     setImagePreview(previewUrl)
   }
-
-  /*
-   * VALIDAZIONE
-   */
 
   const validateForm = () => {
     if (!formData.referralCode.trim()) {
@@ -259,10 +219,6 @@ function AdminFlavorForm() {
     return null
   }
 
-  /*
-   * SUBMIT
-   */
-
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
 
@@ -286,109 +242,86 @@ function AdminFlavorForm() {
       navigate("/admin/catalog/flavors")
     } catch (error) {
       console.error(error)
-
       setError(t("admin.flavorForm.saveError"))
     } finally {
       setSaving(false)
     }
   }
 
-  /*
-   * LOADING
-   */
-
   if (loading) {
-    return <div className="text-center py-5">{t("common.loading")}</div>
+    return (
+      <div className="admin-flavor-form-loading">{t("common.loading")}</div>
+    )
   }
 
   return (
-    <div>
-      {/* HEADER */}
+    <div className="admin-flavor-form-page">
+      <div className="admin-flavor-form-container">
+        <header className="admin-flavor-form-header">
+          <div>
+            <button
+              type="button"
+              className="admin-flavor-form-back"
+              onClick={() => navigate("/admin/catalog/flavors")}
+            >
+              <ArrowLeft size={17} />
+              {t("admin.flavorForm.backToFlavors")}
+            </button>
 
-      <div className="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-4">
-        <div>
-          <button
-            type="button"
-            className="btn btn-link px-0 mb-2"
-            onClick={() => navigate("/admin/catalog/flavors")}
-          >
-            <ArrowLeft size={18} className="me-1" />
+            <h1>
+              {isEditMode
+                ? t("admin.flavorForm.editTitle")
+                : t("admin.flavorForm.createTitle")}
+            </h1>
 
-            {t("admin.flavorForm.backToFlavors")}
-          </button>
+            <p>
+              {isEditMode
+                ? t("admin.flavorForm.editSubtitle")
+                : t("admin.flavorForm.createSubtitle")}
+            </p>
+          </div>
+        </header>
 
-          <h1 className="mb-1">
-            {isEditMode
-              ? t("admin.flavorForm.editTitle")
-              : t("admin.flavorForm.createTitle")}
-          </h1>
+        {error && <div className="admin-flavor-form-error">{error}</div>}
 
-          <p className="text-muted mb-0">
-            {isEditMode
-              ? t("admin.flavorForm.editSubtitle")
-              : t("admin.flavorForm.createSubtitle")}
-          </p>
-        </div>
-      </div>
+        <form onSubmit={handleSubmit}>
+          <div className="admin-flavor-form-grid">
+            <section className="admin-flavor-form-card admin-flavor-form-general">
+              <div className="admin-flavor-form-card-header">
+                <h2>{t("admin.flavorForm.general")}</h2>
+              </div>
 
-      {/* ERROR */}
-
-      {error && <div className="alert alert-danger">{error}</div>}
-
-      <form onSubmit={handleSubmit}>
-        <div className="row g-4">
-          {/* INFORMAZIONI GENERALI */}
-
-          <div className="col-12 col-lg-8">
-            <div className="card border-0 shadow-sm h-100">
-              <div className="card-body">
-                <h2 className="h5 mb-4">{t("admin.flavorForm.general")}</h2>
-
-                <div className="row g-3">
-                  {/* CODICE */}
-
-                  <div className="col-12 col-md-6">
-                    <label className="form-label">
-                      {t("admin.flavorForm.referralCode")}
-                    </label>
+              <div className="admin-flavor-form-card-body">
+                <div className="admin-flavor-form-fields">
+                  <div className="admin-flavor-form-field">
+                    <label>{t("admin.flavorForm.referralCode")}</label>
 
                     <input
                       type="text"
                       name="referralCode"
-                      className="form-control"
                       value={formData.referralCode}
                       onChange={handleChange}
                       placeholder="PIST-001"
                     />
                   </div>
 
-                  {/* STOCK */}
-
-                  <div className="col-12 col-md-6">
-                    <label className="form-label">
-                      {t("admin.flavorForm.stockPortions")}
-                    </label>
+                  <div className="admin-flavor-form-field">
+                    <label>{t("admin.flavorForm.stockPortions")}</label>
 
                     <input
                       type="number"
                       name="stockPortions"
                       min="0"
-                      className="form-control"
                       value={formData.stockPortions}
                       onChange={handleChange}
                     />
                   </div>
 
-                  {/* CATEGORIA */}
-
-                  <div className="col-12">
-                    <label className="form-label">
-                      {t("admin.flavorForm.category")}
-                    </label>
+                  <div className="admin-flavor-form-field admin-flavor-form-full">
+                    <label>{t("admin.flavorForm.category")}</label>
 
                     <select
                       name="category"
-                      className="form-select"
                       value={formData.category}
                       onChange={handleChange}
                     >
@@ -405,64 +338,48 @@ function AdminFlavorForm() {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </section>
 
-          {/* IMMAGINE */}
+            <section className="admin-flavor-form-card admin-flavor-form-image-card">
+              <div className="admin-flavor-form-card-header">
+                <h2>{t("admin.flavorForm.image")}</h2>
+              </div>
 
-          <div className="col-12 col-lg-4">
-            <div className="card border-0 shadow-sm h-100">
-              <div className="card-body">
-                <h2 className="h5 mb-4">{t("admin.flavorForm.image")}</h2>
-
-                <div
-                  className="border rounded d-flex align-items-center justify-content-center overflow-hidden mb-3"
-                  style={{
-                    height: "240px",
-                    backgroundColor: "#f8f9fa",
-                  }}
-                >
+              <div className="admin-flavor-form-card-body">
+                <div className="admin-flavor-form-image-preview">
                   {imagePreview ? (
                     <img
                       src={imagePreview}
                       alt={formData.translations[0]?.name || "Flavor"}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                      }}
                     />
                   ) : (
-                    <div className="text-center text-muted">
-                      <ImagePlus size={40} className="mb-2" />
-
-                      <div>{t("admin.flavorForm.noImage")}</div>
+                    <div className="admin-flavor-form-image-empty">
+                      <ImagePlus size={42} />
+                      <span>{t("admin.flavorForm.noImage")}</span>
                     </div>
                   )}
                 </div>
 
-                <label className="form-label">
+                <label className="admin-flavor-form-file-label">
                   {t("admin.flavorForm.chooseImage")}
                 </label>
 
                 <input
                   type="file"
-                  className="form-control"
+                  className="admin-flavor-form-file"
                   accept="image/png,image/jpeg,image/webp"
                   onChange={handleImageChange}
                 />
               </div>
-            </div>
-          </div>
+            </section>
 
-          {/* CARATTERISTICHE */}
+            <section className="admin-flavor-form-card admin-flavor-form-full-card">
+              <div className="admin-flavor-form-card-header">
+                <h2>{t("admin.flavorForm.features")}</h2>
+              </div>
 
-          <div className="col-12">
-            <div className="card border-0 shadow-sm">
-              <div className="card-body">
-                <h2 className="h5 mb-4">{t("admin.flavorForm.features")}</h2>
-
-                <div className="row g-3">
+              <div className="admin-flavor-form-card-body">
+                <div className="admin-flavor-form-checkboxes">
                   <CheckboxField
                     name="available"
                     label={t("admin.flavorForm.available")}
@@ -499,23 +416,17 @@ function AdminFlavorForm() {
                   />
                 </div>
               </div>
-            </div>
-          </div>
+            </section>
 
-          {/* TRADUZIONI */}
+            <section className="admin-flavor-form-card admin-flavor-form-full-card">
+              <div className="admin-flavor-form-card-header">
+                <h2>{t("admin.flavorForm.translations")}</h2>
 
-          <div className="col-12">
-            <div className="card border-0 shadow-sm">
-              <div className="card-body">
-                <h2 className="h5 mb-1">
-                  {t("admin.flavorForm.translations")}
-                </h2>
+                <p>{t("admin.flavorForm.translationsDescription")}</p>
+              </div>
 
-                <p className="text-muted small mb-4">
-                  {t("admin.flavorForm.translationsDescription")}
-                </p>
-
-                <div className="row g-4">
+              <div className="admin-flavor-form-card-body">
+                <div className="admin-flavor-form-translations">
                   {languages.map((language) => {
                     const translation = formData.translations.find(
                       (item) => item.language === language,
@@ -526,99 +437,84 @@ function AdminFlavorForm() {
                     }
 
                     return (
-                      <div className="col-12 col-lg-6" key={language}>
-                        <div className="border rounded p-3 h-100">
-                          <div className="d-flex justify-content-between align-items-center mb-3">
-                            <h3 className="h6 mb-0">
-                              {getLanguageName(language)}
-                            </h3>
+                      <div
+                        className="admin-flavor-form-translation"
+                        key={language}
+                      >
+                        <div className="admin-flavor-form-translation-header">
+                          <h3>{getLanguageName(language)}</h3>
 
-                            <span className="badge text-bg-light">
-                              {language}
-                            </span>
-                          </div>
+                          <span>{language}</span>
+                        </div>
 
-                          {/* NOME */}
+                        <div className="admin-flavor-form-field">
+                          <label>{t("admin.flavorForm.name")}</label>
 
-                          <div className="mb-3">
-                            <label className="form-label">
-                              {t("admin.flavorForm.name")}
-                            </label>
+                          <input
+                            type="text"
+                            value={translation.name}
+                            onChange={(event) =>
+                              handleTranslationChange(
+                                language,
+                                "name",
+                                event.target.value,
+                              )
+                            }
+                          />
+                        </div>
 
-                            <input
-                              type="text"
-                              className="form-control"
-                              value={translation.name}
-                              onChange={(event) =>
-                                handleTranslationChange(
-                                  language,
-                                  "name",
-                                  event.target.value,
-                                )
-                              }
-                            />
-                          </div>
+                        <div className="admin-flavor-form-field">
+                          <label>{t("admin.flavorForm.description")}</label>
 
-                          {/* DESCRIZIONE */}
-
-                          <div>
-                            <label className="form-label">
-                              {t("admin.flavorForm.description")}
-                            </label>
-
-                            <textarea
-                              className="form-control"
-                              rows={4}
-                              value={translation.description}
-                              onChange={(event) =>
-                                handleTranslationChange(
-                                  language,
-                                  "description",
-                                  event.target.value,
-                                )
-                              }
-                            />
-                          </div>
+                          <textarea
+                            rows={5}
+                            value={translation.description}
+                            onChange={(event) =>
+                              handleTranslationChange(
+                                language,
+                                "description",
+                                event.target.value,
+                              )
+                            }
+                          />
                         </div>
                       </div>
                     )
                   })}
                 </div>
               </div>
-            </div>
+            </section>
           </div>
-        </div>
 
-        {/* AZIONI */}
+          <div className="admin-flavor-form-actions">
+            <button
+              type="button"
+              className="admin-flavor-form-cancel"
+              disabled={saving}
+              onClick={() => navigate("/admin/catalog/flavors")}
+            >
+              {t("admin.flavorForm.cancel")}
+            </button>
 
-        <div className="d-flex justify-content-end gap-2 mt-4 mb-5">
-          <button
-            type="button"
-            className="btn btn-outline-secondary"
-            disabled={saving}
-            onClick={() => navigate("/admin/catalog/flavors")}
-          >
-            {t("admin.flavorForm.cancel")}
-          </button>
+            <button
+              type="submit"
+              className="admin-flavor-form-save"
+              disabled={saving}
+            >
+              <Save size={17} />
 
-          <button type="submit" className="btn btn-dark" disabled={saving}>
-            <Save size={17} className="me-2" />
-
-            {saving
-              ? t("admin.flavorForm.saving")
-              : isEditMode
-                ? t("admin.flavorForm.saveChanges")
-                : t("admin.flavorForm.createFlavor")}
-          </button>
-        </div>
-      </form>
+              {saving
+                ? t("admin.flavorForm.saving")
+                : isEditMode
+                  ? t("admin.flavorForm.saveChanges")
+                  : t("admin.flavorForm.createFlavor")}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   )
 }
-
-/* -------------------------------------------------------------------------- */
-/* CHECKBOX */
-/* -------------------------------------------------------------------------- */
 
 interface CheckboxFieldProps {
   name: string
@@ -629,28 +525,21 @@ interface CheckboxFieldProps {
 
 function CheckboxField({ name, label, checked, onChange }: CheckboxFieldProps) {
   return (
-    <div className="col-12 col-md-6 col-lg-4">
-      <div className="form-check">
-        <input
-          id={`flavor-${name}`}
-          type="checkbox"
-          name={name}
-          className="form-check-input"
-          checked={checked}
-          onChange={onChange}
-        />
+    <label className="admin-flavor-form-checkbox">
+      <input
+        id={`flavor-${name}`}
+        type="checkbox"
+        name={name}
+        checked={checked}
+        onChange={onChange}
+      />
 
-        <label htmlFor={`flavor-${name}`} className="form-check-label">
-          {label}
-        </label>
-      </div>
-    </div>
+      <span className="admin-flavor-form-checkbox-box" />
+
+      <span>{label}</span>
+    </label>
   )
 }
-
-/* -------------------------------------------------------------------------- */
-/* LINGUE */
-/* -------------------------------------------------------------------------- */
 
 function getLanguageName(language: Language) {
   switch (language) {

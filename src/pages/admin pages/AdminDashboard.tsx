@@ -13,6 +13,7 @@ import { useEffect, useState } from "react"
 import api from "../../services/api"
 import { ChartLineIcon } from "@phosphor-icons/react/dist/ssr"
 import { Link } from "react-router-dom"
+import "../../styles/AdminDashboard.css"
 
 interface SalesPoint {
   label: string
@@ -50,7 +51,6 @@ type Period = "DAY" | "WEEK" | "MONTH" | "YEAR"
 
 function AdminDashboard() {
   const { t, i18n } = useTranslation()
-
   const [stats, setStats] = useState<DashboardStats | null>(null)
   const [loading, setLoading] = useState(true)
   const [period, setPeriod] = useState<Period>("MONTH")
@@ -190,24 +190,27 @@ function AdminDashboard() {
   }
 
   return (
-    <div>
-      <div className="mb-4">
-        <h1 className="mb-1">{t("admin.dashboard.title")}</h1>
-
-        <p className="text-muted mb-0">{t("admin.dashboard.subtitle")}</p>
+    <div className="admin-dashboard">
+      {/* HEADER */}
+      <div className="admin-dashboard-header">
+        <div>
+          <h1>{t("admin.dashboard.title")}</h1>
+          <p>{t("admin.dashboard.subtitle")}</p>
+        </div>
       </div>
 
-      <div className="card border-0 shadow-sm mb-4">
-        <div className="card-body p-3">
-          <div className="d-flex flex-wrap gap-2 align-items-center">
-            <CalendarDays size={20} className="text-muted me-1" />
+      {/* PERIODO */}
+      <div className="admin-period-card">
+        <div className="admin-period-content">
+          <div className="admin-period-icon">
+            <CalendarDays size={19} strokeWidth={1.7} />
+          </div>
 
+          <div className="admin-period-buttons">
             <button
               type="button"
-              className={`btn ${
-                period === "DAY" && offset === 0
-                  ? "btn-dark"
-                  : "btn-outline-secondary"
+              className={`admin-period-button ${
+                period === "DAY" && offset === 0 ? "active" : ""
               }`}
               onClick={() => handlePeriodChange("DAY")}
             >
@@ -216,10 +219,8 @@ function AdminDashboard() {
 
             <button
               type="button"
-              className={`btn ${
-                period === "WEEK" && offset === 0
-                  ? "btn-dark"
-                  : "btn-outline-secondary"
+              className={`admin-period-button ${
+                period === "WEEK" && offset === 0 ? "active" : ""
               }`}
               onClick={() => handlePeriodChange("WEEK")}
             >
@@ -228,10 +229,8 @@ function AdminDashboard() {
 
             <button
               type="button"
-              className={`btn ${
-                period === "MONTH" && offset === 0
-                  ? "btn-dark"
-                  : "btn-outline-secondary"
+              className={`admin-period-button ${
+                period === "MONTH" && offset === 0 ? "active" : ""
               }`}
               onClick={() => handlePeriodChange("MONTH")}
             >
@@ -240,24 +239,22 @@ function AdminDashboard() {
 
             <button
               type="button"
-              className={`btn ${
-                period === "YEAR" && offset === 0
-                  ? "btn-dark"
-                  : "btn-outline-secondary"
+              className={`admin-period-button ${
+                period === "YEAR" && offset === 0 ? "active" : ""
               }`}
               onClick={() => handlePeriodChange("YEAR")}
             >
               {t("admin.dashboard.year")}
             </button>
+          </div>
 
-            <div className="vr mx-1 d-none d-md-block" />
+          <div className="admin-period-divider" />
 
+          <div className="admin-period-buttons">
             <button
               type="button"
-              className={`btn ${
-                period === "DAY" && offset === -1
-                  ? "btn-dark"
-                  : "btn-outline-secondary"
+              className={`admin-period-button secondary ${
+                period === "DAY" && offset === -1 ? "active" : ""
               }`}
               onClick={() => handlePreviousPeriod("DAY")}
             >
@@ -266,10 +263,8 @@ function AdminDashboard() {
 
             <button
               type="button"
-              className={`btn ${
-                period === "WEEK" && offset === -1
-                  ? "btn-dark"
-                  : "btn-outline-secondary"
+              className={`admin-period-button secondary ${
+                period === "WEEK" && offset === -1 ? "active" : ""
               }`}
               onClick={() => handlePreviousPeriod("WEEK")}
             >
@@ -278,10 +273,8 @@ function AdminDashboard() {
 
             <button
               type="button"
-              className={`btn ${
-                period === "MONTH" && offset === -1
-                  ? "btn-dark"
-                  : "btn-outline-secondary"
+              className={`admin-period-button secondary ${
+                period === "MONTH" && offset === -1 ? "active" : ""
               }`}
               onClick={() => handlePreviousPeriod("MONTH")}
             >
@@ -290,262 +283,197 @@ function AdminDashboard() {
 
             <button
               type="button"
-              className={`btn ${
-                period === "YEAR" && offset === -1
-                  ? "btn-dark"
-                  : "btn-outline-secondary"
+              className={`admin-period-button secondary ${
+                period === "YEAR" && offset === -1 ? "active" : ""
               }`}
               onClick={() => handlePreviousPeriod("YEAR")}
             >
               {t("admin.dashboard.yearPrevious")}
             </button>
+          </div>
 
-            <span className="text-muted ms-auto">{getPeriodLabel()}</span>
+          <span className="admin-period-label">{getPeriodLabel()}</span>
+        </div>
+      </div>
+
+      {/* STATISTICHE PRINCIPALI */}
+      <div className="admin-stats-grid">
+        <div className="admin-stat-card">
+          <div>
+            <p>{t("admin.dashboard.orders")}</p>
+            <h2>{loading ? "..." : (stats?.totalOrders ?? 0)}</h2>
+          </div>
+
+          <div className="admin-stat-icon">
+            <ShoppingBag size={25} strokeWidth={1.6} />
+          </div>
+        </div>
+
+        <div className="admin-stat-card">
+          <div>
+            <p>{t("admin.dashboard.customers")}</p>
+            <h2>{loading ? "..." : (stats?.newCustomers ?? 0)}</h2>
+          </div>
+
+          <div className="admin-stat-icon">
+            <Users size={25} strokeWidth={1.6} />
+          </div>
+        </div>
+
+        <div className="admin-stat-card">
+          <div>
+            <p>{t("admin.dashboard.revenue")}</p>
+            <h2>{loading ? "..." : formatRevenue(stats?.revenue ?? 0)}</h2>
+          </div>
+
+          <div className="admin-stat-icon">
+            <Euro size={25} strokeWidth={1.6} />
+          </div>
+        </div>
+
+        <div className="admin-stat-card">
+          <div>
+            <p>{t("admin.dashboard.averageOrder")}</p>
+            <h2>
+              {loading ? "..." : formatRevenue(stats?.averageOrderValue ?? 0)}
+            </h2>
+          </div>
+
+          <div className="admin-stat-icon">
+            <Euro size={25} strokeWidth={1.6} />
           </div>
         </div>
       </div>
 
-      <div className="row g-4">
-        <div className="col-12 col-md-6 col-xl-3">
-          <div className="card border-0 shadow-sm">
-            <div className="card-body p-4">
-              <div className="d-flex justify-content-between align-items-center">
-                <div>
-                  <p className="text-muted mb-1">
-                    {t("admin.dashboard.orders")}
-                  </p>
+      {/* STATO ORDINI */}
+      <div className="admin-stats-grid admin-status-grid">
+        <div className="admin-stat-card">
+          <div>
+            <p>{t("admin.dashboard.pendingPayments")}</p>
+            <h2>{loading ? "..." : (stats?.pendingPayments ?? 0)}</h2>
+          </div>
 
-                  <h2 className="mb-0">
-                    {loading ? "..." : (stats?.totalOrders ?? 0)}
-                  </h2>
-                </div>
-
-                <ShoppingBag size={32} className="text-muted" />
-              </div>
-            </div>
+          <div className="admin-stat-icon">
+            <Clock size={25} strokeWidth={1.6} />
           </div>
         </div>
 
-        <div className="col-12 col-md-6 col-xl-3">
-          <div className="card border-0 shadow-sm">
-            <div className="card-body p-4">
-              <div className="d-flex justify-content-between align-items-center">
-                <div>
-                  <p className="text-muted mb-1">
-                    {t("admin.dashboard.customers")}
-                  </p>
+        <div className="admin-stat-card">
+          <div>
+            <p>{t("admin.dashboard.preparingOrders")}</p>
+            <h2>{loading ? "..." : (stats?.preparingOrders ?? 0)}</h2>
+          </div>
 
-                  <h2 className="mb-0">
-                    {loading ? "..." : (stats?.newCustomers ?? 0)}
-                  </h2>
-                </div>
-
-                <Users size={32} className="text-muted" />
-              </div>
-            </div>
+          <div className="admin-stat-icon">
+            <ChefHat size={25} strokeWidth={1.6} />
           </div>
         </div>
 
-        <div className="col-12 col-md-6 col-xl-3">
-          <div className="card border-0 shadow-sm">
-            <div className="card-body p-4">
-              <div className="d-flex justify-content-between align-items-center">
-                <div>
-                  <p className="text-muted mb-1">
-                    {t("admin.dashboard.revenue")}
-                  </p>
+        <div className="admin-stat-card">
+          <div>
+            <p>{t("admin.dashboard.shippedOrders")}</p>
+            <h2>{loading ? "..." : (stats?.shippedOrders ?? 0)}</h2>
+          </div>
 
-                  <h2 className="mb-0">
-                    {loading ? "..." : formatRevenue(stats?.revenue ?? 0)}
-                  </h2>
-                </div>
-
-                <Euro size={32} className="text-muted" />
-              </div>
-            </div>
+          <div className="admin-stat-icon">
+            <Truck size={25} strokeWidth={1.6} />
           </div>
         </div>
 
-        <div className="col-12 col-md-6 col-xl-3">
-          <div className="card border-0 shadow-sm">
-            <div className="card-body p-4">
-              <div className="d-flex justify-content-between align-items-center">
-                <div>
-                  <p className="text-muted mb-1">
-                    {t("admin.dashboard.averageOrder")}
-                  </p>
+        <div className="admin-stat-card">
+          <div>
+            <p>{t("admin.dashboard.deliveredOrders")}</p>
+            <h2>{loading ? "..." : (stats?.deliveredOrders ?? 0)}</h2>
+          </div>
 
-                  <h2 className="mb-0">
-                    {loading
-                      ? "..."
-                      : formatRevenue(stats?.averageOrderValue ?? 0)}
-                  </h2>
-                </div>
-
-                <Euro size={32} className="text-muted" />
-              </div>
-            </div>
+          <div className="admin-stat-icon">
+            <CheckCircle size={25} strokeWidth={1.6} />
           </div>
         </div>
       </div>
 
-      <div className="row g-4 mt-1">
-        <div className="col-12 col-md-6 col-xl-3">
-          <div className="card border-0 shadow-sm">
-            <div className="card-body p-4">
-              <div className="d-flex justify-content-between align-items-center">
-                <div>
-                  <p className="text-muted mb-1">
-                    {t("admin.dashboard.pendingPayments")}
-                  </p>
-
-                  <h2 className="mb-0">
-                    {loading ? "..." : (stats?.pendingPayments ?? 0)}
-                  </h2>
-                </div>
-
-                <Clock size={32} className="text-muted" />
-              </div>
+      {/* VENDITE RECENTI */}
+      <div className="admin-sales-card">
+        <div className="admin-sales-header">
+          <div>
+            <div className="admin-sales-title">
+              <ChartLineIcon size={20} />
+              <h2>{t("admin.dashboard.recentSales")}</h2>
             </div>
+
+            <p>{t("admin.dashboard.last10Sales")}</p>
           </div>
         </div>
 
-        <div className="col-12 col-md-6 col-xl-3">
-          <div className="card border-0 shadow-sm">
-            <div className="card-body p-4">
-              <div className="d-flex justify-content-between align-items-center">
-                <div>
-                  <p className="text-muted mb-1">
-                    {t("admin.dashboard.preparingOrders")}
-                  </p>
+        <div className="admin-table-wrapper">
+          <table className="admin-sales-table">
+            <thead>
+              <tr>
+                <th>{t("admin.dashboard.customer")}</th>
+                <th>{t("admin.dashboard.date")}</th>
+                <th>{t("admin.dashboard.order")}</th>
+                <th>{t("admin.dashboard.status")}</th>
+                <th className="admin-table-total">
+                  {t("admin.dashboard.total")}
+                </th>
+              </tr>
+            </thead>
 
-                  <h2 className="mb-0">
-                    {loading ? "..." : (stats?.preparingOrders ?? 0)}
-                  </h2>
-                </div>
-
-                <ChefHat size={32} className="text-muted" />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-12 col-md-6 col-xl-3">
-          <div className="card border-0 shadow-sm">
-            <div className="card-body p-4">
-              <div className="d-flex justify-content-between align-items-center">
-                <div>
-                  <p className="text-muted mb-1">
-                    {t("admin.dashboard.shippedOrders")}
-                  </p>
-
-                  <h2 className="mb-0">
-                    {loading ? "..." : (stats?.shippedOrders ?? 0)}
-                  </h2>
-                </div>
-
-                <Truck size={32} className="text-muted" />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-12 col-md-6 col-xl-3">
-          <div className="card border-0 shadow-sm">
-            <div className="card-body p-4">
-              <div className="d-flex justify-content-between align-items-center">
-                <div>
-                  <p className="text-muted mb-1">
-                    {t("admin.dashboard.deliveredOrders")}
-                  </p>
-
-                  <h2 className="mb-0">
-                    {loading ? "..." : (stats?.deliveredOrders ?? 0)}
-                  </h2>
-                </div>
-
-                <CheckCircle size={32} className="text-muted" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="card border-0 shadow-sm mt-4">
-        <div className="card-body p-4">
-          <div className="d-flex justify-content-between align-items-center mb-4">
-            <div>
-              <div className="d-flex">
-                <ChartLineIcon size={20} className="text-muted me-1" />
-
-                <h5 className="mb-1">{t("admin.dashboard.recentSales")}</h5>
-              </div>
-
-              <p className="text-muted mb-0">
-                {t("admin.dashboard.last10Sales")}
-              </p>
-            </div>
-          </div>
-
-          <div className="table-responsive">
-            <table className="table table-sm align-middle mb-0">
-              <thead>
+            <tbody>
+              {recentSales.length === 0 ? (
                 <tr>
-                  <th>{t("admin.dashboard.customer")}</th>
-                  <th>{t("admin.dashboard.date")}</th>
-                  <th>{t("admin.dashboard.order")}</th>
-                  <th>{t("admin.dashboard.status")}</th>
-                  <th className="text-end">{t("admin.dashboard.total")}</th>
+                  <td colSpan={5} className="admin-empty-sales">
+                    {t("admin.dashboard.noSales")}
+                  </td>
                 </tr>
-              </thead>
+              ) : (
+                recentSales.map((sale) => (
+                  <tr key={sale.id}>
+                    <td>
+                      <Link
+                        to={`/admin/customers/${sale.user.id}`}
+                        className="admin-customer-link"
+                      >
+                        <strong>
+                          {sale.user.name} {sale.user.surname}
+                        </strong>
+                      </Link>
 
-              <tbody>
-                {recentSales.length === 0 ? (
-                  <tr>
-                    <td colSpan={5} className="text-center text-muted py-4">
-                      {t("admin.dashboard.noSales")}
+                      <small>{sale.user.email}</small>
+                    </td>
+
+                    <td className="admin-nowrap">
+                      {new Date(sale.createdAt).toLocaleString(
+                        i18n.language === "IT"
+                          ? "it-IT"
+                          : i18n.language === "EN"
+                            ? "en-GB"
+                            : i18n.language === "FR"
+                              ? "fr-FR"
+                              : "de-DE",
+                      )}
+                    </td>
+
+                    <td>
+                      <span className="admin-order-id">
+                        #{sale.id.slice(0, 8).toUpperCase()}
+                      </span>
+                    </td>
+
+                    <td>
+                      <span className="admin-status-badge">
+                        {sale.orderStatus}
+                      </span>
+                    </td>
+
+                    <td className="admin-table-total">
+                      <strong>{formatRevenue(sale.total)}</strong>
                     </td>
                   </tr>
-                ) : (
-                  recentSales.map((sale) => (
-                    <tr key={sale.id}>
-                      <td>
-                        <Link to={`/admin/customers/${sale.user.id}`}>
-                          <strong>
-                            {sale.user.name} {sale.user.surname}
-                          </strong>
-                        </Link>
-
-                        <small className="d-block text-muted">
-                          {sale.user.email}
-                        </small>
-                      </td>
-
-                      <td>
-                        {new Date(sale.createdAt).toLocaleString(
-                          i18n.language === "IT"
-                            ? "it-IT"
-                            : i18n.language === "EN"
-                              ? "en-GB"
-                              : i18n.language === "FR"
-                                ? "fr-FR"
-                                : "de-DE",
-                        )}
-                      </td>
-
-                      <td>#{sale.id.slice(0, 8).toUpperCase()}</td>
-
-                      <td>{sale.orderStatus}</td>
-
-                      <td className="text-end">
-                        <strong>{formatRevenue(sale.total)}</strong>
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-          </div>
+                ))
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
