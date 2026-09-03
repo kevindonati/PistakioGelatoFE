@@ -560,3 +560,53 @@
     gap: 2px;
   }
 }
+
+.pistakio-order-payment-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pistakio-order-terms {
+  padding: 12px 14px;
+  background: #f8fbf3;
+  border: 1px solid #e8f5d8;
+  border-radius: 11px;
+}
+
+.pistakio-order-terms-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin: 0;
+  color: #555;
+  font-size: 12px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.pistakio-order-terms-label input {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin: 1px 0 0;
+  accent-color: #8bbf2c;
+  cursor: pointer;
+}
+
+.pistakio-order-terms-label a {
+  color: #f24892;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.pistakio-order-terms-label a:hover {
+  text-decoration: underline;
+}
+
+.pistakio-order-pay-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}

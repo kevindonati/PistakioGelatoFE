@@ -338,3 +338,45 @@ export const getOrderShippingCost = async (
 
   return response.data
 }
+
+export interface AdminNotificationOrder {
+  id: string
+  orderStatus: string
+  total: number
+  createdAt: string
+  user: {
+    id: string
+    name: string
+    surname: string
+    email: string
+  }
+}
+
+export interface AdminNotificationCustomer {
+  id: string
+  name: string
+  surname: string
+  email: string
+  createdAt: string
+}
+
+export interface AdminNotifications {
+  ordersCount: number
+  customersCount: number
+  orders: AdminNotificationOrder[]
+  customers: AdminNotificationCustomer[]
+}
+
+export const getAdminNotifications = async (): Promise<AdminNotifications> => {
+  const response = await api.get<AdminNotifications>("/admin/notifications")
+
+  return response.data
+}
+
+export const markAdminOrderNotificationsAsRead = async (): Promise<void> => {
+  await api.patch("/admin/notifications/orders/read")
+}
+
+export const markAdminCustomerNotificationsAsRead = async (): Promise<void> => {
+  await api.patch("/admin/notifications/customers/read")
+}

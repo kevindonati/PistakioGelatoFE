@@ -38,6 +38,7 @@ function OrderDetails() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
   const [paymentLoading, setPaymentLoading] = useState(false)
+  const [termsAccepted, setTermsAccepted] = useState(false)
 
   useEffect(() => {
     if (!id) {
@@ -89,6 +90,11 @@ function OrderDetails() {
 
   const handlePayment = async (method: "STRIPE" | "PAYPAL") => {
     if (!order) {
+      return
+    }
+
+    if (!termsAccepted) {
+      setError(t("checkout.termsRequired"))
       return
     }
 
@@ -188,32 +194,59 @@ function OrderDetails() {
             </span>
 
             {order.orderStatus === "PENDING_PAYMENT" && (
-              <div className="d-flex gap-2">
-                <button
-                  type="button"
-                  className="pistakio-order-pay-button"
-                  onClick={() => handlePayment("STRIPE")}
-                  disabled={paymentLoading}
-                >
-                  <CreditCard size={18} />
+              <div className="pistakio-order-payment-actions">
+                <div className="pistakio-order-terms">
+                  <label className="pistakio-order-terms-label">
+                    <input
+                      type="checkbox"
+                      checked={termsAccepted}
+                      onChange={(event) => {
+                        setTermsAccepted(event.target.checked)
+                        if (event.target.checked) {
+                          setError("")
+                        }
+                      }}
+                    />
 
-                  {paymentLoading
-                    ? t("orderDetails.paymentLoading")
-                    : t("orderDetails.payWithStripe")}
-                </button>
+                    <span>
+                      {t("checkout.acceptTerms")}{" "}
+                      <Link
+                        to="/terms"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {t("checkout.termsLink")}
+                      </Link>
+                    </span>
+                  </label>
+                </div>
+                <div className="d-flex gap-2">
+                  <button
+                    type="button"
+                    className="pistakio-order-pay-button"
+                    onClick={() => handlePayment("STRIPE")}
+                    disabled={paymentLoading || !termsAccepted}
+                  >
+                    <CreditCard size={18} />
 
-                <button
-                  type="button"
-                  className="pistakio-order-pay-button"
-                  onClick={() => handlePayment("PAYPAL")}
-                  disabled={paymentLoading}
-                >
-                  <Wallet size={18} />
+                    {paymentLoading
+                      ? t("orderDetails.paymentLoading")
+                      : t("orderDetails.payWithStripe")}
+                  </button>
 
-                  {paymentLoading
-                    ? t("orderDetails.paymentLoading")
-                    : t("orderDetails.payWithPaypal")}
-                </button>
+                  <button
+                    type="button"
+                    className="pistakio-order-pay-button"
+                    onClick={() => handlePayment("PAYPAL")}
+                    disabled={paymentLoading || !termsAccepted}
+                  >
+                    <Wallet size={18} />
+
+                    {paymentLoading
+                      ? t("orderDetails.paymentLoading")
+                      : t("orderDetails.payWithPaypal")}
+                  </button>
+                </div>
               </div>
             )}
           </div>

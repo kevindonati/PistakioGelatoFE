@@ -42,6 +42,7 @@ function Checkout() {
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState("")
   const [shippingCost, setShippingCost] = useState(0)
+  const [termsAccepted, setTermsAccepted] = useState(false)
   const [paymentMethod, setPaymentMethod] = useState<"STRIPE" | "PAYPAL">(
     "STRIPE",
   )
@@ -192,6 +193,11 @@ function Checkout() {
 
     if (!selectedAddress) {
       setError(t("checkout.addressRequired"))
+      return
+    }
+
+    if (!termsAccepted) {
+      setError(t("checkout.termsRequired"))
       return
     }
 
@@ -474,6 +480,31 @@ function Checkout() {
                   <strong>€ {totalPrice.toFixed(2)}</strong>
                 </div>
 
+                {/* TERMS */}
+
+                <div className="pistakio-checkout-terms">
+                  <label className="pistakio-checkout-terms-label">
+                    <input
+                      type="checkbox"
+                      checked={termsAccepted}
+                      onChange={(event) =>
+                        setTermsAccepted(event.target.checked)
+                      }
+                    />
+
+                    <span>
+                      {t("checkout.acceptTerms")}{" "}
+                      <a
+                        href="/terms"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {t("checkout.termsLink")}
+                      </a>
+                    </span>
+                  </label>
+                </div>
+
                 {/* PAYMENT BUTTONS */}
 
                 <div className="gap-2 mt-3">
@@ -481,7 +512,10 @@ function Checkout() {
                     type="button"
                     className="pistakio-checkout-confirm flex-grow-1 mb-2"
                     disabled={
-                      submitting || addresses.length === 0 || !selectedAddress
+                      submitting ||
+                      addresses.length === 0 ||
+                      !selectedAddress ||
+                      !termsAccepted
                     }
                     onClick={(event) => handleSubmit(event, "STRIPE")}
                   >
@@ -496,7 +530,10 @@ function Checkout() {
                     type="button"
                     className="pistakio-checkout-confirm flex-grow-1"
                     disabled={
-                      submitting || addresses.length === 0 || !selectedAddress
+                      submitting ||
+                      addresses.length === 0 ||
+                      !selectedAddress ||
+                      !termsAccepted
                     }
                     onClick={(event) => handleSubmit(event, "PAYPAL")}
                   >

@@ -14,25 +14,52 @@ import {
   Tags,
   Home,
   Languages,
+  Bell,
 } from "lucide-react"
 
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import { useAuth } from "../context/useAuth"
+
 import { useTranslation } from "react-i18next"
 
+import {
+  getAdminNotifications,
+  markAdminOrderNotificationsAsRead,
+  markAdminCustomerNotificationsAsRead,
+  type AdminNotifications,
+} from "../services/orderApi"
+
 import "../styles/Admin.css"
+
 import logo from "../assets/LOGO CON SCRITTA PIST DEF NOBG.png"
 
 function AdminLayout() {
   const { logout } = useAuth()
+
   const { t, i18n } = useTranslation()
 
   const navigate = useNavigate()
+
   const location = useLocation()
+
   const [collapsed, setCollapsed] = useState(false)
+
   const isCatalogActive = location.pathname.startsWith("/admin/catalog")
+
   const [catalogOpen, setCatalogOpen] = useState(isCatalogActive)
+
+  const [notifications, setNotifications] = useState<AdminNotifications | null>(
+    null,
+  )
+
+  const [notificationsOpen, setNotificationsOpen] = useState(false)
+
+  const [notificationTab, setNotificationTab] = useState<
+    "orders" | "customers"
+  >("orders")
+
+  const notificationsRef = useRef<HTMLDivElement>(null)
 
   const handleLogout = () => {
     logout()
@@ -55,16 +82,105 @@ function AdminLayout() {
     const language = event.target.value
 
     i18n.changeLanguage(language)
+
     localStorage.setItem("language", language)
   }
+
+  const loadNotifications = async () => {
+    try {
+      const data = await getAdminNotifications()
+
+      setNotifications(data)
+    } catch (error) {
+      console.error("Errore caricamento notifiche admin:", error)
+    }
+  }
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    loadNotifications()
+
+    const interval = setInterval(() => {
+      loadNotifications()
+    }, 10000)
+
+    return () => clearInterval(interval)
+  }, [])
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        notificationsRef.current &&
+        !notificationsRef.current.contains(event.target as Node)
+      ) {
+        setNotificationsOpen(false)
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside)
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [])
+
+  const handleNotificationsToggle = () => {
+    setNotificationsOpen((current) => !current)
+  }
+
+  const handleOrdersNotifications = async () => {
+    try {
+      await markAdminOrderNotificationsAsRead()
+
+      setNotifications((current) =>
+        current
+          ? {
+              ...current,
+              ordersCount: 0,
+            }
+          : current,
+      )
+    } catch (error) {
+      console.error("Errore aggiornamento notifiche ordini:", error)
+    }
+  }
+
+  const handleCustomersNotifications = async () => {
+    try {
+      await markAdminCustomerNotificationsAsRead()
+
+      setNotifications((current) =>
+        current
+          ? {
+              ...current,
+              customersCount: 0,
+            }
+          : current,
+      )
+    } catch (error) {
+      console.error("Errore aggiornamento notifiche clienti:", error)
+    }
+  }
+
+  const handleNotificationTabChange = async (tab: "orders" | "customers") => {
+    setNotificationTab(tab)
+
+    if (tab === "orders") {
+      await handleOrdersNotifications()
+    } else {
+      await handleCustomersNotifications()
+    }
+  }
+
+  const totalNotifications = notifications
+    ? notifications.ordersCount + notifications.customersCount
+    : 0
 
   return (
     <div
       className={`admin-layout ${collapsed ? "admin-layout-collapsed" : ""}`}
     >
-      {/* SIDEBAR */}
       <aside className="admin-sidebar">
-        {/* LOGO */}
         <div className="admin-sidebar-header">
           {!collapsed && (
             <img src={logo} alt="logo pistakio gelato" className="admin-logo" />
@@ -84,9 +200,7 @@ function AdminLayout() {
           </button>
         </div>
 
-        {/* MENU */}
         <nav className="admin-nav">
-          {/* DASHBOARD */}
           <AdminNavItem
             to="/admin"
             icon={<LayoutDashboard size={19} />}
@@ -94,8 +208,6 @@ function AdminLayout() {
             collapsed={collapsed}
             end
           />
-
-          {/* GESTION */}
 
           {!collapsed && (
             <div className="admin-section-title">
@@ -110,7 +222,6 @@ function AdminLayout() {
             collapsed={collapsed}
           />
 
-          {/* CATALOG */}
           {!collapsed && (
             <button
               type="button"
@@ -132,7 +243,6 @@ function AdminLayout() {
             </button>
           )}
 
-          {/* CATALOG COLLAPSED */}
           {collapsed && (
             <button
               type="button"
@@ -146,7 +256,6 @@ function AdminLayout() {
             </button>
           )}
 
-          {/* CATALOG MENU */}
           {!collapsed && catalogOpen && (
             <div className="admin-submenu">
               <AdminSubNavItem
@@ -169,7 +278,6 @@ function AdminLayout() {
             </div>
           )}
 
-          {/* CUSTOMERS */}
           <AdminNavItem
             to="/admin/customers"
             icon={<Users size={19} />}
@@ -177,7 +285,6 @@ function AdminLayout() {
             collapsed={collapsed}
           />
 
-          {/* SHOP */}
           {!collapsed && (
             <div className="admin-section-title">
               {t("admin.sidebar.store")}
@@ -191,7 +298,6 @@ function AdminLayout() {
             collapsed={collapsed}
           />
 
-          {/* HOME */}
           <AdminNavItem
             to="/"
             icon={<Home size={19} />}
@@ -200,9 +306,7 @@ function AdminLayout() {
           />
         </nav>
 
-        {/* FOOTER SIDEBAR */}
         <div className="admin-sidebar-footer">
-          {/* LANGUAGE */}
           <div
             className={`admin-language ${
               collapsed ? "admin-language-collapsed" : ""
@@ -225,7 +329,6 @@ function AdminLayout() {
             )}
           </div>
 
-          {/* LOGOUT */}
           <button
             type="button"
             className="admin-logout"
@@ -239,15 +342,144 @@ function AdminLayout() {
         </div>
       </aside>
 
-      {/* CONTENT */}
       <main className="admin-content">
+        <div className="admin-notifications" ref={notificationsRef}>
+          <button
+            type="button"
+            className={`admin-notifications-button ${
+              notificationsOpen ? "active" : ""
+            }`}
+            onClick={handleNotificationsToggle}
+            aria-label={t("admin.notifications.title")}
+            aria-expanded={notificationsOpen}
+          >
+            <Bell size={20} />
+
+            {totalNotifications > 0 && (
+              <span className="admin-notifications-badge">
+                {Math.min(totalNotifications, 99)}
+              </span>
+            )}
+          </button>
+
+          {notificationsOpen && notifications && (
+            <div className="admin-notifications-dropdown">
+              <div className="admin-notifications-tabs">
+                <button
+                  type="button"
+                  className={`admin-notifications-tab ${
+                    notificationTab === "orders" ? "active" : ""
+                  }`}
+                  onClick={() => handleNotificationTabChange("orders")}
+                >
+                  <span>{t("admin.notifications.orders")}</span>
+
+                  {notifications.ordersCount > 0 && (
+                    <span className="admin-notifications-tab-count">
+                      ({notifications.ordersCount})
+                    </span>
+                  )}
+                </button>
+
+                <button
+                  type="button"
+                  className={`admin-notifications-tab ${
+                    notificationTab === "customers" ? "active" : ""
+                  }`}
+                  onClick={() => handleNotificationTabChange("customers")}
+                >
+                  <span>{t("admin.notifications.customers")}</span>
+
+                  {notifications.customersCount > 0 && (
+                    <span className="admin-notifications-tab-count">
+                      ({notifications.customersCount})
+                    </span>
+                  )}
+                </button>
+              </div>
+
+              <div className="admin-notifications-list">
+                {notificationTab === "orders" ? (
+                  notifications.orders.length > 0 ? (
+                    notifications.orders.map((order) => (
+                      <button
+                        key={order.id}
+                        type="button"
+                        className="admin-notification-item"
+                        onClick={() => {
+                          setNotificationsOpen(false)
+                          navigate(`/admin/orders/${order.id}`)
+                        }}
+                      >
+                        <span className="admin-notification-id">
+                          #{order.id.slice(0, 8)}
+                        </span>
+
+                        <span className="admin-notification-text">
+                          <strong>
+                            {order.user?.name} {order.user?.surname}
+                          </strong>
+
+                          <span>
+                            {" "}
+                            -{" "}
+                            {new Date(order.createdAt).toLocaleDateString(
+                              "it-IT",
+                            )}
+                          </span>
+                        </span>
+                      </button>
+                    ))
+                  ) : (
+                    <div className="admin-notifications-empty">
+                      {t("admin.notifications.noNewOrders")}
+                    </div>
+                  )
+                ) : notifications.customers.length > 0 ? (
+                  notifications.customers.map((customer) => (
+                    <button
+                      key={customer.id}
+                      type="button"
+                      className="admin-notification-item"
+                      onClick={() => {
+                        setNotificationsOpen(false)
+                        navigate(`/admin/customers/${customer.id}`)
+                      }}
+                    >
+                      <span className="admin-notification-id">
+                        #{customer.id.slice(0, 8)}
+                      </span>
+
+                      <span className="admin-notification-text">
+                        <strong>
+                          {customer.name} {customer.surname}
+                        </strong>
+
+                        <span>
+                          {" "}
+                          - {t("admin.notifications.registered")}{" "}
+                          {new Date(customer.createdAt).toLocaleDateString(
+                            "it-IT",
+                          )}
+                        </span>
+                      </span>
+                    </button>
+                  ))
+                ) : (
+                  <div className="admin-notifications-empty">
+                    {t("admin.notifications.noNewCustomers")}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+
         <Outlet />
       </main>
     </div>
   )
 }
-
-/* MAIN NAV ITEM */
 
 interface AdminNavItemProps {
   to: string
@@ -272,12 +504,11 @@ function AdminNavItem({
       title={collapsed ? label : undefined}
     >
       {icon}
+
       {!collapsed && <span>{label}</span>}
     </NavLink>
   )
 }
-
-/* CATALOG SUB ITEM */
 
 interface AdminSubNavItemProps {
   to: string
@@ -294,6 +525,7 @@ function AdminSubNavItem({ to, icon, label }: AdminSubNavItemProps) {
       }
     >
       {icon}
+
       <span>{label}</span>
     </NavLink>
   )

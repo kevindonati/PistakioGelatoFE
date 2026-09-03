@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom"
 import Login from "./pages/guest pages/Login"
 import ProtectedRoute from "./components/ProtectedRoute"
-import Loading from "./components/Loading"
 import AdminRoute from "./components/AdminRoute"
 import Navbar from "./components/Navbar"
 import GuestRoute from "./components/GuestRoute"
@@ -37,14 +36,14 @@ import PaymentFailed from "./pages/guest pages/PaymentFailed"
 import AdminSettings from "./pages/admin pages/AdminSettings"
 import ForgotPassword from "./pages/guest pages/ForgotPassword"
 import ResetPassword from "./pages/guest pages/ResetPassword"
-
-function NotFound() {
-  return <h1>404 - Pagina non trovata</h1>
-}
+import NotFound from "./pages/guest pages/NotFound"
+import CookiePolicy from "./pages/guest pages/CookiePolicy"
+import PrivacyPolicy from "./pages/guest pages/PrivacyPolicy"
+import TermsAndConditions from "./pages/guest pages/TermsAndConditions"
+import Returns from "./pages/guest pages/Returns"
 
 function AppContent() {
   const location = useLocation()
-
   const isAdminRoute = location.pathname.startsWith("/admin")
   const isLoginRoute = location.pathname.startsWith("/login")
   const isRegisterRoute = location.pathname.startsWith("/register")
@@ -98,23 +97,16 @@ function AppContent() {
               element={<AdminCustomerDetails />}
             />
             <Route path="/admin/settings" element={<AdminSettings />} />
-            {/* 
-            
-            <Route
-              path="/admin/shipments"
-              element={<AdminShipments />}
-            />
-            <Route
-              path="/admin/payments"
-              element={<AdminPayments />}
-            />
-            */}
           </Route>
         </Route>
 
         {/* HOME */}
 
         <Route path="/" element={<Home />} />
+        <Route path="/cookies" element={<CookiePolicy />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<TermsAndConditions />} />
+        <Route path="/returns" element={<Returns />} />
 
         {/* GUEST */}
 
@@ -125,7 +117,7 @@ function AppContent() {
           <Route path="/reset-password" element={<ResetPassword />} />
         </Route>
 
-        {/* CATALOGO */}
+        {/* CATALOG */}
 
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/catalog/flavors/:id" element={<FlavorDetails />} />
@@ -147,10 +139,6 @@ function AppContent() {
           <Route path="/orders" element={<Orders />} />
           <Route path="/orders/:id" element={<OrderDetails />} />
         </Route>
-
-        {/* TEST */}
-
-        <Route path="/aa" element={<Loading />} />
 
         {/* 404 */}
 

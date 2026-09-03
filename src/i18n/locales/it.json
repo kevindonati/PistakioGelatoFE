@@ -206,7 +206,10 @@
     "paymentStripe": "Carta di credito / debito",
     "paymentPaypal": "PayPal",
     "payWithStripe": "Paga con carta",
-    "payWithPaypal": "Paga con PayPal"
+    "payWithPaypal": "Paga con PayPal",
+    "acceptTerms": "Ho letto e accetto i",
+    "termsLink": "Termini e Condizioni",
+    "termsRequired": "Devi accettare i Termini e Condizioni prima di procedere con il pagamento."
   },
 
   "address": {
@@ -736,14 +739,37 @@
         "maxWeight": "Peso massimo",
         "cost": "Costo"
       }
+    },
+    "notifications": {
+      "title": "Notifiche",
+      "new": "nuove",
+      "orders": "Ordini",
+      "customers": "Clienti",
+      "noNewOrders": "Nessun nuovo ordine",
+      "newOrders": "Nuovi ordini da controllare",
+      "noNewCustomers": "Nessun nuovo cliente",
+      "newCustomers": "Nuovi clienti registrati"
     }
   },
   "footer": {
-    "description": "Il piacere del gelato artigianale direttamente a casa tua.",
-    "linksTitle": "Navigazione",
-    "accountTitle": "Account",
-    "followUs": "Seguici",
-    "rights": "Tutti i diritti riservati."
+    "productsTitle": "Prodotti",
+    "allFlavors": "Tutti i gusti",
+    "categories": "Categorie",
+    "companyTitle": "La nostra azienda",
+    "shipping": "Consegna",
+    "terms": "Termini e condizioni",
+    "about": "Chi siamo",
+    "contact": "Contatti",
+    "accountTitle": "Il tuo account",
+    "personalInfo": "Informazioni personali",
+    "orders": "Ordini",
+    "addresses": "Indirizzi",
+    "businessInfoTitle": "Informazioni azienda",
+    "vatNumber": "P. IVA",
+    "privacy": "Privacy Policy",
+    "cookies": "Cookie Policy",
+    "returns": "Resi e diritto di recesso",
+    "rights": "Tutti i diritti riservati"
   },
   "account": {
     "title": "Il mio account",
@@ -789,5 +815,253 @@
     "successMessage": "La tua password è stata reimpostata con successo.",
     "goToLogin": "Vai al login",
     "backToLogin": "Torna al login"
+  },
+  "notFound": {
+    "title": "Pagina non trovata",
+    "message": "La pagina che stai cercando non esiste o potrebbe essere stata spostata.",
+    "home": "Torna alla home",
+    "back": "Torna indietro"
+  },
+  "cookiePolicy": {
+    "eyebrow": "Informativa",
+    "title": "Cookie Policy",
+    "intro": "Questa informativa descrive l'utilizzo di cookie e di tecnologie analoghe sul sito Pistakio Gelato.",
+    "whatAreCookiesTitle": "Cosa sono i cookie",
+    "whatAreCookiesText": "I cookie sono piccoli file di testo o tecnologie analoghe che possono essere memorizzati sul dispositivo dell'utente durante la navigazione. Possono essere utilizzati per garantire il corretto funzionamento di un sito, ricordare determinate preferenze o, in alcuni casi, analizzare la navigazione e creare profili.",
+    "cookiesUsedTitle": "Cookie utilizzati dal sito",
+    "cookiesUsedText": "Il sito Pistakio non utilizza direttamente cookie propri destinati alla profilazione o alla pubblicità personalizzata. Le funzionalità principali dell'applicazione utilizzano principalmente il localStorage del browser.",
+    "noProfilingTitle": "Nessun cookie di profilazione proprietario",
+    "noProfilingText": "In base alla configurazione attuale del sito, non vengono utilizzati cookie proprietari per finalità di profilazione, pubblicità personalizzata o remarketing.",
+    "technicalTitle": "Tecnologie tecniche e necessarie",
+    "technicalText": "L'applicazione utilizza il localStorage del browser per conservare alcune informazioni necessarie al funzionamento del servizio. Queste informazioni non sono cookie.",
+    "tableName": "Elemento",
+    "tableType": "Tipologia",
+    "tablePurpose": "Finalità",
+    "technical": "Tecnico",
+    "authStorage": "Conservazione del token necessario alla gestione dell'autenticazione dell'utente.",
+    "languageStorage": "Memorizzazione della lingua selezionata dall'utente.",
+    "paymentTitle": "Servizi di pagamento",
+    "paymentText": "Durante il processo di pagamento il sito può trasferire l'utente verso servizi di pagamento forniti da soggetti terzi. Tali servizi possono utilizzare cookie e tecnologie analoghe sui propri domini.",
+    "stripeText": "Stripe può utilizzare cookie e tecnologie analoghe durante il processo di pagamento per il funzionamento del servizio, la sicurezza delle transazioni e la prevenzione delle frodi.",
+    "paypalText": "PayPal può utilizzare cookie e tecnologie analoghe durante il processo di pagamento per il funzionamento del servizio, la sicurezza delle transazioni e la prevenzione delle frodi.",
+    "thirdPartyTitle": "Servizi di terze parti",
+    "thirdPartyText": "I servizi di terze parti possono applicare proprie tecnologie di memorizzazione o tracciamento quando l'utente interagisce con i relativi servizi. Tali tecnologie sono disciplinate dalle informative dei rispettivi fornitori.",
+    "managementTitle": "Gestione delle tecnologie di memorizzazione",
+    "managementText": "L'utente può gestire o cancellare i dati memorizzati dal browser attraverso le impostazioni del proprio browser. La disattivazione di alcune tecnologie necessarie potrebbe compromettere il corretto funzionamento di determinate funzionalità del sito.",
+    "durationTitle": "Durata della conservazione",
+    "durationText": "La durata delle informazioni memorizzate dipende dalla specifica tecnologia utilizzata e dalla finalità per cui viene utilizzata. Per i servizi di terze parti, i periodi di conservazione sono stabiliti dai rispettivi fornitori.",
+    "updatesTitle": "Aggiornamenti della Cookie Policy",
+    "updatesText": "La presente Cookie Policy può essere aggiornata in caso di modifiche alle tecnologie utilizzate, ai servizi offerti o alla normativa applicabile. La versione aggiornata sarà pubblicata su questa pagina.",
+    "contactTitle": "Contatti",
+    "contactText": "Per informazioni relative all'utilizzo di cookie e tecnologie analoghe è possibile contattare il titolare del trattamento ai recapiti indicati di seguito.",
+    "vatNumber": "P. IVA",
+    "email": "Email",
+    "lastUpdated": "Ultimo aggiornamento"
+  },
+  "privacyPolicy": {
+    "eyebrow": "Informativa",
+    "title": "Privacy Policy",
+    "intro": "Questa informativa descrive come Pistakio Gelato tratta i dati personali degli utenti che utilizzano il sito e i relativi servizi.",
+    "controllerTitle": "Titolare del trattamento",
+    "controllerText": "Il titolare del trattamento dei dati personali è il soggetto indicato di seguito.",
+    "vatNumber": "P. IVA",
+    "email": "Email",
+    "pec": "PEC",
+    "dataTitle": "Dati personali trattati",
+    "dataIntro": "In relazione all'utilizzo del sito possono essere trattate le seguenti categorie di dati personali:",
+    "dataIdentity": "nome e cognome",
+    "dataContact": "indirizzo e-mail e altri dati di contatto forniti dall'utente",
+    "dataAddress": "indirizzi di fatturazione e consegna",
+    "dataOrder": "informazioni relative agli ordini, ai prodotti acquistati e alle consegne",
+    "dataAccount": "dati necessari alla gestione dell'account e dell'autenticazione",
+    "dataTechnical": "dati tecnici necessari al funzionamento e alla sicurezza del servizio",
+    "purposeTitle": "Finalità del trattamento",
+    "purposeIntro": "I dati personali possono essere trattati per le seguenti finalità:",
+    "purposeAccountTitle": "Gestione dell'account",
+    "purposeAccountText": "Creazione e gestione dell'account, autenticazione dell'utente e accesso alle funzionalità riservate.",
+    "purposeOrdersTitle": "Gestione degli ordini",
+    "purposeOrdersText": "Ricezione, gestione, elaborazione e assistenza relativa agli ordini effettuati tramite il sito.",
+    "purposePaymentTitle": "Pagamenti",
+    "purposePaymentText": "Gestione dei pagamenti e delle relative operazioni di sicurezza e prevenzione delle frodi tramite i fornitori di pagamento disponibili.",
+    "purposeShippingTitle": "Consegna",
+    "purposeShippingText": "Gestione della preparazione e della consegna degli ordini all'indirizzo indicato dall'utente.",
+    "purposeSupportTitle": "Assistenza e comunicazioni",
+    "purposeSupportText": "Gestione delle richieste inviate dall'utente e comunicazioni necessarie relative ai servizi e agli ordini.",
+    "purposeLegalTitle": "Obblighi di legge",
+    "purposeLegalText": "Adempimento degli obblighi previsti dalla normativa applicabile, inclusi gli obblighi amministrativi, fiscali e contabili.",
+    "legalBasisTitle": "Base giuridica del trattamento",
+    "legalBasisIntro": "Il trattamento dei dati personali viene effettuato sulla base delle condizioni di liceità previste dalla normativa applicabile.",
+    "tablePurpose": "Finalità",
+    "tableBasis": "Base giuridica",
+    "basisAccountPurpose": "Gestione dell'account",
+    "basisOrderPurpose": "Gestione degli ordini",
+    "basisPaymentPurpose": "Gestione dei pagamenti",
+    "basisLegalPurpose": "Adempimento degli obblighi di legge",
+    "basisSecurityPurpose": "Sicurezza del servizio",
+    "basisContract": "Esecuzione del contratto o di misure precontrattuali richieste dall'utente",
+    "basisLegalObligation": "Adempimento di un obbligo legale",
+    "basisLegitimateInterest": "Legittimo interesse del titolare",
+    "provisionTitle": "Conferimento dei dati",
+    "provisionText": "Il conferimento dei dati necessari alla creazione dell'account, alla gestione degli ordini, alla consegna e ai pagamenti è necessario per poter fornire i relativi servizi. Il mancato conferimento dei dati necessari può impedire l'erogazione del servizio richiesto.",
+    "recipientsTitle": "Destinatari dei dati",
+    "recipientsIntro": "I dati personali possono essere comunicati, nei limiti necessari alle rispettive finalità, ai seguenti soggetti:",
+    "recipientShipping": "fornitori dei servizi di consegna e spedizione",
+    "recipientPayment": "fornitori di servizi di pagamento",
+    "recipientHosting": "fornitori dei servizi di hosting e infrastruttura tecnologica",
+    "recipientTechnical": "fornitori di servizi tecnici necessari al funzionamento e alla sicurezza del sito",
+    "recipientsNote": "I soggetti che trattano dati per conto del titolare possono essere designati responsabili del trattamento quando previsto dalla normativa applicabile.",
+    "paymentTitle": "Servizi di pagamento",
+    "paymentText": "Per la gestione dei pagamenti il sito utilizza servizi forniti da soggetti terzi. I dati necessari al pagamento possono essere trattati direttamente dai relativi fornitori secondo le rispettive informative.",
+    "stripeText": "Stripe tratta i dati necessari alla gestione dei pagamenti e alle attività connesse alla sicurezza delle transazioni e alla prevenzione delle frodi.",
+    "paypalText": "PayPal tratta i dati necessari alla gestione dei pagamenti e alle attività connesse alla sicurezza delle transazioni e alla prevenzione delle frodi.",
+    "securityTitle": "Sicurezza dei dati",
+    "securityText": "Il titolare adotta misure tecniche e organizzative adeguate per proteggere i dati personali da perdita, uso illecito, accesso non autorizzato, alterazione o divulgazione non autorizzata.",
+    "retentionTitle": "Periodo di conservazione",
+    "retentionText": "I dati personali sono conservati per un periodo non superiore a quello necessario rispetto alle finalità per cui sono stati raccolti, fatti salvi eventuali obblighi di legge o esigenze di tutela dei diritti del titolare.",
+    "retentionAccountTitle": "Dati dell'account",
+    "retentionAccountText": "Conservati per il periodo in cui l'account rimane attivo, salvo ulteriori esigenze di conservazione previste dalla legge.",
+    "retentionOrdersTitle": "Dati relativi agli ordini",
+    "retentionOrdersText": "Conservati per il periodo necessario alla gestione dell'ordine e successivamente per gli eventuali periodi previsti dalla normativa amministrativa, fiscale e contabile.",
+    "retentionMessagesTitle": "Richieste e comunicazioni",
+    "retentionMessagesText": "Conservate per il periodo necessario a gestire la richiesta e per il tempo necessario alla tutela dei diritti del titolare.",
+    "rightsTitle": "Diritti dell'interessato",
+    "rightsIntro": "L'interessato può esercitare, nei casi previsti dalla normativa, i seguenti diritti:",
+    "rightAccess": "diritto di accesso ai propri dati personali",
+    "rightRectification": "diritto di rettifica dei dati inesatti o incompleti",
+    "rightErasure": "diritto alla cancellazione dei dati",
+    "rightRestriction": "diritto alla limitazione del trattamento",
+    "rightPortability": "diritto alla portabilità dei dati, ove applicabile",
+    "rightObjection": "diritto di opposizione al trattamento nei casi previsti",
+    "rightsText": "Per esercitare i propri diritti è possibile contattare il titolare utilizzando i recapiti indicati nella presente informativa.",
+    "complaintTitle": "Diritto di proporre reclamo",
+    "complaintText": "L'interessato ha il diritto di proporre reclamo all'autorità di controllo competente qualora ritenga che il trattamento dei propri dati personali avvenga in violazione della normativa applicabile.",
+    "automatedTitle": "Processi decisionali automatizzati",
+    "automatedText": "Il sito non utilizza processi decisionali automatizzati o attività di profilazione che producano effetti giuridici o incidano significativamente sull'utente.",
+    "changesTitle": "Modifiche alla Privacy Policy",
+    "changesText": "La presente Privacy Policy può essere aggiornata in caso di modifiche ai servizi, alle modalità di trattamento dei dati o alla normativa applicabile. La versione aggiornata sarà pubblicata su questa pagina.",
+    "lastUpdated": "Ultimo aggiornamento"
+  },
+  "termsPage": {
+    "title": "Termini e Condizioni",
+    "lastUpdated": "Ultimo aggiornamento: 3 settembre 2026",
+    "general": {
+      "title": "1. Informazioni generali",
+      "text": "I presenti Termini e Condizioni disciplinano l'utilizzo del sito web e l'acquisto dei prodotti offerti da Pistakio Gelato. Accedendo al sito e utilizzandone i servizi, l'utente accetta i presenti Termini e Condizioni.",
+      "businessName": "Ragione sociale",
+      "address": "Sede",
+      "vatNumber": "Partita IVA",
+      "email": "Email"
+    },
+    "service": {
+      "title": "2. Oggetto del servizio",
+      "text": "Il sito consente agli utenti di consultare il catalogo dei prodotti, creare un account, effettuare ordini e scegliere tra le modalità di consegna o ritiro eventualmente disponibili. Pistakio Gelato si riserva il diritto di modificare, sospendere o aggiornare i servizi offerti."
+    },
+    "account": {
+      "title": "3. Account e registrazione",
+      "text": "Per utilizzare determinate funzionalità del sito può essere necessario creare un account. L'utente è responsabile della correttezza dei dati forniti e della riservatezza delle proprie credenziali di accesso. L'utente si impegna a non utilizzare l'account per finalità illecite o non autorizzate."
+    },
+    "products": {
+      "title": "4. Prodotti e disponibilità",
+      "text": "I prodotti sono descritti nel catalogo online attraverso testi e immagini. Le immagini hanno finalità illustrative e possono presentare lievi differenze rispetto al prodotto effettivamente consegnato. La disponibilità dei prodotti può variare e Pistakio Gelato può modificare o rimuovere prodotti dal catalogo."
+    },
+    "orders": {
+      "title": "5. Ordini",
+      "text": "L'ordine viene effettuato seguendo la procedura disponibile sul sito. L'invio dell'ordine costituisce una richiesta di acquisto da parte dell'utente. L'ordine si considera accettato quando Pistakio Gelato ne conferma l'accettazione. In caso di indisponibilità del prodotto o di altre circostanze oggettive che impediscano l'evasione dell'ordine, Pistakio Gelato potrà rifiutare o annullare l'ordine, informando l'utente e procedendo all'eventuale rimborso di quanto già pagato."
+    },
+    "prices": {
+      "title": "6. Prezzi",
+      "text": "I prezzi dei prodotti sono quelli indicati sul sito al momento dell'ordine. Eventuali costi aggiuntivi relativi alla consegna o ad altri servizi vengono indicati durante il processo di acquisto prima della conferma dell'ordine."
+    },
+    "payment": {
+      "title": "7. Pagamenti",
+      "text": "I pagamenti possono essere effettuati attraverso i metodi disponibili sul sito, inclusi Stripe e PayPal. I dati relativi ai pagamenti vengono gestiti attraverso i rispettivi fornitori di servizi di pagamento e secondo le loro condizioni e informative sulla privacy. Pistakio Gelato non conserva direttamente i dati completi delle carte di pagamento."
+    },
+    "delivery": {
+      "title": "8. Consegna e ritiro",
+      "text": "Le modalità di consegna e/o ritiro disponibili vengono indicate durante la procedura di acquisto. L'utente è responsabile della correttezza delle informazioni necessarie per la consegna. Eventuali ritardi derivanti da informazioni errate o incomplete fornite dall'utente non sono imputabili a Pistakio Gelato. Per prodotti alimentari e deperibili, il cliente è tenuto a garantire che il prodotto possa essere ricevuto e conservato correttamente."
+    },
+    "withdrawal": {
+      "title": "9. Diritto di recesso",
+      "text": "Ai sensi della normativa applicabile in materia di tutela dei consumatori, il diritto di recesso può essere escluso per determinati prodotti, tra cui beni che rischiano di deteriorarsi o scadere rapidamente. Considerata la natura alimentare e deperibile dei prodotti offerti, il diritto di recesso può pertanto non essere applicabile agli acquisti di gelato e ad altri prodotti deperibili, nei casi previsti dalla legge."
+    },
+    "cancellation": {
+      "title": "10. Annullamento e rimborsi",
+      "text": "Le richieste di annullamento e rimborso vengono valutate in base allo stato dell'ordine, alla natura del prodotto e alla normativa applicabile. Qualora un ordine venga annullato da Pistakio Gelato dopo che il pagamento è stato effettuato, l'importo eventualmente dovuto sarà rimborsato attraverso il metodo di pagamento utilizzato, secondo le modalità previste dal relativo fornitore."
+    },
+    "liability": {
+      "title": "11. Responsabilità",
+      "text": "Pistakio Gelato si impegna a mantenere il sito e i servizi disponibili con ragionevole continuità, senza garantire l'assenza assoluta di interruzioni o errori. L'utente è responsabile dell'utilizzo corretto del sito e dei propri dispositivi e connessioni. Restano ferme le responsabilità inderogabili previste dalla normativa applicabile."
+    },
+    "intellectualProperty": {
+      "title": "12. Proprietà intellettuale",
+      "text": "Il sito, il logo, i testi, le immagini, la grafica e gli altri contenuti presenti sul sito sono protetti dalla normativa applicabile e appartengono a Pistakio Gelato o ai rispettivi titolari. È vietata la riproduzione o utilizzazione dei contenuti senza la necessaria autorizzazione."
+    },
+    "privacy": {
+      "title": "13. Privacy",
+      "text": "Il trattamento dei dati personali degli utenti è disciplinato dalla Privacy Policy disponibile sul sito, che costituisce parte integrante delle informazioni relative all'utilizzo dei servizi."
+    },
+    "cookies": {
+      "title": "14. Cookie",
+      "text": "L'utilizzo dei cookie e di tecnologie analoghe è disciplinato dalla Cookie Policy disponibile sul sito."
+    },
+    "changes": {
+      "title": "15. Modifiche ai Termini",
+      "text": "Pistakio Gelato può aggiornare i presenti Termini e Condizioni per adeguarli a modifiche normative, tecniche o dei servizi offerti. La versione aggiornata sarà pubblicata sul sito con l'indicazione della data di aggiornamento."
+    },
+    "law": {
+      "title": "16. Legge applicabile e controversie",
+      "text": "I presenti Termini e Condizioni sono disciplinati dalla legge italiana, fatto salvo quanto diversamente previsto dalle norme inderogabili applicabili ai consumatori. Per le controversie con i consumatori saranno rispettate le disposizioni relative al foro competente previste dalla normativa applicabile."
+    },
+    "contact": {
+      "title": "17. Contatti",
+      "text": "Per informazioni, richieste relative agli ordini o comunicazioni riguardanti i presenti Termini e Condizioni è possibile contattare Pistakio Gelato tramite l'indirizzo email:"
+    }
+  },
+  "returnsPage": {
+    "title": "Resi e diritto di recesso",
+    "lastUpdated": "Ultimo aggiornamento: 3 settembre 2026",
+    "general": {
+      "title": "1. Informazioni generali",
+      "text": "La presente pagina descrive le condizioni applicabili ai resi, agli annullamenti e al diritto di recesso relativi agli acquisti effettuati sul sito Pistakio Gelato.",
+      "businessName": "Ragione sociale",
+      "address": "Sede",
+      "vatNumber": "Partita IVA",
+      "email": "Email"
+    },
+    "perishable": {
+      "title": "2. Prodotti alimentari e deperibili",
+      "text": "I prodotti offerti da Pistakio Gelato sono prevalentemente prodotti alimentari e, in particolare, gelato e altri prodotti che possono deteriorarsi rapidamente. Per tali prodotti il diritto di recesso può essere escluso nei casi previsti dalla normativa applicabile.",
+      "noticeTitle": "Importante",
+      "noticeText": "Per il gelato e gli altri prodotti alimentari deperibili non è normalmente possibile esercitare il diritto di recesso una volta effettuato l'acquisto, quando ricorrono le condizioni previste dalla legge."
+    },
+    "withdrawal": {
+      "title": "3. Diritto di recesso",
+      "text": "Per i prodotti per i quali il diritto di recesso è applicabile, il consumatore dispone normalmente di 14 giorni per comunicare la propria decisione di recedere dal contratto, senza dover fornire una motivazione. Il termine decorre, per i contratti di vendita, dal giorno in cui il consumatore acquisisce il possesso fisico dei beni, secondo quanto previsto dalla normativa applicabile."
+    },
+    "nonPerishable": {
+      "title": "4. Prodotti non deperibili",
+      "text": "Qualora Pistakio Gelato dovesse offrire prodotti non deperibili per i quali il diritto di recesso non sia escluso dalla legge, il diritto di recesso sarà esercitabile nei termini e secondo le modalità previste dalla normativa applicabile."
+    },
+    "howTo": {
+      "title": "5. Come richiedere il recesso",
+      "text": "Quando il diritto di recesso è applicabile, il consumatore deve comunicare la propria decisione prima della scadenza del relativo termine. La comunicazione può essere effettuata mediante una dichiarazione esplicita inviata a Pistakio Gelato.",
+      "emailTitle": "Inviare la richiesta a:"
+    },
+    "refund": {
+      "title": "6. Rimborsi",
+      "text": "Quando il recesso è applicabile e viene esercitato validamente, Pistakio Gelato provvede al rimborso dei pagamenti ricevuti nei termini previsti dalla legge, utilizzando, salvo diverso accordo con il consumatore, lo stesso metodo di pagamento utilizzato per la transazione iniziale. Restano applicabili le condizioni e le eccezioni previste dalla normativa."
+    },
+    "damaged": {
+      "title": "7. Prodotti danneggiati, errati o non conformi",
+      "text": "Il diritto di recesso è distinto dai diritti del consumatore in caso di prodotto difettoso, danneggiato, errato o non conforme all'ordine. In tali casi il cliente è invitato a contattare Pistakio Gelato il prima possibile, fornendo il numero dell'ordine e, ove possibile, fotografie del prodotto e dell'imballaggio."
+    },
+    "delivery": {
+      "title": "8. Problemi alla consegna",
+      "text": "In caso di problemi relativi alla consegna, come prodotto danneggiato durante il trasporto, prodotto errato o quantità non corrispondente all'ordine, il cliente deve contattare Pistakio Gelato tempestivamente per consentire la verifica del problema e l'adozione della soluzione prevista dalla normativa applicabile."
+    },
+    "contact": {
+      "title": "9. Contatti",
+      "text": "Per richieste relative a resi, rimborsi, annullamenti o diritto di recesso è possibile contattare Pistakio Gelato al seguente indirizzo:"
+    }
   }
 }

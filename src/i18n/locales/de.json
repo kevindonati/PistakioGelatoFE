@@ -199,7 +199,10 @@
     "paymentStripe": "Kredit- / Debitkarte",
     "paymentPaypal": "PayPal",
     "payWithStripe": "Mit Karte bezahlen",
-    "payWithPaypal": "Mit PayPal bezahlen"
+    "payWithPaypal": "Mit PayPal bezahlen",
+    "acceptTerms": "Ich habe die",
+    "termsLink": "Allgemeinen Geschäftsbedingungen",
+    "termsRequired": "Sie müssen die Allgemeinen Geschäftsbedingungen akzeptieren, bevor Sie mit der Zahlung fortfahren."
   },
   "address": {
     "title": "Neue Adresse",
@@ -718,14 +721,37 @@
         "maxWeight": "Maximalgewicht",
         "cost": "Kosten"
       }
+    },
+    "notifications": {
+      "title": "Benachrichtigungen",
+      "new": "neu",
+      "orders": "Bestellungen",
+      "customers": "Kunden",
+      "noNewOrders": "Keine neuen Bestellungen",
+      "newOrders": "Neue Bestellungen zu prüfen",
+      "noNewCustomers": "Keine neuen Kunden",
+      "newCustomers": "Neue Kunden registriert"
     }
   },
   "footer": {
-    "description": "Der Genuss von handwerklich hergestelltem Gelato direkt zu dir nach Hause.",
-    "linksTitle": "Navigation",
-    "accountTitle": "Konto",
-    "followUs": "Folge uns",
-    "rights": "Alle Rechte vorbehalten."
+    "productsTitle": "Produkte",
+    "allFlavors": "Alle Sorten",
+    "categories": "Kategorien",
+    "companyTitle": "Unser Unternehmen",
+    "shipping": "Lieferung",
+    "terms": "Allgemeine Geschäftsbedingungen",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "accountTitle": "Ihr Konto",
+    "personalInfo": "Persönliche Daten",
+    "orders": "Bestellungen",
+    "addresses": "Adressen",
+    "businessInfoTitle": "Unternehmensinformationen",
+    "vatNumber": "USt-IdNr.",
+    "privacy": "Datenschutzerklärung",
+    "cookies": "Cookie-Richtlinie",
+    "returns": "Rückgabe und Widerrufsrecht",
+    "rights": "Alle Rechte vorbehalten"
   },
   "account": {
     "title": "Mein Konto",
@@ -771,5 +797,253 @@
     "successMessage": "Dein Passwort wurde erfolgreich zurückgesetzt.",
     "goToLogin": "Zum Login",
     "backToLogin": "Zurück zum Login"
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "message": "Die gesuchte Seite existiert nicht oder wurde möglicherweise verschoben.",
+    "home": "Zur Startseite",
+    "back": "Zurück"
+  },
+  "cookiePolicy": {
+    "eyebrow": "Informationen",
+    "title": "Cookie-Richtlinie",
+    "intro": "Diese Richtlinie beschreibt die Verwendung von Cookies und ähnlichen Technologien auf der Website von Pistakio Gelato.",
+    "whatAreCookiesTitle": "Was sind Cookies",
+    "whatAreCookiesText": "Cookies sind kleine Textdateien oder ähnliche Technologien, die während des Besuchs einer Website auf dem Gerät des Nutzers gespeichert werden können. Sie können verwendet werden, um die ordnungsgemäße Funktion einer Website sicherzustellen, bestimmte Einstellungen zu speichern oder in einigen Fällen das Surfverhalten zu analysieren und Profile zu erstellen.",
+    "cookiesUsedTitle": "Auf der Website verwendete Cookies",
+    "cookiesUsedText": "Die Pistakio-Website verwendet keine eigenen Cookies direkt zu Profilierungs- oder personalisierten Werbezwecken. Die wichtigsten Funktionen der Anwendung verwenden hauptsächlich den localStorage des Browsers.",
+    "noProfilingTitle": "Keine eigenen Profiling-Cookies",
+    "noProfilingText": "Nach der aktuellen Konfiguration der Website werden keine eigenen Cookies für Profilierung, personalisierte Werbung oder Remarketing verwendet.",
+    "technicalTitle": "Technische und notwendige Technologien",
+    "technicalText": "Die Anwendung verwendet den localStorage des Browsers, um bestimmte für den Betrieb des Dienstes erforderliche Informationen zu speichern. Diese Informationen stellen keine Cookies dar.",
+    "tableName": "Element",
+    "tableType": "Typ",
+    "tablePurpose": "Zweck",
+    "technical": "Technisch",
+    "authStorage": "Speicherung des für die Verwaltung der Benutzerauthentifizierung erforderlichen Tokens.",
+    "languageStorage": "Speicherung der vom Nutzer ausgewählten Sprache.",
+    "paymentTitle": "Zahlungsdienste",
+    "paymentText": "Während des Zahlungsvorgangs kann die Website den Nutzer zu von Drittanbietern bereitgestellten Zahlungsdiensten weiterleiten. Diese Dienste können Cookies und ähnliche Technologien auf ihren eigenen Domains verwenden.",
+    "stripeText": "Stripe kann während des Zahlungsvorgangs Cookies und ähnliche Technologien verwenden, um den Dienst zu betreiben, Transaktionen abzusichern und Betrug zu verhindern.",
+    "paypalText": "PayPal kann während des Zahlungsvorgangs Cookies und ähnliche Technologien verwenden, um den Dienst zu betreiben, Transaktionen abzusichern und Betrug zu verhindern.",
+    "thirdPartyTitle": "Drittanbieter-Dienste",
+    "thirdPartyText": "Drittanbieter-Dienste können eigene Speicher- oder Tracking-Technologien verwenden, wenn Nutzer mit ihren Diensten interagieren. Diese Technologien unterliegen den Richtlinien der jeweiligen Anbieter.",
+    "managementTitle": "Verwaltung von Speichertechnologien",
+    "managementText": "Nutzer können die von ihrem Browser gespeicherten Informationen über die Browsereinstellungen verwalten oder löschen. Die Deaktivierung bestimmter notwendiger Technologien kann die ordnungsgemäße Funktion einiger Website-Funktionen beeinträchtigen.",
+    "durationTitle": "Speicherdauer",
+    "durationText": "Die Dauer der Speicherung hängt von der verwendeten Technologie und dem jeweiligen Zweck ab. Bei Drittanbieterdiensten werden die Speicherfristen von den jeweiligen Anbietern festgelegt.",
+    "updatesTitle": "Aktualisierungen der Cookie-Richtlinie",
+    "updatesText": "Diese Cookie-Richtlinie kann aktualisiert werden, wenn sich die verwendeten Technologien, die angebotenen Dienste oder die geltenden gesetzlichen Bestimmungen ändern. Die aktualisierte Version wird auf dieser Seite veröffentlicht.",
+    "contactTitle": "Kontakt",
+    "contactText": "Für Informationen zur Verwendung von Cookies und ähnlichen Technologien können Sie den Verantwortlichen unter den unten angegebenen Kontaktdaten kontaktieren.",
+    "vatNumber": "USt-IdNr.",
+    "email": "E-Mail",
+    "lastUpdated": "Letzte Aktualisierung"
+  },
+  "privacyPolicy": {
+    "eyebrow": "Informationen",
+    "title": "Datenschutzerklärung",
+    "intro": "Diese Datenschutzerklärung beschreibt, wie Pistakio Gelato die personenbezogenen Daten von Nutzern verarbeitet, die die Website und die damit verbundenen Dienste nutzen.",
+    "controllerTitle": "Verantwortlicher",
+    "controllerText": "Verantwortlicher für die Verarbeitung personenbezogener Daten ist das nachfolgend angegebene Unternehmen.",
+    "vatNumber": "USt-IdNr.",
+    "email": "E-Mail",
+    "pec": "Zertifizierte E-Mail (PEC)",
+    "dataTitle": "Verarbeitete personenbezogene Daten",
+    "dataIntro": "Im Zusammenhang mit der Nutzung der Website können folgende Kategorien personenbezogener Daten verarbeitet werden:",
+    "dataIdentity": "Vor- und Nachname",
+    "dataContact": "E-Mail-Adresse und andere vom Nutzer bereitgestellte Kontaktdaten",
+    "dataAddress": "Rechnungs- und Lieferadressen",
+    "dataOrder": "Informationen zu Bestellungen, gekauften Produkten und Lieferungen",
+    "dataAccount": "Daten, die für die Verwaltung des Kontos und die Authentifizierung des Nutzers erforderlich sind",
+    "dataTechnical": "Technische Daten, die für den Betrieb und die Sicherheit des Dienstes erforderlich sind",
+    "purposeTitle": "Zwecke der Verarbeitung",
+    "purposeIntro": "Personenbezogene Daten können zu folgenden Zwecken verarbeitet werden:",
+    "purposeAccountTitle": "Kontoverwaltung",
+    "purposeAccountText": "Erstellung und Verwaltung des Kontos, Authentifizierung des Nutzers und Zugriff auf geschützte Funktionen.",
+    "purposeOrdersTitle": "Bestellverwaltung",
+    "purposeOrdersText": "Annahme, Verwaltung und Bearbeitung von Bestellungen über die Website sowie damit verbundene Unterstützung.",
+    "purposePaymentTitle": "Zahlungen",
+    "purposePaymentText": "Abwicklung von Zahlungen sowie damit verbundene Sicherheits- und Maßnahmen zur Betrugsprävention über die verfügbaren Zahlungsanbieter.",
+    "purposeShippingTitle": "Lieferung",
+    "purposeShippingText": "Organisation der Vorbereitung und Lieferung von Bestellungen an die vom Nutzer angegebene Adresse.",
+    "purposeSupportTitle": "Support und Kommunikation",
+    "purposeSupportText": "Bearbeitung von Anfragen des Nutzers und notwendige Kommunikation im Zusammenhang mit Dienstleistungen und Bestellungen.",
+    "purposeLegalTitle": "Gesetzliche Verpflichtungen",
+    "purposeLegalText": "Erfüllung der geltenden gesetzlichen Verpflichtungen, einschließlich administrativer, steuerlicher und buchhalterischer Anforderungen.",
+    "legalBasisTitle": "Rechtsgrundlage der Verarbeitung",
+    "legalBasisIntro": "Die Verarbeitung personenbezogener Daten erfolgt auf Grundlage der nach geltendem Recht zulässigen Voraussetzungen.",
+    "tablePurpose": "Zweck",
+    "tableBasis": "Rechtsgrundlage",
+    "basisAccountPurpose": "Kontoverwaltung",
+    "basisOrderPurpose": "Bestellverwaltung",
+    "basisPaymentPurpose": "Zahlungsabwicklung",
+    "basisLegalPurpose": "Erfüllung gesetzlicher Verpflichtungen",
+    "basisSecurityPurpose": "Sicherheit des Dienstes",
+    "basisContract": "Erfüllung eines Vertrags oder vorvertraglicher Maßnahmen auf Anfrage des Nutzers",
+    "basisLegalObligation": "Erfüllung einer gesetzlichen Verpflichtung",
+    "basisLegitimateInterest": "Berechtigtes Interesse des Verantwortlichen",
+    "provisionTitle": "Bereitstellung der Daten",
+    "provisionText": "Die Bereitstellung der für die Erstellung eines Kontos, die Verwaltung von Bestellungen, die Lieferung und die Zahlungsabwicklung erforderlichen Daten ist notwendig, um die entsprechenden Dienste bereitzustellen. Werden erforderliche Daten nicht bereitgestellt, kann der angeforderte Dienst möglicherweise nicht erbracht werden.",
+    "recipientsTitle": "Empfänger der Daten",
+    "recipientsIntro": "Personenbezogene Daten können, soweit dies für die jeweiligen Zwecke erforderlich ist, an folgende Empfänger übermittelt werden:",
+    "recipientShipping": "Anbieter von Liefer- und Versanddienstleistungen",
+    "recipientPayment": "Zahlungsdienstleister",
+    "recipientHosting": "Anbieter von Hosting- und technologischer Infrastruktur",
+    "recipientTechnical": "technische Dienstleister, die für den Betrieb und die Sicherheit der Website erforderlich sind",
+    "recipientsNote": "Personen oder Unternehmen, die Daten im Auftrag des Verantwortlichen verarbeiten, können gemäß den geltenden gesetzlichen Bestimmungen als Auftragsverarbeiter benannt werden.",
+    "paymentTitle": "Zahlungsdienste",
+    "paymentText": "Für die Abwicklung von Zahlungen nutzt die Website Dienste von Drittanbietern. Für die Zahlung erforderliche Daten können von den jeweiligen Anbietern gemäß deren Datenschutzerklärungen direkt verarbeitet werden.",
+    "stripeText": "Stripe verarbeitet die für die Abwicklung von Zahlungen erforderlichen Daten sowie Daten im Zusammenhang mit der Transaktionssicherheit und Betrugsprävention.",
+    "paypalText": "PayPal verarbeitet die für die Abwicklung von Zahlungen erforderlichen Daten sowie Daten im Zusammenhang mit der Transaktionssicherheit und Betrugsprävention.",
+    "securityTitle": "Datensicherheit",
+    "securityText": "Der Verantwortliche ergreift geeignete technische und organisatorische Maßnahmen, um personenbezogene Daten vor Verlust, unrechtmäßiger Nutzung, unbefugtem Zugriff, Veränderung oder unbefugter Offenlegung zu schützen.",
+    "retentionTitle": "Speicherdauer",
+    "retentionText": "Personenbezogene Daten werden nicht länger gespeichert, als es für die Zwecke, für die sie erhoben wurden, erforderlich ist, vorbehaltlich gesetzlicher Aufbewahrungspflichten oder Erfordernisse zum Schutz der Rechte des Verantwortlichen.",
+    "retentionAccountTitle": "Kontodaten",
+    "retentionAccountText": "Werden gespeichert, solange das Konto aktiv ist, vorbehaltlich zusätzlicher gesetzlicher Aufbewahrungspflichten.",
+    "retentionOrdersTitle": "Bestelldaten",
+    "retentionOrdersText": "Werden für den zur Abwicklung der Bestellung erforderlichen Zeitraum und anschließend für die gesetzlich vorgesehenen administrativen, steuerlichen und buchhalterischen Aufbewahrungsfristen gespeichert.",
+    "retentionMessagesTitle": "Anfragen und Kommunikation",
+    "retentionMessagesText": "Werden für den zur Bearbeitung der Anfrage erforderlichen Zeitraum und für die zur Wahrung der Rechte des Verantwortlichen erforderliche Dauer gespeichert.",
+    "rightsTitle": "Rechte der betroffenen Person",
+    "rightsIntro": "Soweit gesetzlich vorgesehen, kann die betroffene Person folgende Rechte ausüben:",
+    "rightAccess": "Recht auf Auskunft über die eigenen personenbezogenen Daten",
+    "rightRectification": "Recht auf Berichtigung unrichtiger oder unvollständiger Daten",
+    "rightErasure": "Recht auf Löschung personenbezogener Daten",
+    "rightRestriction": "Recht auf Einschränkung der Verarbeitung",
+    "rightPortability": "Recht auf Datenübertragbarkeit, soweit anwendbar",
+    "rightObjection": "Recht auf Widerspruch gegen die Verarbeitung in den gesetzlich vorgesehenen Fällen",
+    "rightsText": "Zur Ausübung dieser Rechte kann sich der Nutzer über die in dieser Datenschutzerklärung angegebenen Kontaktdaten an den Verantwortlichen wenden.",
+    "complaintTitle": "Beschwerderecht",
+    "complaintText": "Die betroffene Person hat das Recht, bei der zuständigen Aufsichtsbehörde Beschwerde einzulegen, wenn sie der Ansicht ist, dass die Verarbeitung ihrer personenbezogenen Daten gegen geltendes Recht verstößt.",
+    "automatedTitle": "Automatisierte Entscheidungsfindung",
+    "automatedText": "Die Website verwendet keine automatisierten Entscheidungsprozesse oder Profiling-Aktivitäten, die rechtliche Auswirkungen haben oder den Nutzer in ähnlicher Weise erheblich beeinträchtigen.",
+    "changesTitle": "Änderungen der Datenschutzerklärung",
+    "changesText": "Diese Datenschutzerklärung kann bei Änderungen der Dienste, der Datenverarbeitung oder der geltenden Gesetzgebung aktualisiert werden. Die aktualisierte Version wird auf dieser Seite veröffentlicht.",
+    "lastUpdated": "Letzte Aktualisierung"
+  },
+  "termsPage": {
+    "title": "Allgemeine Geschäftsbedingungen",
+    "lastUpdated": "Letzte Aktualisierung: 3. September 2026",
+    "general": {
+      "title": "1. Allgemeine Informationen",
+      "text": "Diese Allgemeinen Geschäftsbedingungen regeln die Nutzung der Website und den Kauf der von Pistakio Gelato angebotenen Produkte. Mit dem Zugriff auf die Website und der Nutzung ihrer Dienste akzeptiert der Nutzer diese Allgemeinen Geschäftsbedingungen.",
+      "businessName": "Firmenname",
+      "address": "Anschrift",
+      "vatNumber": "Umsatzsteuer-Identifikationsnummer",
+      "email": "E-Mail"
+    },
+    "service": {
+      "title": "2. Gegenstand des Dienstes",
+      "text": "Die Website ermöglicht es Nutzern, den Produktkatalog einzusehen, ein Konto zu erstellen, Bestellungen aufzugeben und zwischen den verfügbaren Liefer- oder Abholoptionen zu wählen. Pistakio Gelato behält sich das Recht vor, die angebotenen Dienste zu ändern, auszusetzen oder zu aktualisieren."
+    },
+    "account": {
+      "title": "3. Konto und Registrierung",
+      "text": "Für bestimmte Funktionen der Website kann die Erstellung eines Kontos erforderlich sein. Der Nutzer ist für die Richtigkeit der angegebenen Daten und die Vertraulichkeit seiner Zugangsdaten verantwortlich. Das Konto darf nicht für rechtswidrige oder nicht autorisierte Zwecke verwendet werden."
+    },
+    "products": {
+      "title": "4. Produkte und Verfügbarkeit",
+      "text": "Die Produkte werden im Online-Katalog anhand von Texten und Bildern beschrieben. Die Bilder dienen nur zur Veranschaulichung und können geringfügig vom tatsächlich gelieferten Produkt abweichen. Die Verfügbarkeit der Produkte kann sich ändern und Pistakio Gelato kann Produkte aus dem Katalog ändern oder entfernen."
+    },
+    "orders": {
+      "title": "5. Bestellungen",
+      "text": "Bestellungen werden über das auf der Website verfügbare Verfahren aufgegeben. Die Übermittlung einer Bestellung stellt eine Kaufanfrage des Nutzers dar. Die Bestellung gilt als angenommen, sobald Pistakio Gelato deren Annahme bestätigt. Bei Nichtverfügbarkeit eines Produkts oder anderen objektiven Umständen, die eine Ausführung verhindern, kann Pistakio Gelato die Bestellung ablehnen oder stornieren und den Nutzer informieren sowie gegebenenfalls bereits gezahlte Beträge erstatten."
+    },
+    "prices": {
+      "title": "6. Preise",
+      "text": "Es gelten die auf der Website zum Zeitpunkt der Bestellung angegebenen Preise. Etwaige zusätzliche Liefer- oder Servicekosten werden während des Bestellvorgangs vor der Bestätigung der Bestellung angezeigt."
+    },
+    "payment": {
+      "title": "7. Zahlungen",
+      "text": "Zahlungen können mit den auf der Website verfügbaren Zahlungsmethoden, einschließlich Stripe und PayPal, vorgenommen werden. Zahlungsinformationen werden über die jeweiligen Zahlungsdienstleister gemäß deren Bedingungen und Datenschutzrichtlinien verarbeitet. Pistakio Gelato speichert keine vollständigen Zahlungskartendaten direkt."
+    },
+    "delivery": {
+      "title": "8. Lieferung und Abholung",
+      "text": "Die verfügbaren Liefer- und/oder Abholmöglichkeiten werden während des Bestellvorgangs angezeigt. Der Nutzer ist für die Richtigkeit der für die Lieferung erforderlichen Angaben verantwortlich. Verzögerungen aufgrund falscher oder unvollständiger Angaben des Nutzers sind Pistakio Gelato nicht zuzurechnen. Bei Lebensmitteln und verderblichen Produkten muss der Kunde sicherstellen, dass diese ordnungsgemäß entgegengenommen und gelagert werden können."
+    },
+    "withdrawal": {
+      "title": "9. Widerrufsrecht",
+      "text": "Nach den geltenden Verbraucherschutzvorschriften kann das Widerrufsrecht für bestimmte Produkte ausgeschlossen sein, insbesondere für Waren, die schnell verderben oder ablaufen können. Aufgrund der Lebensmittel- und Verderblichkeit der angebotenen Produkte kann das Widerrufsrecht daher bei Käufen von Speiseeis und anderen verderblichen Produkten in den gesetzlich vorgesehenen Fällen ausgeschlossen sein."
+    },
+    "cancellation": {
+      "title": "10. Stornierung und Erstattungen",
+      "text": "Anfragen zu Stornierungen und Erstattungen werden unter Berücksichtigung des Bestellstatus, der Art des Produkts und der geltenden gesetzlichen Bestimmungen geprüft. Wird eine Bestellung von Pistakio Gelato nach erfolgter Zahlung storniert, wird ein gegebenenfalls geschuldeter Betrag über die verwendete Zahlungsmethode gemäß den Verfahren des jeweiligen Zahlungsdienstleisters erstattet."
+    },
+    "liability": {
+      "title": "11. Haftung",
+      "text": "Pistakio Gelato bemüht sich um eine angemessene Verfügbarkeit der Website und Dienste, garantiert jedoch nicht, dass diese vollständig unterbrechungs- oder fehlerfrei sind. Der Nutzer ist für die ordnungsgemäße Nutzung der Website, seiner Geräte und seiner Internetverbindung verantwortlich. Zwingende gesetzliche Haftung bleibt unberührt."
+    },
+    "intellectualProperty": {
+      "title": "12. Geistiges Eigentum",
+      "text": "Die Website, das Logo, Texte, Bilder, Grafiken und sonstige Inhalte sind durch die geltenden gesetzlichen Bestimmungen geschützt und gehören Pistakio Gelato oder den jeweiligen Rechteinhabern. Eine Vervielfältigung oder Nutzung ohne die erforderliche Genehmigung ist untersagt."
+    },
+    "privacy": {
+      "title": "13. Datenschutz",
+      "text": "Die Verarbeitung personenbezogener Daten der Nutzer richtet sich nach der auf der Website verfügbaren Datenschutzrichtlinie."
+    },
+    "cookies": {
+      "title": "14. Cookies",
+      "text": "Die Verwendung von Cookies und ähnlichen Technologien richtet sich nach der auf der Website verfügbaren Cookie-Richtlinie."
+    },
+    "changes": {
+      "title": "15. Änderungen der Bedingungen",
+      "text": "Pistakio Gelato kann diese Allgemeinen Geschäftsbedingungen aktualisieren, um rechtliche, technische oder Änderungen der angebotenen Dienste zu berücksichtigen. Die aktualisierte Version wird mit Angabe des Aktualisierungsdatums auf der Website veröffentlicht."
+    },
+    "law": {
+      "title": "16. Anwendbares Recht und Streitigkeiten",
+      "text": "Diese Allgemeinen Geschäftsbedingungen unterliegen dem italienischen Recht, vorbehaltlich zwingender Verbraucherschutzvorschriften. Bei Streitigkeiten mit Verbrauchern werden die zwingenden gesetzlichen Vorschriften über den zuständigen Gerichtsstand eingehalten."
+    },
+    "contact": {
+      "title": "17. Kontakt",
+      "text": "Für Informationen, Fragen zu Bestellungen oder Mitteilungen zu diesen Allgemeinen Geschäftsbedingungen kann Pistakio Gelato unter folgender E-Mail-Adresse kontaktiert werden:"
+    }
+  },
+  "returnsPage": {
+    "title": "Rückgabe und Widerrufsrecht",
+    "lastUpdated": "Letzte Aktualisierung: 3. September 2026",
+    "general": {
+      "title": "1. Allgemeine Informationen",
+      "text": "Diese Seite beschreibt die Bedingungen für Rückgaben, Stornierungen und das Widerrufsrecht bei Käufen auf der Website von Pistakio Gelato.",
+      "businessName": "Firmenname",
+      "address": "Anschrift",
+      "vatNumber": "Umsatzsteuer-Identifikationsnummer",
+      "email": "E-Mail"
+    },
+    "perishable": {
+      "title": "2. Lebensmittel und verderbliche Produkte",
+      "text": "Die von Pistakio Gelato angebotenen Produkte sind hauptsächlich Lebensmittel, insbesondere Speiseeis und andere Produkte, die schnell verderben können. Für solche Produkte kann das Widerrufsrecht ausgeschlossen sein, sofern dies nach geltendem Recht vorgesehen ist.",
+      "noticeTitle": "Wichtig",
+      "noticeText": "Für Speiseeis und andere verderbliche Lebensmittel besteht normalerweise kein Widerrufsrecht, wenn die gesetzlichen Voraussetzungen für den Ausschluss erfüllt sind."
+    },
+    "withdrawal": {
+      "title": "3. Widerrufsrecht",
+      "text": "Für Produkte, bei denen das Widerrufsrecht gilt, haben Verbraucher grundsätzlich 14 Tage Zeit, ihre Entscheidung zum Widerruf mitzuteilen, ohne einen Grund angeben zu müssen. Bei Kaufverträgen beginnt die Frist grundsätzlich mit der physischen Inbesitznahme der Ware durch den Verbraucher, entsprechend den geltenden gesetzlichen Bestimmungen."
+    },
+    "nonPerishable": {
+      "title": "4. Nicht verderbliche Produkte",
+      "text": "Sollte Pistakio Gelato nicht verderbliche Produkte anbieten, für die das Widerrufsrecht gesetzlich nicht ausgeschlossen ist, kann das Widerrufsrecht innerhalb der gesetzlich vorgesehenen Fristen und nach den geltenden Verfahren ausgeübt werden."
+    },
+    "howTo": {
+      "title": "5. Ausübung des Widerrufsrechts",
+      "text": "Wenn das Widerrufsrecht anwendbar ist, muss der Verbraucher seine Entscheidung vor Ablauf der geltenden Frist mitteilen. Die Mitteilung kann durch eine eindeutige Erklärung an Pistakio Gelato erfolgen.",
+      "emailTitle": "Anfrage senden an:"
+    },
+    "refund": {
+      "title": "6. Erstattungen",
+      "text": "Wenn das Widerrufsrecht gilt und wirksam ausgeübt wird, erstattet Pistakio Gelato die erhaltenen Zahlungen innerhalb der gesetzlich vorgesehenen Fristen. Sofern nichts anderes mit dem Verbraucher vereinbart wurde, wird dasselbe Zahlungsmittel verwendet, das bei der ursprünglichen Transaktion eingesetzt wurde."
+    },
+    "damaged": {
+      "title": "7. Beschädigte, falsche oder nicht vertragsgemäße Produkte",
+      "text": "Das Widerrufsrecht ist von den gesetzlichen Verbraucherrechten bei mangelhaften, beschädigten, falschen oder nicht vertragsgemäßen Produkten zu unterscheiden. In solchen Fällen wird der Kunde gebeten, Pistakio Gelato so schnell wie möglich zu kontaktieren und die Bestellnummer sowie, wenn möglich, Fotos des Produkts und der Verpackung bereitzustellen."
+    },
+    "delivery": {
+      "title": "8. Probleme bei der Lieferung",
+      "text": "Bei Problemen mit der Lieferung, beispielsweise einem während des Transports beschädigten Produkt, einem falschen Produkt oder einer von der Bestellung abweichenden Menge, sollte der Kunde Pistakio Gelato unverzüglich kontaktieren, damit das Problem geprüft und die gesetzlich vorgesehene Lösung umgesetzt werden kann."
+    },
+    "contact": {
+      "title": "9. Kontakt",
+      "text": "Bei Fragen zu Rückgaben, Erstattungen, Stornierungen oder zum Widerrufsrecht kann Pistakio Gelato unter folgender E-Mail-Adresse kontaktiert werden:"
+    }
   }
 }

@@ -586,3 +586,41 @@
     align-items: flex-start;
   }
 }
+
+.pistakio-checkout-terms {
+  margin-top: 20px;
+  padding: 14px 16px;
+  background: #f8fbf3;
+  border: 1px solid #e8f5d8;
+  border-radius: 11px;
+}
+
+.pistakio-checkout-terms-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0;
+  color: #555;
+  font-size: 13px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.pistakio-checkout-terms-label input {
+  flex-shrink: 0;
+  width: 17px;
+  height: 17px;
+  margin: 1px 0 0;
+  accent-color: #8bbf2c;
+  cursor: pointer;
+}
+
+.pistakio-checkout-terms-label a {
+  color: #f24892;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.pistakio-checkout-terms-label a:hover {
+  text-decoration: underline;
+}

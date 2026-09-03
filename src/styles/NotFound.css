@@ -1,0 +1,125 @@
+.not-found-page {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.not-found-card {
+  width: 100%;
+  max-width: 650px;
+  padding: 55px 45px;
+  border-radius: 22px;
+  background: #fff;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.07);
+}
+
+.not-found-number {
+  margin-bottom: 15px;
+  color: #8bbf2c;
+  font-size: 110px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -6px;
+}
+
+.not-found-number span {
+  color: #f24892;
+}
+
+.not-found-content h1 {
+  margin: 0;
+  color: #333;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.not-found-content p {
+  max-width: 470px;
+  margin: 12px auto 0;
+  color: #777;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.not-found-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.not-found-primary-button,
+.not-found-secondary-button {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 18px;
+  border-radius: 11px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.not-found-primary-button {
+  border: none;
+  background: #8bbf2c;
+  color: #fff;
+}
+
+.not-found-primary-button:hover {
+  background: #78a823;
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 15px rgba(139, 191, 44, 0.25);
+}
+
+.not-found-secondary-button {
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #555;
+}
+
+.not-found-secondary-button:hover {
+  border-color: #8bbf2c;
+  background: rgba(139, 191, 44, 0.06);
+  color: #78a823;
+}
+
+@media (max-width: 600px) {
+  .not-found-page {
+    padding: 25px 15px;
+  }
+
+  .not-found-card {
+    padding: 40px 22px;
+    border-radius: 18px;
+  }
+
+  .not-found-number {
+    font-size: 80px;
+    letter-spacing: -4px;
+  }
+
+  .not-found-content h1 {
+    font-size: 26px;
+  }
+
+  .not-found-content p {
+    font-size: 14px;
+  }
+
+  .not-found-actions {
+    flex-direction: column;
+  }
+
+  .not-found-primary-button,
+  .not-found-secondary-button {
+    width: 100%;
+  }
+}
