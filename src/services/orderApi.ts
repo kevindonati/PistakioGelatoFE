@@ -380,3 +380,7 @@ export const markAdminOrderNotificationsAsRead = async (): Promise<void> => {
 export const markAdminCustomerNotificationsAsRead = async (): Promise<void> => {
   await api.patch("/admin/notifications/customers/read")
 }
+
+export const failPayment = async (orderId: string): Promise<void> => {
+  await api.get(`/payments/cancel?orderId=${orderId}`)
+}

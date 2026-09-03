@@ -1,5 +1,7 @@
 import axios from "axios"
+
 import { getLanguage } from "./language.ts"
+
 import { getToken } from "./auth"
 
 const api = axios.create({

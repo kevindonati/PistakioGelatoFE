@@ -2,7 +2,6 @@ import { useState } from "react"
 import type { FormEvent } from "react"
 import { useNavigate } from "react-router-dom"
 import api from "../../services/api"
-import axios from "axios"
 import { useTranslation } from "react-i18next"
 import {
   Eye,
@@ -17,6 +16,7 @@ import {
 } from "lucide-react"
 import logo from "../../assets/LOGO CON SCRITTA PIST DEF.png"
 import "../../styles/Register.css"
+import { getErrorMessage } from "../../utils/errorHandler"
 
 function Register() {
   const navigate = useNavigate()
@@ -49,17 +49,7 @@ function Register() {
 
       navigate("/login")
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const status = error.response?.status
-
-        if (status === 400) {
-          setError(t("auth.emailAlreadyRegistered"))
-        } else {
-          setError(t("auth.registerError"))
-        }
-      } else {
-        setError(t("auth.registerError"))
-      }
+      setError(getErrorMessage(error, t("auth.registerError")))
     } finally {
       setIsLoading(false)
     }
@@ -215,7 +205,7 @@ function Register() {
           {error && (
             <div className="register-error" role="alert">
               <AlertCircle size={18} />
-              <span>{error}</span>
+              <span style={{ whiteSpace: "pre-line" }}>{error}</span>
             </div>
           )}
 

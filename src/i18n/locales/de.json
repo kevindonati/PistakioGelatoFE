@@ -268,15 +268,16 @@
   },
   "paymentFailed": {
     "title": "Zahlung fehlgeschlagen",
-    "message": "Die Zahlung konnte nicht abgeschlossen werden. Du kannst es erneut versuchen oder zum Katalog zurückkehren.",
+    "message": "Die Zahlung konnte nicht abgeschlossen werden. Sie können eine andere Zahlungsmethode wählen oder es erneut versuchen.",
     "payment": "Zahlung",
-    "paymentDescription": "Bei der Verarbeitung deiner Zahlung ist ein Problem aufgetreten.",
-    "warning": "Es wurde keine Zahlung abgeschlossen. Du kannst es jederzeit erneut versuchen.",
+    "paymentDescription": "Wählen Sie, wie Sie Ihre Bestellung bezahlen möchten.",
+    "warning": "Die vorherige Zahlung war nicht erfolgreich.",
     "orderId": "Bestellnummer",
-    "retry": "Zahlung erneut versuchen",
-    "backToCart": "Zurück zum Warenkorb",
-    "backToCatalog": "Zum Katalog",
-    "processing": "Wird verarbeitet..."
+    "choosePayment": "Zahlungsmethode wählen",
+    "retryStripe": "Mit Stripe erneut versuchen",
+    "retryPaypal": "Mit PayPal erneut versuchen",
+    "processing": "Wird verarbeitet...",
+    "backToCatalog": "Zurück zum Katalog"
   },
   "orders": {
     "title": "Meine Bestellungen",
@@ -730,7 +731,8 @@
       "noNewOrders": "Keine neuen Bestellungen",
       "newOrders": "Neue Bestellungen zu prüfen",
       "noNewCustomers": "Keine neuen Kunden",
-      "newCustomers": "Neue Kunden registriert"
+      "newCustomers": "Neue Kunden registriert",
+      "registered": "registriert"
     }
   },
   "footer": {

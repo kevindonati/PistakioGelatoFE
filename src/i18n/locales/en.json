@@ -268,15 +268,16 @@
   },
   "paymentFailed": {
     "title": "Payment failed",
-    "message": "Your payment could not be completed. You can try again or return to the catalog.",
+    "message": "The payment could not be completed. You can choose another payment method or try again.",
     "payment": "Payment",
-    "paymentDescription": "There was a problem processing your payment.",
-    "warning": "No payment was completed. You can try again at any time.",
+    "paymentDescription": "Choose how you would like to complete your order payment.",
+    "warning": "The previous payment was unsuccessful.",
     "orderId": "Order ID",
-    "retry": "Retry payment",
-    "backToCart": "Back to cart",
-    "backToCatalog": "Back to catalog",
-    "processing": "Processing..."
+    "choosePayment": "Choose payment method",
+    "retryStripe": "Retry with Stripe",
+    "retryPaypal": "Retry with PayPal",
+    "processing": "Processing...",
+    "backToCatalog": "Back to catalog"
   },
   "orders": {
     "title": "My Orders",
@@ -730,7 +731,8 @@
       "noNewOrders": "No new orders",
       "newOrders": "New orders to check",
       "noNewCustomers": "No new customers",
-      "newCustomers": "New customers registered"
+      "newCustomers": "New customers registered",
+      "registered": "registered"
     }
   },
   "footer": {

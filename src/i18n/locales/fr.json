@@ -267,16 +267,17 @@
     "loadError": "Impossible de récupérer la commande."
   },
   "paymentFailed": {
-    "title": "Échec du paiement",
-    "message": "Votre paiement n'a pas pu être effectué. Vous pouvez réessayer ou retourner au catalogue.",
+    "title": "Paiement échoué",
+    "message": "Le paiement n'a pas pu être effectué. Vous pouvez choisir un autre mode de paiement ou réessayer.",
     "payment": "Paiement",
-    "paymentDescription": "Un problème est survenu lors du traitement de votre paiement.",
-    "warning": "Aucun paiement n'a été effectué. Vous pouvez réessayer à tout moment.",
-    "orderId": "ID de la commande",
-    "retry": "Réessayer le paiement",
-    "backToCart": "Retour au panier",
-    "backToCatalog": "Retour au catalogue",
-    "processing": "Traitement..."
+    "paymentDescription": "Choisissez comment effectuer le paiement de votre commande.",
+    "warning": "Le paiement précédent a échoué.",
+    "orderId": "Numéro de commande",
+    "choosePayment": "Choisir le mode de paiement",
+    "retryStripe": "Réessayer avec Stripe",
+    "retryPaypal": "Réessayer avec PayPal",
+    "processing": "Traitement...",
+    "backToCatalog": "Retour au catalogue"
   },
   "orders": {
     "title": "Mes commandes",
@@ -730,7 +731,8 @@
       "noNewOrders": "Aucune nouvelle commande",
       "newOrders": "Nouvelles commandes à vérifier",
       "noNewCustomers": "Aucun nouveau client",
-      "newCustomers": "Nouveaux clients inscrits"
+      "newCustomers": "Nouveaux clients inscrits",
+      "registered": "inscrit"
     }
   },
   "footer": {

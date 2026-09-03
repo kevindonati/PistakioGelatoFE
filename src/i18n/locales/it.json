@@ -279,15 +279,16 @@
 
   "paymentFailed": {
     "title": "Pagamento non riuscito",
-    "message": "Il pagamento non è stato completato. Puoi riprovare oppure tornare al catalogo.",
+    "message": "Il pagamento non è stato completato. Puoi scegliere un altro metodo di pagamento oppure riprovare.",
     "payment": "Pagamento",
-    "paymentDescription": "Si è verificato un problema durante il pagamento.",
-    "warning": "Nessun pagamento è stato completato. Puoi riprovare in qualsiasi momento.",
-    "orderId": "ID ordine",
-    "retry": "Riprova il pagamento",
-    "backToCart": "Torna al carrello",
-    "backToCatalog": "Torna al catalogo",
-    "processing": "Elaborazione..."
+    "paymentDescription": "Scegli come completare il pagamento del tuo ordine.",
+    "warning": "Il pagamento precedente non è andato a buon fine.",
+    "orderId": "Numero ordine",
+    "choosePayment": "Scegli metodo di pagamento",
+    "retryStripe": "Riprova con Stripe",
+    "retryPaypal": "Riprova con PayPal",
+    "processing": "Elaborazione...",
+    "backToCatalog": "Torna al catalogo"
   },
 
   "orders": {
@@ -748,7 +749,8 @@
       "noNewOrders": "Nessun nuovo ordine",
       "newOrders": "Nuovi ordini da controllare",
       "noNewCustomers": "Nessun nuovo cliente",
-      "newCustomers": "Nuovi clienti registrati"
+      "newCustomers": "Nuovi clienti registrati",
+      "registered": "registrato"
     }
   },
   "footer": {
