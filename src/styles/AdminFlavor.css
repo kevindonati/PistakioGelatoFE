@@ -1,0 +1,522 @@
+.admin-flavors-page {
+  width: 100%;
+  padding-bottom: 50px;
+  background: transparent;
+}
+
+.admin-flavors-container {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+.admin-flavors-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.admin-flavors-header h1 {
+  margin: 0;
+  color: #333;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.admin-flavors-header p {
+  margin: 8px 0 0;
+  color: #777;
+  font-size: 14px;
+}
+
+.admin-flavors-primary-button {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 12px;
+  background: #8bbf2c;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-flavors-primary-button:hover {
+  background: #78a823;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 15px rgba(139, 191, 44, 0.25);
+}
+
+.admin-flavors-error {
+  padding: 13px 15px;
+  margin-bottom: 25px;
+  border: 1px solid #f24892;
+  border-radius: 11px;
+  background: #fff0f5;
+  color: #d6296d;
+  font-size: 14px;
+}
+
+.admin-flavors-filters {
+  display: grid;
+  grid-template-columns:
+    minmax(240px, 1.5fr)
+    minmax(180px, 1fr)
+    minmax(170px, 0.8fr)
+    auto;
+  gap: 16px;
+  align-items: end;
+  padding: 22px;
+  margin-bottom: 22px;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+}
+
+.admin-flavors-field {
+  min-width: 0;
+}
+
+.admin-flavors-field label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.admin-flavors-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.admin-flavors-input-wrapper svg {
+  position: absolute;
+  left: 14px;
+  color: #8bbf2c;
+}
+
+.admin-flavors-input-wrapper input,
+.admin-flavors-field select,
+.admin-flavors-toolbar select {
+  width: 100%;
+  height: 46px;
+  border: 1px solid #ddd;
+  border-radius: 11px;
+  outline: none;
+  background: #fff;
+  color: #333;
+  font-size: 14px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.admin-flavors-input-wrapper input {
+  padding: 0 14px 0 42px;
+}
+
+.admin-flavors-input-wrapper input::placeholder {
+  color: #aaa;
+}
+
+.admin-flavors-input-wrapper input:focus,
+.admin-flavors-field select:focus,
+.admin-flavors-toolbar select:focus {
+  border-color: #8bbf2c;
+  box-shadow: 0 0 0 3px rgba(139, 191, 44, 0.15);
+}
+
+.admin-flavors-field select,
+.admin-flavors-toolbar select {
+  padding: 0 38px 0 13px;
+}
+
+.admin-flavors-filter-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.admin-flavors-search-button,
+.admin-flavors-reset-button {
+  height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 15px;
+  border-radius: 11px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.admin-flavors-search-button {
+  border: none;
+  background: #8bbf2c;
+  color: #fff;
+}
+
+.admin-flavors-search-button:hover {
+  background: #78a823;
+}
+
+.admin-flavors-reset-button {
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #555;
+}
+
+.admin-flavors-reset-button:hover {
+  border-color: #ccc;
+  background: #f8f8f8;
+}
+
+.admin-flavors-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 12px;
+}
+
+.admin-flavors-toolbar > span {
+  color: #777;
+  font-size: 14px;
+}
+
+.admin-flavors-toolbar select {
+  width: 220px;
+}
+
+.admin-flavors-table-card {
+  overflow: hidden;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+}
+
+.admin-flavors-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.admin-flavors-table {
+  width: 100%;
+  min-width: 950px;
+  margin: 0;
+  border-collapse: collapse;
+}
+
+.admin-flavors-table thead {
+  background: #fafafa;
+}
+
+.admin-flavors-table th {
+  padding: 16px 18px;
+  border-bottom: 1px solid #eee;
+  color: #777;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.admin-flavors-table th:last-child,
+.admin-flavors-table td:last-child {
+  text-align: right;
+}
+
+.admin-flavors-table td {
+  padding: 16px 18px;
+  border-bottom: 1px solid #f0f0f0;
+  color: #555;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.admin-flavors-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.admin-flavors-table tbody tr:hover {
+  background: #fcfcfc;
+}
+
+.admin-flavors-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-flavors-image {
+  width: 58px;
+  height: 58px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #f5f5f5;
+}
+
+.admin-flavors-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.admin-flavors-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 23px;
+}
+
+.admin-flavors-name {
+  color: #333;
+  font-weight: 700;
+}
+
+.admin-flavors-table td small {
+  display: block;
+  margin-top: 4px;
+  color: #999;
+  font-size: 12px;
+}
+
+.admin-flavors-category {
+  color: #555;
+}
+
+.admin-flavors-stock {
+  color: #333;
+  font-weight: 700;
+}
+
+.admin-flavors-stock-empty {
+  color: #d6296d;
+}
+
+.admin-flavors-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  max-width: 230px;
+}
+
+.admin-flavors-feature,
+.admin-flavors-availability {
+  display: inline-flex;
+  align-items: center;
+  min-height: 25px;
+  padding: 3px 8px;
+  border-radius: 7px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.admin-flavors-feature.vegan {
+  background: #e8f5d8;
+  color: #5d861d;
+}
+
+.admin-flavors-feature.lactose {
+  background: #e8f3f7;
+  color: #39758b;
+}
+
+.admin-flavors-feature.gluten {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.admin-flavors-feature.sugar {
+  background: #eeeeee;
+  color: #555;
+}
+
+.admin-flavors-availability.available {
+  background: #e8f5d8;
+  color: #5d861d;
+}
+
+.admin-flavors-availability.unavailable {
+  background: #fff0f5;
+  color: #d6296d;
+}
+
+.admin-flavors-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 7px;
+}
+
+.admin-flavors-action {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 9px;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-flavors-action.edit {
+  border: 1px solid #ddd;
+  color: #555;
+}
+
+.admin-flavors-action.edit:hover {
+  border-color: #8bbf2c;
+  background: rgba(139, 191, 44, 0.08);
+  color: #78a823;
+}
+
+.admin-flavors-action.delete {
+  border: 1px solid #f1c4d5;
+  color: #d6296d;
+}
+
+.admin-flavors-action.delete:hover {
+  background: #fff0f5;
+  border-color: #f24892;
+}
+
+.admin-flavors-action:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.admin-flavors-empty {
+  padding: 55px 20px;
+  color: #888;
+  text-align: center;
+  font-size: 14px;
+}
+
+.admin-flavors-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.admin-flavors-pagination button {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fff;
+  color: #555;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-flavors-pagination button:hover:not(:disabled) {
+  border-color: #8bbf2c;
+  color: #78a823;
+  background: rgba(139, 191, 44, 0.06);
+}
+
+.admin-flavors-pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.admin-flavors-pagination span {
+  color: #555;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+@media (max-width: 1100px) {
+  .admin-flavors-filters {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .admin-flavors-filter-actions {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 700px) {
+  .admin-flavors-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-flavors-header h1 {
+    font-size: 26px;
+  }
+
+  .admin-flavors-primary-button {
+    width: 100%;
+  }
+
+  .admin-flavors-filters {
+    grid-template-columns: 1fr;
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  .admin-flavors-filter-actions {
+    width: 100%;
+  }
+
+  .admin-flavors-search-button,
+  .admin-flavors-reset-button {
+    flex: 1;
+  }
+
+  .admin-flavors-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-flavors-toolbar select {
+    width: 100%;
+  }
+
+  .admin-flavors-table-card {
+    border-radius: 15px;
+  }
+
+  .admin-flavors-table th,
+  .admin-flavors-table td {
+    padding: 13px 14px;
+  }
+}
+
+@media (max-width: 420px) {
+  .admin-flavors-filters {
+    padding: 15px;
+  }
+
+  .admin-flavors-filter-actions {
+    flex-direction: column;
+  }
+
+  .admin-flavors-search-button,
+  .admin-flavors-reset-button {
+    width: 100%;
+  }
+}

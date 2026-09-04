@@ -1,0 +1,562 @@
+import { useEffect, useState } from "react"
+import { useNavigate, useSearchParams } from "react-router-dom"
+import { useTranslation } from "react-i18next"
+import {
+  ArrowLeft,
+  Check,
+  MapPin,
+  Plus,
+  ShoppingBag,
+  Truck,
+} from "lucide-react"
+import { useCart } from "../../context/CartContext"
+import { getAddresses } from "../../services/addressApi"
+import {
+  checkoutOrder,
+  createStripeCheckout,
+  createPaypalOrder,
+  getOrderById,
+  getMyOrderItems,
+  getOrderShippingCost,
+} from "../../services/orderApi"
+import type { Address } from "../../types/Address"
+import type { Order } from "../../types/Order"
+import type { CartItem } from "../../context/CartContext"
+import Loading from "../../components/Loading"
+import "../../styles/Checkout.css"
+import { getFlavorById, getTubById } from "../../services/catalogApi"
+import { Paypal, Stripe } from "react-bootstrap-icons"
+
+function Checkout() {
+  const { t } = useTranslation()
+  const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const orderId = searchParams.get("orderId")
+  const { items: cartItems, order: cartOrder, loading: cartLoading } = useCart()
+  const [addresses, setAddresses] = useState<Address[]>([])
+  const [selectedAddress, setSelectedAddress] = useState<string | null>(null)
+  const [notes, setNotes] = useState("")
+  const [order, setOrder] = useState<Order | null>(null)
+  const [items, setItems] = useState<CartItem[]>([])
+  const [loading, setLoading] = useState(true)
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState("")
+  const [shippingCost, setShippingCost] = useState(0)
+  const [termsAccepted, setTermsAccepted] = useState(false)
+  const [paymentMethod, setPaymentMethod] = useState<"STRIPE" | "PAYPAL">(
+    "STRIPE",
+  )
+
+  /* LOAD CHECKOUT DATA */
+
+  useEffect(() => {
+    const loadCheckoutData = async () => {
+      try {
+        setLoading(true)
+        setError("")
+
+        const addressesData = await getAddresses()
+
+        setAddresses(addressesData)
+
+        if (addressesData.length > 0) {
+          setSelectedAddress(addressesData[0].id)
+        }
+
+        /* if orderId comes first from url, don't use the cart */
+
+        if (orderId) {
+          const [orderData, orderItemsData] = await Promise.all([
+            getOrderById(orderId),
+            getMyOrderItems(0, 50),
+          ])
+
+          const filteredItems = orderItemsData.filter(
+            (item) => item.order.id === orderId,
+          )
+
+          const checkoutItems = await Promise.all(
+            filteredItems.map(async (item) => {
+              const [flavor, tub] = await Promise.all([
+                getFlavorById(item.flavor.id),
+                getTubById(item.tub.id),
+              ])
+
+              return {
+                id: item.id,
+                flavor,
+                tub,
+                quantity: item.quantity,
+              }
+            }),
+          )
+
+          setOrder(orderData)
+          setItems(checkoutItems)
+
+          const shipping = await getOrderShippingCost(orderData.id)
+          setShippingCost(shipping)
+
+          return
+        }
+
+        /* checkout from cart */
+
+        setOrder(cartOrder)
+        setItems(cartItems)
+        if (cartOrder) {
+          const shipping = await getOrderShippingCost(cartOrder.id)
+
+          setShippingCost(shipping)
+        }
+      } catch (error) {
+        console.error(error)
+
+        setError(t("checkout.loadAddressesError"))
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    /* normal checkout wait for CartContext to load */
+    /* but if i have the orderId, i can load directly the order */
+
+    if (orderId || !cartLoading) {
+      loadCheckoutData()
+    }
+  }, [orderId, cartLoading, cartOrder, cartItems, t])
+
+  /* LOADING */
+
+  if (cartLoading && !orderId) {
+    return <Loading />
+  }
+
+  if (loading) {
+    return <Loading />
+  }
+
+  /* EMPTY */
+
+  if (!order || items.length === 0) {
+    return (
+      <main className="pistakio-checkout">
+        <div className="container">
+          <div className="pistakio-checkout-empty">
+            <div className="pistakio-checkout-empty-icon">
+              <ShoppingBag size={30} />
+            </div>
+
+            <h1>{t("checkout.title")}</h1>
+
+            <p>{t("checkout.emptyCart")}</p>
+
+            <button
+              type="button"
+              className="pistakio-checkout-secondary-button"
+              onClick={() => navigate("/cart")}
+            >
+              <ArrowLeft size={17} />
+
+              {t("checkout.backToCart")}
+            </button>
+          </div>
+        </div>
+      </main>
+    )
+  }
+
+  /* TOTALS */
+
+  const subtotal = items.reduce(
+    (total, item) => total + item.tub.price * item.quantity,
+    0,
+  )
+
+  /* if the order is PENDING_PAYMENT, the total is already calculated from BE */
+  /* if it's a normal checkout, the total will be calculated from BE after checkout */
+
+  const totalPrice =
+    order.orderStatus === "PENDING_PAYMENT"
+      ? order.total
+      : subtotal + shippingCost
+
+  /* SUBMIT */
+
+  const handleSubmit = async (
+    event: React.FormEvent,
+    selectedPaymentMethod?: "STRIPE" | "PAYPAL",
+  ) => {
+    event.preventDefault()
+
+    const method = selectedPaymentMethod ?? paymentMethod
+
+    if (!selectedAddress) {
+      setError(t("checkout.addressRequired"))
+      return
+    }
+
+    if (!termsAccepted) {
+      setError(t("checkout.termsRequired"))
+      return
+    }
+
+    if (!order) {
+      return
+    }
+
+    try {
+      setSubmitting(true)
+      setError("")
+
+      /* only order with status CART can be checked out.
+         if the order has PENDING_PAYMENT status, it will skip checkoutOrder() */
+
+      let currentOrder = order
+
+      if (currentOrder.orderStatus === "CART") {
+        currentOrder = await checkoutOrder(currentOrder.id, {
+          address: selectedAddress,
+          notes: notes.trim() || undefined,
+        })
+
+        setOrder(currentOrder)
+      }
+
+      /* STRIPE */
+
+      if (method === "STRIPE") {
+        setPaymentMethod("STRIPE")
+
+        const stripeResponse = await createStripeCheckout(currentOrder.id)
+
+        window.location.href = stripeResponse.url
+
+        return
+      }
+
+      /* PAYPAL */
+
+      setPaymentMethod("PAYPAL")
+
+      const paypalResponse = await createPaypalOrder(currentOrder.id)
+
+      window.location.href = paypalResponse.approvalUrl
+    } catch (error) {
+      console.error(error)
+
+      setError(t("checkout.error"))
+
+      setSubmitting(false)
+    }
+  }
+
+  return (
+    <main className="pistakio-checkout bg-body-tertiary">
+      <div className="container">
+        {/* HEADER */}
+
+        <section className="pistakio-checkout-header">
+          <button
+            type="button"
+            className="pistakio-checkout-back"
+            onClick={() => navigate("/cart")}
+          >
+            <ArrowLeft size={17} />
+
+            {t("checkout.backToCart")}
+          </button>
+
+          <h1>{t("checkout.title")}</h1>
+        </section>
+
+        {/* ERROR */}
+
+        {error && <div className="pistakio-checkout-alert">{error}</div>}
+
+        <form onSubmit={(event) => handleSubmit(event)}>
+          <div className="pistakio-checkout-layout">
+            {/* LEFT */}
+
+            <div className="pistakio-checkout-main">
+              {/* ADDRESS */}
+
+              <section className="pistakio-checkout-card">
+                <div className="pistakio-checkout-card-header">
+                  <div className="pistakio-checkout-section-icon">
+                    <MapPin size={20} />
+                  </div>
+
+                  <div>
+                    <h2>{t("checkout.deliveryAddress")}</h2>
+
+                    <p>{t("checkout.deliveryAddressDescription")}</p>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="pistakio-checkout-add-button"
+                    onClick={() => navigate("/account/addresses/new")}
+                  >
+                    <Plus size={16} />
+
+                    <span>{t("checkout.newAddress")}</span>
+                  </button>
+                </div>
+
+                {addresses.length === 0 ? (
+                  <div className="pistakio-checkout-no-addresses">
+                    <MapPin size={38} strokeWidth={1.5} />
+
+                    <p>{t("checkout.noAddresses")}</p>
+
+                    <button
+                      type="button"
+                      className="pistakio-checkout-primary-button"
+                      onClick={() => navigate("/account/addresses/new")}
+                    >
+                      <Plus size={17} />
+
+                      {t("checkout.addAddress")}
+                    </button>
+                  </div>
+                ) : (
+                  <div className="pistakio-checkout-addresses">
+                    {addresses.map((address) => {
+                      const selected = selectedAddress === address.id
+
+                      return (
+                        <button
+                          key={address.id}
+                          type="button"
+                          className={`pistakio-checkout-address ${
+                            selected ? "selected" : ""
+                          }`}
+                          onClick={() => setSelectedAddress(address.id)}
+                        >
+                          <div className="pistakio-checkout-address-radio">
+                            {selected && <Check size={14} />}
+                          </div>
+
+                          <div className="pistakio-checkout-address-content">
+                            <div className="pistakio-checkout-address-title">
+                              {address.addressLine1}
+                            </div>
+
+                            {address.addressLine2 && (
+                              <div>{address.addressLine2}</div>
+                            )}
+
+                            <div>
+                              {address.postalCode} {address.city}
+                            </div>
+
+                            <div>{address.country}</div>
+                          </div>
+
+                          {selected && (
+                            <div className="pistakio-checkout-selected-label">
+                              <Check size={14} />
+
+                              <span>{t("checkout.selected")}</span>
+                            </div>
+                          )}
+                        </button>
+                      )
+                    })}
+                  </div>
+                )}
+              </section>
+
+              {/* NOTES */}
+
+              <section className="pistakio-checkout-card">
+                <div className="pistakio-checkout-card-header">
+                  <div className="pistakio-checkout-section-icon pistakio-checkout-section-icon-pink">
+                    <ShoppingBag size={20} />
+                  </div>
+
+                  <div>
+                    <h2>{t("checkout.notes")}</h2>
+
+                    <p>{t("checkout.notesDescription")}</p>
+                  </div>
+                </div>
+
+                <textarea
+                  className="pistakio-checkout-notes"
+                  rows={5}
+                  maxLength={500}
+                  value={notes}
+                  onChange={(event) => setNotes(event.target.value)}
+                  placeholder={t("checkout.notesPlaceholder")}
+                />
+
+                <div className="pistakio-checkout-character-count">
+                  {notes.length}/500
+                </div>
+              </section>
+            </div>
+
+            {/* RIGHT - SUMMARY */}
+
+            <aside className="pistakio-checkout-summary">
+              <div className="pistakio-checkout-summary-card">
+                <div className="pistakio-checkout-summary-header">
+                  <div className="pistakio-checkout-summary-icon">
+                    <ShoppingBag size={19} />
+                  </div>
+
+                  <div>
+                    <h2>{t("checkout.summary")}</h2>
+
+                    <span>
+                      {items.length} {items.length === 1 ? "item" : "items"}
+                    </span>
+                  </div>
+                </div>
+
+                {/* ITEMS */}
+
+                <div className="pistakio-checkout-items">
+                  {items.map((item) => (
+                    <div key={item.id} className="pistakio-checkout-item">
+                      <div className="pistakio-checkout-item-image">
+                        {item.flavor.image ? (
+                          <img src={item.flavor.image} alt={item.flavor.name} />
+                        ) : (
+                          <ShoppingBag size={20} />
+                        )}
+                      </div>
+
+                      <div className="pistakio-checkout-item-info">
+                        <strong>{item.flavor.name}</strong>
+
+                        <span>
+                          {item.tub.weight} g × {item.quantity}
+                        </span>
+                      </div>
+
+                      <strong className="pistakio-checkout-item-price">
+                        €{(item.tub.price * item.quantity).toFixed(2)}
+                      </strong>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="pistakio-checkout-divider" />
+
+                {/* SUBTOTAL */}
+
+                <div className="pistakio-checkout-price-row">
+                  <span>{t("checkout.subtotal")}</span>
+
+                  <strong>€ {subtotal.toFixed(2)}</strong>
+                </div>
+
+                {/* SHIPPING */}
+
+                <div className="pistakio-checkout-price-row">
+                  <span className="d-flex align-items-center gap-2">
+                    <Truck size={15} />
+
+                    {t("checkout.shipping")}
+                  </span>
+
+                  <strong>
+                    {shippingCost === 0
+                      ? t("checkout.free")
+                      : `€ ${shippingCost.toFixed(2)}`}
+                  </strong>
+                </div>
+
+                <div className="pistakio-checkout-divider" />
+
+                {/* TOTAL */}
+
+                <div className="pistakio-checkout-total">
+                  <span>{t("cart.total")}</span>
+
+                  <strong>€ {totalPrice.toFixed(2)}</strong>
+                </div>
+
+                {/* TERMS */}
+
+                <div className="pistakio-checkout-terms">
+                  <label className="pistakio-checkout-terms-label">
+                    <input
+                      type="checkbox"
+                      checked={termsAccepted}
+                      onChange={(event) =>
+                        setTermsAccepted(event.target.checked)
+                      }
+                    />
+
+                    <span>
+                      {t("checkout.acceptTerms")}{" "}
+                      <a
+                        href="/terms"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {t("checkout.termsLink")}
+                      </a>
+                    </span>
+                  </label>
+                </div>
+
+                {/* PAYMENT BUTTONS */}
+
+                <div className="gap-2 mt-3">
+                  <button
+                    type="button"
+                    className="pistakio-checkout-confirm flex-grow-1 mb-2"
+                    disabled={
+                      submitting ||
+                      addresses.length === 0 ||
+                      !selectedAddress ||
+                      !termsAccepted
+                    }
+                    onClick={(event) => handleSubmit(event, "STRIPE")}
+                  >
+                    <Stripe size={18} />
+
+                    {submitting && paymentMethod === "STRIPE"
+                      ? t("checkout.processing")
+                      : t("checkout.payWithStripe")}
+                  </button>
+
+                  <button
+                    type="button"
+                    className="pistakio-checkout-confirm flex-grow-1"
+                    disabled={
+                      submitting ||
+                      addresses.length === 0 ||
+                      !selectedAddress ||
+                      !termsAccepted
+                    }
+                    onClick={(event) => handleSubmit(event, "PAYPAL")}
+                  >
+                    <Paypal size={18} />
+
+                    {submitting && paymentMethod === "PAYPAL"
+                      ? t("checkout.processing")
+                      : t("checkout.payWithPaypal")}
+                  </button>
+                </div>
+
+                <p className="pistakio-checkout-secure">
+                  <Check size={14} />
+
+                  {t("checkout.securePayment")}
+                </p>
+              </div>
+            </aside>
+          </div>
+        </form>
+      </div>
+    </main>
+  )
+}
+
+export default Checkout

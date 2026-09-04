@@ -1,0 +1,327 @@
+.pistakio-addresses {
+  min-height: 100vh;
+  padding: 55px 0 90px;
+}
+
+/* HEADER */
+.pistakio-addresses-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+.pistakio-addresses-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 20px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #777777;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+.pistakio-addresses-back:hover {
+  color: #8bbf2c;
+  transform: translateX(-3px);
+}
+.pistakio-addresses-eyebrow {
+  display: block;
+  margin-bottom: 8px;
+  color: #f24892;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.pistakio-addresses-header h1 {
+  margin: 0 0 8px;
+  color: #333333;
+  font-size: clamp(36px, 5vw, 50px);
+  line-height: 1.05;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+}
+.pistakio-addresses-header p {
+  margin: 0;
+  color: #888888;
+  font-size: 14px;
+}
+
+/* BUTTON */
+.pistakio-addresses-new-button {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 17px;
+  border: none;
+  border-radius: 9px;
+  background: #8bbf2c;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.pistakio-addresses-new-button:hover {
+  background: #78a823;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(139, 191, 44, 0.22);
+}
+
+/* ALERT */
+.pistakio-addresses-alert {
+  margin-bottom: 22px;
+  padding: 14px 17px;
+  border: 1px solid #f1c3d5;
+  border-radius: 11px;
+  background: #fff6f9;
+  color: #c72d68;
+  font-size: 13px;
+}
+
+/* LOADING */
+.pistakio-addresses-loading {
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #999999;
+}
+.pistakio-addresses-loading-icon {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  border-radius: 50%;
+  background: rgba(139, 191, 44, 0.1);
+  color: #8bbf2c;
+}
+.pistakio-addresses-loading p {
+  margin: 0;
+  font-size: 13px;
+}
+
+/* EMPTY */
+.pistakio-addresses-empty {
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  border: 1px solid #eeeeee;
+  border-radius: 18px;
+  background: #ffffff;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.035);
+}
+.pistakio-addresses-empty-icon {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  border-radius: 50%;
+  background: rgba(242, 72, 146, 0.1);
+  color: #f24892;
+}
+.pistakio-addresses-empty h2 {
+  margin: 0 0 8px;
+  color: #333333;
+  font-size: 20px;
+  font-weight: 700;
+}
+.pistakio-addresses-empty p {
+  max-width: 430px;
+  margin: 0 0 25px;
+  color: #888888;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* GRID */
+.pistakio-addresses-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+/* CARD */
+.pistakio-address-card {
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  padding: 22px;
+  border: 1px solid #eeeeee;
+  border-radius: 17px;
+  background: #ffffff;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.035);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.pistakio-address-card:hover {
+  border-color: #dddddd;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.07);
+}
+
+/* CARD HEADER */
+.pistakio-address-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 17px;
+  border-bottom: 1px solid #eeeeee;
+}
+.pistakio-address-card-icon {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 11px;
+  background: rgba(139, 191, 44, 0.1);
+  color: #8bbf2c;
+}
+.pistakio-address-card-header span {
+  display: block;
+  margin-bottom: 3px;
+  color: #999999;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.pistakio-address-card-header h2 {
+  margin: 0;
+  color: #333333;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* ADDRESS CONTENT */
+.pistakio-address-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 20px 0;
+  color: #666666;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.pistakio-address-content strong {
+  color: #333333;
+  font-weight: 700;
+}
+
+/* ACTIONS */
+.pistakio-address-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 17px;
+  border-top: 1px solid #eeeeee;
+}
+.pistakio-address-edit {
+  min-height: 40px;
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #555555;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+.pistakio-address-edit:hover {
+  border-color: #8bbf2c;
+  background: rgba(139, 191, 44, 0.07);
+  color: #6c9a20;
+}
+.pistakio-address-delete {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ead5dc;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #d93678;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+.pistakio-address-delete:hover:not(:disabled) {
+  border-color: #f24892;
+  background: #fff6f9;
+  transform: translateY(-1px);
+}
+.pistakio-address-delete:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* TABLET */
+@media (max-width: 991.98px) {
+  .pistakio-addresses-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .pistakio-addresses {
+    padding: 30px 0 60px;
+  }
+  .pistakio-addresses-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .pistakio-addresses-header h1 {
+    font-size: 38px;
+  }
+  .pistakio-addresses-new-button {
+    width: 100%;
+  }
+  .pistakio-addresses-grid {
+    grid-template-columns: 1fr;
+  }
+  .pistakio-addresses-empty {
+    min-height: 320px;
+    padding: 30px 20px;
+  }
+}

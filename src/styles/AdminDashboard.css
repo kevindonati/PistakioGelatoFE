@@ -1,0 +1,420 @@
+.admin-dashboard {
+  width: 100%;
+  padding: 10px 0 40px;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.admin-dashboard-header {
+  margin-bottom: 28px;
+}
+
+.admin-dashboard-header h1 {
+  margin: 0;
+  color: #333;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.admin-dashboard-header p {
+  margin: 7px 0 0;
+  color: #777;
+  font-size: 14px;
+}
+
+/* =========================================================
+   PERIODO
+========================================================= */
+
+.admin-period-card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+.admin-period-content {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.admin-period-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  background: rgba(139, 191, 44, 0.12);
+  color: #8bbf2c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.admin-period-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.admin-period-button {
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #444;
+  border-radius: 10px;
+  padding: 9px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-period-button:hover {
+  border-color: #8bbf2c;
+  color: #8bbf2c;
+  background: rgba(139, 191, 44, 0.05);
+}
+
+.admin-period-button.active {
+  background: #8bbf2c;
+  border-color: #8bbf2c;
+  color: #fff;
+}
+
+.admin-period-button.secondary:hover {
+  border-color: #f24892;
+  color: #f24892;
+  background: rgba(242, 72, 146, 0.05);
+}
+
+.admin-period-button.secondary.active {
+  background: #f24892;
+  border-color: #f24892;
+  color: #fff;
+}
+
+.admin-period-divider {
+  width: 1px;
+  height: 30px;
+  background: #e5e5e5;
+  margin: 0 4px;
+}
+
+.admin-period-label {
+  margin-left: auto;
+  color: #777;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   STATISTICHE
+========================================================= */
+
+.admin-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.admin-status-grid {
+  margin-top: 18px;
+}
+
+.admin-stat-card {
+  min-height: 125px;
+  background: #fff;
+  border-radius: 18px;
+  padding: 22px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.admin-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+}
+
+.admin-stat-card p {
+  margin: 0 0 9px;
+  color: #777;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.admin-stat-card h2 {
+  margin: 0;
+  color: #333;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.admin-stat-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(139, 191, 44, 0.12);
+  color: #8bbf2c;
+}
+
+/* =========================================================
+   VENDITE RECENTI
+========================================================= */
+
+.admin-sales-card {
+  margin-top: 24px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.admin-sales-header {
+  padding: 24px 24px 20px;
+}
+
+.admin-sales-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 5px;
+  color: #8bbf2c;
+}
+
+.admin-sales-title h2 {
+  margin: 0;
+  color: #333;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.admin-sales-header p {
+  margin: 0;
+  color: #888;
+  font-size: 13px;
+}
+
+/* =========================================================
+   TABELLA
+========================================================= */
+
+.admin-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.admin-sales-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-sales-table thead {
+  background: #fafafa;
+}
+
+.admin-sales-table th {
+  padding: 14px 24px;
+  border-bottom: 1px solid #eee;
+  color: #888;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.admin-sales-table td {
+  padding: 17px 24px;
+  border-bottom: 1px solid #f0f0f0;
+  color: #444;
+  font-size: 13px;
+}
+
+.admin-sales-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-sales-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.admin-sales-table tbody tr:hover {
+  background: rgba(139, 191, 44, 0.035);
+}
+
+.admin-customer-link {
+  display: block;
+  width: fit-content;
+  color: #333;
+  text-decoration: none;
+}
+
+.admin-customer-link:hover {
+  color: #8bbf2c;
+}
+
+.admin-sales-table td small {
+  display: block;
+  margin-top: 4px;
+  color: #999;
+  font-size: 12px;
+}
+
+.admin-nowrap {
+  white-space: nowrap;
+}
+
+.admin-order-id {
+  font-weight: 600;
+  color: #555;
+}
+
+.admin-status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #f5f5f5;
+  border: 1px solid #e5e5e5;
+  color: #666;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.admin-table-total {
+  text-align: right !important;
+  white-space: nowrap;
+}
+
+.admin-empty-sales {
+  padding: 50px 24px !important;
+  text-align: center;
+  color: #999 !important;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 1100px) {
+  .admin-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .admin-period-label {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 5px;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 5px 0 30px;
+  }
+
+  .admin-dashboard-header {
+    margin-bottom: 22px;
+  }
+
+  .admin-dashboard-header h1 {
+    font-size: 26px;
+  }
+
+  .admin-period-card {
+    padding: 15px;
+    border-radius: 16px;
+  }
+
+  .admin-period-content {
+    align-items: stretch;
+  }
+
+  .admin-period-icon {
+    display: none;
+  }
+
+  .admin-period-buttons {
+    width: 100%;
+  }
+
+  .admin-period-button {
+    flex: 1;
+    min-width: calc(50% - 4px);
+    padding: 9px 8px;
+  }
+
+  .admin-period-divider {
+    display: none;
+  }
+
+  .admin-period-label {
+    text-align: center;
+    padding-top: 5px;
+  }
+
+  .admin-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .admin-status-grid {
+    margin-top: 14px;
+  }
+
+  .admin-stat-card {
+    min-height: 110px;
+    padding: 19px;
+    border-radius: 16px;
+  }
+
+  .admin-stat-card h2 {
+    font-size: 23px;
+  }
+
+  .admin-sales-card {
+    margin-top: 20px;
+    border-radius: 16px;
+  }
+
+  .admin-sales-header {
+    padding: 20px;
+  }
+
+  .admin-sales-table {
+    min-width: 720px;
+  }
+
+  .admin-sales-table th,
+  .admin-sales-table td {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-period-button {
+    font-size: 12px;
+  }
+
+  .admin-stat-card {
+    padding: 17px;
+  }
+
+  .admin-stat-icon {
+    width: 42px;
+    height: 42px;
+  }
+}
