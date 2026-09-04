@@ -1,6 +1,6 @@
 # Pistakio Gelato — Frontend
 
-Il frontend di **Pistakio Gelato** è sviluppato separatamente dal backend ed è responsabile dell'interfaccia utente dell'e-commerce.
+Il frontend di **Pistakio Gelato** è sviluppato separatamente dal [backend](https://github.com/kevindonati/PistakioGelatoBE) ed è responsabile dell'interfaccia utente dell'e-commerce.
 
 Il progetto utilizza **React**, **TypeScript** e **Vite** e comunica con il backend Spring Boot attraverso una REST API.
 
