@@ -34,7 +34,7 @@ export const getFlavors = async (
 
 export const getAvailableFlavors = async (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  language?: string,
+  _language?: string,
 ): Promise<Flavor[]> => {
   const response = await api.get<Flavor[]>("/flavors/available")
   return response.data
