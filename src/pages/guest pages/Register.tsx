@@ -13,6 +13,7 @@ import {
   Globe,
   ArrowRight,
   AlertCircle,
+  Check,
 } from "lucide-react"
 import logo from "../../assets/LOGO CON SCRITTA PIST DEF.png"
 import "../../styles/Register.css"
@@ -25,14 +26,22 @@ function Register() {
   const [surname, setSurname] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
   const [phone, setPhone] = useState("")
   const [language, setLanguage] = useState("IT")
   const [error, setError] = useState("")
   const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
+
+    if (password !== confirmPassword) {
+      setError(t("auth.passwordMismatch"))
+      setIsLoading(false)
+      return
+    }
 
     setError("")
     setIsLoading(true)
@@ -154,6 +163,56 @@ function Register() {
                 }
               >
                 {showPassword ? (
+                  <EyeOff size={19} strokeWidth={2} />
+                ) : (
+                  <Eye size={19} strokeWidth={2} />
+                )}
+              </button>
+            </div>
+          </div>
+
+          {/* CONFIRM PASSWORD */}
+          <div className="register-field">
+            <label htmlFor="register-confirm-password">
+              {t("auth.confirmPassword")}
+            </label>
+
+            <div
+              className={`register-input-wrapper ${
+                confirmPassword.length > 0
+                  ? password === confirmPassword
+                    ? "register-input-valid"
+                    : "register-input-invalid"
+                  : ""
+              }`}
+            >
+              <Lock className="register-input-icon" size={18} />
+
+              <input
+                id="register-confirm-password"
+                type={showConfirmPassword ? "text" : "password"}
+                value={confirmPassword}
+                onChange={(event) => setConfirmPassword(event.target.value)}
+                placeholder={t("auth.confirmPasswordPlaceholder")}
+                autoComplete="new-password"
+                required
+              />
+
+              {confirmPassword.length > 0 && password === confirmPassword && (
+                <Check className="register-password-valid-icon" size={18} />
+              )}
+
+              <button
+                type="button"
+                className="register-password-toggle"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                aria-label={
+                  showConfirmPassword
+                    ? t("auth.hidePassword")
+                    : t("auth.showPassword")
+                }
+              >
+                {showConfirmPassword ? (
                   <EyeOff size={19} strokeWidth={2} />
                 ) : (
                   <Eye size={19} strokeWidth={2} />

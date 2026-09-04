@@ -255,3 +255,21 @@
     font-size: 26px;
   }
 }
+
+.register-input-wrapper.register-input-valid input {
+  border-color: #8bbf2c;
+  box-shadow: 0 0 0 3px rgba(139, 191, 44, 0.15);
+}
+
+.register-input-wrapper.register-input-invalid input {
+  border-color: #f24892;
+  box-shadow: 0 0 0 3px rgba(242, 72, 146, 0.12);
+}
+
+.register-password-valid-icon {
+  position: absolute;
+  right: 48px;
+  color: #8bbf2c;
+  z-index: 2;
+  pointer-events: none;
+}

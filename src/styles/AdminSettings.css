@@ -345,3 +345,157 @@
     padding: 15px;
   }
 }
+
+.admin-settings-maintenance {
+  margin-top: 25px;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+}
+
+.admin-settings-maintenance-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 26px 28px;
+  border-bottom: 1px solid #eee;
+}
+
+.admin-settings-maintenance-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 13px;
+  background: rgba(139, 191, 44, 0.12);
+  color: #8bbf2c;
+}
+
+.admin-settings-maintenance-header h2 {
+  margin: 0;
+  color: #333;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.admin-settings-maintenance-header p {
+  margin: 5px 0 0;
+  color: #888;
+  font-size: 13px;
+}
+
+.admin-settings-maintenance-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 25px 28px;
+}
+
+.admin-settings-maintenance-info {
+  min-width: 0;
+}
+
+.admin-settings-maintenance-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 8px;
+  color: #333;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.admin-settings-maintenance-status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #8bbf2c;
+}
+
+.admin-settings-maintenance-status-dot.active {
+  background: #d6296d;
+}
+
+.admin-settings-maintenance-description {
+  margin: 0;
+  color: #888;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.admin-settings-maintenance-toggle {
+  position: relative;
+  width: 54px;
+  height: 30px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 30px;
+  background: #ddd;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.admin-settings-maintenance-toggle::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+}
+
+.admin-settings-maintenance-toggle.active {
+  background: #8bbf2c;
+}
+
+.admin-settings-maintenance-toggle.active::after {
+  transform: translateX(24px);
+}
+
+.admin-settings-maintenance-toggle:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.admin-settings-maintenance-toggle:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(139, 191, 44, 0.15);
+}
+
+@media (max-width: 700px) {
+  .admin-settings-maintenance {
+    border-radius: 16px;
+  }
+
+  .admin-settings-maintenance-header {
+    padding: 21px;
+  }
+
+  .admin-settings-maintenance-content {
+    align-items: flex-start;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 420px) {
+  .admin-settings-maintenance-header {
+    align-items: flex-start;
+  }
+
+  .admin-settings-maintenance-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .admin-settings-maintenance-content {
+    gap: 20px;
+  }
+}

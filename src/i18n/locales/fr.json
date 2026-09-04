@@ -37,7 +37,10 @@
     "hasAccount": "Vous avez déjà un compte ?",
     "access": "Se connecter",
     "registering": "Création du compte...",
-    "loggingIn": "Connexion..."
+    "loggingIn": "Connexion...",
+    "confirmPassword": "Confirmer le mot de passe",
+    "confirmPasswordPlaceholder": "Répétez votre mot de passe",
+    "passwordMismatch": "Les mots de passe ne correspondent pas."
   },
   "common": {
     "loading": "Chargement..."
@@ -721,6 +724,18 @@
         "over": "Au-delà de la dernière tranche",
         "maxWeight": "Poids maximum",
         "cost": "Coût"
+      },
+      "maintenance": {
+        "title": "Mode maintenance",
+        "description": "Gérez la disponibilité de la boutique en ligne.",
+        "active": "Maintenance active",
+        "inactive": "Boutique en ligne active",
+        "activeDescription": "La boutique est temporairement indisponible pour les clients.",
+        "inactiveDescription": "La boutique est normalement accessible aux clients.",
+        "saved": "Mode maintenance mis à jour.",
+        "saveError": "Impossible de mettre à jour le mode maintenance.",
+        "enable": "Activer le mode maintenance",
+        "disable": "Désactiver le mode maintenance"
       }
     },
     "notifications": {
@@ -1047,5 +1062,9 @@
       "title": "9. Contact",
       "text": "Pour toute demande concernant les retours, remboursements, annulations ou le droit de rétractation, Pistakio Gelato peut être contacté à l'adresse suivante :"
     }
+  },
+  "comingSoon": {
+    "title": "Bientôt disponible",
+    "description": "Notre boutique en ligne sera bientôt disponible. Revenez nous rendre visite !"
   }
 }

@@ -41,6 +41,7 @@ import CookiePolicy from "./pages/guest pages/CookiePolicy"
 import PrivacyPolicy from "./pages/guest pages/PrivacyPolicy"
 import TermsAndConditions from "./pages/guest pages/TermsAndConditions"
 import Returns from "./pages/guest pages/Returns"
+import MaintenanceGuard from "./components/MaintenanceGuard"
 
 function AppContent() {
   const location = useLocation()
@@ -53,97 +54,102 @@ function AppContent() {
       {!isAdminRoute && <Navbar />}
 
       <Routes>
-        {/* ADMIN */}
+        <Route element={<MaintenanceGuard />}>
+          {/* ADMIN */}
 
-        <Route element={<AdminRoute />}>
-          <Route element={<AdminLayout />}>
-            <Route path="/admin" element={<AdminDashboard />} />
-
-            <Route path="/admin/orders" element={<AdminOrders />} />
-            <Route path="/admin/orders/:id" element={<AdminOrderDetails />} />
-            <Route path="/admin/catalog/flavors" element={<AdminFlavors />} />
-            <Route
-              path="/admin/catalog/flavors/new"
-              element={<AdminFlavorForm />}
-            />
-            <Route
-              path="/admin/catalog/flavors/:id/edit"
-              element={<AdminFlavorForm />}
-            />
-            <Route path="/admin/catalog/tubs" element={<AdminTubs />} />
-            <Route path="/admin/catalog/tubs/new" element={<AdminTubForm />} />
-
-            <Route
-              path="/admin/catalog/tubs/:id/edit"
-              element={<AdminTubForm />}
-            />
-            <Route
-              path="/admin/catalog/categories"
-              element={<AdminCategories />}
-            />
-
-            <Route
-              path="/admin/catalog/categories/new"
-              element={<AdminCategoryForm />}
-            />
-
-            <Route
-              path="/admin/catalog/categories/:id/edit"
-              element={<AdminCategoryForm />}
-            />
-            <Route path="/admin/customers" element={<AdminCustomers />} />
-            <Route
-              path="/admin/customers/:id"
-              element={<AdminCustomerDetails />}
-            />
-            <Route path="/admin/settings" element={<AdminSettings />} />
+          <Route element={<AdminRoute />}>
+            <Route element={<AdminLayout />}>
+              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/admin/orders" element={<AdminOrders />} />
+              <Route path="/admin/orders/:id" element={<AdminOrderDetails />} />
+              <Route path="/admin/catalog/flavors" element={<AdminFlavors />} />
+              <Route
+                path="/admin/catalog/flavors/new"
+                element={<AdminFlavorForm />}
+              />
+              <Route
+                path="/admin/catalog/flavors/:id/edit"
+                element={<AdminFlavorForm />}
+              />
+              <Route path="/admin/catalog/tubs" element={<AdminTubs />} />
+              <Route
+                path="/admin/catalog/tubs/new"
+                element={<AdminTubForm />}
+              />
+              <Route
+                path="/admin/catalog/tubs/:id/edit"
+                element={<AdminTubForm />}
+              />
+              <Route
+                path="/admin/catalog/categories"
+                element={<AdminCategories />}
+              />
+              <Route
+                path="/admin/catalog/categories/new"
+                element={<AdminCategoryForm />}
+              />
+              <Route
+                path="/admin/catalog/categories/:id/edit"
+                element={<AdminCategoryForm />}
+              />
+              <Route path="/admin/customers" element={<AdminCustomers />} />
+              <Route
+                path="/admin/customers/:id"
+                element={<AdminCustomerDetails />}
+              />
+              <Route path="/admin/settings" element={<AdminSettings />} />
+            </Route>
           </Route>
+
+          {/* HOME */}
+
+          <Route path="/" element={<Home />} />
+          <Route path="/cookies" element={<CookiePolicy />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<TermsAndConditions />} />
+          <Route path="/returns" element={<Returns />} />
+
+          {/* GUEST */}
+
+          <Route element={<GuestRoute />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+          </Route>
+
+          {/* CATALOG */}
+
+          <Route path="/catalog" element={<Catalog />} />
+          <Route path="/catalog/flavors/:id" element={<FlavorDetails />} />
+
+          {/* CART */}
+
+          <Route path="/cart" element={<Cart />} />
+
+          {/* PROTECTED */}
+
+          <Route element={<ProtectedRoute />}>
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/account" element={<Account />} />
+            <Route path="/account/addresses/new" element={<NewAddress />} />
+            <Route path="/account/addresses" element={<Addresses />} />
+            <Route
+              path="/account/addresses/:id/edit"
+              element={<EditAddress />}
+            />
+            <Route path="/payment/success" element={<PaymentSuccess />} />
+            <Route path="/payment/failed" element={<PaymentFailed />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/orders/:id" element={<OrderDetails />} />
+          </Route>
+
+          {/* 404 */}
+
+          <Route path="*" element={<NotFound />} />
         </Route>
-
-        {/* HOME */}
-
-        <Route path="/" element={<Home />} />
-        <Route path="/cookies" element={<CookiePolicy />} />
-        <Route path="/privacy" element={<PrivacyPolicy />} />
-        <Route path="/terms" element={<TermsAndConditions />} />
-        <Route path="/returns" element={<Returns />} />
-
-        {/* GUEST */}
-
-        <Route element={<GuestRoute />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-        </Route>
-
-        {/* CATALOG */}
-
-        <Route path="/catalog" element={<Catalog />} />
-        <Route path="/catalog/flavors/:id" element={<FlavorDetails />} />
-
-        {/* CART */}
-
-        <Route path="/cart" element={<Cart />} />
-
-        {/* PROTECTED */}
-
-        <Route element={<ProtectedRoute />}>
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/account" element={<Account />} />
-          <Route path="/account/addresses/new" element={<NewAddress />} />
-          <Route path="/account/addresses" element={<Addresses />} />
-          <Route path="/account/addresses/:id/edit" element={<EditAddress />} />
-          <Route path="/payment/success" element={<PaymentSuccess />} />
-          <Route path="/payment/failed" element={<PaymentFailed />} />
-          <Route path="/orders" element={<Orders />} />
-          <Route path="/orders/:id" element={<OrderDetails />} />
-        </Route>
-
-        {/* 404 */}
-
-        <Route path="*" element={<NotFound />} />
       </Routes>
+
       {!isAdminRoute && !isLoginRoute && !isRegisterRoute && <Footer />}
     </>
   )

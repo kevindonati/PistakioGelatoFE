@@ -23,3 +23,19 @@ export const updateShippingSettings = async (
 
   return response.data
 }
+
+export const getMaintenanceMode = async (): Promise<boolean> => {
+  const response = await api.get<boolean>("/settings/maintenance")
+
+  return response.data
+}
+
+export const updateMaintenanceMode = async (
+  enabled: boolean,
+): Promise<boolean> => {
+  const response = await api.put<boolean>("/settings/maintenance", {
+    enabled,
+  })
+
+  return response.data
+}

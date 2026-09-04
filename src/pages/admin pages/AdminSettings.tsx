@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { Save, Truck } from "lucide-react"
+import { Save, Truck, Wrench } from "lucide-react"
 import {
   getShippingSettings,
   updateShippingSettings,
+  getMaintenanceMode,
+  updateMaintenanceMode,
   type ShippingSettings,
 } from "../../services/settingsApi"
 import "../../styles/AdminSettings.css"
@@ -21,10 +23,17 @@ function AdminSettings() {
     costOver: 15,
   })
 
+  const [maintenanceMode, setMaintenanceMode] = useState(false)
+
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
+  const [savingMaintenance, setSavingMaintenance] = useState(false)
+
   const [success, setSuccess] = useState(false)
+  const [maintenanceSuccess, setMaintenanceSuccess] = useState(false)
+
   const [error, setError] = useState("")
+  const [maintenanceError, setMaintenanceError] = useState("")
 
   useEffect(() => {
     const loadSettings = async () => {
@@ -32,9 +41,13 @@ function AdminSettings() {
         setLoading(true)
         setError("")
 
-        const data = await getShippingSettings()
+        const [shippingData, maintenanceData] = await Promise.all([
+          getShippingSettings(),
+          getMaintenanceMode(),
+        ])
 
-        setSettings(data)
+        setSettings(shippingData)
+        setMaintenanceMode(maintenanceData)
       } catch (error) {
         console.error(error)
         setError(t("admin.settings.loadError"))
@@ -71,6 +84,26 @@ function AdminSettings() {
       setError(t("admin.settings.saveError"))
     } finally {
       setSaving(false)
+    }
+  }
+
+  const handleMaintenanceToggle = async () => {
+    const newValue = !maintenanceMode
+
+    try {
+      setSavingMaintenance(true)
+      setMaintenanceSuccess(false)
+      setMaintenanceError("")
+
+      const updated = await updateMaintenanceMode(newValue)
+
+      setMaintenanceMode(updated)
+      setMaintenanceSuccess(true)
+    } catch (error) {
+      console.error(error)
+      setMaintenanceError(t("admin.settings.maintenance.saveError"))
+    } finally {
+      setSavingMaintenance(false)
     }
   }
 
@@ -338,6 +371,66 @@ function AdminSettings() {
 
             {saving ? t("admin.settings.saving") : t("admin.settings.save")}
           </button>
+        </div>
+      </div>
+
+      <div className="admin-settings-maintenance">
+        <div className="admin-settings-maintenance-header">
+          <div className="admin-settings-maintenance-icon">
+            <Wrench size={24} />
+          </div>
+
+          <div>
+            <h2>{t("admin.settings.maintenance.title")}</h2>
+            <p>{t("admin.settings.maintenance.description")}</p>
+          </div>
+        </div>
+
+        {maintenanceError && (
+          <div className="admin-settings-error">{maintenanceError}</div>
+        )}
+
+        {maintenanceSuccess && (
+          <div className="admin-settings-success">
+            {t("admin.settings.maintenance.saved")}
+          </div>
+        )}
+
+        <div className="admin-settings-maintenance-content">
+          <div className="admin-settings-maintenance-info">
+            <div className="admin-settings-maintenance-status">
+              <span
+                className={`admin-settings-maintenance-status-dot ${
+                  maintenanceMode ? "active" : ""
+                }`}
+              />
+
+              {maintenanceMode
+                ? t("admin.settings.maintenance.active")
+                : t("admin.settings.maintenance.inactive")}
+            </div>
+
+            <p className="admin-settings-maintenance-description">
+              {maintenanceMode
+                ? t("admin.settings.maintenance.activeDescription")
+                : t("admin.settings.maintenance.inactiveDescription")}
+            </p>
+          </div>
+
+          <button
+            type="button"
+            className={`admin-settings-maintenance-toggle ${
+              maintenanceMode ? "active" : ""
+            }`}
+            onClick={handleMaintenanceToggle}
+            disabled={savingMaintenance}
+            aria-label={
+              maintenanceMode
+                ? t("admin.settings.maintenance.disable")
+                : t("admin.settings.maintenance.enable")
+            }
+            aria-pressed={maintenanceMode}
+          />
         </div>
       </div>
     </div>
